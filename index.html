@@ -49,6 +49,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
         }
 
         .brand {
@@ -70,11 +72,18 @@
             letter-spacing: 0.5px;
         }
 
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
         nav ul {
             display: flex;
             list-style: none;
             gap: 20px;
             align-items: center;
+            flex-wrap: wrap;
         }
 
         nav a {
@@ -93,10 +102,11 @@
             background: var(--secondary);
             color: var(--white);
             border: 1px solid var(--border);
-            padding: 5px 10px;
+            padding: 6px 12px;
             border-radius: 6px;
             cursor: pointer;
             font-family: 'Tajawal', sans-serif;
+            font-size: 0.9rem;
         }
 
         .hero {
@@ -228,82 +238,6 @@
             font-size: 0.95rem;
         }
 
-        /* قفل تسجيل الدخول ولوحة التحكم */
-        .admin-login-box {
-            background: var(--white);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 3rem;
-            text-align: center;
-            max-width: 500px;
-            margin: 0 auto 4rem;
-            box-shadow: var(--shadow);
-        }
-
-        .admin-panel {
-            background: var(--white);
-            border: 2px dashed var(--accent);
-            border-radius: 12px;
-            padding: 2.5rem;
-            margin-bottom: 4rem;
-            box-shadow: var(--shadow);
-            display: none;
-        }
-
-        .admin-panel h3 {
-            color: var(--primary);
-            margin-bottom: 1.5rem;
-            font-size: 1.5rem;
-        }
-
-        .form-group {
-            margin-bottom: 1.2rem;
-            text-align: right;
-        }
-
-        body[dir="ltr"] .form-group {
-            text-align: left;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: var(--primary);
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 10px 15px;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            font-family: 'Tajawal', sans-serif;
-            font-size: 1rem;
-        }
-
-        textarea.form-control {
-            resize: vertical;
-            min-height: 120px;
-        }
-
-        .btn-primary {
-            background-color: var(--accent);
-            color: var(--primary);
-            border: none;
-            padding: 12px 25px;
-            border-radius: 8px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: var(--transition);
-            font-family: 'Tajawal', sans-serif;
-            font-size: 1rem;
-        }
-
-        .btn-primary:hover {
-            background-color: var(--accent-hover);
-        }
-
-        /* قسم التطوع */
         .volunteer-section {
             background: linear-gradient(135deg, var(--secondary), var(--primary));
             color: var(--white);
@@ -373,17 +307,14 @@
             <ul>
                 <li><a href="#categories" data-i18n="nav_categories">الأقسام</a></li>
                 <li><a href="#articles" data-i18n="nav_articles">المقالات</a></li>
-                <li><a href="#admin" data-i18n="nav_admin">إدارة المحتوى</a></li>
                 <li><a href="#volunteer" data-i18n="nav_volunteer">تطوع معنا</a></li>
-                <li>
-                    <select id="langSwitch" class="lang-select" onchange="changeLanguage(this.value)">
-                        <option value="ar">العربية</option>
-                        <option value="nl">Nederlands</option>
-                        <option value="tr">Türkçe</option>
-                        <option value="en">English</option>
-                    </select>
-                </li>
             </ul>
+            <select id="langSwitch" class="lang-select" onchange="changeLanguage(this.value)">
+                <option value="ar">العربية</option>
+                <option value="nl">Nederlands</option>
+                <option value="tr">Türkçe</option>
+                <option value="en">English</option>
+            </select>
         </nav>
     </header>
 
@@ -394,7 +325,6 @@
 
     <div class="container">
         
-        <!-- الأقسام -->
         <section id="categories" class="articles-section">
             <div class="section-title">
                 <h2 data-i18n="cat_section_title">التصنيفات الرئيسية</h2>
@@ -420,7 +350,6 @@
             </div>
         </section>
 
-        <!-- المقالات القانونية -->
         <section id="articles" class="articles-section">
             <div class="section-title">
                 <h2 data-i18n="art_section_title">أحدث المقالات والقوانين المبسطة</h2>
@@ -429,44 +358,6 @@
             <div id="articlesGrid" class="articles-grid"></div>
         </section>
 
-        <!-- بوابة تسجيل دخول المشرفين / المتطوعين -->
-        <section id="admin" class="container">
-            <div id="loginBox" class="admin-login-box">
-                <h3 data-i18n="login_box_title" style="color: var(--primary); margin-bottom: 1rem;">🔐 دخول المشرفين ونشر المقالات</h3>
-                <p data-i18n="login_box_desc" style="color: var(--text-light); margin-bottom: 1.5rem; font-size: 0.95rem;">أدخل كلمة المرور الخاصة بالفريق لإضافة مقال جديد:</p>
-                <div class="form-group">
-                    <input type="password" id="adminPassword" class="form-control" placeholder="أدخل كلمة المرور...">
-                </div>
-                <button type="button" class="btn-primary" onclick="verifyAdmin()" data-i18n="login_btn">دخول لوحة التحكم</button>
-            </div>
-
-            <!-- لوحة التحكم الفعلية (تظهر بعد كلمة المرور الصحيحة) -->
-            <div id="adminPanel" class="admin-panel">
-                <h3 data-i18n="admin_title">📝 لوحة تحكم المحرر: إضافة مقال جديد للعلن</h3>
-                <form id="articleForm" onsubmit="publishArticle(event)">
-                    <div class="form-group">
-                        <label data-i18n="form_title_label">عنوان المقال:</label>
-                        <input type="text" id="artTitle" class="form-control" required placeholder="أدخل عنوان المقال القانوني...">
-                    </div>
-                    <div class="form-group">
-                        <label data-i18n="form_cat_label">التصنيف الرئيسي:</label>
-                        <select id="artCategory" class="form-control">
-                            <option value="الطلاب والتعليم">الطلاب والتعليم</option>
-                            <option value="اللاجئون وطالبي اللجوء">اللاجئون وطالبي اللجوء</option>
-                            <option value="المقيمون والعمل">المقيمون والعمل</option>
-                            <option value="الشؤون العامة">الشؤون العامة والقانون المدني</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label data-i18n="form_content_label">محتوى المقال والشرح المبسط:</label>
-                        <textarea id="artContent" class="form-control" required placeholder="اكتب نص وشرح المقال هنا ليظهر لجميع الزوار على الإنترنت..."></textarea>
-                    </div>
-                    <button type="submit" class="btn-primary" data-i18n="form_submit_btn">نشر المقال فوراً للعلن</button>
-                </form>
-            </div>
-        </section>
-
-        <!-- قسم التطوع معنا -->
         <section id="volunteer" class="volunteer-section">
             <h2 data-i18n="vol_title">انضم إلينا وتطوع معنا</h2>
             <p data-i18n="vol_desc">هل أنت مهتم بالقانون أو الترجمة وترغب في مساعدة الجالية العربية والمجتمعات في هولندا؟ شارك معنا بسيرتك الذاتية.</p>
@@ -480,26 +371,11 @@
     </footer>
 
     <script>
-        // كلمة المرور الخاصة بالمشرفين (يمكنك تغييرها هنا لأي كلمة ترغبين بها، حالياً تم ضبطها على alqanon2026)
-        const ADMIN_PASS = "alqanon2026";
-
-        function verifyAdmin() {
-            const enteredPass = document.getElementById('adminPassword').value;
-            if (enteredPass === ADMIN_PASS) {
-                document.getElementById('loginBox').style.display = 'none';
-                document.getElementById('adminPanel').style.display = 'block';
-                alert('تم تسجيل الدخول بنجاح!');
-            } else {
-                alert('كلمة المرور غير صحيحة. يرجى المحاولة مرة أخرى.');
-            }
-        }
-
         const translations = {
             ar: {
                 brand_title: "منصة القانون",
                 nav_categories: "الأقسام",
                 nav_articles: "المقالات",
-                nav_admin: "إدارة المحتوى",
                 nav_volunteer: "تطوع معنا",
                 hero_title: "بوابتك القانونية المبسطة في هولندا",
                 hero_desc: "نرشدك بخطوات واضحة وموثوقة عبر القوانين الهولندية بمختلف لغاتك المفضلة لتكون على دراية كاملة بحقوقك وواجباتك.",
@@ -515,14 +391,6 @@
                 cat_general_desc: "الحقوق المدنية، الإجراءات القضائية العامة، وحل النزاعات.",
                 art_section_title: "أحدث المقالات والقوانين المبسطة",
                 art_section_desc: "شرح مفصل ومحدث لأهم المواد القانونية",
-                login_box_title: "🔐 دخول المشرفين ونشر المقالات",
-                login_box_desc: "أدخل كلمة المرور الخاصة بالفريق لإضافة مقال جديد:",
-                login_btn: "دخول لوحة التحكم",
-                admin_title: "📝 لوحة تحكم المحرر: إضافة مقال جديد للعلن",
-                form_title_label: "عنوان المقال:",
-                form_cat_label: "التصنيف الرئيسي:",
-                form_content_label: "محتوى المقال والشرح المبسط:",
-                form_submit_btn: "نشر المقال فوراً للعلن",
                 vol_title: "انضم إلينا وتطوع معنا",
                 vol_desc: "هل أنت مهتم بالقانون أو الترجمة وترغب في مساعدة الجالية العربية والمجتمعات في هولندا؟ شارك معنا بسيرتك الذاتية.",
                 vol_btn: "أرسل سيرتك الذاتية الآن",
@@ -532,63 +400,45 @@
                 brand_title: "Al-Qanon Platform",
                 nav_categories: "Categorieën",
                 nav_articles: "Artikelen",
-                nav_admin: "Beheer",
-                nav_volunteer: "Vrijwilliger worden",
+                nav_volunteer: "Vrijwilliger",
                 hero_title: "Uw eenvoudige juridische portaal in Nederland",
-                hero_desc: "Wij begeleiden u door de Nederlandse wetgeving in uw taal.",
-                cat_section_title: "Belangrijkste Categorieën",
+                hero_desc: "Wij begeleiden u door de Nederlandse wetgeving.",
+                cat_section_title: "Categorieën",
                 cat_section_desc: "Kies de juiste categorie",
-                cat_students: "Studenten & Onderwijs",
-                cat_students_desc: "Studiewetten en rechten.",
-                cat_refugees: "Vluchtelingen & Asielzoekers",
-                cat_refugees_desc: "Asielprocedures.",
-                cat_residents: "Inwoners & Werk",
-                cat_residents_desc: "Arbeidsrecht en huur.",
-                cat_general: "Algemene Zaken",
-                cat_general_desc: "Burgerrechten.",
+                cat_students: "Studenten",
+                cat_students_desc: "Studiewetten",
+                cat_refugees: "Vluchtelingen",
+                cat_refugees_desc: "Asielprocedures",
+                cat_residents: "Inwoners",
+                cat_residents_desc: "Arbeidsrecht",
+                cat_general: "Algemeen",
+                cat_general_desc: "Burgerlijk recht",
                 art_section_title: "Laatste Artikelen",
                 art_section_desc: "Gedetailleerde uitleg",
-                login_box_title: "🔐 Beheerder Login",
-                login_box_desc: "Voer het wachtwoord in:",
-                login_btn: "Inloggen",
-                admin_title: "📝 Nieuw artikel publiceren",
-                form_title_label: "Titel:",
-                form_cat_label: "Categorie:",
-                form_content_label: "Inhoud:",
-                form_submit_btn: "Publiceren",
                 vol_title: "Word vrijwilliger",
                 vol_desc: "Stuur je cv.",
-                vol_btn: "Stuur cv",
+                vol_btn: "Stuur nu je cv",
                 footer_text: "© 2026 Al-Qanon Platform."
             },
             tr: {
                 brand_title: "Al-Qanon Platformu",
                 nav_categories: "Kategoriler",
                 nav_articles: "Makaleler",
-                nav_admin: "Yönetim",
                 nav_volunteer: "Gönüllü Olun",
                 hero_title: "Hollanda'daki Hukuk Portalınız",
                 hero_desc: "Haklarınızı öğrenin.",
                 cat_section_title: "Kategoriler",
                 cat_section_desc: "Kategori seçin",
                 cat_students: "Öğrenciler",
-                cat_students_desc: "Eğitim",
+                cat_students_desc: "Eğitim kanunları",
                 cat_refugees: "Mülteciler",
                 cat_refugees_desc: "İltica",
                 cat_residents: "Sakinler",
-                cat_residents_desc: "Çalışma",
+                cat_residents_desc: "İş kanunları",
                 cat_general: "Genel",
-                cat_general_desc: "Haklar",
+                cat_general_desc: "Medeni hukuk",
                 art_section_title: "Son Makaleler",
                 art_section_desc: "Açıklamalar",
-                login_box_title: "🔐 Editör Girişi",
-                login_box_desc: "Şifreyi girin:",
-                login_btn: "Giriş Yap",
-                admin_title: "📝 Makale Ekle",
-                form_title_label: "Başlık:",
-                form_cat_label: "Kategori:",
-                form_content_label: "İçerik:",
-                form_submit_btn: "Yayınla",
                 vol_title: "Gönüllü Olun",
                 vol_desc: "Özgeçmiş gönderin.",
                 vol_btn: "Gönder",
@@ -598,7 +448,6 @@
                 brand_title: "Al-Qanon Platform",
                 nav_categories: "Categories",
                 nav_articles: "Articles",
-                nav_admin: "Management",
                 nav_volunteer: "Volunteer",
                 hero_title: "Your Legal Portal in the Netherlands",
                 hero_desc: "Guiding you through Dutch laws.",
@@ -614,22 +463,14 @@
                 cat_general_desc: "Civil law",
                 art_section_title: "Latest Articles",
                 art_section_desc: "Detailed explanations",
-                login_box_title: "🔐 Admin Login",
-                login_box_desc: "Enter password:",
-                login_btn: "Login",
-                admin_title: "📝 Add Article",
-                form_title_label: "Title:",
-                form_cat_label: "Category:",
-                form_content_label: "Content:",
-                form_submit_btn: "Publish",
-                vol_title: "Volunteer",
-                vol_desc: "Send CV.",
-                vol_btn: "Send CV",
+                vol_title: "Volunteer With Us",
+                vol_desc: "Share your CV.",
+                vol_btn: "Send Your CV Now",
                 footer_text: "© 2026 Al-Qanon Platform."
             }
         };
 
-        let defaultArticles = [
+        const defaultArticles = [
             {
                 title: "قانون استئجار المنازل في هولندا (Huurrecht)",
                 category: "المقيمون والعمل",
@@ -647,19 +488,10 @@
             }
         ];
 
-        function getArticles() {
-            const saved = localStorage.getItem('al_qanon_articles');
-            if (saved) {
-                try { return JSON.parse(saved); } catch(e) { return defaultArticles; }
-            }
-            return defaultArticles;
-        }
-
         function renderArticles() {
             const grid = document.getElementById('articlesGrid');
-            const articles = getArticles();
             grid.innerHTML = '';
-            articles.forEach(art => {
+            defaultArticles.forEach(art => {
                 const card = document.createElement('div');
                 card.className = 'article-card';
                 card.innerHTML = `
@@ -671,23 +503,6 @@
                 `;
                 grid.appendChild(card);
             });
-        }
-
-        function publishArticle(event) {
-            event.preventDefault();
-            const title = document.getElementById('artTitle').value;
-            const category = document.getElementById('artCategory').value;
-            const content = document.getElementById('artContent').value;
-
-            const newArt = { title, category, content };
-            let articles = getArticles();
-            articles.unshift(newArt);
-
-            localStorage.setItem('al_qanon_articles', JSON.stringify(articles));
-            
-            alert('تم نشر المقال بنجاح وأصبح متاحاً للعلن ولكل الزوار!');
-            document.getElementById('articleForm').reset();
-            renderArticles();
         }
 
         function changeLanguage(lang) {
