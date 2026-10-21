@@ -22,8 +22,13 @@
         .admin-login-bar { background: #0b1d30; padding: 10px 5%; text-align: left; font-size: 0.85rem; border-bottom: 1px solid rgba(201,146,62,0.1); display: flex; justify-content: space-between; align-items: center; }
         .admin-login-bar a { color: var(--gold); text-decoration: none; cursor: pointer; font-weight: bold; }
 
-        header { background: rgba(16, 42, 67, 0.98); border-bottom: 1px solid rgba(201, 146, 62, 0.3); padding: 12px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; flex-wrap: wrap; }
+        header { background: rgba(16, 42, 67, 0.98); border-bottom: 1px solid rgba(201, 146, 62, 0.3); padding: 10px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; flex-wrap: wrap; }
         .nav-container { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+        
+        /* تنسيق اللوجو الحقيقي في الزاوية وبشكل مرتب */
+        .top-logo-container a { display: flex; align-items: center; text-decoration: none; }
+        .site-logo-img { height: 45px; width: auto; object-fit: contain; }
+
         nav ul { list-style: none; display: flex; gap: 15px; align-items: center; flex-wrap: wrap; }
         
         nav ul li a, .card-link, .cta-btn, .back-btn { color: var(--white); text-decoration: none; font-weight: 600; font-size: 0.9rem; cursor: pointer; transition: color 0.3s; }
@@ -48,7 +53,7 @@
         .card { background-color: var(--card-bg); border-radius: 10px; overflow: hidden; border: 1px solid rgba(201, 146, 62, 0.2); border-top: 4px solid var(--gold); display: flex; flex-direction: column; }
         .card img { width: 100%; height: 160px; object-fit: cover; }
         .card-content { padding: 15px; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between; }
-        .card-content h3 { color: var(--gold); margin-bottom: 8px; font-size: 1.2rem; }
+        .card-content h2 { color: var(--gold); margin-bottom: 8px; font-size: 1.2rem; }
         .card-content p { color: #d1d8e0; font-size: 0.9rem; margin-bottom: 15px; }
         .card-link { color: var(--black); background-color: var(--gold); padding: 8px 15px; border-radius: 4px; font-weight: 700; text-align: center; display: inline-block; }
 
@@ -90,7 +95,8 @@
     <header>
         <div class="top-logo-container">
             <a href="#home" onclick="showPage('home'); return false;">
-                <span style="font-size: 1.4rem; font-weight: 800; color: var(--gold);" data-i18n="logo">⚖️ منصة القانون</span>
+                <!-- استخدام صورة اللوجو الحقيقية المرفوعة في المستودع -->
+                <img src="logo.png" alt="منصة القانون Al-Qanon" class="site-logo-img">
             </a>
         </div>
         <div class="nav-container">
@@ -126,7 +132,7 @@
                     <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=600&q=80" alt="Student" loading="lazy">
                     <div class="card-content">
                         <div>
-                            <h3 data-i18n="card1Title">الطلاب والأكاديميون</h3>
+                            <h2 data-i18n="card1Title" style="font-size: 1.2rem; color: var(--gold);">الطلاب والأكاديميون</h2>
                             <p data-i18n="card1Desc">دعم وتحليلات قانونية وإرشادات للطلاب الجامعيين والباحثين.</p>
                         </div>
                         <a href="#student" class="card-link" onclick="showPage('student'); return false;" data-i18n="exploreBtn">استكشف المزيد</a>
@@ -137,7 +143,7 @@
                     <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=600&q=80" alt="Refugee" loading="lazy">
                     <div class="card-content">
                         <div>
-                            <h3 data-i18n="card2Title">اللاجئون والحماية</h3>
+                            <h2 data-i18n="card2Title" style="font-size: 1.2rem; color: var(--gold);">اللاجئون والحماية</h2>
                             <p data-i18n="card2Desc">شرح مبسط لقضايا اللجوء، لم شمل الأسرة، وقوانين الحماية.</p>
                         </div>
                         <a href="#refugee" class="card-link" onclick="showPage('refugee'); return false;" data-i18n="exploreBtn">استكشف المزيد</a>
@@ -148,7 +154,7 @@
                     <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=600&q=80" alt="Resident" loading="lazy">
                     <div class="card-content">
                         <div>
-                            <h3 data-i18n="card3Title">المقيمون والعمل</h3>
+                            <h2 data-i18n="card3Title" style="font-size: 1.2rem; color: var(--gold);">المقيمون والعمل</h2>
                             <p data-i18n="card3Desc">تبسيط إجراءات الإقامات بأنواعها، عقود العمل، وقوانين الاندماج.</p>
                         </div>
                         <a href="#resident" class="card-link" onclick="showPage('resident'); return false;" data-i18n="exploreBtn">استكشف المزيد</a>
@@ -159,7 +165,7 @@
                     <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=600&q=80" alt="General Affairs" loading="lazy">
                     <div class="card-content">
                         <div>
-                            <h3 data-i18n="card4Title">الشؤون العامة والمهنية</h3>
+                            <h2 data-i18n="card4Title" style="font-size: 1.2rem; color: var(--gold);">الشؤون العامة والمهنية</h2>
                             <p data-i18n="card4Desc">تحليلات ومقالات قانونية شاملة للشركات والأفراد والشؤون العامة.</p>
                         </div>
                         <a href="#general" class="card-link" onclick="showPage('general'); return false;" data-i18n="exploreBtn">استكشف المزيد</a>
@@ -171,9 +177,9 @@
 
     <!-- الأقسام المختلفة -->
     <div id="page-student" class="content-page">
-        <h1 class="section-title" data-i18n="card1Title">الطلاب والأكاديميون</h1>
+        <h2 class="section-title" data-i18n="card1Title">الطلاب والأكاديميون</h2>
         <div class="editor-box" id="editor-student">
-            <h3 data-i18n="publishNew">نشر مقال أو محتوى جديد (خاص بالمشرف):</h3>
+            <h2 data-i18n="publishNew" style="font-size: 1.1rem; color: var(--gold); margin-bottom: 10px;">نشر مقال أو محتوى جديد (خاص بالمشرف):</h2>
             <textarea id="text-student" class="article-textarea" data-i18n-ph="phStudent" placeholder="اكتب أو الصق مقالك الموجه للطلاب هنا..."></textarea>
             <button class="save-btn" onclick="saveArticle('student')" data-i18n="publishBtn">نشر المقال</button>
             <div id="alert-student" class="alert-box" data-i18n="successPublish">تم نشر المحتوى بنجاح!</div>
@@ -183,9 +189,9 @@
     </div>
 
     <div id="page-refugee" class="content-page">
-        <h1 class="section-title" data-i18n="card2Title">اللاجئون والحماية</h1>
+        <h2 class="section-title" data-i18n="card2Title">اللاجئون والحماية</h2>
         <div class="editor-box" id="editor-refugee">
-            <h3 data-i18n="publishNew">نشر مقال أو محتوى جديد (خاص بالمشرف):</h3>
+            <h2 data-i18n="publishNew" style="font-size: 1.1rem; color: var(--gold); margin-bottom: 10px;">نشر مقال أو محتوى جديد (خاص بالمشرف):</h2>
             <textarea id="text-refugee" class="article-textarea" data-i18n-ph="phRefugee" placeholder="اكتب أو الصق مقالك الموجه للاجئين هنا..."></textarea>
             <button class="save-btn" onclick="saveArticle('refugee')" data-i18n="publishBtn">نشر المقال</button>
             <div id="alert-refugee" class="alert-box" data-i18n="successPublish">تم نشر المحتوى بنجاح!</div>
@@ -195,9 +201,9 @@
     </div>
 
     <div id="page-resident" class="content-page">
-        <h1 class="section-title" data-i18n="card3Title">المقيمون والعمل</h1>
+        <h2 class="section-title" data-i18n="card3Title">المقيمون والعمل</h2>
         <div class="editor-box" id="editor-resident">
-            <h3 data-i18n="publishNew">نشر مقال أو محتوى جديد (خاص بالمشرف):</h3>
+            <h2 data-i18n="publishNew" style="font-size: 1.1rem; color: var(--gold); margin-bottom: 10px;">نشر مقال أو محتوى جديد (خاص بالمشرف):</h2>
             <textarea id="text-resident" class="article-textarea" data-i18n-ph="phResident" placeholder="اكتب أو الصق مقالك المتعلق بالمقيمين هنا..."></textarea>
             <button class="save-btn" onclick="saveArticle('resident')" data-i18n="publishBtn">نشر المقال</button>
             <div id="alert-resident" class="alert-box" data-i18n="successPublish">تم نشر المحتوى بنجاح!</div>
@@ -207,9 +213,9 @@
     </div>
 
     <div id="page-general" class="content-page">
-        <h1 class="section-title" data-i18n="card4Title">الشؤون العامة والمهنية</h1>
+        <h2 class="section-title" data-i18n="card4Title">الشؤون العامة والمهنية</h2>
         <div class="editor-box" id="editor-general">
-            <h3 data-i18n="publishNew">نشر مقال أو محتوى جديد (خاص بالمشرف):</h3>
+            <h2 data-i18n="publishNew" style="font-size: 1.1rem; color: var(--gold); margin-bottom: 10px;">نشر مقال أو محتوى جديد (خاص بالمشرف):</h2>
             <textarea id="text-general" class="article-textarea" data-i18n-ph="phGeneral" placeholder="اكتب أو الصق مقالك المتعلق بالشؤون العامة هنا..."></textarea>
             <button class="save-btn" onclick="saveArticle('general')" data-i18n="publishBtn">نشر المقال</button>
             <div id="alert-general" class="alert-box" data-i18n="successPublish">تم نشر المحتوى بنجاح!</div>
@@ -219,9 +225,9 @@
     </div>
 
     <div id="page-public-law" class="content-page">
-        <h1 class="section-title" data-i18n="publicLaw">القانون العام</h1>
+        <h2 class="section-title" data-i18n="publicLaw">القانون العام</h2>
         <div class="editor-box" id="editor-public-law">
-            <h3 data-i18n="publishNew">نشر مقال أو محتوى جديد (خاص بالمشرف):</h3>
+            <h2 data-i18n="publishNew" style="font-size: 1.1rem; color: var(--gold); margin-bottom: 10px;">نشر مقال أو محتوى جديد (خاص بالمشرف):</h2>
             <textarea id="text-public-law" class="article-textarea" data-i18n-ph="phPublicLaw" placeholder="ابدأ كتابة مقالات وشروحات القانون العام هنا..."></textarea>
             <button class="save-btn" onclick="saveArticle('public-law')" data-i18n="publishBtn">نشر المقال</button>
             <div id="alert-public-law" class="alert-box" data-i18n="successPublish">تم نشر المحتوى بنجاح!</div>
@@ -231,9 +237,9 @@
     </div>
 
     <div id="page-private-law" class="content-page">
-        <h1 class="section-title" data-i18n="privateLaw">القانون الخاص</h1>
+        <h2 class="section-title" data-i18n="privateLaw">القانون الخاص</h2>
         <div class="editor-box" id="editor-private-law">
-            <h3 data-i18n="publishNew">نشر مقال أو محتوى جديد (خاص بالمشرف):</h3>
+            <h2 data-i18n="publishNew" style="font-size: 1.1rem; color: var(--gold); margin-bottom: 10px;">نشر مقال أو محتوى جديد (خاص بالمشرف):</h2>
             <textarea id="text-private-law" class="article-textarea" data-i18n-ph="phPrivateLaw" placeholder="ابدأ كتابة مقالات وشروحات القانون الخاص هنا..."></textarea>
             <button class="save-btn" onclick="saveArticle('private-law')" data-i18n="publishBtn">نشر المقال</button>
             <div id="alert-private-law" class="alert-box" data-i18n="successPublish">تم نشر المحتوى بنجاح!</div>
@@ -243,9 +249,9 @@
     </div>
 
     <div id="page-articles" class="content-page">
-        <h1 class="section-title" data-i18n="articles">المقالات</h1>
+        <h2 class="section-title" data-i18n="articles">المقالات</h2>
         <div class="editor-box" id="editor-articles">
-            <h3 data-i18n="publishNew">نشر مقال أو محتوى جديد (خاص بالمشرف):</h3>
+            <h2 data-i18n="publishNew" style="font-size: 1.1rem; color: var(--gold); margin-bottom: 10px;">نشر مقال أو محتوى جديد (خاص بالمشرف):</h2>
             <textarea id="text-articles" class="article-textarea" data-i18n-ph="phArticles" placeholder="اكتب مقالاتك القانونية العامة هنا..."></textarea>
             <button class="save-btn" onclick="saveArticle('articles')" data-i18n="publishBtn">نشر المقال</button>
             <div id="alert-articles" class="alert-box" data-i18n="successPublish">تم نشر المحتوى بنجاح!</div>
@@ -255,9 +261,9 @@
     </div>
 
     <div id="page-about" class="content-page">
-        <h1 class="section-title" data-i18n="about">من نحن</h1>
+        <h2 class="section-title" data-i18n="about">من نحن</h2>
         <div class="editor-box" id="editor-about">
-            <h3 data-i18n="editAbout">تعديل نبذة من نحن (خاص بالمشرف):</h3>
+            <h2 data-i18n="editAbout" style="font-size: 1.1rem; color: var(--gold); margin-bottom: 10px;">تعديل نبذة من نحن (خاص بالمشرف):</h2>
             <textarea id="text-about" class="article-textarea" data-i18n-ph="phAbout" placeholder="اكتب نبذة عن منصة القانون هنا..."></textarea>
             <button class="save-btn" onclick="saveArticle('about')" data-i18n="saveChanges">حفظ التعديلات</button>
             <div id="alert-about" class="alert-box" data-i18n="successPublish">تم نشر المحتوى بنجاح!</div>
@@ -270,7 +276,7 @@
 
     <!-- صفحة التطوع عبر البريد المباشر -->
     <div id="page-volunteer" class="content-page">
-        <h1 class="section-title" data-i18n="volunteerBtn">تطوع معنا / أرسل سيرتك</h1>
+        <h2 class="section-title" data-i18n="volunteerBtn">تطوع معنا / أرسل سيرتك</h2>
         <div class="volunteer-card">
             <p data-i18n="volunteerText">إذا كنت ترغب بالتطوع معنا أو إرسال سيرتك الذاتية واقتراحاتك، يمكنك مراسلتنا مباشرة عبر البريد الإلكتروني المخصص:</p>
             <a href="mailto:sister.email@example.com" class="email-link">sister.email@example.com</a>
@@ -419,7 +425,7 @@
                 return;
             }
 
-            list.innerHTML = records.length > 0 ? `<h4 style="color:var(--gold); margin-bottom:10px; border-bottom:1px solid rgba(201,146,62,0.3); padding-bottom:5px;">${getUIText('publishedContents')} (${records.length}):</h4>` : '';
+            list.innerHTML = records.length > 0 ? `<h3 style="color:var(--gold); margin-bottom:10px; border-bottom:1px solid rgba(201,146,62,0.3); padding-bottom:5px; font-size: 1.1rem;">${getUIText('publishedContents')} (${records.length}):</h3>` : '';
 
             records.forEach(item => {
                 const div = document.createElement('div');
@@ -466,7 +472,6 @@
 
         const translations = {
             ar: {
-                logo: "⚖️ منصة القانون",
                 home: "الرئيسية",
                 publicLaw: "القانون العام",
                 privateLaw: "القانون الخاص",
@@ -516,7 +521,6 @@
                 phAbout: "اكتب نبذة عن منصة القانون هنا..."
             },
             en: {
-                logo: "⚖️ Al-Qanon Platform",
                 home: "Home",
                 publicLaw: "Public Law",
                 privateLaw: "Private Law",
@@ -566,7 +570,6 @@
                 phAbout: "Write about the Al-Qanon platform here..."
             },
             nl: {
-                logo: "⚖️ Al-Qanon Platform",
                 home: "Home",
                 publicLaw: "Publiekrecht",
                 privateLaw: "Privaatrecht",
@@ -616,7 +619,6 @@
                 phAbout: "Schrijf hier over het Al-Qanon platform..."
             },
             tr: {
-                logo: "⚖️ Kanun Platformu",
                 home: "Ana Sayfa",
                 publicLaw: "Kamu Hukuku",
                 privateLaw: "Özel Hukuk",
