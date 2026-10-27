@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#102A43">
-  <meta name="description" content="منصة القانون AQ: تبسيط القوانين الهولندية باللغة العربية ولغات أخرى.">
+  <meta name="description" content="منصة القانون AQ: تبسيط القوانين الهولندية باللغة العربية ولغات أخرى، مع الإحالة إلى المصادر الرسمية.">
   <title>منصة القانون AQ</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,20 +21,21 @@
     .lang-select,.field{background:#0c2238;color:var(--white);border:1px solid #c9923e88;border-radius:7px;padding:.65rem .8rem;max-width:100%}
     .hero{text-align:center;padding:clamp(2.5rem,7vw,5rem) 1rem;background:linear-gradient(140deg,#102a43,#163758);border-bottom:3px solid var(--gold)}
     .hero h1{color:var(--gold);font-size:clamp(2rem,5vw,3rem);line-height:1.25;margin:0 0 1rem;font-weight:800}.hero p{max-width:780px;margin:0 auto 1.5rem;color:#e2e8ee}
-    .btn{display:inline-flex;justify-content:center;align-items:center;gap:.4rem;background:var(--gold);color:#111;border:0;border-radius:7px;padding:.7rem 1.1rem;font-weight:800;transition:filter .2s}.btn:hover{filter:brightness(1.08)}.btn.secondary{background:transparent;color:var(--gold);border:1px solid var(--gold)}.btn.danger{background:#8f2525;color:white}.btn.small{padding:.4rem .7rem;font-size:.9rem}
+    .btn{display:inline-flex;justify-content:center;align-items:center;gap:.4rem;background:var(--gold);color:#111;border:0;border-radius:7px;padding:.7rem 1.1rem;font-weight:800;transition:filter .2s}.btn:hover{filter:brightness(1.08)}.btn.secondary{background:transparent;color:var(--gold);border:1px solid var(--gold)}.btn.danger{background:#8f2525;color:white}.btn.small{padding:.4rem .7rem;font-size:.9rem}.btn:disabled{opacity:.6;cursor:not-allowed}
     .container{width:min(1200px,100%);padding:0 1rem;margin:2.5rem auto}.page{display:none;min-height:50vh}.page.active{display:block}
     .section-title{text-align:center;color:var(--gold);font-size:clamp(1.5rem,3vw,2rem);margin:0 0 1.5rem}
     .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1.1rem}.card{background:var(--card-bg);border:1px solid #c9923e44;border-top:4px solid var(--gold);border-radius:11px;overflow:hidden;display:flex;flex-direction:column;min-width:0}.card img{width:100%;height:165px;object-fit:cover;background:#0c2238}.card-body{padding:1rem;display:flex;flex-direction:column;align-items:flex-start;gap:.65rem;flex:1}.card h3{color:var(--gold);margin:0;font-size:1.15rem}.card p{margin:0;color:var(--muted);font-size:.93rem;flex:1}.card .btn{margin-top:.4rem;width:100%}
     .panel{background:var(--card-bg);padding:clamp(1rem,3vw,1.5rem);border-radius:11px;border-inline-start:5px solid var(--gold);box-shadow:0 10px 28px #0001}
     .panel h3{color:var(--gold);margin-top:0}.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}.form-row{display:flex;flex-direction:column;gap:.35rem;min-width:0}.form-row.full{grid-column:1/-1}.field{width:100%}textarea.field{min-height:180px;resize:vertical}input[type=file].field{padding:.5rem}
     .help{font-size:.86rem;color:#c8d4df}.notice{padding:.8rem 1rem;border:1px solid #c9923e77;border-radius:8px;background:#0c223866;margin:1rem 0}.status{min-height:1.5em;margin:.5rem 0;color:var(--success)}.status.error{color:var(--danger)}
-    .article-list{display:grid;gap:1rem;margin-top:1.5rem}.article-item{padding:1rem;background:#102a43;border:1px solid #c9923e44;border-radius:8px}.article-item h3{color:var(--gold);margin:.1rem 0}.article-meta{font-size:.85rem;color:#b8c5d1}.article-item p{white-space:pre-wrap;overflow-wrap:anywhere}
+    .article-list{display:grid;gap:1rem;margin-top:1.5rem}.article-item{padding:1rem;background:#102a43;border:1px solid #c9923e44;border-radius:8px;min-width:0}.article-item h3{color:var(--gold);margin:.1rem 0}.article-meta{font-size:.85rem;color:#b8c5d1}.article-item p{white-space:pre-wrap;overflow-wrap:anywhere}.article-source{display:inline-block;color:var(--gold);font-weight:700;margin-top:.5rem;text-decoration:underline;overflow-wrap:anywhere}
     .actions{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.75rem}.empty{text-align:center;color:#cbd5df;padding:1.5rem;border:1px dashed #c9923e66;border-radius:8px}
     footer{margin-top:4rem;padding:1.5rem;text-align:center;background:#05090e;color:#aaa;border-top:1px solid #ffffff15}footer span{color:var(--gold);font-weight:800}
     .hidden{display:none!important}.two-col{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1.2rem}
     :focus-visible{outline:3px solid #f3c777;outline-offset:3px}
     @media(max-width:1000px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}header{justify-content:center}.nav-container{justify-content:center}}
     @media(max-width:620px){.grid,.form-grid,.two-col{grid-template-columns:1fr}.form-row.full{grid-column:auto}nav ul{justify-content:center;gap:10px}nav a{font-size:.85rem}.hero{padding:2.5rem 1rem}.card img{height:190px}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important}}
   </style>
 </head>
 <body>
@@ -76,9 +77,8 @@
       </section>
     </section>
 
-    <section class="page container" id="page-public-law"><h1 class="section-title" data-i18n="navPublic">القانون العام</h1><div class="panel"><p data-i18n="publicIntro">محتوى توعوي حول القانون العام. هذه النسخة التجريبية تعرض المقالات المنشورة محلياً.</p><div id="publicArticles" class="article-list"></div></div><a class="btn secondary" href="#home" data-page="home" data-i18n="back">العودة للرئيسية</a></section>
-    <section class="page container" id="page-private-law"><h1 class="section-title" data-i18n="navPrivate">القانون الخاص</h1><div class="panel"><p data-i18n="privateIntro">محتوى توعوي حول القانون الخاص. هذه النسخة التجريبية تعرض المقالات المنشورة محلياً.</p><div id="privateArticles" class="article-list"></div></div><a class="btn secondary" href="#home" data-page="home" data-i18n="back">العودة للرئيسية</a></section>
-
+    <section class="page container" id="page-public-law"><h1 class="section-title" data-i18n="navPublic">القانون العام</h1><div class="panel"><p data-i18n="publicIntro">محتوى توعوي حول القانون العام.</p><div id="publicArticles" class="article-list"></div></div><a class="btn secondary" href="#home" data-page="home" data-i18n="back">العودة للرئيسية</a></section>
+    <section class="page container" id="page-private-law"><h1 class="section-title" data-i18n="navPrivate">القانون الخاص</h1><div class="panel"><p data-i18n="privateIntro">محتوى توعوي حول القانون الخاص.</p><div id="privateArticles" class="article-list"></div></div><a class="btn secondary" href="#home" data-page="home" data-i18n="back">العودة للرئيسية</a></section>
     <section class="page container" id="page-student"><h1 class="section-title" data-i18n="studentsTitle">الطلاب والأكاديميون</h1><div class="panel"><p data-i18n="studentsText">دعم وإرشادات للطلاب الجامعيين والباحثين.</p><div id="studentArticles" class="article-list"></div></div><a class="btn secondary" href="#home" data-page="home" data-i18n="back">العودة للرئيسية</a></section>
     <section class="page container" id="page-refugee"><h1 class="section-title" data-i18n="refugeeTitle">اللاجئون والحماية</h1><div class="panel"><p data-i18n="refugeeText">شرح مبسط للجوء ولم شمل الأسرة والحماية.</p><div id="refugeeArticles" class="article-list"></div></div><a class="btn secondary" href="#home" data-page="home" data-i18n="back">العودة للرئيسية</a></section>
     <section class="page container" id="page-resident"><h1 class="section-title" data-i18n="residentTitle">المقيمون والعمل</h1><div class="panel"><p data-i18n="residentText">معلومات عامة عن الإقامة وعقود العمل والاندماج.</p><div id="residentArticles" class="article-list"></div></div><a class="btn secondary" href="#home" data-page="home" data-i18n="back">العودة للرئيسية</a></section>
@@ -86,15 +86,15 @@
 
     <section class="page container" id="page-articles">
       <h1 class="section-title" data-i18n="navArticles">المقالات القانونية</h1>
-      <div class="notice">المقالات المنشورة متاحة للجميع. يمكنك إرسال مقال للمراجعة، ولن يظهر للزوار إلا بعد موافقة المشرفة.</div>
+      <div class="notice" data-i18n="articleNotice">المقالات المنشورة متاحة للجميع. يمكنك إرسال مقال للمراجعة، ولن يظهر للزوار إلا بعد موافقة المشرفة.</div>
       <div class="panel">
-        <h3>إرسال مقال للمراجعة</h3>
+        <h3 data-i18n="submitArticleTitle">إرسال مقال للمراجعة</h3>
         <form id="visitorArticleForm" class="form-grid">
-          <div class="form-row full"><label for="visitorTitle">عنوان المقال</label><input class="field" id="visitorTitle" maxlength="180" required></div>
-          <div class="form-row"><label for="visitorCategory">القسم</label><select class="field" id="visitorCategory"><option value="public-law">القانون العام</option><option value="private-law">القانون الخاص</option><option value="student">الطلاب والأكاديميون</option><option value="refugee">اللاجئون والحماية</option><option value="resident">المقيمون والعمل</option><option value="general">الشؤون العامة والمهنية</option><option value="articles">مقالات عامة</option></select></div>
-          <div class="form-row"><label for="visitorAuthor">الاسم (اختياري)</label><input class="field" id="visitorAuthor" maxlength="100"></div>
-          <div class="form-row full"><label for="visitorContent">نص المقال</label><textarea class="field" id="visitorContent" maxlength="30000" required></textarea></div>
-          <div class="form-row full"><button class="btn" type="submit">إرسال للمراجعة</button><p class="status" id="visitorArticleStatus" role="status" aria-live="polite"></p></div>
+          <div class="form-row full"><label for="visitorTitle" data-i18n="articleTitle">عنوان المقال</label><input class="field" id="visitorTitle" maxlength="180" required></div>
+          <div class="form-row"><label for="visitorCategory" data-i18n="category">القسم</label><select class="field" id="visitorCategory"><option value="public-law" data-i18n="navPublic">القانون العام</option><option value="private-law" data-i18n="navPrivate">القانون الخاص</option><option value="student" data-i18n="studentsTitle">الطلاب والأكاديميون</option><option value="refugee" data-i18n="refugeeTitle">اللاجئون والحماية</option><option value="resident" data-i18n="residentTitle">المقيمون والعمل</option><option value="general" data-i18n="generalTitle">الشؤون العامة والمهنية</option></select></div>
+          <div class="form-row"><label for="visitorAuthor" data-i18n="authorOptional">الاسم (اختياري)</label><input class="field" id="visitorAuthor" maxlength="100"></div>
+          <div class="form-row full"><label for="visitorContent" data-i18n="articleBody">نص المقال</label><textarea class="field" id="visitorContent" maxlength="30000" required></textarea></div>
+          <div class="form-row full"><button class="btn" type="submit" data-i18n="sendForReview">إرسال للمراجعة</button><p class="status" id="visitorArticleStatus" role="status" aria-live="polite"></p></div>
         </form>
       </div>
       <div id="allArticles" class="article-list"></div>
@@ -102,216 +102,215 @@
 
     <section class="page container" id="page-about">
       <h1 class="section-title" data-i18n="navAbout">من نحن</h1>
-      <div class="panel"><h3 data-i18n="aboutHeading">عن منصة القانون AQ</h3><p data-i18n="aboutText">نسعى إلى جعل المعلومات القانونية الهولندية أوضح وأسهل وصولاً، مع توضيح المصادر والتمييز بين المعلومات العامة والاستشارة القانونية الفردية.</p><p data-i18n="disclaimer">المحتوى للتوعية العامة ولا يُعد استشارة قانونية أو بديلاً عن محامٍ مختص. تحققي دائماً من المصادر الرسمية وتاريخ تحديث المعلومات.</p></div>
+      <div class="panel"><h3 data-i18n="aboutHeading">عن منصة القانون AQ</h3><p data-i18n="aboutText">نسعى إلى جعل المعلومات القانونية الهولندية أوضح وأسهل وصولاً، مع توضيح المصادر والتمييز بين المعلومات العامة والاستشارة القانونية الفردية.</p><p data-i18n="disclaimer">المحتوى للتوعية العامة ولا يُعد استشارة قانونية أو بديلاً عن محامٍ مختص. تحقّق دائمًا من المصادر الرسمية وتاريخ تحديث المعلومات.</p></div>
     </section>
 
     <section class="page container" id="page-volunteer">
       <h1 class="section-title" data-i18n="volunteerTitle">تطوع معنا</h1>
       <div class="panel">
-        <p data-i18n="volunteerIntro">نرحب بالمساهمين في الترجمة والبحث والتحرير القانوني. لا ترسلي وثائق هوية أو معلومات حساسة عبر هذا النموذج التجريبي.</p>
+        <p data-i18n="volunteerIntro">نرحب بالمساهمين في الترجمة والبحث والتحرير القانوني. املأ النموذج، وسيفتح برنامج البريد الإلكتروني لديك لإرسال الطلب وإرفاق السيرة الذاتية بنفسك.</p>
         <form id="volunteerForm" class="form-grid">
           <div class="form-row"><label for="vName" data-i18n="name">الاسم</label><input class="field" id="vName" name="name" required maxlength="100" autocomplete="name"></div>
           <div class="form-row"><label for="vEmail" data-i18n="email">البريد الإلكتروني</label><input class="field" id="vEmail" name="email" type="email" required maxlength="254" autocomplete="email"></div>
           <div class="form-row"><label for="vArea" data-i18n="volunteerArea">مجال المساهمة</label><select class="field" id="vArea" name="area" required><option value="translation" data-i18n="translation">الترجمة</option><option value="research" data-i18n="research">البحث</option><option value="editing" data-i18n="editing">التحرير</option><option value="other" data-i18n="other">مجال آخر</option></select></div>
           <div class="form-row"><label for="vLang" data-i18n="preferredLanguage">لغة التواصل</label><select class="field" id="vLang" name="language"><option value="ar">العربية</option><option value="nl">Nederlands</option><option value="tr">Türkçe</option><option value="en">English</option></select></div>
           <div class="form-row full"><label for="vMessage" data-i18n="message">رسالة مختصرة</label><textarea class="field" id="vMessage" name="message" maxlength="2000" required></textarea></div>
-          <div class="form-row full"><label><input type="checkbox" id="vConsent" required> <span data-i18n="consent">أوافق على استخدام بياناتي للتواصل بشأن طلب التطوع وفق سياسة الخصوصية.</span></label></div>
-         
-<div class="panel">
-  <p data-i18n="volunteerIntro">
-    نرحب بالمساهمين في الترجمة والبحث والتحرير القانوني.
-    اضغط على الزر لفتح بريدك الإلكتروني، واكتب معلوماتك
-    وأرفق سيرتك الذاتية بنفسك.
-  </p>
-
-  <a class="btn"
-     href="mailto:nour.dlikan@gmail.com?subject=Volunteer%20Application">
-    إرسال طلب التطوع بالبريد الإلكتروني
-  </a>
-
-  <p class="help">
-    سيفتح برنامج البريد الإلكتروني لديك. أرفق سيرتك الذاتية
-    بنفسك قبل إرسال الطلب.
-  </p>
-</div>
- 
+          <div class="form-row full"><label><input type="checkbox" id="vConsent" required> <span data-i18n="consent">أوافق على استخدام بياناتي للتواصل بشأن طلب التطوع.</span></label></div>
+          <div class="form-row full"><button class="btn" type="submit" data-i18n="sendRequest">إنشاء رسالة البريد الإلكتروني</button><p class="status" id="volunteerStatus" role="status" aria-live="polite"></p><p class="help" data-i18n="volunteerHelp">لن تُرسل البيانات إلى الموقع. سيفتح برنامج البريد الإلكتروني لديك، وأرفق سيرتك الذاتية يدويًا قبل الإرسال.</p></div>
+        </form>
       </div>
     </section>
 
     <section class="page container" id="page-admin">
-      <h1 class="section-title" data-i18n="adminTitle">لوحة الإدارة التجريبية</h1>
-      <div class="notice">تسجيل الدخول محمي عبر Supabase. لا تكتبي كلمة المرور داخل الكود أو تشاركيها مع أي شخص.</div>
+      <h1 class="section-title" data-i18n="adminTitle">لوحة الإدارة</h1>
+      <div class="notice" data-i18n="adminNotice">الدخول مخصص لحساب الإدارة. لا تكتب كلمة المرور داخل الكود أو تشاركها مع أي شخص.</div>
       <div class="panel" id="adminLoginPanel">
-        <h3>دخول المشرفة</h3>
+        <h3 data-i18n="adminLoginTitle">دخول المشرفة</h3>
         <form id="adminLoginForm" class="form-grid">
-          <div class="form-row"><label for="adminEmail">البريد الإلكتروني</label><input class="field" id="adminEmail" type="email" autocomplete="username" required></div>
-          <div class="form-row"><label for="adminPassword">كلمة المرور</label><input class="field" id="adminPassword" type="password" autocomplete="current-password" required></div>
-          <div class="form-row full"><button class="btn" type="submit">تسجيل الدخول</button><p class="status" id="adminLoginStatus" role="status" aria-live="polite"></p></div>
+          <div class="form-row"><label for="adminEmail" data-i18n="email">البريد الإلكتروني</label><input class="field" id="adminEmail" type="email" autocomplete="username" required></div>
+          <div class="form-row"><label for="adminPassword" data-i18n="password">كلمة المرور</label><input class="field" id="adminPassword" type="password" autocomplete="current-password" required></div>
+          <div class="form-row full"><button class="btn" type="submit" data-i18n="login">تسجيل الدخول</button><p class="status" id="adminLoginStatus" role="status" aria-live="polite"></p></div>
         </form>
       </div>
       <div id="adminWorkspace" class="hidden">
-      <div class="actions"><button type="button" class="btn secondary" id="adminLogout">تسجيل الخروج</button><p class="status" id="adminSessionStatus" role="status" aria-live="polite"></p></div>
-      <div class="two-col">
-        <div class="panel">
-          <h3 data-i18n="articleEditor">محرر المقالات</h3>
-          <form id="articleForm" class="form-grid">
-            <input type="hidden" id="articleId">
-            <div class="form-row full"><label for="articleTitle" data-i18n="articleTitle">عنوان المقال</label><input class="field" id="articleTitle" maxlength="180" required></div>
-            <div class="form-row"><label for="articleCategory" data-i18n="category">القسم</label><select class="field" id="articleCategory"><option value="public-law" data-i18n="navPublic">القانون العام</option><option value="private-law" data-i18n="navPrivate">القانون الخاص</option><option value="student" data-i18n="studentsTitle">الطلاب والأكاديميون</option><option value="refugee" data-i18n="refugeeTitle">اللاجئون والحماية</option><option value="resident" data-i18n="residentTitle">المقيمون والعمل</option><option value="general" data-i18n="generalTitle">الشؤون العامة والمهنية</option></select></div>
-            <div class="form-row"><label for="articleLang" data-i18n="articleLanguage">لغة المقال</label><select class="field" id="articleLang"><option value="ar">العربية</option><option value="nl">Nederlands</option><option value="tr">Türkçe</option><option value="en">English</option></select></div>
-            <div class="form-row full"><label for="articleBody" data-i18n="articleBody">نص المقال</label><textarea class="field" id="articleBody" maxlength="30000" required></textarea></div>
-            <div class="form-row full"><label for="articleSource" data-i18n="source">المصدر الرسمي / الرابط (اختياري)</label><input class="field" id="articleSource" type="url" maxlength="1000" placeholder="https://"></div>
-            <div class="form-row full"><label><input id="articlePublished" type="checkbox"> <span data-i18n="publish">نشر المقال للزوار</span></label></div>
-            <div class="form-row full"><div class="actions"><button class="btn" type="submit" data-i18n="saveArticle">حفظ المقال</button><button class="btn secondary" id="clearArticle" type="button" data-i18n="clear">مسح الحقول</button></div><p class="status" id="articleStatus" role="status" aria-live="polite"></p></div>
-          </form>
+        <div class="actions"><button type="button" class="btn secondary" id="adminLogout" data-i18n="logout">تسجيل الخروج</button><p class="status" id="adminSessionStatus" role="status" aria-live="polite"></p></div>
+        <div class="two-col">
+          <div class="panel">
+            <h3 data-i18n="articleEditor">محرر المقالات</h3>
+            <form id="articleForm" class="form-grid">
+              <input type="hidden" id="articleId">
+              <div class="form-row full"><label for="articleTitle" data-i18n="articleTitle">عنوان المقال</label><input class="field" id="articleTitle" maxlength="180" required></div>
+              <div class="form-row"><label for="articleCategory" data-i18n="category">القسم</label><select class="field" id="articleCategory"><option value="public-law" data-i18n="navPublic">القانون العام</option><option value="private-law" data-i18n="navPrivate">القانون الخاص</option><option value="student" data-i18n="studentsTitle">الطلاب والأكاديميون</option><option value="refugee" data-i18n="refugeeTitle">اللاجئون والحماية</option><option value="resident" data-i18n="residentTitle">المقيمون والعمل</option><option value="general" data-i18n="generalTitle">الشؤون العامة والمهنية</option></select></div>
+              <div class="form-row"><label for="articleLang" data-i18n="articleLanguage">لغة المقال</label><select class="field" id="articleLang"><option value="ar">العربية</option><option value="nl">Nederlands</option><option value="tr">Türkçe</option><option value="en">English</option></select></div>
+              <div class="form-row full"><label for="articleBody" data-i18n="articleBody">نص المقال</label><textarea class="field" id="articleBody" maxlength="30000" required></textarea></div>
+              <div class="form-row full"><label for="articleSource" data-i18n="source">المصدر الرسمي / الرابط</label><input class="field" id="articleSource" type="url" maxlength="1000" placeholder="https://"></div>
+              <div class="form-row full"><label><input id="articlePublished" type="checkbox"> <span data-i18n="publish">نشر المقال للزوار</span></label></div>
+              <div class="form-row full"><div class="actions"><button class="btn" type="submit" data-i18n="saveArticle">حفظ المقال</button><button class="btn secondary" id="clearArticle" type="button" data-i18n="clear">مسح الحقول</button></div><p class="status" id="articleStatus" role="status" aria-live="polite"></p></div>
+            </form>
+          </div>
+          <div class="panel"><h3 data-i18n="manageArticles">إدارة المقالات</h3><div id="adminArticles" class="article-list"></div></div>
         </div>
-        <div class="panel"><h3 data-i18n="manageArticles">إدارة المقالات</h3><p class="help" data-i18n="localStorageNote">التخزين المحلي للتجربة فقط، ويمكن لأي شخص يستخدم نفس المتصفح الوصول إليه. لا يُعد نظام صلاحيات.</p><div id="adminArticles" class="article-list"></div></div>
-      </div>
       </div>
     </section>
   </main>
 
-  <footer><p data-i18n="footer">جميع الحقوق محفوظة © 2026 - منصة <span>AQ القانون</span></p><small data-i18n="footerNote">نسخة أولية — يلزم ربط خادم آمن قبل النشر الفعلي.</small></footer>
+  <footer>
+    <p data-i18n="footer">جميع الحقوق محفوظة © 2026 - منصة <span>AQ القانون</span></p>
+    <small data-i18n="footerNote">منصة القانون AQ تقدّم معلومات قانونية مبسّطة، ولا تُغني عن استشارة محامٍ مختص.</small>
+  </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-'use strict';
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+  'use strict';
+  const SUPABASE_URL = 'https://vmrhohvvdapvebxxiilu.supabase.co';
+  const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_00z1UqTfpp_24yZf3-_KKA_l2sa41-3';
+  const ADMIN_USER_ID = '04a0788a-6043-4383-875e-8edd68c9adf3';
+  const VOLUNTEER_EMAIL = 'nour.dlikan@gmail.com';
+  const db = window.supabase?.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY) || null;
+  let currentLang = 'ar';
+  let articles = [];
+  let isAdmin = false;
+  let currentAdminId = null;
 
-/*
-  FRONTEND DEMO ONLY.
-  Before production, replace localStorage with authenticated server API calls.
-  Never put passwords, API secrets, private volunteer submissions, or authorization
-  logic in this file. Enforce authorization and validation on the server.
-*/
-const API_BASE = ''; // Example: 'https://your-domain.example/api' — configure your real backend.
-const STORAGE_KEY = 'alqanon_demo_articles_v1';
-
-const translations = {
- ar: {
-  skip:'تجاوز إلى المحتوى',brand:'منصة القانون AQ',navHome:'الرئيسية',navPublic:'القانون العام',navPrivate:'القانون الخاص',navArticles:'المقالات القانونية',navAbout:'من نحن',navVolunteer:'تطوع معنا',navAdmin:'الإدارة',language:'اللغة',
-  heroTitle:'منصة القانون AQ',heroText:'منصة لتبسيط وشرح القوانين الهولندية باللغة العربية، مع محتوى توعوي بلغات متعددة.',heroCta:'تطوع معنا / أرسل سيرتك',audienceTitle:'الفئات المستهدفة',studentsTitle:'الطلاب والأكاديميون',studentsText:'دعم وإرشادات للطلاب الجامعيين والباحثين.',refugeeTitle:'اللاجئون والحماية',refugeeText:'شرح مبسط للجوء ولم شمل الأسرة والحماية.',residentTitle:'المقيمون والعمل',residentText:'معلومات عامة عن الإقامة وعقود العمل والاندماج.',generalTitle:'الشؤون العامة والمهنية',generalText:'مقالات توعوية قانونية للأفراد والمهنيين.',explore:'استكشف المزيد',back:'العودة للرئيسية',publicIntro:'محتوى توعوي حول القانون العام. هذه النسخة التجريبية تعرض المقالات المنشورة محلياً.',privateIntro:'محتوى توعوي حول القانون الخاص. هذه النسخة التجريبية تعرض المقالات المنشورة محلياً.',demoNotice:'وضع تجريبي: تُحفظ البيانات في هذا المتصفح فقط. لا تستخدميه لتخزين معلومات شخصية أو سرية.',aboutHeading:'عن منصة القانون AQ',aboutText:'نسعى إلى جعل المعلومات القانونية الهولندية أوضح وأسهل وصولاً، مع توضيح المصادر والتمييز بين المعلومات العامة والاستشارة القانونية الفردية.',disclaimer:'المحتوى للتوعية العامة ولا يُعد استشارة قانونية أو بديلاً عن محامٍ مختص. تحققي دائماً من المصادر الرسمية وتاريخ تحديث المعلومات.',volunteerTitle:'تطوع معنا',volunteerIntro:'نرحب بالمساهمين في الترجمة والبحث والتحرير القانوني. لا ترسلي وثائق هوية أو معلومات حساسة عبر هذا النموذج التجريبي.',name:'الاسم',email:'البريد الإلكتروني',volunteerArea:'مجال المساهمة',translation:'الترجمة',research:'البحث',editing:'التحرير',other:'مجال آخر',preferredLanguage:'لغة التواصل',message:'رسالة مختصرة',consent:'أوافق على استخدام بياناتي للتواصل بشأن طلب التطوع وفق سياسة الخصوصية.',sendRequest:'إرسال طلب التطوع',adminTitle:'لوحة الإدارة التجريبية',adminWarning:'هذه ليست مصادقة حقيقية. لا يوجد حساب مشرف أو حماية خادم في هذه النسخة؛ لا تنشريها مع بيانات حساسة أو مقالات خاصة.',articleEditor:'محرر المقالات',articleTitle:'عنوان المقال',category:'القسم',articleLanguage:'لغة المقال',articleBody:'نص المقال',source:'المصدر الرسمي / الرابط (اختياري)',publish:'نشر المقال للزوار',saveArticle:'حفظ المقال',clear:'مسح الحقول',manageArticles:'إدارة المقالات',localStorageNote:'التخزين المحلي للتجربة فقط، ويمكن لأي شخص يستخدم نفس المتصفح الوصول إليه. لا يُعد نظام صلاحيات.',footer:'جميع الحقوق محفوظة © 2026 - منصة AQ القانون',footerNote:'نسخة أولية — يلزم ربط خادم آمن قبل النشر الفعلي.',saved:'تم حفظ المقال في هذا المتصفح التجريبي.',updated:'تم تحديث المقال في التخزين التجريبي.',deleted:'تم حذف المقال من هذا المتصفح.',emptyArticles:'لا توجد مقالات بعد.',edit:'تعديل',delete:'حذف',published:'منشور',draft:'مسودة',confirmDelete:'هل تريدين حذف هذا المقال؟',needTitleBody:'يرجى إدخال عنوان المقال ونصه.',storageError:'تعذر الحفظ في المتصفح. قد تكون مساحة التخزين ممتلئة أو معطلة.',volunteerDemo:'لم يُرسل الطلب إلى جهة خارجية. هذه نسخة تجريبية فقط؛ اربطي النموذج بخادم آمن قبل استقبال الطلبات.',badUrl:'أدخلي رابطاً صالحاً يبدأ بـ https:// أو اتركي الحقل فارغاً.',sourceLabel:'المصدر',noSource:'لم يُحدد مصدر',adminLocal:'بيانات تجريبية محلية',requestRequired:'يرجى إكمال الحقول المطلوبة والموافقة على سياسة الخصوصية.'
- },
- nl: {
-  skip:'Ga naar inhoud',brand:'Al-Qanon AQ',navHome:'Home',navPublic:'Publiekrecht',navPrivate:'Privaatrecht',navArticles:'Juridische artikelen',navAbout:'Over ons',navVolunteer:'Vrijwilligers',navAdmin:'Beheer',language:'Taal',
-  heroTitle:'Al-Qanon AQ',heroText:'Een platform dat Nederlandse wetgeving begrijpelijk maakt, in het Arabisch en andere talen.',heroCta:'Help mee / stuur je cv',audienceTitle:'Voor wie',studentsTitle:'Studenten en academici',studentsText:'Ondersteuning en informatie voor studenten en onderzoekers.',refugeeTitle:'Vluchtelingen en bescherming',refugeeText:'Eenvoudige uitleg over asiel, gezinshereniging en bescherming.',residentTitle:'Verblijf en werk',residentText:'Algemene informatie over verblijf, arbeidscontracten en inburgering.',generalTitle:'Algemene en professionele zaken',generalText:'Juridische informatie voor particulieren en professionals.',explore:'Meer bekijken',back:'Terug naar home',publicIntro:'Informatie over publiekrecht. Deze demo toont lokaal opgeslagen gepubliceerde artikelen.',privateIntro:'Informatie over privaatrecht. Deze demo toont lokaal opgeslagen gepubliceerde artikelen.',demoNotice:'Demomodus: gegevens worden alleen in deze browser opgeslagen. Bewaar hier geen persoonlijke of vertrouwelijke informatie.',aboutHeading:'Over Al-Qanon AQ',aboutText:'We maken Nederlandse juridische informatie toegankelijker, met duidelijke bronnen en een onderscheid tussen algemene informatie en individueel juridisch advies.',disclaimer:'Alle inhoud is algemene informatie en geen juridisch advies. Controleer altijd officiële bronnen en de datum van actualisering.',volunteerTitle:'Word vrijwilliger',volunteerIntro:'We verwelkomen hulp bij vertaling, onderzoek en juridische redactie. Stuur via dit dem formulier geen identiteitsdocumenten of gevoelige informatie.',name:'Naam',email:'E-mailadres',volunteerArea:'Bijdragegebied',translation:'Vertaling',research:'Onderzoek',editing:'Redactie',other:'Anders',preferredLanguage:'Voorkeurstaal',message:'Kort bericht',consent:'Ik geef toestemming om mijn gegevens te gebruiken om contact op te nemen over mijn vrijwilligersaanvraag.',sendRequest:'Aanvraag versturen',adminTitle:'Demo-beheerpaneel',adminWarning:'Dit is geen echte authenticatie. Er is geen beheerdersaccount of serverbeveiliging. Publiceer geen gevoelige gegevens of privéartikelen.',articleEditor:'Artikel bewerken',articleTitle:'Titel',category:'Categorie',articleLanguage:'Artikeltaal',articleBody:'Artikeltekst',source:'Officiële bron / link (optioneel)',publish:'Publiceren voor bezoekers',saveArticle:'Artikel opslaan',clear:'Velden wissen',manageArticles:'Artikelen beheren',localStorageNote:'Lokale opslag is alleen voor demonstratie en is toegankelijk voor gebruikers van dezelfde browser. Dit is geen machtigingensysteem.',footer:'Alle rechten voorbehouden © 2026 - Al-Qanon AQ',footerNote:'Prototype — koppel een beveiligde server vóór publicatie.',saved:'Artikel opgeslagen in deze demo-browser.',updated:'Artikel bijgewerkt in demo-opslag.',deleted:'Artikel verwijderd uit deze browser.',emptyArticles:'Nog geen artikelen.',edit:'Bewerken',delete:'Verwijderen',published:'Gepubliceerd',draft:'Concept',confirmDelete:'Wil je dit artikel verwijderen?',needTitleBody:'Vul de titel en artikeltekst in.',storageError:'Opslaan in de browser is mislukt.',volunteerDemo:'De aanvraag is niet naar een externe partij verzonden. Dit is alleen een demo; koppel een beveiligde server voordat je aanvragen ontvangt.',badUrl:'Voer een geldige https://-link in of laat het veld leeg.',sourceLabel:'Bron',noSource:'Geen bron opgegeven',adminLocal:'Lokale demogegevens',requestRequired:'Vul de verplichte velden in en geef toestemming.'
- },
- tr: {
-  skip:'İçeriğe geç',brand:'Al-Qanon AQ',navHome:'Ana sayfa',navPublic:'Kamu hukuku',navPrivate:'Özel hukuk',navArticles:'Hukuki makaleler',navAbout:'Hakkımızda',navVolunteer:'Gönüllü ol',navAdmin:'Yönetim',language:'Dil',
-  heroTitle:'Al-Qanon AQ',heroText:'Hollanda hukukunu Arapça ve diğer dillerde anlaşılır hâle getiren bilgilendirme platformu.',heroCta:'Gönüllü ol / CV gönder',audienceTitle:'Hedef kitle',studentsTitle:'Öğrenciler ve akademisyenler',studentsText:'Üniversite öğrencileri ve araştırmacılar için destek ve rehberlik.',refugeeTitle:'Mülteciler ve koruma',refugeeText:'Sığınma, aile birleşimi ve koruma hakkında sade açıklamalar.',residentTitle:'Oturum ve çalışma',residentText:'Oturum, iş sözleşmeleri ve uyum hakkında genel bilgiler.',generalTitle:'Genel ve mesleki konular',generalText:'Bireyler ve profesyoneller için hukuki bilgilendirme.',explore:'Daha fazla bilgi',back:'Ana sayfaya dön',publicIntro:'Kamu hukuku hakkında bilgilendirme. Bu demo yerel olarak yayımlanmış makaleleri gösterir.',privateIntro:'Özel hukuk hakkında bilgilendirme. Bu demo yerel olarak yayımlanmış makaleleri gösterir.',demoNotice:'Demo modu: Veriler yalnızca bu tarayıcıda saklanır. Kişisel veya gizli bilgileri burada saklamayın.',aboutHeading:'Al-Qanon AQ hakkında',aboutText:'Hollanda hukukuna ilişkin bilgileri daha erişilebilir kılmayı, kaynakları açıkça belirtmeyi ve genel bilgi ile kişisel hukuki danışmanlığı ayırmayı amaçlıyoruz.',disclaimer:'İçerik genel bilgilendirmedir; hukuki danışmanlık yerine geçmez. Resmî kaynakları ve güncelleme tarihini kontrol edin.',volunteerTitle:'Gönüllü ol',volunteerIntro:'Çeviri, araştırma ve hukuki editörlük katkılarını memnuniyetle karşılıyoruz. Bu demo formuyla kimlik belgesi veya hassas bilgi göndermeyin.',name:'Ad',email:'E-posta',volunteerArea:'Katkı alanı',translation:'Çeviri',research:'Araştırma',editing:'Editörlük',other:'Diğer',preferredLanguage:'İletişim dili',message:'Kısa mesaj',consent:'Gönüllülük başvurum hakkında iletişim kurulması için verilerimin kullanılmasını kabul ediyorum.',sendRequest:'Başvuruyu gönder',adminTitle:'Demo yönetim paneli',adminWarning:'Bu gerçek bir kimlik doğrulama sistemi değildir. Yönetici hesabı veya sunucu güvenliği yoktur. Hassas veriler ya da özel makaleler yayımlamayın.',articleEditor:'Makale düzenleyici',articleTitle:'Makale başlığı',category:'Kategori',articleLanguage:'Makale dili',articleBody:'Makale metni',source:'Resmî kaynak / bağlantı (isteğe bağlı)',publish:'Ziyaretçiler için yayımla',saveArticle:'Makaleyi kaydet',clear:'Alanları temizle',manageArticles:'Makaleleri yönet',localStorageNote:'Yerel depolama yalnızca demo içindir ve aynı tarayıcıyı kullananlar tarafından erişilebilir. Yetkilendirme sistemi değildir.',footer:'Tüm hakları saklıdır © 2026 - Al-Qanon AQ',footerNote:'Ön sürüm — yayımlamadan önce güvenli sunucu bağlayın.',saved:'Makale bu demo tarayıcısına kaydedildi.',updated:'Makale demo depolamasında güncellendi.',deleted:'Makale bu tarayıcıdan silindi.',emptyArticles:'Henüz makale yok.',edit:'Düzenle',delete:'Sil',published:'Yayımlandı',draft:'Taslak',confirmDelete:'Bu makaleyi silmek istiyor musunuz?',needTitleBody:'Lütfen başlığı ve makale metnini girin.',storageError:'Tarayıcıya kaydedilemedi.',volunteerDemo:'Başvuru harici bir yere gönderilmedi. Bu yalnızca bir demodur; başvuru almadan önce güvenli sunucu bağlayın.',badUrl:'Geçerli bir https:// bağlantısı girin veya alanı boş bırakın.',sourceLabel:'Kaynak',noSource:'Kaynak belirtilmedi',adminLocal:'Yerel demo verileri',requestRequired:'Zorunlu alanları doldurun ve onay verin.'
- },
- en: {
-  skip:'Skip to content',brand:'Al-Qanon AQ',navHome:'Home',navPublic:'Public law',navPrivate:'Private law',navArticles:'Legal articles',navAbout:'About us',navVolunteer:'Volunteer',navAdmin:'Admin',language:'Language',
-  heroTitle:'Al-Qanon AQ',heroText:'A platform making Dutch law easier to understand in Arabic and other languages.',heroCta:'Volunteer / submit your CV',audienceTitle:'Who we serve',studentsTitle:'Students and academics',studentsText:'Support and guidance for university students and researchers.',refugeeTitle:'Refugees and protection',refugeeText:'Plain-language information about asylum, family reunification and protection.',residentTitle:'Residence and work',residentText:'General information about residence, employment contracts and integration.',generalTitle:'General and professional topics',generalText:'Legal information for individuals and professionals.',explore:'Explore more',back:'Back to home',publicIntro:'Public-law information. This demo displays locally stored published articles.',privateIntro:'Private-law information. This demo displays locally stored published articles.',demoNotice:'Demo mode: data is stored only in this browser. Do not store personal or confidential information here.',aboutHeading:'About Al-Qanon AQ',aboutText:'We aim to make Dutch legal information easier to access, with clear sources and a distinction between general information and individual legal advice.',disclaimer:'Content is for general information and is not legal advice or a substitute for a qualified lawyer. Always check official sources and update dates.',volunteerTitle:'Volunteer with us',volunteerIntro:'We welcome help with translation, research and legal editing. Do not send identity documents or sensitive information through this demo form.',name:'Name',email:'Email address',volunteerArea:'Contribution area',translation:'Translation',research:'Research',editing:'Editing',other:'Other',preferredLanguage:'Contact language',message:'Short message',consent:'I consent to my data being used to contact me about my volunteer application under the privacy policy.',sendRequest:'Submit volunteer request',adminTitle:'Demo admin panel',adminWarning:'This is not real authentication. There is no admin account or server-side security. Do not publish sensitive data or private articles.',articleEditor:'Article editor',articleTitle:'Article title',category:'Category',articleLanguage:'Article language',articleBody:'Article text',source:'Official source / URL (optional)',publish:'Publish for visitors',saveArticle:'Save article',clear:'Clear fields',manageArticles:'Manage articles',localStorageNote:'Local storage is for demonstration only and is accessible to anyone using this browser. It is not an authorization system.',footer:'All rights reserved © 2026 - Al-Qanon AQ',footerNote:'Prototype — connect a secure server before production.',saved:'Article saved in this demo browser.',updated:'Article updated in demo storage.',deleted:'Article deleted from this browser.',emptyArticles:'No articles yet.',edit:'Edit',delete:'Delete',published:'Published',draft:'Draft',confirmDelete:'Delete this article?',needTitleBody:'Please enter an article title and body.',storageError:'Could not save to browser storage.',volunteerDemo:'The request was not sent externally. This is a demo only; connect a secure server before collecting applications.',badUrl:'Enter a valid https:// URL or leave this field empty.',sourceLabel:'Source',noSource:'No source provided',adminLocal:'Local demo data',requestRequired:'Complete required fields and provide consent.'
- }
-};
-
-const SUPABASE_URL = 'https://vmrhohvvdapvebxxiilu.supabase.co';
-const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_00z1UqTfpp_24yZf3-_KKA_l2sa41-3';
-const ADMIN_USER_ID = '04a0788a-6043-4383-875e-8edd68c9adf3';
-const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
-let currentLang = 'ar';
-let articles = [];
-let isAdmin = false;
-let currentAdminId = null;
-
-function t(key){return (translations[currentLang] && translations[currentLang][key]) || translations.en[key] || key;}
-function setStatus(id,msg,error=false){const el=document.getElementById(id);if(!el)return;el.textContent=msg;el.classList.toggle('error',error);}
-function safeHttpUrl(value){if(!value)return '';try{const u=new URL(value);return u.protocol==='https:'?u.href:null;}catch(e){return null;}}
-function escapeText(value){return String(value ?? '');}
-function showPage(pageId){const page=document.getElementById('page-'+pageId);if(!page)pageId='home';document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+pageId));if(location.hash!=='#'+pageId)history.replaceState(null,'','#'+pageId);window.scrollTo({top:0,behavior:'auto'});renderArticles();}
-function articleFromRow(row){return {id:String(row.id),title:row.title,body:row.content,category:row.category||'articles',author_name:row.author_name||'',status:row.status,updatedAt:row.created_at?new Date(row.created_at).getTime():Date.now()};}
-async function refreshArticles(){
-  let query=db.from('articles').select('id,title,content,author_name,status,created_at,category').order('created_at',{ascending:false});
-  if(!isAdmin)query=query.eq('status','published');
-  const {data,error}=await query;
-  if(error){console.error(error);articles=[];renderArticles();if(isAdmin)setStatus('adminSessionStatus','تعذر تحميل المقالات: '+error.message,true);return;}
-  articles=(data||[]).map(articleFromRow);renderArticles();
-}
-function renderArticles(){
-  renderArticleTarget('allArticles',articles.filter(a=>a.status==='published'),false);
-  renderArticleTarget('adminArticles',articles,true);
-  renderArticleTarget('publicArticles',articles.filter(a=>a.status==='published'&&a.category==='public-law'),false);
-  renderArticleTarget('privateArticles',articles.filter(a=>a.status==='published'&&a.category==='private-law'),false);
-  ['student','refugee','resident','general'].forEach(cat=>renderArticleTarget(cat+'Articles',articles.filter(a=>a.status==='published'&&a.category===cat),false));
-}
-function renderArticleTarget(id,list,adminView){
-  const root=document.getElementById(id);if(!root)return;root.replaceChildren();
-  if(!list.length){const p=document.createElement('div');p.className='empty';p.textContent=t('emptyArticles');root.append(p);return;}
-  list.forEach(a=>{
-    const item=document.createElement('article');item.className='article-item';
-    const h=document.createElement('h3');h.textContent=a.title;item.append(h);
-    const meta=document.createElement('div');meta.className='article-meta';
-    const statusText=a.status==='published'?'منشور':a.status==='pending_review'?'بانتظار المراجعة':'مرفوض';
-    meta.textContent=(adminView?statusText+' · ':'')+(a.author_name?'بقلم '+a.author_name+' · ':'')+new Date(a.updatedAt).toLocaleDateString(currentLang);item.append(meta);
-    const body=document.createElement('p');body.textContent=a.body;item.append(body);
-    if(adminView&&isAdmin){
-      const actions=document.createElement('div');actions.className='actions';
-      const edit=document.createElement('button');edit.type='button';edit.className='btn small secondary';edit.textContent='تعديل';edit.addEventListener('click',()=>editArticle(a.id));actions.append(edit);
-      if(a.status!=='published'){const pub=document.createElement('button');pub.type='button';pub.className='btn small';pub.textContent='نشر';pub.addEventListener('click',()=>updateArticleStatus(a.id,'published'));actions.append(pub);}
-      if(a.status!=='rejected'){const reject=document.createElement('button');reject.type='button';reject.className='btn small danger';reject.textContent='رفض';reject.addEventListener('click',()=>updateArticleStatus(a.id,'rejected'));actions.append(reject);}
-      if(a.status==='published'){const unpub=document.createElement('button');unpub.type='button';unpub.className='btn small secondary';unpub.textContent='إلغاء النشر';unpub.addEventListener('click',()=>updateArticleStatus(a.id,'pending_review'));actions.append(unpub);}
-      item.append(actions);
+  const translations = {
+    ar: {
+      skip:'تجاوز إلى المحتوى',brand:'منصة القانون AQ',navHome:'الرئيسية',navPublic:'القانون العام',navPrivate:'القانون الخاص',navArticles:'المقالات القانونية',navAbout:'من نحن',navVolunteer:'تطوع معنا',navAdmin:'الإدارة',language:'اللغة',
+      heroTitle:'منصة القانون AQ',heroText:'منصة لتبسيط وشرح القوانين الهولندية باللغة العربية، مع محتوى توعوي بلغات متعددة.',heroCta:'تطوع معنا / أرسل سيرتك',audienceTitle:'الفئات المستهدفة',studentsTitle:'الطلاب والأكاديميون',studentsText:'دعم وإرشادات للطلاب الجامعيين والباحثين.',refugeeTitle:'اللاجئون والحماية',refugeeText:'شرح مبسط للجوء ولم شمل الأسرة والحماية.',residentTitle:'المقيمون والعمل',residentText:'معلومات عامة عن الإقامة وعقود العمل والاندماج.',generalTitle:'الشؤون العامة والمهنية',generalText:'مقالات توعوية قانونية للأفراد والمهنيين.',explore:'استكشف المزيد',back:'العودة للرئيسية',publicIntro:'محتوى توعوي حول القانون العام، مع مقالات منشورة بعد المراجعة.',privateIntro:'محتوى توعوي حول القانون الخاص، مع مقالات منشورة بعد المراجعة.',
+      articleNotice:'المقالات المنشورة متاحة للجميع. يمكنك إرسال مقال للمراجعة، ولن يظهر للزوار إلا بعد موافقة المشرفة.',submitArticleTitle:'إرسال مقال للمراجعة',articleTitle:'عنوان المقال',category:'القسم',authorOptional:'الاسم (اختياري)',articleBody:'نص المقال',sendForReview:'إرسال للمراجعة',aboutHeading:'عن منصة القانون AQ',aboutText:'نسعى إلى جعل المعلومات القانونية الهولندية أوضح وأسهل وصولاً، مع توضيح المصادر والتمييز بين المعلومات العامة والاستشارة القانونية الفردية.',disclaimer:'المحتوى للتوعية العامة ولا يُعد استشارة قانونية أو بديلاً عن محامٍ مختص. تحقّق دائمًا من المصادر الرسمية وتاريخ تحديث المعلومات.',
+      volunteerTitle:'تطوع معنا',volunteerIntro:'نرحب بالمساهمين في الترجمة والبحث والتحرير القانوني. املأ النموذج، وسيفتح برنامج البريد الإلكتروني لديك لإرسال الطلب وإرفاق السيرة الذاتية بنفسك.',name:'الاسم',email:'البريد الإلكتروني',volunteerArea:'مجال المساهمة',translation:'الترجمة',research:'البحث',editing:'التحرير',other:'مجال آخر',preferredLanguage:'لغة التواصل',message:'رسالة مختصرة',consent:'أوافق على استخدام بياناتي للتواصل بشأن طلب التطوع.',sendRequest:'إنشاء رسالة البريد الإلكتروني',volunteerHelp:'لن تُرسل البيانات إلى الموقع. سيفتح برنامج البريد الإلكتروني لديك، وأرفق سيرتك الذاتية يدويًا قبل الإرسال.',
+      adminTitle:'لوحة الإدارة',adminNotice:'الدخول مخصص لحساب الإدارة. لا تكتب كلمة المرور داخل الكود أو تشاركها مع أي شخص.',adminLoginTitle:'دخول المشرفة',password:'كلمة المرور',login:'تسجيل الدخول',logout:'تسجيل الخروج',articleEditor:'محرر المقالات',articleLanguage:'لغة المقال',source:'المصدر الرسمي / الرابط',publish:'نشر المقال للزوار',saveArticle:'حفظ المقال',clear:'مسح الحقول',manageArticles:'إدارة المقالات',footer:'جميع الحقوق محفوظة © 2026 - منصة AQ القانون',footerNote:'منصة القانون AQ تقدّم معلومات قانونية مبسّطة، ولا تُغني عن استشارة محامٍ مختص.',
+      loading:'جارٍ التحميل…',emptyArticles:'لا توجد مقالات منشورة بعد.',emptyAdmin:'لا توجد مقالات لإدارتها حتى الآن.',saved:'تم حفظ المقال بنجاح.',updated:'تم تحديث المقال بنجاح.',deleted:'تم حذف المقال.',published:'منشور',pending_review:'بانتظار المراجعة',rejected:'مرفوض',edit:'تعديل',publishAction:'نشر',reject:'رفض',unpublish:'إلغاء النشر',delete:'حذف',confirmDelete:'هل تريد حذف هذا المقال نهائيًا؟',needTitleBody:'يرجى إدخال عنوان المقال ونصه.',badUrl:'أدخل رابطًا صالحًا يبدأ بـ https:// أو اترك الحقل فارغًا.',loginRequired:'يجب تسجيل الدخول بحساب الإدارة أولًا.',loginError:'تعذر تسجيل الدخول. تحقّق من البريد وكلمة المرور.',notAuthorized:'هذا الحساب غير مخوّل لإدارة المنصة.',databaseError:'تعذر الاتصال بقاعدة البيانات. تأكد من إعداد Supabase وسياسات الوصول.',articleSent:'وصل المقال للمراجعة. سيظهر للزوار بعد موافقة المشرفة.',volunteerMail:'سيتم فتح برنامج البريد الإلكتروني لإكمال الطلب. أرفق السيرة الذاتية قبل الإرسال.',noSource:'لم يُحدّد مصدر',sourceLabel:'المصدر',sendError:'تعذّر إرسال الطلب. تأكد من إعداد قاعدة البيانات وحاول لاحقًا.',saveError:'تعذّر حفظ المقال. تأكد من إعداد قاعدة البيانات وصلاحيات الحساب.'
+    },
+    nl: {
+      skip:'Ga naar inhoud',brand:'Al-Qanon AQ',navHome:'Home',navPublic:'Publiekrecht',navPrivate:'Privaatrecht',navArticles:'Juridische artikelen',navAbout:'Over ons',navVolunteer:'Vrijwilliger worden',navAdmin:'Beheer',language:'Taal',
+      heroTitle:'Al-Qanon AQ',heroText:'Een platform dat Nederlandse wetgeving begrijpelijk maakt in het Arabisch en andere talen.',heroCta:'Help mee / stuur je cv',audienceTitle:'Voor wie',studentsTitle:'Studenten en academici',studentsText:'Ondersteuning en informatie voor studenten en onderzoekers.',refugeeTitle:'Vluchtelingen en bescherming',refugeeText:'Eenvoudige uitleg over asiel, gezinshereniging en bescherming.',residentTitle:'Verblijf en werk',residentText:'Algemene informatie over verblijf, arbeidscontracten en inburgering.',generalTitle:'Algemene en professionele zaken',generalText:'Juridische informatie voor particulieren en professionals.',explore:'Meer bekijken',back:'Terug naar home',publicIntro:'Informatie over publiekrecht met artikelen die na controle zijn gepubliceerd.',privateIntro:'Informatie over privaatrecht met artikelen die na controle zijn gepubliceerd.',
+      articleNotice:'Gepubliceerde artikelen zijn openbaar. Je kunt een artikel ter beoordeling indienen; het verschijnt pas na goedkeuring.',submitArticleTitle:'Artikel ter beoordeling indienen',articleTitle:'Titel van het artikel',category:'Categorie',authorOptional:'Naam (optioneel)',articleBody:'Artikeltekst',sendForReview:'Indienen ter beoordeling',aboutHeading:'Over Al-Qanon AQ',aboutText:'We maken Nederlandse juridische informatie toegankelijker, met duidelijke bronnen en een onderscheid tussen algemene informatie en individueel juridisch advies.',disclaimer:'De inhoud is algemene informatie en geen juridisch advies. Controleer officiële bronnen en de actualisatiedatum.',
+      volunteerTitle:'Word vrijwilliger',volunteerIntro:'We verwelkomen hulp bij vertaling, onderzoek en juridische redactie. Vul het formulier in; je e-mailprogramma opent om je aanvraag en cv zelf te versturen.',name:'Naam',email:'E-mailadres',volunteerArea:'Bijdragegebied',translation:'Vertaling',research:'Onderzoek',editing:'Redactie',other:'Anders',preferredLanguage:'Contacttaal',message:'Kort bericht',consent:'Ik geef toestemming om mijn gegevens te gebruiken voor contact over mijn aanvraag.',sendRequest:'E-mail opstellen',volunteerHelp:'Je gegevens worden niet naar de website verzonden. Voeg je cv zelf toe in je e-mailprogramma.',
+      adminTitle:'Beheerpaneel',adminNotice:'Inloggen is alleen bedoeld voor het beheerdersaccount. Zet je wachtwoord niet in de code en deel het niet.',adminLoginTitle:'Inloggen beheerder',password:'Wachtwoord',login:'Inloggen',logout:'Uitloggen',articleEditor:'Artikel bewerken',articleLanguage:'Artikeltaal',source:'Officiële bron / link',publish:'Publiceren voor bezoekers',saveArticle:'Artikel opslaan',clear:'Velden wissen',manageArticles:'Artikelen beheren',footer:'Alle rechten voorbehouden © 2026 - Al-Qanon AQ',footerNote:'Al-Qanon AQ biedt algemene juridische informatie en vervangt geen juridisch advies.',
+      loading:'Laden…',emptyArticles:'Er zijn nog geen gepubliceerde artikelen.',emptyAdmin:'Er zijn nog geen artikelen om te beheren.',saved:'Artikel opgeslagen.',updated:'Artikel bijgewerkt.',deleted:'Artikel verwijderd.',published:'Gepubliceerd',pending_review:'In afwachting van beoordeling',rejected:'Afgewezen',edit:'Bewerken',publishAction:'Publiceren',reject:'Afwijzen',unpublish:'Publicatie intrekken',delete:'Verwijderen',confirmDelete:'Wil je dit artikel definitief verwijderen?',needTitleBody:'Vul de titel en artikeltekst in.',badUrl:'Voer een geldige https://-link in of laat het veld leeg.',loginRequired:'Log eerst in met het beheerdersaccount.',loginError:'Inloggen is niet gelukt. Controleer e-mail en wachtwoord.',notAuthorized:'Dit account mag de website niet beheren.',databaseError:'Geen verbinding met de database. Controleer Supabase en de toegangsregels.',articleSent:'Het artikel is ter beoordeling ingediend. Na goedkeuring wordt het gepubliceerd.',volunteerMail:'Je e-mailprogramma wordt geopend. Voeg je cv toe voordat je de e-mail verstuurt.',noSource:'Geen bron opgegeven',sourceLabel:'Bron',sendError:'Verzenden is niet gelukt. Controleer de database-instellingen.',saveError:'Opslaan is niet gelukt. Controleer de database en accountrechten.'
+    },
+    en: {
+      skip:'Skip to content',brand:'Al-Qanon AQ',navHome:'Home',navPublic:'Public law',navPrivate:'Private law',navArticles:'Legal articles',navAbout:'About us',navVolunteer:'Volunteer',navAdmin:'Administration',language:'Language',
+      heroTitle:'Al-Qanon AQ',heroText:'A platform making Dutch law easier to understand in Arabic and other languages.',heroCta:'Volunteer / submit your CV',audienceTitle:'Who we serve',studentsTitle:'Students and academics',studentsText:'Support and guidance for students and researchers.',refugeeTitle:'Refugees and protection',refugeeText:'Plain-language information about asylum, family reunification and protection.',residentTitle:'Residence and work',residentText:'General information about residence, employment contracts and integration.',generalTitle:'General and professional topics',generalText:'Legal information for individuals and professionals.',explore:'Explore more',back:'Back to home',publicIntro:'Public-law information with articles published after review.',privateIntro:'Private-law information with articles published after review.',
+      articleNotice:'Published articles are public. You can submit an article for review; it will only appear after approval.',submitArticleTitle:'Submit an article for review',articleTitle:'Article title',category:'Category',authorOptional:'Name (optional)',articleBody:'Article text',sendForReview:'Submit for review',aboutHeading:'About Al-Qanon AQ',aboutText:'We make Dutch legal information easier to access, with clear sources and a distinction between general information and individual legal advice.',disclaimer:'Content is general information, not legal advice. Always check official sources and update dates.',
+      volunteerTitle:'Volunteer with us',volunteerIntro:'We welcome help with translation, research and legal editing. Complete the form; your email app will open so you can send your application and attach your CV.',name:'Name',email:'Email address',volunteerArea:'Contribution area',translation:'Translation',research:'Research',editing:'Editing',other:'Other',preferredLanguage:'Contact language',message:'Short message',consent:'I consent to the use of my data to contact me about this application.',sendRequest:'Create email',volunteerHelp:'Your data will not be sent to the website. Attach your CV manually in your email app.',
+      adminTitle:'Administration panel',adminNotice:'Login is only for the administrator account. Never put your password in the code or share it.',adminLoginTitle:'Administrator login',password:'Password',login:'Log in',logout:'Log out',articleEditor:'Article editor',articleLanguage:'Article language',source:'Official source / URL',publish:'Publish for visitors',saveArticle:'Save article',clear:'Clear fields',manageArticles:'Manage articles',footer:'All rights reserved © 2026 - Al-Qanon AQ',footerNote:'Al-Qanon AQ provides general legal information and is not a substitute for legal advice.',
+      loading:'Loading…',emptyArticles:'No published articles yet.',emptyAdmin:'No articles to manage yet.',saved:'Article saved.',updated:'Article updated.',deleted:'Article deleted.',published:'Published',pending_review:'Pending review',rejected:'Rejected',edit:'Edit',publishAction:'Publish',reject:'Reject',unpublish:'Unpublish',delete:'Delete',confirmDelete:'Permanently delete this article?',needTitleBody:'Please enter an article title and body.',badUrl:'Enter a valid https:// URL or leave the field empty.',loginRequired:'Please log in with the administrator account first.',loginError:'Login failed. Check your email and password.',notAuthorized:'This account is not authorized to manage the platform.',databaseError:'Could not connect to the database. Check Supabase and access policies.',articleSent:'Your article was submitted for review. It will appear after approval.',volunteerMail:'Your email app will open. Attach your CV before sending.',noSource:'No source provided',sourceLabel:'Source',sendError:'Submission failed. Check the database setup.',saveError:'Saving failed. Check the database and account permissions.'
+    },
+    tr: {
+      skip:'İçeriğe geç',brand:'Al-Qanon AQ',navHome:'Ana sayfa',navPublic:'Kamu hukuku',navPrivate:'Özel hukuk',navArticles:'Hukuki makaleler',navAbout:'Hakkımızda',navVolunteer:'Gönüllü ol',navAdmin:'Yönetim',language:'Dil',
+      heroTitle:'Al-Qanon AQ',heroText:'Hollanda hukukunu Arapça ve diğer dillerde anlaşılır hâle getiren bilgilendirme platformu.',heroCta:'Gönüllü ol / CV gönder',audienceTitle:'Hedef kitle',studentsTitle:'Öğrenciler ve akademisyenler',studentsText:'Üniversite öğrencileri ve araştırmacılar için destek.',refugeeTitle:'Mülteciler ve koruma',refugeeText:'Sığınma, aile birleşimi ve koruma hakkında sade açıklamalar.',residentTitle:'Oturum ve çalışma',residentText:'Oturum, iş sözleşmeleri ve uyum hakkında genel bilgiler.',generalTitle:'Genel ve mesleki konular',generalText:'Bireyler ve profesyoneller için hukuki bilgilendirme.',explore:'Daha fazla bilgi',back:'Ana sayfaya dön',publicIntro:'İncelemeden sonra yayımlanan kamu hukuku makaleleri.',privateIntro:'İncelemeden sonra yayımlanan özel hukuk makaleleri.',
+      articleNotice:'Yayımlanan makaleler herkese açıktır. Bir makaleyi incelemeye gönderebilirsiniz; onaydan önce görünmez.',submitArticleTitle:'İnceleme için makale gönder',articleTitle:'Makale başlığı',category:'Kategori',authorOptional:'Ad (isteğe bağlı)',articleBody:'Makale metni',sendForReview:'İncelemeye gönder',aboutHeading:'Al-Qanon AQ hakkında',aboutText:'Hollanda hukukuna ilişkin bilgileri kaynakları açıkça belirterek erişilebilir kılmayı amaçlıyoruz.',disclaimer:'İçerik genel bilgilendirmedir, hukuki danışmanlık değildir. Resmî kaynakları ve güncelleme tarihini kontrol edin.',
+      volunteerTitle:'Gönüllü ol',volunteerIntro:'Çeviri, araştırma ve hukuki editörlük katkılarını memnuniyetle karşılıyoruz. Formu doldurun; başvurunuzu ve özgeçmişinizi göndermek için e-posta uygulamanız açılır.',name:'Ad',email:'E-posta',volunteerArea:'Katkı alanı',translation:'Çeviri',research:'Araştırma',editing:'Editörlük',other:'Diğer',preferredLanguage:'İletişim dili',message:'Kısa mesaj',consent:'Başvurum hakkında iletişim kurulması için verilerimin kullanılmasını kabul ediyorum.',sendRequest:'E-posta oluştur',volunteerHelp:'Verileriniz web sitesine gönderilmez. Özgeçmişinizi e-postanıza kendiniz ekleyin.',
+      adminTitle:'Yönetim paneli',adminNotice:'Giriş yalnızca yönetici hesabı içindir. Parolanızı koda yazmayın veya paylaşmayın.',adminLoginTitle:'Yönetici girişi',password:'Parola',login:'Giriş yap',logout:'Çıkış yap',articleEditor:'Makale düzenleyici',articleLanguage:'Makale dili',source:'Resmî kaynak / bağlantı',publish:'Ziyaretçiler için yayımla',saveArticle:'Makaleyi kaydet',clear:'Alanları temizle',manageArticles:'Makaleleri yönet',footer:'Tüm hakları saklıdır © 2026 - Al-Qanon AQ',footerNote:'Al-Qanon AQ genel hukuki bilgi sunar; hukuki danışmanlığın yerine geçmez.',
+      loading:'Yükleniyor…',emptyArticles:'Henüz yayımlanmış makale yok.',emptyAdmin:'Henüz yönetilecek makale yok.',saved:'Makale kaydedildi.',updated:'Makale güncellendi.',deleted:'Makale silindi.',published:'Yayımlandı',pending_review:'İnceleme bekliyor',rejected:'Reddedildi',edit:'Düzenle',publishAction:'Yayımla',reject:'Reddet',unpublish:'Yayından kaldır',delete:'Sil',confirmDelete:'Bu makale kalıcı olarak silinsin mi?',needTitleBody:'Başlığı ve makale metnini girin.',badUrl:'Geçerli bir https:// bağlantısı girin veya alanı boş bırakın.',loginRequired:'Önce yönetici hesabıyla giriş yapın.',loginError:'Giriş başarısız. E-posta ve parolanızı kontrol edin.',notAuthorized:'Bu hesabın yönetim yetkisi yok.',databaseError:'Veritabanına bağlanılamadı. Supabase ayarlarını kontrol edin.',articleSent:'Makale incelemeye gönderildi; onaydan sonra yayımlanır.',volunteerMail:'E-posta uygulamanız açılacak. Göndermeden önce özgeçmişinizi ekleyin.',noSource:'Kaynak belirtilmedi',sourceLabel:'Kaynak',sendError:'Gönderim başarısız. Veritabanı ayarlarını kontrol edin.',saveError:'Kaydedilemedi. Veritabanı ve hesap izinlerini kontrol edin.'
     }
-    root.append(item);
+  };
+
+  function t(key){return translations[currentLang]?.[key] ?? translations.en[key] ?? key;}
+  function setStatus(id,message,error=false){const el=document.getElementById(id);if(!el)return;el.textContent=message;el.classList.toggle('error',error);}
+  function safeHttpUrl(value){if(!value)return '';try{const url=new URL(value);return url.protocol==='https:'?url.href:null;}catch{return null;}}
+  function showPage(pageId,updateHash=true){if(!document.getElementById('page-'+pageId))pageId='home';document.querySelectorAll('.page').forEach(page=>page.classList.toggle('active',page.id==='page-'+pageId));document.querySelectorAll('[data-page]').forEach(link=>{if(link.tagName==='A'&&link.closest('nav')){if(link.dataset.page===pageId)link.setAttribute('aria-current','page');else link.removeAttribute('aria-current');}});if(updateHash&&location.hash!=='#'+pageId)history.replaceState(null,'','#'+pageId);window.scrollTo({top:0,behavior:'auto'});renderArticles();}
+  function articleFromRow(row){return{id:String(row.id),title:row.title||'',body:row.content||'',category:row.category||'general',author_name:row.author_name||'',status:row.status||'pending_review',language:row.language||'ar',source_url:row.source_url||'',updatedAt:row.updated_at||row.created_at||new Date().toISOString()};}
+  function articleCategoryName(category){const key=({ 'public-law':'navPublic','private-law':'navPrivate',student:'studentsTitle',refugee:'refugeeTitle',resident:'residentTitle',general:'generalTitle' })[category];return key?t(key):t('generalTitle');}
+  async function refreshArticles(){
+    if(!db){articles=[];renderArticles();setStatus('adminSessionStatus','Supabase غير متاح. تحقق من اتصال الإنترنت ومكتبة Supabase.',true);return;}
+    let query=db.from('articles').select('id,title,content,author_name,status,created_at,updated_at,category,language,source_url').order('created_at',{ascending:false});
+    if(!isAdmin)query=query.eq('status','published');
+    const {data,error}=await query;
+    if(error){console.error('Supabase articles error:',error);articles=[];renderArticles();if(isAdmin)setStatus('adminSessionStatus',t('databaseError'),true);return;}
+    articles=(data||[]).map(articleFromRow);renderArticles();
+  }
+  function renderArticleTarget(id,list,adminView=false){
+    const root=document.getElementById(id);if(!root)return;root.replaceChildren();
+    if(!list.length){const empty=document.createElement('div');empty.className='empty';empty.textContent=t(adminView?'emptyAdmin':'emptyArticles');root.append(empty);return;}
+    list.forEach(article=>{
+      const item=document.createElement('article');item.className='article-item';
+      const title=document.createElement('h3');title.textContent=article.title;item.append(title);
+      const meta=document.createElement('div');meta.className='article-meta';
+      const date=article.updatedAt?new Date(article.updatedAt).toLocaleDateString(currentLang==='ar'?'ar':currentLang):'';
+      const parts=[];if(adminView)parts.push(t(article.status));if(article.author_name)parts.push(article.author_name);parts.push(articleCategoryName(article.category));if(date)parts.push(date);meta.textContent=parts.join(' · ');item.append(meta);
+      const body=document.createElement('p');body.textContent=article.body;item.append(body);
+      if(article.source_url){const source=safeHttpUrl(article.source_url);if(source){const link=document.createElement('a');link.className='article-source';link.href=source;link.target='_blank';link.rel='noopener noreferrer';link.textContent=t('sourceLabel')+': '+source;item.append(link);}}
+      if(adminView&&isAdmin){
+        const actions=document.createElement('div');actions.className='actions';
+        const edit=document.createElement('button');edit.type='button';edit.className='btn secondary small';edit.textContent=t('edit');edit.addEventListener('click',()=>editArticle(article.id));actions.append(edit);
+        if(article.status!=='published'){const publish=document.createElement('button');publish.type='button';publish.className='btn small';publish.textContent=t('publishAction');publish.addEventListener('click',()=>updateArticleStatus(article.id,'published'));actions.append(publish);}
+        if(article.status!=='rejected'){const reject=document.createElement('button');reject.type='button';reject.className='btn danger small';reject.textContent=t('reject');reject.addEventListener('click',()=>updateArticleStatus(article.id,'rejected'));actions.append(reject);}
+        if(article.status==='published'){const unpublish=document.createElement('button');unpublish.type='button';unpublish.className='btn secondary small';unpublish.textContent=t('unpublish');unpublish.addEventListener('click',()=>updateArticleStatus(article.id,'pending_review'));actions.append(unpublish);}
+        const remove=document.createElement('button');remove.type='button';remove.className='btn danger small';remove.textContent=t('delete');remove.addEventListener('click',()=>deleteArticle(article.id));actions.append(remove);
+        item.append(actions);
+      }
+      root.append(item);
+    });
+  }
+  function renderArticles(){
+    const published=articles.filter(article=>article.status==='published');
+    renderArticleTarget('allArticles',published,false);
+    renderArticleTarget('publicArticles',published.filter(article=>article.category==='public-law'),false);
+    renderArticleTarget('privateArticles',published.filter(article=>article.category==='private-law'),false);
+    ['student','refugee','resident','general'].forEach(category=>renderArticleTarget(category+'Articles',published.filter(article=>article.category===category),false));
+    renderArticleTarget('adminArticles',isAdmin?articles:[],true);
+  }
+  function clearArticleForm(){document.getElementById('articleForm').reset();document.getElementById('articleId').value='';setStatus('articleStatus','');}
+  function editArticle(id){const article=articles.find(item=>item.id===String(id));if(!article)return;document.getElementById('articleId').value=article.id;document.getElementById('articleTitle').value=article.title;document.getElementById('articleCategory').value=article.category;document.getElementById('articleLang').value=article.language||'ar';document.getElementById('articleBody').value=article.body;document.getElementById('articleSource').value=article.source_url||'';document.getElementById('articlePublished').checked=article.status==='published';showPage('admin');document.getElementById('articleTitle').focus();}
+  async function updateArticleStatus(id,status){if(!isAdmin||!db)return;const {error}=await db.from('articles').update({status,updated_at:new Date().toISOString()}).eq('id',Number(id));if(error){console.error(error);setStatus('articleStatus',t('saveError'),true);return;}setStatus('articleStatus',t(status));await refreshArticles();}
+  async function deleteArticle(id){if(!isAdmin||!db)return;if(!window.confirm(t('confirmDelete')))return;const {error}=await db.from('articles').delete().eq('id',Number(id));if(error){console.error(error);setStatus('articleStatus',t('saveError'),true);return;}setStatus('articleStatus',t('deleted'));await refreshArticles();}
+  async function setAdminUI(user){
+    isAdmin=!!user&&user.id===ADMIN_USER_ID;currentAdminId=isAdmin?user.id:null;
+    document.getElementById('adminLoginPanel').classList.toggle('hidden',isAdmin);document.getElementById('adminWorkspace').classList.toggle('hidden',!isAdmin);
+    if(user&&!isAdmin){await db?.auth.signOut();setStatus('adminLoginStatus',t('notAuthorized'),true);}
+    if(isAdmin){setStatus('adminSessionStatus','');await refreshArticles();}else{articles=[];renderArticles();await refreshArticles();}
+  }
+
+  document.querySelectorAll('[data-page]').forEach(element=>element.addEventListener('click',event=>{const page=element.dataset.page;if(!page)return;event.preventDefault();showPage(page);}));
+  window.addEventListener('hashchange',()=>{const page=(location.hash||'#home').slice(1);showPage(page,false);});
+  document.getElementById('langSelect').addEventListener('change',event=>{currentLang=translations[event.target.value]?event.target.value:'ar';document.documentElement.lang=currentLang;document.documentElement.dir=currentLang==='ar'?'rtl':'ltr';document.body.dir=currentLang==='ar'?'rtl':'ltr';document.querySelectorAll('[data-i18n]').forEach(element=>{const key=element.dataset.i18n;if(translations[currentLang][key])element.textContent=translations[currentLang][key];});renderArticles();});
+
+  document.getElementById('visitorArticleForm').addEventListener('submit',async event=>{
+    event.preventDefault();if(!db){setStatus('visitorArticleStatus',t('databaseError'),true);return;}
+    const form=event.currentTarget;const title=document.getElementById('visitorTitle').value.trim();const content=document.getElementById('visitorContent').value.trim();const category=document.getElementById('visitorCategory').value;const author_name=document.getElementById('visitorAuthor').value.trim()||null;
+    if(!title||!content){setStatus('visitorArticleStatus',t('needTitleBody'),true);return;}
+    const button=form.querySelector('button[type="submit"]');button.disabled=true;setStatus('visitorArticleStatus',t('loading'));
+    const {error}=await db.from('articles').insert([{title,content,category,author_name,status:'pending_review',language:currentLang}]);button.disabled=false;
+    if(error){console.error(error);setStatus('visitorArticleStatus',t('sendError'),true);return;}
+    form.reset();setStatus('visitorArticleStatus',t('articleSent'));
   });
-}
-async function updateArticleStatus(id,status){
-  if(!isAdmin)return;
-  const {error}=await db.from('articles').update({status}).eq('id',Number(id));
-  if(error){setStatus('articleStatus','تعذر تحديث المقال: '+error.message,true);return;}
-  setStatus('articleStatus','تم تحديث حالة المقال.');await refreshArticles();
-}
-function clearArticleForm(){document.getElementById('articleForm').reset();document.getElementById('articleId').value='';setStatus('articleStatus','');}
-function editArticle(id){const a=articles.find(x=>x.id===String(id));if(!a)return;document.getElementById('articleId').value=a.id;document.getElementById('articleTitle').value=a.title;document.getElementById('articleCategory').value=a.category;document.getElementById('articleLang').value='ar';document.getElementById('articleBody').value=a.body;document.getElementById('articleSource').value='';document.getElementById('articlePublished').checked=a.status==='published';showPage('admin');document.getElementById('articleTitle').focus();}
-async function setAdminUI(user){
-  isAdmin=!!user&&user.id===ADMIN_USER_ID;currentAdminId=isAdmin?user.id:null;
-  document.getElementById('adminLoginPanel').classList.toggle('hidden',isAdmin);
-  document.getElementById('adminWorkspace').classList.toggle('hidden',!isAdmin);
-  if(user&&!isAdmin){await db.auth.signOut();setStatus('adminLoginStatus','هذا الحساب غير مخوّل لإدارة المنصة.',true);}
-  if(isAdmin){setStatus('adminSessionStatus','تم تسجيل الدخول كمشرفة.');await refreshArticles();}
-  else {articles=[];await refreshArticles();}
-}
-document.querySelectorAll('[data-page]').forEach(el=>el.addEventListener('click',e=>{const page=el.dataset.page;if(!page)return;e.preventDefault();showPage(page);}));
-window.addEventListener('hashchange',()=>{const id=(location.hash||'#home').slice(1);if(document.getElementById('page-'+id))showPage(id);});
-document.getElementById('langSelect').addEventListener('change',e=>{currentLang=translations[e.target.value]?e.target.value:'ar';document.documentElement.lang=currentLang;document.documentElement.dir=currentLang==='ar'?'rtl':'ltr';document.body.dir=currentLang==='ar'?'rtl':'ltr';document.querySelectorAll('[data-i18n]').forEach(el=>{const key=el.dataset.i18n;if(translations[currentLang][key])el.textContent=translations[currentLang][key];});renderArticles();});
 
-document.getElementById('visitorArticleForm').addEventListener('submit',async e=>{
-  e.preventDefault();const form=e.currentTarget;const title=document.getElementById('visitorTitle').value.trim();const content=document.getElementById('visitorContent').value.trim();const category=document.getElementById('visitorCategory').value;const author_name=document.getElementById('visitorAuthor').value.trim()||null;
-  if(!title||!content){setStatus('visitorArticleStatus','يرجى كتابة عنوان المقال ونصه.',true);return;}
-  const btn=form.querySelector('button[type="submit"]');btn.disabled=true;setStatus('visitorArticleStatus','جارٍ إرسال المقال للمراجعة…');
-  const {error}=await db.from('articles').insert([{title,content,category,author_name,status:'pending_review'}]);btn.disabled=false;
-  if(error){setStatus('visitorArticleStatus','لم يتم الإرسال: '+error.message,true);return;}
-  form.reset();setStatus('visitorArticleStatus','وصل المقال بنجاح، وسيظهر بعد مراجعة المشرفة وموافقتها.');
-});
+  document.getElementById('volunteerForm').addEventListener('submit',event=>{
+    event.preventDefault();const form=event.currentTarget;if(!form.reportValidity())return;
+    if(!document.getElementById('vConsent').checked){setStatus('volunteerStatus',t('sendError'),true);return;}
+    const name=document.getElementById('vName').value.trim();const email=document.getElementById('vEmail').value.trim();const area=document.getElementById('vArea');const language=document.getElementById('vLang').value;const message=document.getElementById('vMessage').value.trim();
+    const body=[`Name: ${name}`,`Email: ${email}`,`Contribution: ${area.options[area.selectedIndex].text}`,`Contact language: ${language}`,'',message,'','I will attach my CV manually.'].join('\n');
+    const subject=encodeURIComponent('Volunteer application — Al-Qanon AQ');const mailBody=encodeURIComponent(body);setStatus('volunteerStatus',t('volunteerMail'));window.location.href=`mailto:${VOLUNTEER_EMAIL}?subject=${subject}&body=${mailBody}`;
+  });
 
-document.getElementById('adminLoginForm').addEventListener('submit',async e=>{
-  e.preventDefault();setStatus('adminLoginStatus','جارٍ تسجيل الدخول…');
-  const email=document.getElementById('adminEmail').value.trim();const password=document.getElementById('adminPassword').value;
-  const {data,error}=await db.auth.signInWithPassword({email,password});
-  document.getElementById('adminPassword').value='';
-  if(error){setStatus('adminLoginStatus','تعذر تسجيل الدخول. تحققي من البريد وكلمة المرور. ('+error.message+')',true);return;}
-  if(data.user?.id!==ADMIN_USER_ID){await db.auth.signOut();setStatus('adminLoginStatus','هذا الحساب غير مخوّل لإدارة المنصة.',true);return;}
-  setStatus('adminLoginStatus','تم تسجيل الدخول بنجاح.');await setAdminUI(data.user);
-});
-document.getElementById('adminLogout').addEventListener('click',async()=>{await db.auth.signOut();await setAdminUI(null);setStatus('adminLoginStatus','تم تسجيل الخروج.');showPage('home');});
+  document.getElementById('adminLoginForm').addEventListener('submit',async event=>{
+    event.preventDefault();if(!db){setStatus('adminLoginStatus',t('databaseError'),true);return;}
+    setStatus('adminLoginStatus',t('loading'));const email=document.getElementById('adminEmail').value.trim();const password=document.getElementById('adminPassword').value;
+    const {data,error}=await db.auth.signInWithPassword({email,password});document.getElementById('adminPassword').value='';
+    if(error){console.error('Supabase login error:',error);setStatus('adminLoginStatus',t('loginError')+' ('+String(error.message||'unknown error')+')',true);return;}
+    if(data.user?.id!==ADMIN_USER_ID){await db.auth.signOut();setStatus('adminLoginStatus',t('notAuthorized'),true);return;}
+    setStatus('adminLoginStatus',t('login'));await setAdminUI(data.user);
+  });
+  document.getElementById('adminLogout').addEventListener('click',async()=>{await db?.auth.signOut();await setAdminUI(null);setStatus('adminLoginStatus',t('logout'));showPage('home');});
+  document.getElementById('articleForm').addEventListener('submit',async event=>{
+    event.preventDefault();if(!isAdmin||currentAdminId!==ADMIN_USER_ID||!db){setStatus('articleStatus',t('loginRequired'),true);return;}
+    const id=document.getElementById('articleId').value;const title=document.getElementById('articleTitle').value.trim();const content=document.getElementById('articleBody').value.trim();const category=document.getElementById('articleCategory').value;const language=document.getElementById('articleLang').value;const sourceInput=document.getElementById('articleSource').value.trim();const source_url=safeHttpUrl(sourceInput);
+    if(!title||!content){setStatus('articleStatus',t('needTitleBody'),true);return;}if(source_url===null){setStatus('articleStatus',t('badUrl'),true);return;}
+    const status=document.getElementById('articlePublished').checked?'published':'pending_review';const payload={title,content,category,language,source_url:source_url||null,status,updated_at:new Date().toISOString()};
+    const result=id?await db.from('articles').update(payload).eq('id',Number(id)):await db.from('articles').insert([payload]);
+    if(result.error){console.error(result.error);setStatus('articleStatus',t('saveError'),true);return;}
+    clearArticleForm();setStatus('articleStatus',id?t('updated'):t('saved'));await refreshArticles();
+  });
+  document.getElementById('clearArticle').addEventListener('click',clearArticleForm);
 
-document.getElementById('articleForm').addEventListener('submit',async e=>{
-  e.preventDefault();if(!isAdmin||currentAdminId!==ADMIN_USER_ID){setStatus('articleStatus','يجب تسجيل الدخول بحساب المشرفة أولاً.',true);return;}
-  const id=document.getElementById('articleId').value;const title=document.getElementById('articleTitle').value.trim();let content=document.getElementById('articleBody').value.trim();const category=document.getElementById('articleCategory').value;const sourceInput=document.getElementById('articleSource').value.trim();const source=safeHttpUrl(sourceInput);
-  if(!title||!content){setStatus('articleStatus',t('needTitleBody'),true);return;}if(source===null){setStatus('articleStatus',t('badUrl'),true);return;}if(source)content+='\n\nالمصدر: '+source;
-  const status=document.getElementById('articlePublished').checked?'published':'pending_review';const payload={title,content,category,status};
-  const result=id?await db.from('articles').update(payload).eq('id',Number(id)):await db.from('articles').insert([payload]);
-  if(result.error){setStatus('articleStatus','تعذر حفظ المقال: '+result.error.message,true);return;}
-  clearArticleForm();setStatus('articleStatus',id?'تم تحديث المقال.':'تم حفظ المقال بنجاح.');await refreshArticles();
-});
-document.getElementById('clearArticle').addEventListener('click',clearArticleForm);
-// Keep volunteer form honest: it must not claim to send data when no destination is configured.
-document.getElementById('volunteerForm').addEventListener('submit',e=>{e.preventDefault();setStatus('volunteerStatus','نموذج التطوع غير مربوط بعد ببريد أو قاعدة بيانات. لم يتم إرسال بياناتك.',true);});
-
-(async function init(){
-  const id=(location.hash||'#home').slice(1);showPage(document.getElementById('page-'+id)?id:'home');
-  const {data}=await db.auth.getSession();await setAdminUI(data.session?.user||null);
-})();
-</script>
+  (async function init(){
+    const page=(location.hash||'#home').slice(1);showPage(document.getElementById('page-'+page)?page:'home',false);
+    if(!db){setStatus('adminLoginStatus',t('databaseError'),true);return;}
+    const {data,error}=await db.auth.getSession();if(error)console.error(error);await setAdminUI(data?.session?.user||null);
+    db.auth.onAuthStateChange((_event,session)=>{setAdminUI(session?.user||null);});
+  })();
+  </script>
 </body>
 </html>
