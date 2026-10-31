@@ -38,7 +38,7 @@
     .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1.1rem}.card{background:var(--card-bg);border:1px solid #c9923e44;border-top:4px solid var(--gold);border-radius:11px;overflow:hidden;display:flex;flex-direction:column;min-width:0}.card img{width:100%;height:165px;object-fit:cover;background:#0c2238}.card-body{padding:1rem;display:flex;flex-direction:column;align-items:flex-start;gap:.65rem;flex:1}.card h3{color:var(--gold);margin:0;font-size:1.15rem}.card p{margin:0;color:var(--muted);font-size:.93rem;flex:1}.card .btn{margin-top:.4rem;width:100%}
     .panel{background:var(--card-bg);padding:clamp(1rem,3vw,1.5rem);border-radius:11px;border-inline-start:5px solid var(--gold);box-shadow:0 10px 28px #0001}
     .panel h3{color:var(--gold);margin-top:0}.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}.form-row{display:flex;flex-direction:column;gap:.35rem;min-width:0}.form-row.full{grid-column:1/-1}.field{width:100%}textarea.field{min-height:180px;resize:vertical}input[type=file].field{padding:.5rem}
-    .help{font-size:.86rem;color:#c8d4df}.notice{padding:.8rem 1rem;border:1px solid #c9923e77;border-radius:8px;background:#0c223866;margin:1rem 0}.status{min-height:1.5em;margin:.5rem 0;color:var(--success)}.status.error{color:var(--danger)}
+    .text-link{border:0;background:none;color:var(--gold);text-decoration:underline;text-underline-offset:3px;cursor:pointer;font:inherit;padding:.15rem .25rem}.help{font-size:.86rem;color:#c8d4df}.notice{padding:.8rem 1rem;border:1px solid #c9923e77;border-radius:8px;background:#0c223866;margin:1rem 0}.status{min-height:1.5em;margin:.5rem 0;color:var(--success)}.status.error{color:var(--danger)}
     .article-list{display:grid;gap:1rem;margin-top:1.5rem}.article-item{padding:1rem;background:#102a43;border:1px solid #c9923e44;border-radius:8px;min-width:0}.article-item h3{color:var(--gold);margin:.1rem 0}.article-meta{font-size:.85rem;color:#b8c5d1}.article-item p{white-space:pre-wrap;overflow-wrap:anywhere}.article-source{display:inline-block;color:var(--gold);font-weight:700;margin-top:.5rem;text-decoration:underline;overflow-wrap:anywhere}
     .actions{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.75rem}.empty{text-align:center;color:#cbd5df;padding:1.5rem;border:1px dashed #c9923e66;border-radius:8px}
     footer{margin-top:4rem;padding:1.5rem;text-align:center;background:#05090e;color:#aaa;border-top:1px solid #ffffff15}footer span{color:var(--gold);font-weight:800}
@@ -121,24 +121,24 @@
     <section class="page container" id="page-volunteer">
       <h1 class="section-title" data-i18n="volunteerTitle">بوابة المتطوعين</h1>
       <div class="notice">تحتاج إلى رمز عضوية من المشرفة نور. لا تشارك الرمز أو كلمة المرور مع أي شخص.</div>
-      <div class="two-col">
-        <div class="panel">
-          <h3>تفعيل عضوية جديدة</h3>
-          <form id="volunteerClaimForm" class="form-grid">
-            <div class="form-row full"><label for="claimCode">رمز العضوية</label><input class="field" id="claimCode" required maxlength="13" autocomplete="off" placeholder="AQ-XXXXXXXXXX"></div>
-            <div class="form-row full"><label for="claimPassword">أنشئ كلمة مرور (12 حرفاً على الأقل)</label><input class="field" id="claimPassword" type="password" minlength="12" maxlength="128" required autocomplete="new-password"></div>
-            <div class="form-row full"><label for="claimPasswordConfirm">تأكيد كلمة المرور</label><input class="field" id="claimPasswordConfirm" type="password" minlength="12" maxlength="128" required autocomplete="new-password"></div>
-            <div class="form-row full"><button class="btn" type="submit">تفعيل العضوية</button><p class="status" id="claimStatus" role="status" aria-live="polite"></p></div>
-          </form>
-        </div>
-        <div class="panel">
-          <h3>دخول المتطوعين</h3>
-          <form id="volunteerLoginForm" class="form-grid">
-            <div class="form-row full"><label for="volunteerCode">رمز العضوية</label><input class="field" id="volunteerCode" required maxlength="13" autocomplete="username"></div>
-            <div class="form-row full"><label for="volunteerPassword">كلمة المرور</label><input class="field" id="volunteerPassword" type="password" required maxlength="128" autocomplete="current-password"></div>
-            <div class="form-row full"><button class="btn" type="submit">تسجيل الدخول</button><p class="status" id="volunteerLoginStatus" role="status" aria-live="polite"></p></div>
-          </form>
-        </div>
+      <div class="panel" id="volunteerLoginPanel">
+        <h3>دخول المتطوعين</h3>
+        <form id="volunteerLoginForm" class="form-grid">
+          <div class="form-row full"><label for="volunteerCode">رمز العضوية</label><input class="field" id="volunteerCode" required maxlength="13" autocomplete="username"></div>
+          <div class="form-row full"><label for="volunteerPassword">كلمة المرور</label><input class="field" id="volunteerPassword" type="password" required maxlength="128" autocomplete="current-password"></div>
+          <div class="form-row full"><button class="btn" type="submit">تسجيل الدخول</button><p class="status" id="volunteerLoginStatus" role="status" aria-live="polite"></p></div>
+        </form>
+        <p class="help" style="margin:.8rem 0 0">أول مرة هنا؟ <button type="button" class="text-link" id="showVolunteerClaim">تفعيل العضوية لأول مرة</button></p>
+      </div>
+      <div class="panel hidden" id="volunteerClaimPanel">
+        <h3>تفعيل العضوية لأول مرة</h3>
+        <p class="help">أدخل رمز العضوية الذي حصلت عليه من المشرفة نور، وأنشئ كلمة مرور للدخول لاحقاً.</p>
+        <form id="volunteerClaimForm" class="form-grid">
+          <div class="form-row full"><label for="claimCode">رمز العضوية</label><input class="field" id="claimCode" required maxlength="13" autocomplete="off" placeholder="AQ-XXXXXXXXXX"></div>
+          <div class="form-row full"><label for="claimPassword">أنشئ كلمة مرور (12 حرفاً على الأقل)</label><input class="field" id="claimPassword" type="password" minlength="12" maxlength="128" required autocomplete="new-password"></div>
+          <div class="form-row full"><label for="claimPasswordConfirm">تأكيد كلمة المرور</label><input class="field" id="claimPasswordConfirm" type="password" minlength="12" maxlength="128" required autocomplete="new-password"></div>
+          <div class="form-row full"><button class="btn" type="submit">تفعيل العضوية</button><p class="status" id="claimStatus" role="status" aria-live="polite"></p></div>
+        </form>
       </div>
       <div class="panel hidden" id="volunteerWorkspace">
         <div class="actions"><h3 id="volunteerWelcome">مساحة المتطوع</h3><button class="btn secondary" id="volunteerLogout" type="button">تسجيل الخروج</button></div>
@@ -367,13 +367,18 @@
     sessionStorage.setItem('aqVolunteerDisplayName',volunteerDisplayName);
     showVolunteerWorkspace();
   }
+  let volunteerClaimOpen=false;
   function showVolunteerWorkspace(){
     const active=!!volunteerExpiresAt&&Date.now()<volunteerExpiresAt;
     document.getElementById('volunteerWorkspace').classList.toggle('hidden',!active);
-    document.getElementById('volunteerClaimForm').classList.toggle('hidden',active);
-    document.getElementById('volunteerLoginForm').classList.toggle('hidden',active);
-    if(active){document.getElementById('volunteerWelcome').textContent='أهلاً '+(volunteerDisplayName||'بك');document.getElementById('volunteerExpiry').textContent='تنتهي جلسة الدخول بعد 24 ساعة من تسجيل الدخول.';}
+    document.getElementById('volunteerClaimPanel').classList.toggle('hidden',active||!volunteerClaimOpen);
+    document.getElementById('volunteerLoginPanel').classList.toggle('hidden',active);
+    if(active){volunteerClaimOpen=false;document.getElementById('volunteerWelcome').textContent='أهلاً '+(volunteerDisplayName||'بك');document.getElementById('volunteerExpiry').textContent='تنتهي جلسة الدخول بعد 24 ساعة من تسجيل الدخول.';}
   }
+  document.getElementById('showVolunteerClaim').addEventListener('click',()=>{
+    volunteerClaimOpen=!volunteerClaimOpen;
+    showVolunteerWorkspace();
+  });
   async function endVolunteerSession(message=''){
     volunteerExpiresAt=null;volunteerDisplayName='';sessionStorage.removeItem('aqVolunteerExpiresAt');sessionStorage.removeItem('aqVolunteerDisplayName');
     await volunteerDb?.auth.signOut();showVolunteerWorkspace();document.getElementById('volunteerClaimForm').reset();document.getElementById('volunteerLoginForm').reset();
