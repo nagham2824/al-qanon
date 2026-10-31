@@ -420,7 +420,7 @@
   });
   document.getElementById('createVolunteerForm').addEventListener('submit',async event=>{
     event.preventDefault();const name=document.getElementById('newVolunteerName').value.trim();const button=event.currentTarget.querySelector('button');button.disabled=true;setStatus('createVolunteerStatus','جارٍ إنشاء العضوية…');document.getElementById('newVolunteerCodeBox').classList.add('hidden');
-    try{const {data:{session}}=await volunteerDb.auth.getSession();const result=await volunteerRequest('create_volunteer',{displayName:name},session?.access_token||'');document.getElementById('newVolunteerCode').textContent=result.memberCode;document.getElementById('newVolunteerCodeBox').classList.remove('hidden');event.currentTarget.reset();setStatus('createVolunteerStatus','تم إنشاء العضوية. انسخي الرمز وسلّميه للمتطوع مرة واحدة.');await refreshVolunteers();}
+    try{const {data:{session}}=await db.auth.getSession();const result=await volunteerRequest('create_volunteer',{displayName:name},session?.access_token||'');document.getElementById('newVolunteerCode').textContent=result.memberCode;document.getElementById('newVolunteerCodeBox').classList.remove('hidden');event.currentTarget.reset();setStatus('createVolunteerStatus','تم إنشاء العضوية. انسخي الرمز وسلّميه للمتطوع مرة واحدة.');await refreshVolunteers();}
     catch(e){setStatus('createVolunteerStatus',e.message,true);}finally{button.disabled=false;}
   });
   document.getElementById('copyVolunteerCode').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(document.getElementById('newVolunteerCode').textContent);setStatus('createVolunteerStatus','تم نسخ الرمز.');}catch{setStatus('createVolunteerStatus','تعذر النسخ تلقائياً؛ انسخي الرمز يدوياً.',true);}});
