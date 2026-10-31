@@ -119,17 +119,38 @@
     </section>
 
     <section class="page container" id="page-volunteer">
-      <h1 class="section-title" data-i18n="volunteerTitle">تطوع معنا</h1>
-      <div class="panel">
-        <p data-i18n="volunteerIntro">نرحب بالمساهمين في الترجمة والبحث والتحرير القانوني. املأ النموذج، وسيفتح برنامج البريد الإلكتروني لديك لإرسال الطلب وإرفاق السيرة الذاتية بنفسك.</p>
-        <form id="volunteerForm" class="form-grid">
-          <div class="form-row"><label for="vName" data-i18n="name">الاسم</label><input class="field" id="vName" name="name" required maxlength="100" autocomplete="name"></div>
-          <div class="form-row"><label for="vEmail" data-i18n="email">البريد الإلكتروني</label><input class="field" id="vEmail" name="email" type="email" required maxlength="254" autocomplete="email"></div>
-          <div class="form-row"><label for="vArea" data-i18n="volunteerArea">مجال المساهمة</label><select class="field" id="vArea" name="area" required><option value="translation" data-i18n="translation">الترجمة</option><option value="research" data-i18n="research">البحث</option><option value="editing" data-i18n="editing">التحرير</option><option value="other" data-i18n="other">مجال آخر</option></select></div>
-          <div class="form-row"><label for="vLang" data-i18n="preferredLanguage">لغة التواصل</label><select class="field" id="vLang" name="language"><option value="ar">العربية</option><option value="nl">Nederlands</option><option value="tr">Türkçe</option><option value="en">English</option></select></div>
-          <div class="form-row full"><label for="vMessage" data-i18n="message">رسالة مختصرة</label><textarea class="field" id="vMessage" name="message" maxlength="2000" required></textarea></div>
-          <div class="form-row full"><label><input type="checkbox" id="vConsent" required> <span data-i18n="consent">أوافق على استخدام بياناتي للتواصل بشأن طلب التطوع.</span></label></div>
-          <div class="form-row full"><button class="btn" type="submit" data-i18n="sendRequest">إنشاء رسالة البريد الإلكتروني</button><p class="status" id="volunteerStatus" role="status" aria-live="polite"></p><p class="help" data-i18n="volunteerHelp">لن تُرسل البيانات إلى الموقع. سيفتح برنامج البريد الإلكتروني لديك، وأرفق سيرتك الذاتية يدويًا قبل الإرسال.</p></div>
+      <h1 class="section-title" data-i18n="volunteerTitle">بوابة المتطوعين</h1>
+      <div class="notice">تحتاج إلى رمز عضوية من المشرفة نور. لا تشارك الرمز أو كلمة المرور مع أي شخص.</div>
+      <div class="two-col">
+        <div class="panel">
+          <h3>تفعيل عضوية جديدة</h3>
+          <form id="volunteerClaimForm" class="form-grid">
+            <div class="form-row full"><label for="claimCode">رمز العضوية</label><input class="field" id="claimCode" required maxlength="13" autocomplete="off" placeholder="AQ-XXXXXXXXXX"></div>
+            <div class="form-row full"><label for="claimPassword">أنشئ كلمة مرور (12 حرفاً على الأقل)</label><input class="field" id="claimPassword" type="password" minlength="12" maxlength="128" required autocomplete="new-password"></div>
+            <div class="form-row full"><label for="claimPasswordConfirm">تأكيد كلمة المرور</label><input class="field" id="claimPasswordConfirm" type="password" minlength="12" maxlength="128" required autocomplete="new-password"></div>
+            <div class="form-row full"><button class="btn" type="submit">تفعيل العضوية</button><p class="status" id="claimStatus" role="status" aria-live="polite"></p></div>
+          </form>
+        </div>
+        <div class="panel">
+          <h3>دخول المتطوعين</h3>
+          <form id="volunteerLoginForm" class="form-grid">
+            <div class="form-row full"><label for="volunteerCode">رمز العضوية</label><input class="field" id="volunteerCode" required maxlength="13" autocomplete="username"></div>
+            <div class="form-row full"><label for="volunteerPassword">كلمة المرور</label><input class="field" id="volunteerPassword" type="password" required maxlength="128" autocomplete="current-password"></div>
+            <div class="form-row full"><button class="btn" type="submit">تسجيل الدخول</button><p class="status" id="volunteerLoginStatus" role="status" aria-live="polite"></p></div>
+          </form>
+        </div>
+      </div>
+      <div class="panel hidden" id="volunteerWorkspace">
+        <div class="actions"><h3 id="volunteerWelcome">مساحة المتطوع</h3><button class="btn secondary" id="volunteerLogout" type="button">تسجيل الخروج</button></div>
+        <p class="help" id="volunteerExpiry"></p>
+        <h3>إرسال مقال للمراجعة</h3>
+        <form id="volunteerArticleForm" class="form-grid">
+          <div class="form-row full"><label for="volunteerArticleTitle">عنوان المقال</label><input class="field" id="volunteerArticleTitle" maxlength="180" required></div>
+          <div class="form-row"><label for="volunteerArticleCategory">القسم</label><select class="field" id="volunteerArticleCategory"><option value="public-law">القانون العام</option><option value="private-law">القانون الخاص</option><option value="student">الطلاب والأكاديميون</option><option value="refugee">اللاجئون والحماية</option><option value="resident">المقيمون والعمل</option><option value="general">الشؤون العامة والمهنية</option></select></div>
+          <div class="form-row"><label for="volunteerArticleLang">لغة المقال</label><select class="field" id="volunteerArticleLang"><option value="ar">العربية</option><option value="nl">Nederlands</option><option value="tr">Türkçe</option><option value="en">English</option></select></div>
+          <div class="form-row full"><label for="volunteerArticleBody">نص المقال</label><textarea class="field" id="volunteerArticleBody" maxlength="30000" required></textarea></div>
+          <div class="form-row full"><label for="volunteerArticleSource">المصدر / الرابط (اختياري)</label><input class="field" id="volunteerArticleSource" type="url" maxlength="1000" placeholder="https://"></div>
+          <div class="form-row full"><button class="btn" type="submit">إرسال للمراجعة</button><p class="status" id="volunteerArticleStatus" role="status" aria-live="polite"></p></div>
         </form>
       </div>
     </section>
@@ -146,6 +167,16 @@
         </form>
       </div>
       <div id="adminWorkspace" class="hidden">
+        <div class="panel" id="volunteerManagementPanel" style="margin:1rem 0">
+          <h3>إدارة عضويات المتطوعين</h3>
+          <form id="createVolunteerForm" class="form-grid">
+            <div class="form-row"><label for="newVolunteerName">اسم المتطوع</label><input class="field" id="newVolunteerName" maxlength="100" required></div>
+            <div class="form-row"><label>&nbsp;</label><button class="btn" type="submit">إنشاء عضوية ورمز</button></div>
+            <p class="status form-row full" id="createVolunteerStatus" role="status" aria-live="polite"></p>
+          </form>
+          <div class="notice hidden" id="newVolunteerCodeBox"><strong>رمز العضوية — يظهر مرة واحدة فقط:</strong><p id="newVolunteerCode" style="font-weight:700;direction:ltr"></p><button type="button" class="btn secondary" id="copyVolunteerCode">نسخ الرمز</button></div>
+          <div id="volunteerAdminList" class="article-list"></div>
+        </div>
         <div class="actions"><button type="button" class="btn secondary" id="adminLogout" data-i18n="logout">تسجيل الخروج</button><p class="status" id="adminSessionStatus" role="status" aria-live="polite"></p></div>
         <div class="two-col">
           <div class="panel">
@@ -274,7 +305,7 @@
     isAdmin=!!user&&user.id===ADMIN_USER_ID;currentAdminId=isAdmin?user.id:null;
     document.getElementById('adminLoginPanel').classList.toggle('hidden',isAdmin);document.getElementById('adminWorkspace').classList.toggle('hidden',!isAdmin);
     if(user&&!isAdmin){await db?.auth.signOut();setStatus('adminLoginStatus',t('notAuthorized'),true);}
-    if(isAdmin){setStatus('adminSessionStatus','');await refreshArticles();}else{articles=[];renderArticles();await refreshArticles();}
+    if(isAdmin){setStatus('adminSessionStatus','');await refreshArticles();await refreshVolunteers();}else{articles=[];renderArticles();await refreshArticles();}
   }
 
   document.querySelectorAll('[data-page]').forEach(element=>element.addEventListener('click',event=>{const page=element.dataset.page;if(!page)return;event.preventDefault();showPage(page);}));
@@ -319,10 +350,90 @@
   });
   document.getElementById('clearArticle').addEventListener('click',clearArticleForm);
 
+
+  const VOLUNTEER_FUNCTION_URL = SUPABASE_URL + '/functions/v1/volunteer-auth';
+  let volunteerExpiresAt = null;
+  let volunteerDisplayName = '';
+  async function volunteerRequest(action,payload={},token=''){
+    const headers={'Content-Type':'application/json','apikey':SUPABASE_PUBLISHABLE_KEY};
+    if(token)headers.Authorization='Bearer '+token;
+    const response=await fetch(VOLUNTEER_FUNCTION_URL,{method:'POST',headers,body:JSON.stringify({action,...payload})});
+    const result=await response.json().catch(()=>({error:'تعذر قراءة استجابة الخادم.'}));
+    if(!response.ok)throw new Error(result.error||'تعذر تنفيذ الطلب.');
+    return result;
+  }
+  async function acceptVolunteerSession(result){
+    if(!result.session?.access_token||!result.session?.refresh_token)throw new Error('لم تصل بيانات جلسة الدخول.');
+    const {error}=await db.auth.setSession({access_token:result.session.access_token,refresh_token:result.session.refresh_token});
+    if(error)throw error;
+    volunteerExpiresAt=new Date(result.expiresAt).getTime();
+    volunteerDisplayName=result.displayName||'';
+    sessionStorage.setItem('aqVolunteerExpiresAt',String(volunteerExpiresAt));
+    sessionStorage.setItem('aqVolunteerDisplayName',volunteerDisplayName);
+    showVolunteerWorkspace();
+  }
+  function showVolunteerWorkspace(){
+    const active=!!volunteerExpiresAt&&Date.now()<volunteerExpiresAt;
+    document.getElementById('volunteerWorkspace').classList.toggle('hidden',!active);
+    document.getElementById('volunteerClaimForm').classList.toggle('hidden',active);
+    document.getElementById('volunteerLoginForm').classList.toggle('hidden',active);
+    if(active){document.getElementById('volunteerWelcome').textContent='أهلاً '+(volunteerDisplayName||'بك');document.getElementById('volunteerExpiry').textContent='تنتهي جلسة الدخول بعد 24 ساعة من تسجيل الدخول.';}
+  }
+  async function endVolunteerSession(message=''){
+    volunteerExpiresAt=null;volunteerDisplayName='';sessionStorage.removeItem('aqVolunteerExpiresAt');sessionStorage.removeItem('aqVolunteerDisplayName');
+    await db?.auth.signOut();showVolunteerWorkspace();document.getElementById('volunteerClaimForm').reset();document.getElementById('volunteerLoginForm').reset();
+    if(message)setStatus('volunteerLoginStatus',message,true);
+  }
+  async function refreshVolunteers(){
+    const root=document.getElementById('volunteerAdminList');if(!root||!isAdmin||!db)return;
+    root.textContent='جارٍ تحميل العضويات…';
+    const {data:{session}}=await db.auth.getSession();
+    try{
+      const result=await volunteerRequest('list_volunteers',{},session?.access_token||'');
+      root.replaceChildren();
+      if(!result.volunteers?.length){root.textContent='لا توجد عضويات حتى الآن.';return;}
+      result.volunteers.forEach(v=>{
+        const item=document.createElement('div');item.className='article-item';
+        const title=document.createElement('strong');title.textContent=v.display_name||'متطوع';item.append(title);
+        const meta=document.createElement('p');meta.className='article-meta';meta.textContent='الرمز ينتهي بـ '+(v.member_code_hint||'----')+' · '+(v.status==='active'?'مفعّلة':v.status==='suspended'?'موقوفة':'بانتظار التفعيل');item.append(meta);
+        const button=document.createElement('button');button.type='button';button.className='btn small '+(v.status==='suspended'?'':'danger');button.textContent=v.status==='suspended'?'إعادة التفعيل':'إيقاف العضوية';
+        button.addEventListener('click',async()=>{button.disabled=true;try{await volunteerRequest('set_volunteer_status',{volunteerId:v.id,status:v.status==='suspended'?'active':'suspended'},session?.access_token||'');await refreshVolunteers();}catch(e){setStatus('createVolunteerStatus',e.message,true);button.disabled=false;}});
+        item.append(button);root.append(item);
+      });
+    }catch(e){root.textContent=e.message;}
+  }
+  document.getElementById('volunteerClaimForm').addEventListener('submit',async event=>{
+    event.preventDefault();const code=document.getElementById('claimCode').value.trim().toUpperCase();const password=document.getElementById('claimPassword').value;const confirm=document.getElementById('claimPasswordConfirm').value;
+    if(password!==confirm){setStatus('claimStatus','كلمتا المرور غير متطابقتين.',true);return;}
+    const button=event.currentTarget.querySelector('button');button.disabled=true;setStatus('claimStatus','جارٍ تفعيل العضوية…');
+    try{const result=await volunteerRequest('claim',{code,password});await acceptVolunteerSession(result);setStatus('volunteerArticleStatus','تم تفعيل العضوية. يمكنك إرسال مقالك الآن.');}
+    catch(e){setStatus('claimStatus',e.message,true);}finally{button.disabled=false;document.getElementById('claimPassword').value='';document.getElementById('claimPasswordConfirm').value='';}
+  });
+  document.getElementById('volunteerLoginForm').addEventListener('submit',async event=>{
+    event.preventDefault();const code=document.getElementById('volunteerCode').value.trim().toUpperCase();const password=document.getElementById('volunteerPassword').value;const button=event.currentTarget.querySelector('button');button.disabled=true;setStatus('volunteerLoginStatus','جارٍ تسجيل الدخول…');
+    try{const result=await volunteerRequest('login',{code,password});await acceptVolunteerSession(result);setStatus('volunteerArticleStatus','تم تسجيل الدخول.');}
+    catch(e){setStatus('volunteerLoginStatus',e.message,true);}finally{button.disabled=false;document.getElementById('volunteerPassword').value='';}
+  });
+  document.getElementById('volunteerLogout').addEventListener('click',()=>endVolunteerSession('تم تسجيل الخروج.'));
+  document.getElementById('volunteerArticleForm').addEventListener('submit',async event=>{
+    event.preventDefault();if(!volunteerExpiresAt||Date.now()>=volunteerExpiresAt){await endVolunteerSession('انتهت جلسة الدخول. سجّل الدخول مجدداً.');return;}
+    const {data:{session}}=await db.auth.getSession();const source=safeHttpUrl(document.getElementById('volunteerArticleSource').value.trim());if(source===null){setStatus('volunteerArticleStatus','أدخل رابطاً صالحاً يبدأ بـ https:// أو اتركه فارغاً.',true);return;}
+    const payload={title:document.getElementById('volunteerArticleTitle').value.trim(),content:document.getElementById('volunteerArticleBody').value.trim(),category:document.getElementById('volunteerArticleCategory').value,language:document.getElementById('volunteerArticleLang').value,source_url:source||''};
+    const button=event.currentTarget.querySelector('button');button.disabled=true;setStatus('volunteerArticleStatus','جارٍ إرسال المقال…');
+    try{const result=await volunteerRequest('submit_article',payload,session?.access_token||'');event.currentTarget.reset();setStatus('volunteerArticleStatus','وصل المقال للمراجعة بنجاح. رقم المقال: '+result.article.id);}
+    catch(e){setStatus('volunteerArticleStatus',e.message,true);if(/انتهت|موقوفة/.test(e.message))await endVolunteerSession(e.message);}finally{button.disabled=false;}
+  });
+  document.getElementById('createVolunteerForm').addEventListener('submit',async event=>{
+    event.preventDefault();const name=document.getElementById('newVolunteerName').value.trim();const button=event.currentTarget.querySelector('button');button.disabled=true;setStatus('createVolunteerStatus','جارٍ إنشاء العضوية…');document.getElementById('newVolunteerCodeBox').classList.add('hidden');
+    try{const {data:{session}}=await db.auth.getSession();const result=await volunteerRequest('create_volunteer',{displayName:name},session?.access_token||'');document.getElementById('newVolunteerCode').textContent=result.memberCode;document.getElementById('newVolunteerCodeBox').classList.remove('hidden');event.currentTarget.reset();setStatus('createVolunteerStatus','تم إنشاء العضوية. انسخي الرمز وسلّميه للمتطوع مرة واحدة.');await refreshVolunteers();}
+    catch(e){setStatus('createVolunteerStatus',e.message,true);}finally{button.disabled=false;}
+  });
+  document.getElementById('copyVolunteerCode').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(document.getElementById('newVolunteerCode').textContent);setStatus('createVolunteerStatus','تم نسخ الرمز.');}catch{setStatus('createVolunteerStatus','تعذر النسخ تلقائياً؛ انسخي الرمز يدوياً.',true);}});
+  
   (async function init(){
     const page=(location.hash||'#home').slice(1);showPage(document.getElementById('page-'+page)?page:'home',false);
     if(!db){setStatus('adminLoginStatus',t('databaseError'),true);return;}
-    const {data,error}=await db.auth.getSession();if(error)console.error(error);await setAdminUI(data?.session?.user||null);
+    const {data,error}=await db.auth.getSession();if(error)console.error(error);await setAdminUI(data?.session?.user||null);const savedExpiry=Number(sessionStorage.getItem('aqVolunteerExpiresAt')||0);if(savedExpiry>Date.now()){volunteerExpiresAt=savedExpiry;volunteerDisplayName=sessionStorage.getItem('aqVolunteerDisplayName')||'';showVolunteerWorkspace();}else if(savedExpiry){await endVolunteerSession('انتهت جلسة الدخول. سجّل الدخول مجدداً.');}
     db.auth.onAuthStateChange((_event,session)=>{setAdminUI(session?.user||null);});
   })();
   </script>
