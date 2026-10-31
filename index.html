@@ -388,7 +388,7 @@
   async function refreshVolunteers(){
     const root=document.getElementById('volunteerAdminList');if(!root||!isAdmin||!db)return;
     root.textContent='جارٍ تحميل العضويات…';
-    const {data:{session}}=await volunteerDb.auth.getSession();
+    const {data:{session}}=await db.auth.getSession();
     try{
       const result=await volunteerRequest('list_volunteers',{},session?.access_token||'');
       root.replaceChildren();
