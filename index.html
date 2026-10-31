@@ -411,11 +411,11 @@
   });
   document.getElementById('volunteerLogout').addEventListener('click',()=>endVolunteerSession('تم تسجيل الخروج.'));
   document.getElementById('volunteerArticleForm').addEventListener('submit',async event=>{
-    event.preventDefault();if(!volunteerExpiresAt||Date.now()>=volunteerExpiresAt){await endVolunteerSession('انتهت جلسة الدخول. سجّل الدخول مجدداً.');return;}
+    event.preventDefault();const form=event.currentTarget;if(!volunteerExpiresAt||Date.now()>=volunteerExpiresAt){await endVolunteerSession('انتهت جلسة الدخول. سجّل الدخول مجدداً.');return;}
     const {data:{session}}=await volunteerDb.auth.getSession();const source=safeHttpUrl(document.getElementById('volunteerArticleSource').value.trim());if(source===null){setStatus('volunteerArticleStatus','أدخل رابطاً صالحاً يبدأ بـ https:// أو اتركه فارغاً.',true);return;}
     const payload={title:document.getElementById('volunteerArticleTitle').value.trim(),content:document.getElementById('volunteerArticleBody').value.trim(),category:document.getElementById('volunteerArticleCategory').value,language:document.getElementById('volunteerArticleLang').value,source_url:source||''};
     const button=event.currentTarget.querySelector('button');button.disabled=true;setStatus('volunteerArticleStatus','جارٍ إرسال المقال…');
-    try{const result=await volunteerRequest('submit_article',payload,session?.access_token||'');event.currentTarget.reset();setStatus('volunteerArticleStatus','وصل المقال للمراجعة بنجاح. رقم المقال: '+result.article.id);}
+    try{const result=await volunteerRequest('submit_article',payload,session?.access_token||'');form.reset();setStatus('volunteerArticleStatus','وصل المقال للمراجعة بنجاح. رقم المقال: '+(result.article?.id||'تم الاستلام'));}
     catch(e){setStatus('volunteerArticleStatus',e.message,true);if(/انتهت|موقوفة/.test(e.message))await endVolunteerSession(e.message);}finally{button.disabled=false;}
   });
   async function getVerifiedAdminToken(){
