@@ -212,6 +212,7 @@
   const ADMIN_USER_ID = '04a0788a-6043-4383-875e-8edd68c9adf3';
   const VOLUNTEER_EMAIL = 'nour.dlikan@gmail.com';
   const db = window.supabase?.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY) || null;
+  const volunteerDb = window.supabase?.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, { auth: { storageKey: 'aq-volunteer-auth', persistSession: true, autoRefreshToken: false } }) || null;
   let currentLang = 'ar';
   let articles = [];
   let isAdmin = false;
@@ -364,7 +365,7 @@
   }
   async function acceptVolunteerSession(result){
     if(!result.session?.access_token||!result.session?.refresh_token)throw new Error('لم تصل بيانات جلسة الدخول.');
-    const {error}=await db.auth.setSession({access_token:result.session.access_token,refresh_token:result.session.refresh_token});
+    const {error}=await volunteerDb.auth.setSession({access_token:result.session.access_token,refresh_token:result.session.refresh_token});
     if(error)throw error;
     volunteerExpiresAt=new Date(result.expiresAt).getTime();
     volunteerDisplayName=result.displayName||'';
@@ -381,13 +382,13 @@
   }
   async function endVolunteerSession(message=''){
     volunteerExpiresAt=null;volunteerDisplayName='';sessionStorage.removeItem('aqVolunteerExpiresAt');sessionStorage.removeItem('aqVolunteerDisplayName');
-    await db?.auth.signOut();showVolunteerWorkspace();document.getElementById('volunteerClaimForm').reset();document.getElementById('volunteerLoginForm').reset();
+    await volunteerDb?.auth.signOut();showVolunteerWorkspace();document.getElementById('volunteerClaimForm').reset();document.getElementById('volunteerLoginForm').reset();
     if(message)setStatus('volunteerLoginStatus',message,true);
   }
   async function refreshVolunteers(){
     const root=document.getElementById('volunteerAdminList');if(!root||!isAdmin||!db)return;
     root.textContent='جارٍ تحميل العضويات…';
-    const {data:{session}}=await db.auth.getSession();
+    const {data:{session}}=await volunteerDb.auth.getSession();
     try{
       const result=await volunteerRequest('list_volunteers',{},session?.access_token||'');
       root.replaceChildren();
@@ -417,7 +418,7 @@
   document.getElementById('volunteerLogout').addEventListener('click',()=>endVolunteerSession('تم تسجيل الخروج.'));
   document.getElementById('volunteerArticleForm').addEventListener('submit',async event=>{
     event.preventDefault();if(!volunteerExpiresAt||Date.now()>=volunteerExpiresAt){await endVolunteerSession('انتهت جلسة الدخول. سجّل الدخول مجدداً.');return;}
-    const {data:{session}}=await db.auth.getSession();const source=safeHttpUrl(document.getElementById('volunteerArticleSource').value.trim());if(source===null){setStatus('volunteerArticleStatus','أدخل رابطاً صالحاً يبدأ بـ https:// أو اتركه فارغاً.',true);return;}
+    const {data:{session}}=await volunteerDb.auth.getSession();const source=safeHttpUrl(document.getElementById('volunteerArticleSource').value.trim());if(source===null){setStatus('volunteerArticleStatus','أدخل رابطاً صالحاً يبدأ بـ https:// أو اتركه فارغاً.',true);return;}
     const payload={title:document.getElementById('volunteerArticleTitle').value.trim(),content:document.getElementById('volunteerArticleBody').value.trim(),category:document.getElementById('volunteerArticleCategory').value,language:document.getElementById('volunteerArticleLang').value,source_url:source||''};
     const button=event.currentTarget.querySelector('button');button.disabled=true;setStatus('volunteerArticleStatus','جارٍ إرسال المقال…');
     try{const result=await volunteerRequest('submit_article',payload,session?.access_token||'');event.currentTarget.reset();setStatus('volunteerArticleStatus','وصل المقال للمراجعة بنجاح. رقم المقال: '+result.article.id);}
@@ -425,7 +426,7 @@
   });
   document.getElementById('createVolunteerForm').addEventListener('submit',async event=>{
     event.preventDefault();const name=document.getElementById('newVolunteerName').value.trim();const button=event.currentTarget.querySelector('button');button.disabled=true;setStatus('createVolunteerStatus','جارٍ إنشاء العضوية…');document.getElementById('newVolunteerCodeBox').classList.add('hidden');
-    try{const {data:{session}}=await db.auth.getSession();const result=await volunteerRequest('create_volunteer',{displayName:name},session?.access_token||'');document.getElementById('newVolunteerCode').textContent=result.memberCode;document.getElementById('newVolunteerCodeBox').classList.remove('hidden');event.currentTarget.reset();setStatus('createVolunteerStatus','تم إنشاء العضوية. انسخي الرمز وسلّميه للمتطوع مرة واحدة.');await refreshVolunteers();}
+    try{const {data:{session}}=await volunteerDb.auth.getSession();const result=await volunteerRequest('create_volunteer',{displayName:name},session?.access_token||'');document.getElementById('newVolunteerCode').textContent=result.memberCode;document.getElementById('newVolunteerCodeBox').classList.remove('hidden');event.currentTarget.reset();setStatus('createVolunteerStatus','تم إنشاء العضوية. انسخي الرمز وسلّميه للمتطوع مرة واحدة.');await refreshVolunteers();}
     catch(e){setStatus('createVolunteerStatus',e.message,true);}finally{button.disabled=false;}
   });
   document.getElementById('copyVolunteerCode').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(document.getElementById('newVolunteerCode').textContent);setStatus('createVolunteerStatus','تم نسخ الرمز.');}catch{setStatus('createVolunteerStatus','تعذر النسخ تلقائياً؛ انسخي الرمز يدوياً.',true);}});
@@ -433,7 +434,7 @@
   (async function init(){
     const page=(location.hash||'#home').slice(1);showPage(document.getElementById('page-'+page)?page:'home',false);
     if(!db){setStatus('adminLoginStatus',t('databaseError'),true);return;}
-    const {data,error}=await db.auth.getSession();if(error)console.error(error);await setAdminUI(data?.session?.user||null);const savedExpiry=Number(sessionStorage.getItem('aqVolunteerExpiresAt')||0);if(savedExpiry>Date.now()){volunteerExpiresAt=savedExpiry;volunteerDisplayName=sessionStorage.getItem('aqVolunteerDisplayName')||'';showVolunteerWorkspace();}else if(savedExpiry){await endVolunteerSession('انتهت جلسة الدخول. سجّل الدخول مجدداً.');}
+    const {data,error}=await db.auth.getSession();if(error)console.error(error);await setAdminUI(data?.session?.user||null);const savedExpiry=Number(sessionStorage.getItem('aqVolunteerExpiresAt')||0);if(savedExpiry>Date.now()){volunteerExpiresAt=savedExpiry;volunteerDisplayName=sessionStorage.getItem('aqVolunteerDisplayName')||'';const {data:{session:volSession}}=await volunteerDb.auth.getSession();if(volSession)showVolunteerWorkspace();else await endVolunteerSession('انتهت جلسة الدخول. سجّل الدخول مجدداً.');}else if(savedExpiry){await endVolunteerSession('انتهت جلسة الدخول. سجّل الدخول مجدداً.');}
     db.auth.onAuthStateChange((_event,session)=>{setAdminUI(session?.user||null);});
   })();
   </script>
