@@ -313,7 +313,8 @@
 
   document.querySelectorAll('[data-page]').forEach(element=>element.addEventListener('click',event=>{const page=element.dataset.page;if(!page)return;event.preventDefault();showPage(page);}));
   window.addEventListener('hashchange',()=>{const page=(location.hash||'#home').slice(1);showPage(page,false);});
-  document.getElementById('langSelect').addEventListener('change',event=>{currentLang=translations[event.target.value]?event.target.value:'ar';document.documentElement.lang=currentLang;document.documentElement.dir=currentLang==='ar'?'rtl':'ltr';document.body.dir=currentLang==='ar'?'rtl':'ltr';document.querySelectorAll('[data-i18n]').forEach(element=>{const key=element.dataset.i18n;if(translations[currentLang][key])element.textContent=translations[currentLang][key];});renderArticles();});
+  function applyTranslations(){document.documentElement.lang=currentLang;document.documentElement.dir=currentLang==='ar'?'rtl':'ltr';document.body.dir=currentLang==='ar'?'rtl':'ltr';document.querySelectorAll('[data-i18n]').forEach(element=>{const key=element.dataset.i18n;const value=translations[currentLang]?.[key];if(value!==undefined){if(element.tagName==='INPUT'||element.tagName==='TEXTAREA'){if(element.hasAttribute('placeholder'))element.placeholder=value;}else element.textContent=value;}});renderArticles();}
+  document.getElementById('langSelect').addEventListener('change',event=>{currentLang=translations[event.target.value]?event.target.value:'ar';applyTranslations();});
 
   document.getElementById('visitorArticleForm').addEventListener('submit',async event=>{
     event.preventDefault();if(!db){setStatus('visitorArticleStatus',t('databaseError'),true);return;}
