@@ -120,19 +120,6 @@
 
     <section class="page container" id="page-volunteer">
       <h1 class="section-title" data-i18n="volunteerTitle">تطوع معنا</h1>
-      <p class="help">نرحب بالمساهمين في الترجمة والبحث والتحرير القانوني. أرسل طلبك وسيرتك الذاتية إلى فريق المنصة، وستتواصل معك المشرفة نور عند قبول طلبك.</p>
-      <div class="panel" id="volunteerApplicationPanel">
-        <h3>طلب التطوع</h3>
-        <form id="volunteerApplicationForm" class="form-grid">
-          <div class="form-row"><label for="applicantName">الاسم</label><input class="field" id="applicantName" required maxlength="120"></div>
-          <div class="form-row"><label for="applicantEmail">البريد الإلكتروني</label><input class="field" id="applicantEmail" type="email" required maxlength="180"></div>
-          <div class="form-row"><label for="applicantArea">مجال المساهمة</label><select class="field" id="applicantArea"><option>الترجمة</option><option>البحث القانوني</option><option>التحرير والمراجعة</option><option>مجال آخر</option></select></div>
-          <div class="form-row"><label for="applicantLanguage">لغة التواصل</label><select class="field" id="applicantLanguage"><option>العربية</option><option>الهولندية</option><option>الإنجليزية</option><option>التركية</option></select></div>
-          <div class="form-row full"><label for="applicantMessage">رسالة مختصرة</label><textarea class="field" id="applicantMessage" rows="4" maxlength="2000" placeholder="عرّفنا باهتماماتك وخبرتك…"></textarea></div>
-          <div class="form-row full"><label class="help"><input type="checkbox" id="applicantConsent" required> أوافق على استخدام بياناتي للتواصل بشأن طلب التطوع.</label></div>
-          <div class="form-row full"><button class="btn" type="submit">إرسال طلب التطوع بالبريد الإلكتروني</button><p class="help">سيفتح تطبيق البريد الإلكتروني لديك. أرفق سيرتك الذاتية قبل إرسال الرسالة.</p><p class="status" id="volunteerApplicationStatus" role="status" aria-live="polite"></p></div>
-        </form>
-      </div>
       <div class="hidden" id="volunteerMemberArea">
         <div class="notice">هذه المساحة مخصصة للمتطوعين الذين حصلوا على رمز عضوية من المشرفة نور.</div>
       <div class="panel" id="volunteerLoginPanel">
@@ -421,20 +408,6 @@
       });
     }catch(e){root.textContent=e.message;}
   }
-  document.getElementById('volunteerApplicationForm').addEventListener('submit',event=>{
-    event.preventDefault();
-    const subject=encodeURIComponent('طلب تطوع جديد — منصة AQ القانون');
-    const body=encodeURIComponent(
-      'الاسم: '+document.getElementById('applicantName').value.trim()+'\n'+
-      'البريد الإلكتروني: '+document.getElementById('applicantEmail').value.trim()+'\n'+
-      'مجال المساهمة: '+document.getElementById('applicantArea').value+'\n'+
-      'لغة التواصل: '+document.getElementById('applicantLanguage').value+'\n\n'+
-      'الرسالة:\n'+document.getElementById('applicantMessage').value.trim()+
-      '\n\nسأرفق سيرتي الذاتية مع هذه الرسالة.'
-    );
-    window.location.href='mailto:nour.dlikan@gmail.com?subject='+subject+'&body='+body;
-    setStatus('volunteerApplicationStatus','سيُفتح تطبيق البريد الإلكتروني. أرفق سيرتك الذاتية ثم أرسل الطلب.');
-  });
   document.getElementById('volunteerClaimForm').addEventListener('submit',async event=>{
     event.preventDefault();const code=document.getElementById('claimCode').value.trim().toUpperCase();const password=document.getElementById('claimPassword').value;const confirm=document.getElementById('claimPasswordConfirm').value;
     if(password!==confirm){setStatus('claimStatus','كلمتا المرور غير متطابقتين.',true);return;}
