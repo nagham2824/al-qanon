@@ -62,6 +62,7 @@
         <li><a href="#about" data-page="about" data-i18n="navAbout">من نحن</a></li>
         <li><a href="#volunteer" data-page="volunteer" data-i18n="navVolunteer">تطوع معنا</a></li>
         <li><a href="#admin" data-page="admin" data-i18n="navAdmin">الإدارة</a></li>
+        <li><a href="#volunteer" id="navVolunteerMembers">متطوعين</a></li>
       </ul></nav>
       <label class="hidden" for="langSelect" data-i18n="language">اللغة</label>
       <select class="lang-select" id="langSelect" aria-label="Language">
@@ -132,10 +133,6 @@
           <div class="form-row full"><label class="help"><input type="checkbox" id="applicantConsent" required> أوافق على استخدام بياناتي للتواصل بشأن طلب التطوع.</label></div>
           <div class="form-row full"><button class="btn" type="submit">إرسال طلب التطوع بالبريد الإلكتروني</button><p class="help">سيفتح تطبيق البريد الإلكتروني لديك. أرفق سيرتك الذاتية قبل إرسال الرسالة.</p><p class="status" id="volunteerApplicationStatus" role="status" aria-live="polite"></p></div>
         </form>
-      </div>
-      <div class="panel" id="volunteerMemberPortal">
-        <p class="help">هل لديك عضوية مفعّلة من المشرفة نور؟</p>
-        <button class="btn secondary" type="button" id="openVolunteerLogin">دخول المتطوعين</button>
       </div>
       <div class="hidden" id="volunteerMemberArea">
         <div class="notice">هذه المساحة مخصصة للمتطوعين الذين حصلوا على رمز عضوية من المشرفة نور.</div>
@@ -391,13 +388,13 @@
     const active=!!volunteerExpiresAt&&Date.now()<volunteerExpiresAt;
     document.getElementById('volunteerWorkspace').classList.toggle('hidden',!active);
     document.getElementById('volunteerMemberArea').classList.toggle('hidden',!active&&!volunteerMemberAreaOpen);
-    document.getElementById('volunteerMemberPortal').classList.toggle('hidden',active||volunteerMemberAreaOpen);
     document.getElementById('volunteerClaimPanel').classList.toggle('hidden',active||!volunteerClaimOpen);
     document.getElementById('volunteerLoginPanel').classList.toggle('hidden',active||volunteerClaimOpen);
     if(active){volunteerClaimOpen=false;document.getElementById('volunteerWelcome').textContent='أهلاً '+(volunteerDisplayName||'بك');document.getElementById('volunteerExpiry').textContent='تنتهي جلسة الدخول بعد 24 ساعة من تسجيل الدخول.';}
   }
-  document.getElementById('openVolunteerLogin').addEventListener('click',()=>{
-    volunteerMemberAreaOpen=true;volunteerClaimOpen=false;showVolunteerWorkspace();
+  document.getElementById('navVolunteerMembers').addEventListener('click',event=>{
+    event.preventDefault();showPage('volunteer');volunteerMemberAreaOpen=true;volunteerClaimOpen=false;showVolunteerWorkspace();
+    document.getElementById('volunteerMemberArea').scrollIntoView({behavior:'smooth',block:'start'});
   });
   document.getElementById('showVolunteerClaim').addEventListener('click',()=>{
     volunteerClaimOpen=!volunteerClaimOpen;showVolunteerWorkspace();
