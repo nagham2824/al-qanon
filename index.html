@@ -323,13 +323,7 @@
     form.reset();setStatus('visitorArticleStatus',t('articleSent'));
   });
 
-  document.getElementById('volunteerForm').addEventListener('submit',event=>{
-    event.preventDefault();const form=event.currentTarget;if(!form.reportValidity())return;
-    if(!document.getElementById('vConsent').checked){setStatus('volunteerStatus',t('sendError'),true);return;}
-    const name=document.getElementById('vName').value.trim();const email=document.getElementById('vEmail').value.trim();const area=document.getElementById('vArea');const language=document.getElementById('vLang').value;const message=document.getElementById('vMessage').value.trim();
-    const body=[`Name: ${name}`,`Email: ${email}`,`Contribution: ${area.options[area.selectedIndex].text}`,`Contact language: ${language}`,'',message,'','I will attach my CV manually.'].join('\n');
-    const subject=encodeURIComponent('Volunteer application — Al-Qanon AQ');const mailBody=encodeURIComponent(body);setStatus('volunteerStatus',t('volunteerMail'));window.location.href=`mailto:${VOLUNTEER_EMAIL}?subject=${subject}&body=${mailBody}`;
-  });
+  // Legacy volunteer email form was removed; membership flow is handled below.
 
   document.getElementById('adminLoginForm').addEventListener('submit',async event=>{
     event.preventDefault();if(!db){setStatus('adminLoginStatus',t('databaseError'),true);return;}
