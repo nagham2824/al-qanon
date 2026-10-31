@@ -418,10 +418,40 @@
     try{const result=await volunteerRequest('submit_article',payload,session?.access_token||'');event.currentTarget.reset();setStatus('volunteerArticleStatus','وصل المقال للمراجعة بنجاح. رقم المقال: '+result.article.id);}
     catch(e){setStatus('volunteerArticleStatus',e.message,true);if(/انتهت|موقوفة/.test(e.message))await endVolunteerSession(e.message);}finally{button.disabled=false;}
   });
+  async function getVerifiedAdminToken(){
+    if(!db)throw new Error('تعذر الاتصال بخدمة الإدارة. حدّثي الصفحة وحاولي مجدداً.');
+    let {data:{session},error}=await db.auth.getSession();
+    if(error)throw new Error('تعذر قراءة جلسة الإدارة. سجّلي الخروج ثم الدخول مجدداً.');
+    if(!session?.access_token){
+      const refreshed=await db.auth.refreshSession();
+      session=refreshed.data?.session||null;
+      if(refreshed.error||!session?.access_token)throw new Error('انتهت جلسة الإدارة. سجّلي الخروج ثم الدخول مجدداً.');
+    }
+    const {data:{user},error:userError}=await db.auth.getUser(session.access_token);
+    if(userError||!user)throw new Error('تعذر التحقق من حساب الإدارة. سجّلي الدخول مجدداً.');
+    if(user.id!=='04a0788a-6043-4383-875e-8edd68c9adf3')throw new Error('هذا الحساب لا يملك صلاحية إدارة العضويات.');
+    return session.access_token;
+  }
   document.getElementById('createVolunteerForm').addEventListener('submit',async event=>{
-    event.preventDefault();const name=document.getElementById('newVolunteerName').value.trim();const button=event.currentTarget.querySelector('button');button.disabled=true;setStatus('createVolunteerStatus','جارٍ إنشاء العضوية…');document.getElementById('newVolunteerCodeBox').classList.add('hidden');
-    try{const {data:{session}}=await db.auth.getSession();const result=await volunteerRequest('create_volunteer',{displayName:name},session?.access_token||'');document.getElementById('newVolunteerCode').textContent=result.memberCode;document.getElementById('newVolunteerCodeBox').classList.remove('hidden');event.currentTarget.reset();setStatus('createVolunteerStatus','تم إنشاء العضوية. انسخي الرمز وسلّميه للمتطوع مرة واحدة.');await refreshVolunteers();}
-    catch(e){setStatus('createVolunteerStatus',e.message,true);}finally{button.disabled=false;}
+    event.preventDefault();
+    const name=document.getElementById('newVolunteerName').value.trim();
+    if(!name){setStatus('createVolunteerStatus','أدخلي اسم المتطوع أولاً.',true);return;}
+    const button=event.currentTarget.querySelector('button');
+    button.disabled=true;
+    setStatus('createVolunteerStatus','جارٍ التحقق من صلاحية الإدارة…');
+    document.getElementById('newVolunteerCodeBox').classList.add('hidden');
+    try{
+      const adminToken=await getVerifiedAdminToken();
+      setStatus('createVolunteerStatus','تم التحقق. جارٍ إنشاء العضوية…');
+      const result=await volunteerRequest('create_volunteer',{displayName:name},adminToken);
+      if(!result.memberCode)throw new Error('أنشأ الخادم الطلب دون إرجاع رمز العضوية. لا تعيدي المحاولة قبل تحديث قائمة العضويات.');
+      document.getElementById('newVolunteerCode').textContent=result.memberCode;
+      document.getElementById('newVolunteerCodeBox').classList.remove('hidden');
+      event.currentTarget.reset();
+      setStatus('createVolunteerStatus','تم إنشاء العضوية. انسخي الرمز وسلّميه للمتطوع مرة واحدة.');
+      await refreshVolunteers();
+    }catch(e){setStatus('createVolunteerStatus',e.message||'تعذر إنشاء العضوية.',true);}
+    finally{button.disabled=false;}
   });
   document.getElementById('copyVolunteerCode').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(document.getElementById('newVolunteerCode').textContent);setStatus('createVolunteerStatus','تم نسخ الرمز.');}catch{setStatus('createVolunteerStatus','تعذر النسخ تلقائياً؛ انسخي الرمز يدوياً.',true);}});
   
