@@ -254,6 +254,9 @@ Deno.serve(async (req: Request) => {
       if (!user) return json({ error: "انتهت جلسة الدخول. سجّل الدخول مجدداً." }, 401, origin);
       const volunteer = await volunteerFor(user.id);
       if (!volunteer || volunteer.status !== "active") return json({ error: "العضوية غير نشطة." }, 403, origin);
+      if (!volunteer.session_expires_at || new Date(volunteer.session_expires_at).getTime() <= Date.now()) {
+        return json({ error: "انتهت الجلسة. سجّل الدخول مجدداً." }, 401, origin);
+      }
       if (user.app_metadata?.must_change_password !== true) return json({ error: "لا يوجد تغيير كلمة مرور مطلوب لهذا الحساب." }, 403, origin);
       const password = String(body.password ?? "");
       if (!validNewPassword(password)) return json({ error: "يجب أن تتضمن كلمة المرور 12 حرفاً على الأقل، وحرفاً كبيراً وصغيراً ورقماً ورمزاً." }, 400, origin);
