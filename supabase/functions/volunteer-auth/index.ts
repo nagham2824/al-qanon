@@ -82,6 +82,16 @@ async function verifiedVolunteerSession(token: string, userId: string) {
       volunteer.current_session_id !== sessionId ||
       !volunteer.session_expires_at ||
       new Date(volunteer.session_expires_at).getTime() <= Date.now()) return null;
+
+  // Confirm that this JWT session still exists in Supabase Auth.
+  // The RPC is deliberately callable only by the service_role used by this Edge Function.
+  const { data: authSessionExists, error: authSessionError } = await admin.rpc(
+    "volunteer_auth_session_exists",
+    { p_session_id: sessionId, p_user_id: userId },
+  );
+  if (authSessionError) throw authSessionError;
+  if (authSessionExists !== true) return null;
+
   return { volunteer, sessionId };
 }
 async function volunteerFor(userId: string) {
