@@ -153,7 +153,7 @@ Deno.serve(async (req: Request) => {
       return json({ session: signed.session, expiresAt: expires.toISOString(), displayName: volunteer.display_name, mustChangePassword: signed.user?.app_metadata?.must_change_password === true }, 200, origin);
     }
 
-    if (action === "create_volunteer" || action === "set_volunteer_status" || action === "list_volunteers" || action === "reset_volunteer_password") {
+    if (action === "create_volunteer" || action === "set_volunteer_status" || action === "list_volunteers" || action === "reset_volunteer_password" || action === "delete_volunteer") {
       const user = await identify(token);
       if (!user || user.id !== ADMIN_ID) return json({ error: "غير مصرح" }, 403, origin);
 
@@ -179,6 +179,28 @@ Deno.serve(async (req: Request) => {
         const { data, error } = await admin.from("volunteers").update({ status }).eq("id", id).select("id,display_name,status,member_code_hint").single();
         if (error) throw error;
         return json({ volunteer: data }, 200, origin);
+      }
+
+      if (action === "delete_volunteer") {
+        const id = String(body.volunteerId ?? "");
+        if (!/^[0-9a-f-]{36}$/i.test(id)) return json({ error: "بيانات غير صالحة." }, 400, origin);
+        const { data: volunteer, error: volunteerError } = await admin.from("volunteers")
+          .select("id,display_name,status,auth_user_id").eq("id", id).maybeSingle();
+        if (volunteerError) throw volunteerError;
+        if (!volunteer) return json({ error: "العضوية غير موجودة." }, 404, origin);
+        const { error: suspendError } = await admin.from("volunteers")
+          .update({ status: "suspended" }).eq("id", id);
+        if (suspendError) throw suspendError;
+        if (volunteer.auth_user_id) {
+          const { error: authDeleteError } = await admin.auth.admin.deleteUser(volunteer.auth_user_id);
+          if (authDeleteError) return json({ error: "تم إيقاف العضوية، لكن تعذر حذف حساب الدخول. حاول الحذف مرة أخرى." }, 502, origin);
+        }
+        const { error: rowDeleteError } = await admin.from("volunteers").delete().eq("id", id);
+        if (rowDeleteError) {
+          console.error("Volunteer auth user deleted; membership row deletion failed:", rowDeleteError);
+          return json({ error: "تم إبطال حساب الدخول، لكن تعذر حذف سجل العضوية. أعد المحاولة أو راجع الدعم." }, 502, origin);
+        }
+        return json({ success: true, deletedVolunteerName: volunteer.display_name }, 200, origin);
       }
 
       if (action === "reset_volunteer_password") {
