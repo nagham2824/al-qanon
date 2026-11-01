@@ -180,7 +180,10 @@ Deno.serve(async (req: Request) => {
         const id = String(body.volunteerId ?? "");
         const status = String(body.status ?? "");
         if (!/^[0-9a-f-]{36}$/i.test(id) || !["active", "suspended"].includes(status)) return json({ error: "بيانات غير صالحة." }, 400, origin);
-        const { data, error } = await admin.from("volunteers").update({ status }).eq("id", id).select("id,display_name,status,member_code_hint").single();
+        const statusUpdate = status === "suspended"
+          ? { status, session_started_at: null, session_expires_at: null }
+          : { status };
+        const { data, error } = await admin.from("volunteers").update(statusUpdate).eq("id", id).select("id,display_name,status,member_code_hint").single();
         if (error) throw error;
         return json({ volunteer: data }, 200, origin);
       }
