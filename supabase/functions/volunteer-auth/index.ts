@@ -146,9 +146,13 @@ Deno.serve(async (req: Request) => {
       }
       const now = new Date();
       const expires = new Date(now.getTime() + 24 * 60 * 60 * 1000);
-      await admin.from("volunteers").update({
+      const { data: sessionRow, error: sessionSaveError } = await admin.from("volunteers").update({
         last_login_at: now.toISOString(), session_started_at: now.toISOString(), session_expires_at: expires.toISOString(),
-      }).eq("id", volunteer.id);
+      }).eq("id", volunteer.id).select("id").maybeSingle();
+      if (sessionSaveError || !sessionRow) {
+        console.error("Could not persist volunteer session expiry:", sessionSaveError);
+        return json({ error: "تعذر حفظ جلسة الدخول. حاول تسجيل الدخول مرة أخرى." }, 503, origin);
+      }
       await clearAuthAttempts([ipBucket, codeBucket]);
       return json({ session: signed.session, expiresAt: expires.toISOString(), displayName: volunteer.display_name, mustChangePassword: signed.user?.app_metadata?.must_change_password === true }, 200, origin);
     }
@@ -276,7 +280,7 @@ Deno.serve(async (req: Request) => {
       if (!user) return json({ error: "انتهت جلسة الدخول. سجّل الدخول مجدداً." }, 401, origin);
       if (user.app_metadata?.must_change_password === true) return json({ error: "يجب تغيير كلمة المرور المؤقتة قبل إرسال المقالات." }, 403, origin);
       const volunteer = await volunteerFor(user.id);
-      if (!volunteer || volunteer.status !== "active" || !volunteer.session_expires_at || new Date(volunteer.session_expires_at).getTime() < Date.now()) {
+      if (!volunteer || volunteer.status !== "active" || !volunteer.session_expires_at || new Date(volunteer.session_expires_at).getTime() <= Date.now()) {
         return json({ error: "انتهت الجلسة أو أن العضوية موقوفة. سجّل الدخول مجدداً." }, 401, origin);
       }
       const title = String(body.title ?? "").trim();
