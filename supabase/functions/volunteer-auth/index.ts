@@ -153,7 +153,7 @@ Deno.serve(async (req: Request) => {
       return json({ session: signed.session, expiresAt: expires.toISOString(), displayName: volunteer.display_name, mustChangePassword: signed.user?.app_metadata?.must_change_password === true }, 200, origin);
     }
 
-    if (action === "create_volunteer" || action === "set_volunteer_status" || action === "list_volunteers" || action === "reset_volunteer_password" || action === "delete_volunteer") {
+    if (action === "create_volunteer" || action === "set_volunteer_status" || action === "list_volunteers" || action === "reset_volunteer_password" || action === "reset_volunteer_code" || action === "delete_volunteer") {
       const user = await identify(token);
       if (!user || user.id !== ADMIN_ID) return json({ error: "غير مصرح" }, 403, origin);
 
@@ -179,6 +179,24 @@ Deno.serve(async (req: Request) => {
         const { data, error } = await admin.from("volunteers").update({ status }).eq("id", id).select("id,display_name,status,member_code_hint").single();
         if (error) throw error;
         return json({ volunteer: data }, 200, origin);
+      }
+
+      if (action === "reset_volunteer_code") {
+        const id = String(body.volunteerId ?? "");
+        if (!/^[0-9a-f-]{36}$/i.test(id)) return json({ error: "بيانات غير صالحة." }, 400, origin);
+        const { data: volunteer, error: volunteerError } = await admin.from("volunteers")
+          .select("id,display_name,status").eq("id", id).maybeSingle();
+        if (volunteerError) throw volunteerError;
+        if (!volunteer || volunteer.status !== "active") {
+          return json({ error: "لا يمكن إصدار رمز جديد لهذه العضوية. تأكدي من أنها فعّالة." }, 400, origin);
+        }
+        const memberCode = randomCode();
+        const { error: updateError } = await admin.from("volunteers").update({
+          member_code_hash: await sha256(memberCode),
+          member_code_hint: memberCode.slice(-4),
+        }).eq("id", id);
+        if (updateError) throw updateError;
+        return json({ memberCode, volunteerName: volunteer.display_name }, 200, origin);
       }
 
       if (action === "delete_volunteer") {
@@ -241,8 +259,11 @@ Deno.serve(async (req: Request) => {
       if (!validNewPassword(password)) return json({ error: "يجب أن تتضمن كلمة المرور 12 حرفاً على الأقل، وحرفاً كبيراً وصغيراً ورقماً ورمزاً." }, 400, origin);
       const { data: authRecord, error: authError } = await admin.auth.admin.getUserById(user.id);
       if (authError || !authRecord?.user || authRecord.user.app_metadata?.must_change_password !== true) return json({ error: "تعذر التحقق من طلب تغيير كلمة المرور." }, 403, origin);
-      const { must_change_password: _mustChangePassword, ...appMetadata } = authRecord.user.app_metadata ?? {};
-      const { error: updateError } = await admin.auth.admin.updateUserById(user.id, { password, app_metadata: appMetadata });
+      const appMetadata = authRecord.user.app_metadata ?? {};
+      const { error: updateError } = await admin.auth.admin.updateUserById(user.id, {
+        password,
+        app_metadata: { ...appMetadata, must_change_password: false },
+      });
       if (updateError) throw updateError;
       return json({ success: true }, 200, origin);
     }
