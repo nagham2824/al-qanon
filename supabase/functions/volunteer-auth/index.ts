@@ -59,6 +59,31 @@ async function identify(token: string) {
   const { data, error } = await client.auth.getUser(token);
   return error ? null : data.user;
 }
+
+function verifiedSessionId(token: string) {
+  try {
+    const payload = token.split(".")[1];
+    if (!payload) return null;
+    const normalized = payload.replaceAll("-", "+").replaceAll("_", "/");
+    const decoded = atob(normalized.padEnd(Math.ceil(normalized.length / 4) * 4, "="));
+    const claims = JSON.parse(decoded);
+    const id = String(claims.session_id ?? "");
+    return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(id) ? id : null;
+  } catch {
+    return null;
+  }
+}
+
+async function verifiedVolunteerSession(token: string, userId: string) {
+  const sessionId = verifiedSessionId(token);
+  if (!sessionId) return null;
+  const volunteer = await volunteerFor(userId);
+  if (!volunteer || volunteer.status !== "active" ||
+      volunteer.current_session_id !== sessionId ||
+      !volunteer.session_expires_at ||
+      new Date(volunteer.session_expires_at).getTime() <= Date.now()) return null;
+  return { volunteer, sessionId };
+}
 async function volunteerFor(userId: string) {
   const { data, error } = await admin.from("volunteers").select("*").eq("auth_user_id", userId).maybeSingle();
   if (error) throw error;
@@ -147,10 +172,10 @@ Deno.serve(async (req: Request) => {
       const now = new Date();
       const expires = new Date(now.getTime() + 24 * 60 * 60 * 1000);
       const { data: sessionRow, error: sessionSaveError } = await admin.from("volunteers").update({
-        last_login_at: now.toISOString(), session_started_at: now.toISOString(), session_expires_at: expires.toISOString(),
+        last_login_at: now.toISOString(), session_started_at: now.toISOString(), session_expires_at: expires.toISOString(), current_session_id: verifiedSessionId(signed.session.access_token),
       }).eq("id", volunteer.id).select("id").maybeSingle();
-      if (sessionSaveError || !sessionRow) {
-        console.error("Could not persist volunteer session expiry:", sessionSaveError);
+      if (sessionSaveError || !sessionRow || !verifiedSessionId(signed.session.access_token)) {
+        console.error("Could not persist volunteer session and session ID:", sessionSaveError);
         return json({ error: "تعذر حفظ جلسة الدخول. حاول تسجيل الدخول مرة أخرى." }, 503, origin);
       }
       await clearAuthAttempts([ipBucket, codeBucket]);
@@ -181,7 +206,7 @@ Deno.serve(async (req: Request) => {
         const status = String(body.status ?? "");
         if (!/^[0-9a-f-]{36}$/i.test(id) || !["active", "suspended"].includes(status)) return json({ error: "بيانات غير صالحة." }, 400, origin);
         const statusUpdate = status === "suspended"
-          ? { status, session_started_at: null, session_expires_at: null }
+          ? { status, session_started_at: null, session_expires_at: null, current_session_id: null }
           : { status };
         const { data, error } = await admin.from("volunteers").update(statusUpdate).eq("id", id).select("id,display_name,status,member_code_hint").single();
         if (error) throw error;
@@ -214,7 +239,7 @@ Deno.serve(async (req: Request) => {
         if (volunteerError) throw volunteerError;
         if (!volunteer) return json({ error: "العضوية غير موجودة." }, 404, origin);
         const { error: suspendError } = await admin.from("volunteers")
-          .update({ status: "suspended" }).eq("id", id);
+          .update({ status: "suspended", session_started_at: null, session_expires_at: null, current_session_id: null }).eq("id", id);
         if (suspendError) throw suspendError;
         if (volunteer.auth_user_id) {
           const { error: authDeleteError } = await admin.auth.admin.deleteUser(volunteer.auth_user_id);
@@ -244,6 +269,7 @@ Deno.serve(async (req: Request) => {
         const { error: sessionClearError } = await admin.from("volunteers").update({
           session_started_at: null,
           session_expires_at: null,
+          current_session_id: null,
         }).eq("id", id);
         if (sessionClearError) throw sessionClearError;
 
@@ -267,11 +293,9 @@ Deno.serve(async (req: Request) => {
     if (action === "change_volunteer_password") {
       const user = await identify(token);
       if (!user) return json({ error: "انتهت جلسة الدخول. سجّل الدخول مجدداً." }, 401, origin);
-      const volunteer = await volunteerFor(user.id);
-      if (!volunteer || volunteer.status !== "active") return json({ error: "العضوية غير نشطة." }, 403, origin);
-      if (!volunteer.session_expires_at || new Date(volunteer.session_expires_at).getTime() <= Date.now()) {
-        return json({ error: "انتهت الجلسة. سجّل الدخول مجدداً." }, 401, origin);
-      }
+      const verified = await verifiedVolunteerSession(token, user.id);
+      if (!verified) return json({ error: "انتهت الجلسة أو لم تعد الجلسة الحالية. سجّل الدخول مجدداً." }, 401, origin);
+      const volunteer = verified.volunteer;
       if (user.app_metadata?.must_change_password !== true) return json({ error: "لا يوجد تغيير كلمة مرور مطلوب لهذا الحساب." }, 403, origin);
       const password = String(body.password ?? "");
       if (!validNewPassword(password)) return json({ error: "يجب أن تتضمن كلمة المرور 12 حرفاً على الأقل، وحرفاً كبيراً وصغيراً ورقماً ورمزاً." }, 400, origin);
@@ -282,6 +306,7 @@ Deno.serve(async (req: Request) => {
       const { error: sessionClearError } = await admin.from("volunteers").update({
         session_started_at: null,
         session_expires_at: null,
+        current_session_id: null,
       }).eq("id", volunteer.id);
       if (sessionClearError) throw sessionClearError;
 
@@ -298,10 +323,9 @@ Deno.serve(async (req: Request) => {
       const user = await identify(token);
       if (!user) return json({ error: "انتهت جلسة الدخول. سجّل الدخول مجدداً." }, 401, origin);
       if (user.app_metadata?.must_change_password === true) return json({ error: "يجب تغيير كلمة المرور المؤقتة قبل إرسال المقالات." }, 403, origin);
-      const volunteer = await volunteerFor(user.id);
-      if (!volunteer || volunteer.status !== "active" || !volunteer.session_expires_at || new Date(volunteer.session_expires_at).getTime() <= Date.now()) {
-        return json({ error: "انتهت الجلسة أو أن العضوية موقوفة. سجّل الدخول مجدداً." }, 401, origin);
-      }
+      const verified = await verifiedVolunteerSession(token, user.id);
+      if (!verified) return json({ error: "انتهت الجلسة أو لم تعد الجلسة الحالية. سجّل الدخول مجدداً." }, 401, origin);
+      const volunteer = verified.volunteer;
       const title = String(body.title ?? "").trim();
       const content = String(body.content ?? "").trim();
       const category = String(body.category ?? "general");
