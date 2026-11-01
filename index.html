@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa+Ink:wght@400;700&family=Cairo:wght@300;400;600;700;800&family=Amiri:wght@700&display=swap" rel="stylesheet">
   <style>
-    :root{--primary-dark:#102A43;--gold:#C9923E;--black:#000;--white:#fff;--card-bg:#163758;--muted:#d1d8e0;--danger:#ffb4ab;--success:#b7efc5}
+    :root{--primary-dark:#102A43;--gold:#C9923E;--heading-yellow:#F3C777;--black:#000;--white:#fff;--card-bg:#163758;--muted:#d1d8e0;--danger:#ffb4ab;--success:#b7efc5}
     *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--primary-dark);color:var(--white);font-family:'Cairo',sans-serif;line-height:1.7}
     button,input,select,textarea{font:inherit}button,a,select{touch-action:manipulation}
     a{color:inherit;text-decoration:none}button{cursor:pointer}
@@ -41,13 +41,15 @@
 
     /* AQ visual identity: one brand gold, refined Arabic typography, and a restrained glow */
     .section-title{font-family:'Aref Ruqaa Ink','Amiri','Cairo',serif;font-weight:700;text-shadow:0 2px 12px rgba(201,146,62,.12)}
-    .hero h1.aq-calligraphy{display:block;width:min(900px,100%);margin:0 auto 1.1rem;line-height:1;animation:aq-word-wave 7s ease-in-out infinite}.hero h1.aq-calligraphy::before,.hero h1.aq-calligraphy::after{display:none}.aq-calligraphy-art{display:block;width:min(860px,96vw);height:auto;margin:0 auto;overflow:visible;filter:drop-shadow(0 10px 16px rgba(0,0,0,.28))}.aq-calligraphy-face{font-family:'Aref Ruqaa Ink','Amiri','Cairo',serif;font-size:145px;font-weight:700;fill:url(#aqGoldFace);stroke:#8F5B20;stroke-width:1.15;paint-order:stroke fill;filter:url(#aqDepth)}.aq-calligraphy-shadow{font-family:'Aref Ruqaa Ink','Amiri','Cairo',serif;font-size:145px;font-weight:700;fill:#704619;opacity:.9;transform:translateY(7px)}
+    .hero h1{font-family:'Aref Ruqaa Ink','Amiri','Cairo',serif;background:linear-gradient(110deg,var(--heading-yellow) 0%,var(--heading-yellow) 40%,rgba(255,255,255,.82) 50%,var(--heading-yellow) 60%,var(--heading-yellow) 100%);background-size:220% 100%;background-position:100% 0;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 3px 10px rgba(243,199,119,.16));animation:aq-gold-shimmer 9s ease-in-out infinite,aq-word-wave 7s ease-in-out infinite}
     @keyframes aq-gold-shimmer{0%,100%{background-position:100% 0}50%{background-position:0 0}}
     @keyframes aq-word-wave{0%,100%{transform:translateY(0) rotate(0)}25%{transform:translateY(-2px) rotate(-.18deg)}75%{transform:translateY(1px) rotate(.16deg)}}
 
     .btn{display:inline-flex;justify-content:center;align-items:center;gap:.4rem;background:var(--gold);color:#111;border:0;border-radius:7px;padding:.7rem 1.1rem;font-weight:800;transition:filter .2s}.btn:hover{filter:brightness(1.08)}.btn.secondary{background:transparent;color:var(--gold);border:1px solid var(--gold)}.btn.danger{background:#8f2525;color:white}.btn.small{padding:.4rem .7rem;font-size:.9rem}.btn:disabled{opacity:.6;cursor:not-allowed}
     .container{width:min(1200px,100%);padding:0 1rem;margin:2.5rem auto}.page{display:none;min-height:50vh}.page.active{display:block}
-    .section-title{text-align:center;color:var(--gold);font-size:clamp(1.8rem,3.5vw,2.5rem);margin:0 0 1.5rem;font-weight:800}
+    .section-title{text-align:center;color:var(--heading-yellow);font-size:clamp(1.8rem,3.5vw,2.5rem);margin:0 0 1.5rem;font-weight:800}
+    .page h1,.page h2,.page h3{color:var(--heading-yellow)}
+    .hero h1::before,.hero h1::after{background:linear-gradient(90deg,transparent,var(--heading-yellow))}.hero h1::after{background:linear-gradient(90deg,var(--heading-yellow),transparent)}
     .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1.1rem}.card{background:var(--card-bg);border:1px solid #c9923e44;border-top:4px solid var(--gold);border-radius:11px;overflow:hidden;display:flex;flex-direction:column;min-width:0}.card img{width:100%;height:165px;object-fit:cover;background:#0c2238}.card-body{padding:1rem;display:flex;flex-direction:column;align-items:flex-start;gap:.65rem;flex:1}.card h3{color:var(--gold);margin:0;font-size:1.15rem}.card p{margin:0;color:var(--muted);font-size:.93rem;flex:1}.card .btn{margin-top:.4rem;width:100%}
     .panel{background:var(--card-bg);padding:clamp(1rem,3vw,1.5rem);border-radius:11px;border-inline-start:5px solid var(--gold);box-shadow:0 10px 28px #0001}
     .panel h3{color:var(--gold);margin-top:0}.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}.form-row{display:flex;flex-direction:column;gap:.35rem;min-width:0}.form-row.full{grid-column:1/-1}.field{width:100%}textarea.field{min-height:180px;resize:vertical}input[type=file].field{padding:.5rem}
@@ -58,7 +60,7 @@
     .hidden{display:none!important}.two-col{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1.2rem}
     :focus-visible{outline:3px solid var(--gold);outline-offset:3px}
     @media(max-width:1000px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}header{justify-content:center}.nav-container{justify-content:center}}
-    @media(max-width:620px){.grid,.form-grid,.two-col{grid-template-columns:1fr}.form-row.full{grid-column:auto}nav ul{justify-content:center;gap:10px}nav a{font-size:.85rem}.logo img{width:150px;height:58px}.hero{padding:2rem .8rem 2.5rem}.hero::before{background-size:115vw auto;opacity:.09}.hero h1.aq-calligraphy{width:100%}.aq-calligraphy-art{width:100%}.aq-calligraphy-face,.aq-calligraphy-shadow{font-size:145px}.hero p{font-size:1rem}.hero .btn{font-size:1rem;padding:.75rem 1.2rem}.card img{height:190px}}
+    @media(max-width:620px){.grid,.form-grid,.two-col{grid-template-columns:1fr}.form-row.full{grid-column:auto}nav ul{justify-content:center;gap:10px}nav a{font-size:.85rem}.logo img{width:150px;height:58px}.hero{padding:2rem .8rem 2.5rem}.hero::before{background-size:115vw auto;opacity:.09}.hero h1{font-size:clamp(3.2rem,15vw,4.5rem);gap:.6rem}.hero h1::before,.hero h1::after{height:3px}.hero p{font-size:1rem}.hero .btn{font-size:1rem;padding:.75rem 1.2rem}.card img{height:190px}}
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important}}
       @media(prefers-reduced-motion:reduce){.hero h1{animation:none!important;background-position:100% 0!important}}
   </style>
@@ -87,45 +89,7 @@
   <main id="main">
     <section class="page active" id="page-home">
       <div class="hero">
-        <h1 class="hero-brand aq-calligraphy" aria-label="القانون">
-          <svg class="aq-calligraphy-art" viewBox="0 0 900 250" role="img" aria-labelledby="aqCalligraphyTitle">
-            <title id="aqCalligraphyTitle">القانون</title>
-            <defs>
-              <linearGradient id="aqGoldFace" x1="0" y1="0" x2="0.15" y2="1">
-                <stop offset="0" stop-color="#FFF0C9"/>
-                <stop offset=".18" stop-color="#E7C17E"/>
-                <stop offset=".48" stop-color="#C9923E"/>
-                <stop offset=".72" stop-color="#F2D69C"/>
-                <stop offset="1" stop-color="#9B6423"/>
-              </linearGradient>
-              <linearGradient id="aqGoldStroke" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0" stop-color="#FFE8B4"/>
-                <stop offset=".5" stop-color="#C9923E"/>
-                <stop offset="1" stop-color="#80501D"/>
-              </linearGradient>
-              <filter id="aqDepth" x="-25%" y="-35%" width="150%" height="180%">
-                <feGaussianBlur in="SourceAlpha" stdDeviation="5" result="shadowBlur"/>
-                <feOffset in="shadowBlur" dx="0" dy="7" result="shadowOffset"/>
-                <feColorMatrix in="shadowOffset" type="matrix" values="0 0 0 0 0.02 0 0 0 0 0.06 0 0 0 0 0.10 0 0 0 .75 0" result="shadow"/>
-                <feSpecularLighting in="SourceAlpha" surfaceScale="5" specularConstant=".8" specularExponent="18" lighting-color="#FFF1CE" result="spec">
-                  <fePointLight x="-250" y="-180" z="240"/>
-                </feSpecularLighting>
-                <feComposite in="spec" in2="SourceAlpha" operator="in" result="specClip"/>
-                <feMerge><feMergeNode in="shadow"/><feMergeNode in="SourceGraphic"/><feMergeNode in="specClip"/></feMerge>
-              </filter>
-            </defs>
-            <g class="aq-ornament" fill="none" stroke="url(#aqGoldStroke)" stroke-linecap="round" stroke-linejoin="round">
-              <path stroke-width="3.5" d="M112 176 C172 220 244 218 307 188 C337 174 352 155 365 135"/>
-              <path stroke-width="2.4" d="M535 180 C605 216 690 210 755 165 C783 146 800 119 810 88"/>
-              <path stroke-width="2" opacity=".8" d="M240 54 C330 14 570 14 660 54"/>
-              <path stroke-width="2" d="M116 176 C91 163 77 145 72 124 C98 133 113 147 116 176Z"/>
-              <path stroke-width="2" d="M810 88 C830 77 845 60 850 39 C827 46 814 63 810 88Z"/>
-            </g>
-            <text class="aq-calligraphy-shadow" x="450" y="153" text-anchor="middle" direction="rtl" unicode-bidi="plaintext">القانون</text>
-            <text class="aq-calligraphy-face" x="450" y="145" text-anchor="middle" direction="rtl" unicode-bidi="plaintext">القانون</text>
-            <path d="M305 194 Q450 216 595 194" fill="none" stroke="#F4D9A6" stroke-width="1.6" opacity=".7"/>
-          </svg>
-        </h1>
+        <h1 class="hero-brand"><span lang="ar">القانون</span></h1>
         <p data-i18n="heroText">منصة لتبسيط وشرح القوانين الهولندية باللغة العربية، مع محتوى توعوي بلغات متعددة.</p>
         <a class="btn" href="#volunteer" data-page="volunteer" data-i18n="heroCta">تطوع معنا / أرسل سيرتك</a>
 
