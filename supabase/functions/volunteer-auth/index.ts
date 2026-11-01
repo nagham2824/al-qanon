@@ -277,13 +277,21 @@ Deno.serve(async (req: Request) => {
       if (!validNewPassword(password)) return json({ error: "يجب أن تتضمن كلمة المرور 12 حرفاً على الأقل، وحرفاً كبيراً وصغيراً ورقماً ورمزاً." }, 400, origin);
       const { data: authRecord, error: authError } = await admin.auth.admin.getUserById(user.id);
       if (authError || !authRecord?.user || authRecord.user.app_metadata?.must_change_password !== true) return json({ error: "تعذر التحقق من طلب تغيير كلمة المرور." }, 403, origin);
+      // End the temporary-password session before changing credentials.
+      // The client signs out locally after success and must log in again with the new password.
+      const { error: sessionClearError } = await admin.from("volunteers").update({
+        session_started_at: null,
+        session_expires_at: null,
+      }).eq("id", volunteer.id);
+      if (sessionClearError) throw sessionClearError;
+
       const appMetadata = authRecord.user.app_metadata ?? {};
       const { error: updateError } = await admin.auth.admin.updateUserById(user.id, {
         password,
         app_metadata: { ...appMetadata, must_change_password: false },
       });
       if (updateError) throw updateError;
-      return json({ success: true }, 200, origin);
+      return json({ success: true, requiresLogin: true }, 200, origin);
     }
 
     if (action === "submit_article") {
