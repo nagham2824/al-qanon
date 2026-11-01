@@ -3,10 +3,9 @@
 alter table public.volunteers
   add column if not exists current_session_id uuid;
 
--- Check that the supplied Auth session still exists and belongs to the user.
--- SECURITY DEFINER is required to read auth.sessions through the Data API.
--- Execution is restricted both by GRANT and by an explicit service_role claim check.
-create or replace function public.volunteer_auth_session_exists(
+-- Keep the privileged lookup in the existing non-exposed private schema.
+-- The public RPC is SECURITY INVOKER and is executable only by service_role.
+create or replace function private.volunteer_auth_session_exists_internal(
   p_session_id uuid,
   p_user_id uuid
 )
@@ -17,7 +16,7 @@ security definer
 set search_path = ''
 as $function$
 begin
-  if coalesce(current_setting('request.jwt.claim.role', true), '') <> 'service_role' then
+  if coalesce((current_setting('request.jwt.claims', true)::jsonb ->> 'role'), '') <> 'service_role' then
     raise insufficient_privilege using message = 'service_role is required';
   end if;
 
@@ -30,8 +29,25 @@ begin
 end;
 $function$;
 
-revoke all on function public.volunteer_auth_session_exists(uuid, uuid) from public;
-revoke all on function public.volunteer_auth_session_exists(uuid, uuid) from anon, authenticated;
+revoke all on schema private from public, anon, authenticated;
+grant usage on schema private to service_role;
+revoke all on function private.volunteer_auth_session_exists_internal(uuid, uuid) from public, anon, authenticated;
+grant execute on function private.volunteer_auth_session_exists_internal(uuid, uuid) to service_role;
+
+create or replace function public.volunteer_auth_session_exists(
+  p_session_id uuid,
+  p_user_id uuid
+)
+returns boolean
+language sql
+stable
+security invoker
+set search_path = ''
+as $function$
+  select private.volunteer_auth_session_exists_internal(p_session_id, p_user_id);
+$function$;
+
+revoke all on function public.volunteer_auth_session_exists(uuid, uuid) from public, anon, authenticated;
 grant execute on function public.volunteer_auth_session_exists(uuid, uuid) to service_role;
 
 comment on column public.volunteers.current_session_id is
