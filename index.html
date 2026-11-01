@@ -337,6 +337,8 @@
   }
   function showAdminPasswordResetPanel(){
     adminPasswordRecoveryMode=true;
+    isAdmin=false;currentAdminId=null;
+    document.getElementById('adminWorkspace').classList.add('hidden');
     showPage('admin');
     document.getElementById('adminLoginPanel').classList.remove('hidden');
     document.getElementById('adminLoginForm').classList.add('hidden');
