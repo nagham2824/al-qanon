@@ -16,7 +16,7 @@ security definer
 set search_path = ''
 as $function$
 begin
-  if coalesce((current_setting('request.jwt.claims', true)::jsonb ->> 'role'), '') <> 'service_role' then
+  if coalesce((coalesce(current_setting('request.jwt.claims', true), '{}')::jsonb ->> 'role'), '') <> 'service_role' then
     raise insufficient_privilege using message = 'service_role is required';
   end if;
 
