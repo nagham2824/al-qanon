@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://aq-law.nl/sitemap.xml

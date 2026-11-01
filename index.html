@@ -6,6 +6,11 @@
   <meta name="theme-color" content="#102A43">
   <meta name="description" content="منصة القانون AQ: تبسيط القوانين الهولندية باللغة العربية ولغات أخرى، مع الإحالة إلى المصادر الرسمية.">
   <title>منصة القانون AQ</title>
+  <link rel="canonical" href="https://aq-law.nl/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="منصة القانون AQ">
+  <meta property="og:description" content="تبسيط القوانين الهولندية باللغة العربية ولغات أخرى، مع الإحالة إلى المصادر الرسمية.">
+  <meta property="og:url" content="https://aq-law.nl/">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Amiri:wght@700&display=swap" rel="stylesheet">
@@ -316,11 +321,11 @@
     if(!list.length){const empty=document.createElement('div');empty.className='empty';empty.textContent=t(adminView?'emptyAdmin':'emptyArticles');root.append(empty);return;}
     list.forEach(article=>{
       const item=document.createElement('article');item.className='article-item';
-      const title=document.createElement('h3');title.textContent=article.title;item.append(title);
+      const title=document.createElement('h3');title.lang=article.language||'ar';title.dir=title.lang==='ar'?'rtl':'ltr';title.textContent=article.title;item.append(title);
       const meta=document.createElement('div');meta.className='article-meta';
       const date=article.updatedAt?new Date(article.updatedAt).toLocaleDateString(currentLang==='ar'?'ar':currentLang):'';
       const parts=[];if(adminView)parts.push(t(article.status));if(article.author_name)parts.push(article.author_name);parts.push(articleCategoryName(article.category));if(date)parts.push(date);meta.textContent=parts.join(' · ');item.append(meta);
-      const body=document.createElement('p');body.textContent=article.body;item.append(body);
+      const body=document.createElement('p');body.lang=article.language||'ar';body.dir=body.lang==='ar'?'rtl':'ltr';body.textContent=article.body;item.append(body);
       if(article.source_url){const source=safeHttpUrl(article.source_url);if(source){const link=document.createElement('a');link.className='article-source';link.href=source;link.target='_blank';link.rel='noopener noreferrer';link.textContent=t('sourceLabel')+': '+source;item.append(link);}}
       if(adminView&&isAdmin){
         const actions=document.createElement('div');actions.className='actions';
@@ -436,7 +441,7 @@
 
   document.querySelectorAll('[data-page]').forEach(element=>element.addEventListener('click',event=>{const page=element.dataset.page;if(!page)return;event.preventDefault();showPage(page);}));
   window.addEventListener('hashchange',()=>{const page=(location.hash||'#home').slice(1);showPage(page,false);});
-  function applyTranslations(){document.documentElement.lang=currentLang;document.documentElement.dir=currentLang==='ar'?'rtl':'ltr';document.body.dir=currentLang==='ar'?'rtl':'ltr';document.querySelectorAll('[data-i18n]').forEach(element=>{const key=element.dataset.i18n;const value=translations[currentLang]?.[key];if(value!==undefined){if(element.tagName==='INPUT'||element.tagName==='TEXTAREA'){if(element.hasAttribute('placeholder'))element.placeholder=value;}else element.textContent=value;}});renderArticles();if(isAdmin)refreshVolunteers();}
+  function applyTranslations(){document.documentElement.lang=currentLang;document.documentElement.dir=currentLang==='ar'?'rtl':'ltr';document.body.dir=currentLang==='ar'?'rtl':'ltr';document.title=t('brand');document.getElementById('langSelect').setAttribute('aria-label',t('language'));document.querySelectorAll('[data-i18n]').forEach(element=>{const key=element.dataset.i18n;const value=translations[currentLang]?.[key];if(value!==undefined){if(element.tagName==='INPUT'||element.tagName==='TEXTAREA'){if(element.hasAttribute('placeholder'))element.placeholder=value;}else element.textContent=value;}});renderArticles();if(isAdmin)refreshVolunteers();}
   document.getElementById('langSelect').addEventListener('change',event=>{currentLang=translations[event.target.value]?event.target.value:'ar';applyTranslations();});
 
   // Article submission is restricted to authenticated, active volunteers via volunteer-auth.
