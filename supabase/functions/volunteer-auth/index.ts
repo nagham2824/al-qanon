@@ -236,6 +236,14 @@ Deno.serve(async (req: Request) => {
         }
         const { data: authRecord, error: authError } = await admin.auth.admin.getUserById(volunteer.auth_user_id);
         if (authError || !authRecord?.user) throw authError ?? new Error("Volunteer auth user not found");
+        // Invalidate the application's current volunteer session before issuing a temporary password.
+        // A fresh login will create a new 24-hour session.
+        const { error: sessionClearError } = await admin.from("volunteers").update({
+          session_started_at: null,
+          session_expires_at: null,
+        }).eq("id", id);
+        if (sessionClearError) throw sessionClearError;
+
         const temporaryPassword = randomTemporaryPassword();
         const appMetadata = authRecord.user.app_metadata ?? {};
         const { error: updateError } = await admin.auth.admin.updateUserById(volunteer.auth_user_id, {
