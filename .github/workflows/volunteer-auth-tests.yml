@@ -56,14 +56,17 @@ jobs:
             echo "API_URL=$API_URL"
             echo "ANON_KEY=$ANON_KEY"
             echo "SERVICE_ROLE_KEY=$SERVICE_ROLE_KEY"
-            echo "DB_URL=$DB_URL"
           } >> "$GITHUB_ENV"
-      - name: Install PostgreSQL client
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y postgresql-client
       - name: Create isolated test schema
-        run: psql "$DB_URL" -v ON_ERROR_STOP=1 -f tests/volunteer-auth/fixture.sql
+        shell: bash
+        run: |
+          DB_CONTAINER="$(docker ps --filter "name=supabase_db_aq-law-volunteer-auth-integration" --format '{{.Names}}' | head -n 1)"
+          if [ -z "$DB_CONTAINER" ]; then
+            docker ps -a
+            echo "Local Supabase database container was not found."
+            exit 1
+          fi
+          docker exec -i "$DB_CONTAINER" psql -U postgres -d postgres -v ON_ERROR_STOP=1 < tests/volunteer-auth/fixture.sql
       - name: Start volunteer-auth Edge Function locally
         shell: bash
         run: |
