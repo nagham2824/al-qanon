@@ -1,0 +1,27 @@
+name: Volunteer auth helper tests
+
+on:
+  pull_request:
+    paths:
+      - "supabase/functions/volunteer-auth/**"
+      - ".github/workflows/volunteer-auth-tests.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "supabase/functions/volunteer-auth/**"
+      - ".github/workflows/volunteer-auth-tests.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  volunteer-auth-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Run volunteer auth tests
+        run: |
+          node --version
+          node --test supabase/functions/volunteer-auth/claim-helpers.test.js
