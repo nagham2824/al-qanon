@@ -174,7 +174,7 @@ try {
     await assertNoAuthUser(volunteer.email);
   });
 
-  await run("a pre-existing Auth identity is reported as a duplicate conflict", async () => {
+  await run("an interrupted claim is recovered only after verifying the existing Auth password", async () => {
     const volunteer = await createVolunteer("IT_DUPLICATE_AUTH");
     created.push(volunteer);
     const existing = await api("/auth/v1/admin/users", {
@@ -187,12 +187,15 @@ try {
         user_metadata: { account_type: "volunteer" },
       },
     });
-    assert.equal(existing.status, 200, `Could not create duplicate fixture: ${JSON.stringify(existing.data)}`);
+    assert.equal(existing.status, 200, `Could not create interrupted-claim fixture: ${JSON.stringify(existing.data)}`);
     const result = await invoke("claim", volunteer.code, strongPassword);
-    assert.equal(result.status, 409, JSON.stringify(result.data));
+    assert.equal(result.status, 200, JSON.stringify(result.data));
+    assert.ok(result.data.session?.access_token);
     const row = await getVolunteer(volunteer.id);
-    assert.equal(row.status, "invited");
-    assert.equal(row.auth_user_id, null);
+    assert.equal(row.status, "active");
+    assert.equal(row.auth_user_id, existing.data.id);
+    const login = await invoke("login", volunteer.code, strongPassword);
+    assert.equal(login.status, 200, JSON.stringify(login.data));
   });
 
   await run("two simultaneous claims produce one active membership and one Auth user", async () => {
