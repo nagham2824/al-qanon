@@ -1,5 +1,6 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "npm:@supabase/supabase-js@2";
+import { finalizeVolunteerClaim, validNewPassword } from "./claim-helpers.js";
 
 const URL = Deno.env.get("SUPABASE_URL")!;
 const publishableKeys = JSON.parse(Deno.env.get("SUPABASE_PUBLISHABLE_KEYS") ?? "{}");
@@ -41,11 +42,6 @@ function randomTemporaryPassword() {
     [chars[i], chars[j]] = [chars[j], chars[i]];
   }
   return chars.join("");
-}
-function validNewPassword(password: string) {
-  return password.length >= 12 && password.length <= 128 &&
-    /[A-Z]/.test(password) && /[a-z]/.test(password) &&
-    /[0-9]/.test(password) && /[^A-Za-z0-9]/.test(password);
 }
 function internalEmail(id: string) {
   return "vol-" + id.replaceAll("-", "") + "@members.aq-law.invalid";
@@ -136,13 +132,23 @@ Deno.serve(async (req: Request) => {
           return json({ error: "تعذر إنشاء الحساب. تحقق من كلمة السر وحاول مجدداً." }, 400, origin);
         }
         authUserId = created.user.id;
-        const { data: claimed, error: updateError } = await admin.from("volunteers").update({
-          auth_user_id: authUserId, status: "active", claimed_at: new Date().toISOString(), activated_at: new Date().toISOString(),
-        }).eq("id", volunteer.id).is("auth_user_id", null).select("id").maybeSingle();
-        if (updateError || !claimed) {
-          const { error: cleanupError } = await admin.auth.admin.deleteUser(authUserId);
-          if (cleanupError) console.error("Could not clean up unclaimed volunteer auth user:", cleanupError);
-          if (updateError) throw updateError;
+        const claimResult = await finalizeVolunteerClaim({
+          volunteerId: volunteer.id,
+          authUserId,
+          updateVolunteer: async (volunteerId, userId) => {
+            const { data, error } = await admin.from("volunteers").update({
+              auth_user_id: userId, status: "active", claimed_at: new Date().toISOString(), activated_at: new Date().toISOString(),
+            }).eq("id", volunteerId).is("auth_user_id", null).select("id").maybeSingle();
+            return { data, error };
+          },
+          deleteAuthUser: async (userId) => {
+            const { error } = await admin.auth.admin.deleteUser(userId);
+            return { error };
+          },
+        });
+        if (!claimResult.ok) {
+          if (claimResult.cleanupError) console.error("Could not clean up unclaimed volunteer auth user:", claimResult.cleanupError);
+          if (claimResult.updateError) throw claimResult.updateError;
           return json({ error: "تم تفعيل هذه العضوية من طلب آخر. استخدم تسجيل الدخول، أو تواصل مع الإدارة إذا تعذر ذلك." }, 409, origin);
         }
       }
