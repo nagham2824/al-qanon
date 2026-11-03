@@ -16,6 +16,10 @@ on:
       - "tests/volunteer-auth/**"
       - ".github/workflows/volunteer-auth-tests.yml"
 
+concurrency:
+  group: volunteer-auth-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 permissions:
   contents: read
 
