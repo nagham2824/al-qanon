@@ -188,6 +188,12 @@ try {
       },
     });
     assert.equal(existing.status, 200, `Could not create interrupted-claim fixture: ${JSON.stringify(existing.data)}`);
+    const wrongPassword = await invoke("claim", volunteer.code, "DifferentStrong789!");
+    assert.equal(wrongPassword.status, 409, wrongPassword.data?.error ?? `HTTP ${wrongPassword.status}`);
+    const stillInvited = await getVolunteer(volunteer.id);
+    assert.equal(stillInvited.status, "invited");
+    assert.equal(stillInvited.auth_user_id, null);
+
     const result = await invoke("claim", volunteer.code, strongPassword);
     assert.equal(result.status, 200, result.data?.error ?? `HTTP ${result.status}`);
     assert.ok(result.data.session?.access_token);
