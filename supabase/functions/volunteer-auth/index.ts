@@ -126,12 +126,55 @@ Deno.serve(async (req: Request) => {
           user_metadata: { account_type: "volunteer" },
         });
         if (createError) {
-          if (isDuplicateAuthUserError(createError)) {
-            return json({ error: "يبدو أن تفعيل هذه العضوية بدأ بالفعل. جرّب تسجيل الدخول أو تواصل مع الإدارة إذا استمرت المشكلة." }, 409, origin);
+          if (!isDuplicateAuthUserError(createError)) {
+            return json({ error: "تعذر إنشاء الحساب. تحقق من كلمة السر وحاول مجدداً." }, 400, origin);
           }
-          return json({ error: "تعذر إنشاء الحساب. تحقق من كلمة السر وحاول مجدداً." }, 400, origin);
+
+          // A previous claim may have created the Auth identity but failed before linking it.
+          // Recover only when the claimant proves ownership with that identity's password.
+          const { data: previousSession, error: previousSignInError } = await publicAuth().auth.signInWithPassword({
+            email: internalEmail(volunteer.id), password,
+          });
+          if (previousSignInError || !previousSession.session || !previousSession.user) {
+            return json({ error: "توجد محاولة تفعيل سابقة لهذا الرمز. استخدم كلمة السر التي اخترتها سابقاً أو تواصل مع الإدارة." }, 409, origin);
+          }
+
+          authUserId = previousSession.user.id;
+          const { data: recovered, error: recoveryError } = await admin.from("volunteers").update({
+            auth_user_id: authUserId, status: "active", claimed_at: new Date().toISOString(), activated_at: new Date().toISOString(),
+          }).eq("id", volunteer.id).is("auth_user_id", null).select("id").maybeSingle();
+          if (recoveryError) throw recoveryError;
+
+          if (!recovered) {
+            const { data: current, error: currentError } = await admin.from("volunteers")
+              .select("auth_user_id,status").eq("id", volunteer.id).maybeSingle();
+            if (currentError) throw currentError;
+            if (current?.status !== "active" || current.auth_user_id !== authUserId) {
+              return json({ error: "تمت معالجة تفعيل هذه العضوية من طلب آخر. حدّثي الصفحة وحاولي تسجيل الدخول." }, 409, origin);
+            }
+          }
+        } else {
+          authUserId = created.user.id;
+          const claimResult = await finalizeVolunteerClaim({
+            volunteerId: volunteer.id,
+            authUserId,
+            updateVolunteer: async (volunteerId, userId) => {
+              const { data, error } = await admin.from("volunteers").update({
+                auth_user_id: userId, status: "active", claimed_at: new Date().toISOString(), activated_at: new Date().toISOString(),
+              }).eq("id", volunteerId).is("auth_user_id", null).select("id").maybeSingle();
+              return { data, error };
+            },
+            deleteAuthUser: async (userId) => {
+              const { error } = await admin.auth.admin.deleteUser(userId);
+              return { error };
+            },
+          });
+          if (!claimResult.ok) {
+            if (claimResult.cleanupError) console.error("Could not clean up unclaimed volunteer auth user:", claimResult.cleanupError);
+            if (claimResult.updateError) throw claimResult.updateError;
+            return json({ error: "تم تفعيل هذه العضوية من طلب آخر. استخدم تسجيل الدخول، أو تواصل مع الإدارة إذا تعذر ذلك." }, 409, origin);
+          }
         }
-        authUserId = created.user.id;
         const claimResult = await finalizeVolunteerClaim({
           volunteerId: volunteer.id,
           authUserId,
