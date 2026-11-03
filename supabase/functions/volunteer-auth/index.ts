@@ -59,6 +59,17 @@ async function identify(token: string) {
   const { data, error } = await client.auth.getUser(token);
   return error ? null : data.user;
 }
+
+async function hasAdminAal2(token: string) {
+  if (!token) return false;
+  const client = createClient(URL, ANON, {
+    auth: { autoRefreshToken: false, persistSession: false },
+    global: { headers: { Authorization: "Bearer " + token } },
+  });
+  const { data, error } = await client.auth.getClaims(token);
+  const claims = data?.claims;
+  return !error && claims?.sub === ADMIN_ID && claims?.aal === "aal2";
+}
 async function volunteerFor(userId: string) {
   const { data, error } = await admin.from("volunteers").select("*").eq("auth_user_id", userId).maybeSingle();
   if (error) throw error;
@@ -155,7 +166,9 @@ Deno.serve(async (req: Request) => {
 
     if (action === "create_volunteer" || action === "set_volunteer_status" || action === "list_volunteers" || action === "reset_volunteer_password" || action === "reset_volunteer_code" || action === "delete_volunteer") {
       const user = await identify(token);
-      if (!user || user.id !== ADMIN_ID) return json({ error: "غير مصرح" }, 403, origin);
+      if (!user || user.id !== ADMIN_ID || !(await hasAdminAal2(token))) {
+        return json({ error: "يلزم تسجيل دخول الإدارة بالمصادقة الثنائية." }, 403, origin);
+      }
 
       if (action === "create_volunteer") {
         const name = String(body.displayName ?? "").trim().slice(0, 100);
