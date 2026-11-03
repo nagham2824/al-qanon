@@ -205,6 +205,28 @@
           </form>
         </div>
       </div>
+      <div class="panel hidden" id="adminMfaPanel" style="margin:1rem 0">
+        <h3 id="adminMfaTitle">حماية حساب الإدارة</h3><p class="help" id="adminMfaMessage"></p>
+        <div id="adminMfaSetupArea" class="hidden">
+          <button type="button" class="btn" id="adminMfaStart">إعداد تطبيق المصادقة</button>
+          <div id="adminMfaQrArea" class="hidden">
+            <p class="help" id="adminMfaScanHelp"></p>
+            <img id="adminMfaQr" alt="Authenticator setup QR code" style="display:block;width:220px;max-width:100%;height:auto;background:#fff;padding:12px;border-radius:8px;margin:1rem 0">
+            <p class="help" id="adminMfaSecretLabel"></p><code id="adminMfaSecret" style="display:block;direction:ltr;overflow-wrap:anywhere;user-select:all"></code>
+            <form id="adminMfaEnrollForm" class="form-grid">
+              <div class="form-row full"><label for="adminMfaEnrollCode" id="adminMfaEnrollCodeLabel">رمز التحقق</label><input class="field" id="adminMfaEnrollCode" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6" required></div>
+              <div class="form-row full"><button type="submit" class="btn" id="adminMfaEnrollVerify">تأكيد وتفعيل المصادقة الثنائية</button></div>
+            </form>
+          </div>
+        </div>
+        <div id="adminMfaChallengeArea" class="hidden">
+          <form id="adminMfaChallengeForm" class="form-grid">
+            <div class="form-row full"><label for="adminMfaChallengeCode" id="adminMfaChallengeCodeLabel">رمز تطبيق المصادقة</label><input class="field" id="adminMfaChallengeCode" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6" required></div>
+            <div class="form-row full"><button type="submit" class="btn" id="adminMfaChallengeVerify">تحقق وتابع</button></div>
+          </form>
+        </div>
+        <p class="status" id="adminMfaStatus" role="status" aria-live="polite"></p>
+      </div>
       <div id="adminWorkspace" class="hidden">
         <div class="panel" id="volunteerManagementPanel" style="margin:1rem 0">
           <h3 data-i18n="volunteerManagementTitle">إدارة عضويات المتطوعين</h3>
@@ -256,6 +278,9 @@
   let articles = [];
   let isAdmin = false;
   let currentAdminId = null;
+  let adminMfaReady = false;
+  let adminMfaFactorId = null;
+  let adminUiSequence = 0;
 
   const translations = {
     ar: {
@@ -296,6 +321,19 @@
     }
   };
 
+  const adminMfaCopy = {
+    ar:{title:'حماية حساب الإدارة بالمصادقة الثنائية',checking:'جارٍ التحقق من حالة المصادقة…',enrollIntro:'يجب ربط حساب الإدارة بتطبيق مصادقة قبل فتح لوحة الإدارة. استخدمي Google Authenticator أو Microsoft Authenticator على هاتفك.',start:'إعداد تطبيق المصادقة',scan:'امسحي رمز QR بتطبيق المصادقة، ثم أدخلي الرمز المكوّن من 6 أرقام الظاهر في التطبيق.',secret:'المفتاح اليدوي (احتفظي به بسرية):',code:'رمز التحقق',enable:'تأكيد وتفعيل المصادقة الثنائية',challengeIntro:'أدخلي الرمز الحالي من تطبيق المصادقة للمتابعة إلى لوحة الإدارة.',verify:'تحقق وتابع',success:'تم التحقق. جارٍ فتح لوحة الإدارة…',required:'يلزم إكمال المصادقة الثنائية قبل استخدام لوحة الإدارة.',setupError:'تعذر إعداد المصادقة الثنائية. حدّثي الصفحة وحاولي مجدداً.',challengeError:'تعذر التحقق من الرمز. تأكدي من الرمز وحاولي مجدداً.',invalid:'أدخلي رمزاً مكوّناً من 6 أرقام.',placeholder:'000000'},
+    en:{title:'Secure the admin account with two-factor authentication',checking:'Checking authentication status…',enrollIntro:'Link the administrator account to an authenticator app before opening the admin workspace. Use Google Authenticator or Microsoft Authenticator on your phone.',start:'Set up authenticator app',scan:'Scan this QR code with your authenticator app, then enter the 6-digit code shown in the app.',secret:'Manual setup key (keep it secret):',code:'Verification code',enable:'Verify and enable two-factor authentication',challengeIntro:'Enter the current code from your authenticator app to continue to the admin workspace.',verify:'Verify and continue',success:'Verified. Opening the admin workspace…',required:'Complete two-factor authentication before using the admin workspace.',setupError:'Could not set up two-factor authentication. Refresh and try again.',challengeError:'Could not verify the code. Check it and try again.',invalid:'Enter a 6-digit code.',placeholder:'000000'},
+    nl:{title:'Beveilig het beheerdersaccount met tweestapsverificatie',checking:'Authenticatiestatus controleren…',enrollIntro:'Koppel het beheerdersaccount aan een authenticator-app voordat het beheerdersgedeelte wordt geopend. Gebruik Google Authenticator of Microsoft Authenticator op je telefoon.',start:'Authenticator-app instellen',scan:'Scan de QR-code met je authenticator-app en voer daarna de 6-cijferige code uit de app in.',secret:'Handmatige instelsleutel (houd deze geheim):',code:'Verificatiecode',enable:'Verifiëren en tweestapsverificatie inschakelen',challengeIntro:'Voer de actuele code uit je authenticator-app in om door te gaan naar het beheerdersgedeelte.',verify:'Verifiëren en doorgaan',success:'Geverifieerd. Het beheerdersgedeelte wordt geopend…',required:'Voltooi tweestapsverificatie voordat je het beheerdersgedeelte gebruikt.',setupError:'Tweestapsverificatie instellen is mislukt. Vernieuw de pagina en probeer opnieuw.',challengeError:'De code kon niet worden geverifieerd. Controleer de code en probeer opnieuw.',invalid:'Voer een code van 6 cijfers in.',placeholder:'000000'},
+    tr:{title:'Yönetici hesabını iki aşamalı doğrulamayla koruyun',checking:'Kimlik doğrulama durumu kontrol ediliyor…',enrollIntro:'Yönetim panelini açmadan önce yönetici hesabını bir kimlik doğrulama uygulamasına bağlayın. Telefonunuzda Google Authenticator veya Microsoft Authenticator kullanın.',start:'Kimlik doğrulama uygulamasını ayarla',scan:'QR kodunu kimlik doğrulama uygulamanızla tarayın ve uygulamada görünen 6 haneli kodu girin.',secret:'Manuel kurulum anahtarı (gizli tutun):',code:'Doğrulama kodu',enable:'Doğrula ve iki aşamalı doğrulamayı etkinleştir',challengeIntro:'Yönetim paneline devam etmek için kimlik doğrulama uygulamanızdaki güncel kodu girin.',verify:'Doğrula ve devam et',success:'Doğrulandı. Yönetim paneli açılıyor…',required:'Yönetim panelini kullanmadan önce iki aşamalı doğrulamayı tamamlayın.',setupError:'İki aşamalı doğrulama ayarlanamadı. Sayfayı yenileyip tekrar deneyin.',challengeError:'Kod doğrulanamadı. Kodu kontrol edip tekrar deneyin.',invalid:'6 haneli bir kod girin.',placeholder:'000000'}
+  };
+  function adminMfaText(key){return adminMfaCopy[currentLang]?.[key]||adminMfaCopy.en[key]||key;}
+  function updateAdminMfaLabels(){
+    const labels={adminMfaTitle:'title',adminMfaStart:'start',adminMfaScanHelp:'scan',adminMfaSecretLabel:'secret',adminMfaEnrollCodeLabel:'code',adminMfaEnrollVerify:'enable',adminMfaChallengeCodeLabel:'code',adminMfaChallengeVerify:'verify'};
+    Object.entries(labels).forEach(([id,key])=>{const el=document.getElementById(id);if(el)el.textContent=adminMfaText(key);});
+    const enroll=document.getElementById('adminMfaEnrollCode');if(enroll)enroll.placeholder=adminMfaText('placeholder');
+    const challenge=document.getElementById('adminMfaChallengeCode');if(challenge)challenge.placeholder=adminMfaText('placeholder');
+  }
   function t(key){return translations[currentLang]?.[key] ?? translations.en[key] ?? key;}
   function setStatus(id,message,error=false){const el=document.getElementById(id);if(!el)return;el.textContent=message;el.classList.toggle('error',error);}
   function installPasswordToggles(){
@@ -362,10 +400,52 @@
   async function updateArticleStatus(id,status){if(!isAdmin||!db)return;const {error}=await db.from('articles').update({status,updated_at:new Date().toISOString()}).eq('id',Number(id));if(error){console.error(error);setStatus('articleStatus',t('saveError'),true);return;}setStatus('articleStatus',t(status));await refreshArticles();}
   async function deleteArticle(id){if(!isAdmin||!db)return;if(!window.confirm(t('confirmDelete')))return;const {error}=await db.from('articles').delete().eq('id',Number(id));if(error){console.error(error);setStatus('articleStatus',t('saveError'),true);return;}setStatus('articleStatus',t('deleted'));await refreshArticles();}
   async function setAdminUI(user){
-    isAdmin=!!user&&user.id===ADMIN_USER_ID;currentAdminId=isAdmin?user.id:null;
-    document.getElementById('adminLoginPanel').classList.toggle('hidden',isAdmin);document.getElementById('adminWorkspace').classList.toggle('hidden',!isAdmin);
-    if(user&&!isAdmin){await db?.auth.signOut();setStatus('adminLoginStatus',t('notAuthorized'),true);}
-    if(isAdmin){setStatus('adminSessionStatus','');await refreshArticles();await refreshVolunteers();}else{articles=[];renderArticles();await refreshArticles();}
+    const sequence=++adminUiSequence;
+    isAdmin=!!user&&user.id===ADMIN_USER_ID;currentAdminId=isAdmin?user.id:null;adminMfaReady=false;adminMfaFactorId=null;
+    document.getElementById('adminLoginPanel').classList.toggle('hidden',isAdmin);
+    document.getElementById('adminWorkspace').classList.add('hidden');
+    document.getElementById('adminMfaPanel').classList.add('hidden');
+    if(user&&!isAdmin){await db?.auth.signOut();if(sequence===adminUiSequence)setStatus('adminLoginStatus',t('notAuthorized'),true);return;}
+    if(isAdmin){
+      document.getElementById('adminMfaPanel').classList.remove('hidden');
+      document.getElementById('adminMfaMessage').textContent=adminMfaText('checking');
+      document.getElementById('adminMfaSetupArea').classList.add('hidden');
+      document.getElementById('adminMfaQrArea').classList.add('hidden');
+      document.getElementById('adminMfaChallengeArea').classList.add('hidden');
+      updateAdminMfaLabels();
+      try{
+        const [aalResult,factorResult]=await Promise.all([db.auth.mfa.getAuthenticatorAssuranceLevel(),db.auth.mfa.listFactors()]);
+        if(sequence!==adminUiSequence)return;
+        if(aalResult.error)throw aalResult.error;
+        if(factorResult.error)throw factorResult.error;
+        const verified=(factorResult.data.totp||[]).find(f=>f.status==='verified');
+        if(!verified){
+          document.getElementById('adminMfaMessage').textContent=adminMfaText('enrollIntro');
+          document.getElementById('adminMfaSetupArea').classList.remove('hidden');
+          setStatus('adminMfaStatus','');
+          return;
+        }
+        if(aalResult.data.currentLevel!=='aal2'){
+          document.getElementById('adminMfaMessage').textContent=adminMfaText('challengeIntro');
+          document.getElementById('adminMfaChallengeArea').classList.remove('hidden');
+          return;
+        }
+        adminMfaReady=true;
+        document.getElementById('adminMfaPanel').classList.add('hidden');
+        document.getElementById('adminWorkspace').classList.remove('hidden');
+        setStatus('adminSessionStatus','');
+        await refreshArticles();
+        if(sequence!==adminUiSequence)return;
+        await refreshVolunteers();
+      }catch(error){
+        if(sequence!==adminUiSequence)return;
+        document.getElementById('adminMfaMessage').textContent=adminMfaText('required');
+        setStatus('adminMfaStatus',error?.message||adminMfaText('setupError'),true);
+      }
+    }else{
+      if(sequence!==adminUiSequence)return;
+      articles=[];renderArticles();await refreshArticles();
+    }
   }
 
   let adminPasswordRecoveryMode=false;
@@ -451,10 +531,59 @@
 
   document.querySelectorAll('[data-page]').forEach(element=>element.addEventListener('click',event=>{const page=element.dataset.page;if(!page)return;event.preventDefault();showPage(page);}));
   window.addEventListener('hashchange',()=>{const page=(location.hash||'#home').slice(1);showPage(page,false);});
-  function applyTranslations(){document.documentElement.lang=currentLang;document.documentElement.dir=currentLang==='ar'?'rtl':'ltr';document.body.dir=currentLang==='ar'?'rtl':'ltr';document.title=t('brand');document.getElementById('langSelect').setAttribute('aria-label',t('language'));document.querySelectorAll('[data-i18n]').forEach(element=>{const key=element.dataset.i18n;const value=translations[currentLang]?.[key];if(value!==undefined){if(element.tagName==='INPUT'||element.tagName==='TEXTAREA'){if(element.hasAttribute('placeholder'))element.placeholder=value;}else element.textContent=value;}});renderArticles();if(isAdmin)refreshVolunteers();}
+  function applyTranslations(){document.documentElement.lang=currentLang;document.documentElement.dir=currentLang==='ar'?'rtl':'ltr';document.body.dir=currentLang==='ar'?'rtl':'ltr';document.title=t('brand');document.getElementById('langSelect').setAttribute('aria-label',t('language'));document.querySelectorAll('[data-i18n]').forEach(element=>{const key=element.dataset.i18n;const value=translations[currentLang]?.[key];if(value!==undefined){if(element.tagName==='INPUT'||element.tagName==='TEXTAREA'){if(element.hasAttribute('placeholder'))element.placeholder=value;}else element.textContent=value;}});renderArticles();updateAdminMfaLabels();if(isAdmin&&adminMfaReady)refreshVolunteers();}
   document.getElementById('langSelect').addEventListener('change',event=>{currentLang=translations[event.target.value]?event.target.value:'ar';applyTranslations();});
 
   // Article submission is restricted to authenticated, active volunteers via volunteer-auth.
+
+  document.getElementById('adminMfaStart').addEventListener('click',async()=>{
+    const button=document.getElementById('adminMfaStart');button.disabled=true;setStatus('adminMfaStatus',adminMfaText('checking'));
+    try{
+      const {data:factors,error:factorError}=await db.auth.mfa.listFactors();if(factorError)throw factorError;
+      for(const factor of (factors.totp||[]).filter(item=>item.status==='unverified')){
+        const {error}=await db.auth.mfa.unenroll({factorId:factor.id});if(error)throw error;
+      }
+      const {data,error}=await db.auth.mfa.enroll({factorType:'totp',friendlyName:'AQ Law Admin'});if(error)throw error;
+      adminMfaFactorId=data.id;
+      document.getElementById('adminMfaQr').src=data.totp.qr_code;
+      document.getElementById('adminMfaSecret').textContent=data.totp.secret;
+      document.getElementById('adminMfaQrArea').classList.remove('hidden');
+      setStatus('adminMfaStatus','');
+    }catch(error){setStatus('adminMfaStatus',error?.message||adminMfaText('setupError'),true);}
+    finally{button.disabled=false;}
+  });
+  document.getElementById('adminMfaEnrollForm').addEventListener('submit',async event=>{
+    event.preventDefault();const code=document.getElementById('adminMfaEnrollCode').value.replace(/\s/g,'');
+    if(!/^\d{6}$/.test(code)){setStatus('adminMfaStatus',adminMfaText('invalid'),true);return;}
+    const button=document.getElementById('adminMfaEnrollVerify');button.disabled=true;
+    try{
+      if(!adminMfaFactorId)throw new Error(adminMfaText('setupError'));
+      const challenge=await db.auth.mfa.challenge({factorId:adminMfaFactorId});if(challenge.error)throw challenge.error;
+      const verified=await db.auth.mfa.verify({factorId:adminMfaFactorId,challengeId:challenge.data.id,code});if(verified.error)throw verified.error;
+      document.getElementById('adminMfaSecret').textContent='';document.getElementById('adminMfaQr').removeAttribute('src');
+      document.getElementById('adminMfaEnrollCode').value='';adminMfaFactorId=null;
+      setStatus('adminMfaStatus',adminMfaText('success'));
+      const {data:{user},error}=await db.auth.getUser();if(error)throw error;
+      await setAdminUI(user);
+    }catch(error){setStatus('adminMfaStatus',error?.message||adminMfaText('setupError'),true);}
+    finally{button.disabled=false;}
+  });
+  document.getElementById('adminMfaChallengeForm').addEventListener('submit',async event=>{
+    event.preventDefault();const code=document.getElementById('adminMfaChallengeCode').value.replace(/\s/g,'');
+    if(!/^\d{6}$/.test(code)){setStatus('adminMfaStatus',adminMfaText('invalid'),true);return;}
+    const button=document.getElementById('adminMfaChallengeVerify');button.disabled=true;
+    try{
+      const {data:factors,error:factorError}=await db.auth.mfa.listFactors();if(factorError)throw factorError;
+      const factor=(factors.totp||[]).find(item=>item.status==='verified');if(!factor)throw new Error(adminMfaText('challengeError'));
+      const challenge=await db.auth.mfa.challenge({factorId:factor.id});if(challenge.error)throw challenge.error;
+      const verified=await db.auth.mfa.verify({factorId:factor.id,challengeId:challenge.data.id,code});if(verified.error)throw verified.error;
+      document.getElementById('adminMfaChallengeCode').value='';
+      setStatus('adminMfaStatus',adminMfaText('success'));
+      const {data:{user},error}=await db.auth.getUser();if(error)throw error;
+      await setAdminUI(user);
+    }catch(error){setStatus('adminMfaStatus',error?.message||adminMfaText('challengeError'),true);}
+    finally{button.disabled=false;}
+  });
 
   document.getElementById('adminLoginForm').addEventListener('submit',async event=>{
     event.preventDefault();if(!db){setStatus('adminLoginStatus',t('databaseError'),true);return;}
@@ -626,6 +755,9 @@
   });
   async function getVerifiedAdminToken(){
     if(!db)throw new Error(t('adminConnectionError'));
+    if(!adminMfaReady)throw new Error(adminMfaText('required'));
+    const {data:aalData,error:aalError}=await db.auth.mfa.getAuthenticatorAssuranceLevel();
+    if(aalError||aalData.currentLevel!=='aal2')throw new Error(adminMfaText('required'));
     let {data:{session},error}=await db.auth.getSession();
     if(error)throw new Error(t('adminSessionReadError'));
     if(!session?.access_token){
