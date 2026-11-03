@@ -1,6 +1,6 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "npm:@supabase/supabase-js@2";
-import { finalizeVolunteerClaim, isDuplicateAuthUserError, validNewPassword } from "./claim-helpers.js";
+import { finalizeVolunteerClaim, isAuthCreationConflict, validNewPassword } from "./claim-helpers.js";
 
 const URL = Deno.env.get("SUPABASE_URL")!;
 const publishableKeys = JSON.parse(Deno.env.get("SUPABASE_PUBLISHABLE_KEYS") ?? "{}");
@@ -126,7 +126,7 @@ Deno.serve(async (req: Request) => {
           user_metadata: { account_type: "volunteer" },
         });
         if (createError) {
-          if (!isDuplicateAuthUserError(createError)) {
+          if (!isAuthCreationConflict(createError)) {
             return json({ error: "تعذر إنشاء الحساب. تحقق من كلمة السر وحاول مجدداً." }, 400, origin);
           }
 
