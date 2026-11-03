@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { finalizeVolunteerClaim, isDuplicateAuthUserError, validNewPassword } from "./claim-helpers.js";
+import { finalizeVolunteerClaim, isAuthCreationConflict, validNewPassword } from "./claim-helpers.js";
 
 test("password policy accepts a strong password", () => {
   assert.equal(validNewPassword("StrongPass123!"), true);
@@ -38,14 +38,15 @@ test("password policy accepts the 128-character maximum", () => {
   assert.equal(validNewPassword("Aa1!" + "x".repeat(124)), true);
 });
 
-test("Supabase email_exists and user_already_exists are duplicate-user errors", () => {
-  assert.equal(isDuplicateAuthUserError({ code: "email_exists" }), true);
-  assert.equal(isDuplicateAuthUserError({ code: "user_already_exists" }), true);
+test("Supabase duplicate identity and concurrent creation codes are recoverable conflicts", () => {
+  assert.equal(isAuthCreationConflict({ code: "email_exists" }), true);
+  assert.equal(isAuthCreationConflict({ code: "user_already_exists" }), true);
+  assert.equal(isAuthCreationConflict({ code: "conflict" }), true);
 });
 
 test("unrelated Auth errors are not duplicate-user errors", () => {
-  assert.equal(isDuplicateAuthUserError({ code: "weak_password" }), false);
-  assert.equal(isDuplicateAuthUserError(null), false);
+  assert.equal(isAuthCreationConflict({ code: "weak_password" }), false);
+  assert.equal(isAuthCreationConflict(null), false);
 });
 
 test("successful claim does not delete the auth user", async () => {
