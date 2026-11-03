@@ -131,13 +131,13 @@ try {
     const volunteer = await createVolunteer("IT_SUCCESS");
     created.push(volunteer);
     const claim = await invoke("claim", volunteer.code, strongPassword);
-    assert.equal(claim.status, 200, JSON.stringify(claim.data));
+    assert.equal(claim.status, 200, claim.data?.error ?? `HTTP ${claim.status}`);
     const row = await getVolunteer(volunteer.id);
     assert.equal(row.status, "active");
     assert.ok(row.auth_user_id);
     assert.ok(claim.data.session?.access_token);
     const login = await invoke("login", volunteer.code, strongPassword);
-    assert.equal(login.status, 200, JSON.stringify(login.data));
+    assert.equal(login.status, 200, login.data?.error ?? `HTTP ${login.status}`);
     assert.ok(login.data.session?.access_token);
   });
 
@@ -189,7 +189,7 @@ try {
     });
     assert.equal(existing.status, 200, `Could not create interrupted-claim fixture: ${JSON.stringify(existing.data)}`);
     const result = await invoke("claim", volunteer.code, strongPassword);
-    assert.equal(result.status, 200, JSON.stringify(result.data));
+    assert.equal(result.status, 200, result.data?.error ?? `HTTP ${result.status}`);
     assert.ok(result.data.session?.access_token);
     const row = await getVolunteer(volunteer.id);
     assert.equal(row.status, "active");
@@ -203,8 +203,8 @@ try {
     created.push(volunteer);
     const passwords = ["ConcurrentPass123!", "OtherStrongPass456!"];
     const results = await Promise.all(passwords.map((password) => invoke("claim", volunteer.code, password)));
-    assert.equal(results.filter((result) => result.status === 200).length, 1, JSON.stringify(results));
-    assert.equal(results.filter((result) => result.status === 409).length, 1, JSON.stringify(results));
+    assert.equal(results.filter((result) => result.status === 200).length, 1, `Expected one winner; got HTTP statuses ${results.map((result) => result.status).join(", ")}`);
+    assert.equal(results.filter((result) => result.status === 409).length, 1, `Expected one conflict; got HTTP statuses ${results.map((result) => result.status).join(", ")}`);
     const row = await getVolunteer(volunteer.id);
     assert.equal(row.status, "active");
     assert.ok(row.auth_user_id);
