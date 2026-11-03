@@ -1,27 +1,78 @@
-name: Volunteer auth helper tests
+name: Volunteer auth tests
 
 on:
   pull_request:
     paths:
       - "supabase/functions/volunteer-auth/**"
+      - "supabase/config.toml"
+      - "tests/volunteer-auth/**"
       - ".github/workflows/volunteer-auth-tests.yml"
   push:
     branches:
       - main
     paths:
       - "supabase/functions/volunteer-auth/**"
+      - "supabase/config.toml"
+      - "tests/volunteer-auth/**"
       - ".github/workflows/volunteer-auth-tests.yml"
 
 permissions:
   contents: read
 
 jobs:
-  volunteer-auth-tests:
+  helper-tests:
+    name: Helper unit tests
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
         uses: actions/checkout@v5
-      - name: Run volunteer auth tests
+      - name: Run helper tests
         run: |
           node --version
           node --test supabase/functions/volunteer-auth/claim-helpers.test.js
+
+  local-supabase-integration:
+    name: Local Supabase integration tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+      - name: Install Supabase CLI
+        uses: supabase/setup-cli@v1
+        with:
+          version: 2.122.0
+      - name: Start disposable local Supabase stack
+        run: supabase start
+      - name: Export local connection details
+        shell: bash
+        run: |
+          eval "$(supabase status -o env)"
+          {
+            echo "API_URL=$API_URL"
+            echo "ANON_KEY=$ANON_KEY"
+            echo "SERVICE_ROLE_KEY=$SERVICE_ROLE_KEY"
+            echo "DB_URL=$DB_URL"
+          } >> "$GITHUB_ENV"
+      - name: Install PostgreSQL client
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y postgresql-client
+      - name: Create isolated test schema
+        run: psql "$DB_URL" -v ON_ERROR_STOP=1 -f tests/volunteer-auth/fixture.sql
+      - name: Start volunteer-auth Edge Function locally
+        shell: bash
+        run: |
+          supabase functions serve volunteer-auth --no-verify-jwt > /tmp/volunteer-auth-function.log 2>&1 &
+          for attempt in {1..40}; do
+            if curl --silent --fail --output /dev/null --request OPTIONS \
+              --header "apikey: $ANON_KEY" \
+              "$API_URL/functions/v1/volunteer-auth"; then
+              exit 0
+            fi
+            sleep 2
+          done
+          cat /tmp/volunteer-auth-function.log
+          exit 1
+      - name: Exercise real Auth, Postgres, and Edge Function flows
+        run: node tests/volunteer-auth/integration.mjs
