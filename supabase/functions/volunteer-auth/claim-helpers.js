@@ -4,6 +4,12 @@ export function validNewPassword(password) {
     /[0-9]/.test(password) && /[^A-Za-z0-9]/.test(password);
 }
 
+export function isDuplicateAuthUserError(error) {
+  return ["email_exists", "user_already_exists"].includes(
+    String(error?.code ?? ""),
+  );
+}
+
 export async function finalizeVolunteerClaim({
   volunteerId,
   authUserId,
