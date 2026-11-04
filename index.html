@@ -63,6 +63,39 @@
     @media(max-width:620px){.grid,.form-grid,.two-col{grid-template-columns:1fr}.form-row.full{grid-column:auto}nav ul{justify-content:center;gap:10px}nav a{font-size:.85rem}.logo img{width:150px;height:58px}.hero{padding:2rem .8rem 2.5rem}.hero::before{background-size:115vw auto;opacity:.09}.hero h1{font-size:clamp(3.2rem,15vw,4.5rem);gap:.6rem}.hero h1::before,.hero h1::after{height:3px}.hero p{font-size:1rem}.hero .btn{font-size:1rem;padding:.75rem 1.2rem}.card img{height:190px}}
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important}}
       @media(prefers-reduced-motion:reduce){.hero h1{animation:none!important;background-position:100% 0!important}}
+
+    /* AQ Design 2 visual layer — keeps every existing functional ID and handler intact */
+    body{background:#F8F4EC;color:#172B3D}
+    header{background:#EAE5DA;border-bottom:1px solid #d7cbb8;box-shadow:0 2px 8px #102a4310;padding:10px 3.5%;color:#102A43}
+    .logo img{width:130px;height:48px}
+    .nav-container,nav ul{gap:clamp(8px,1.5vw,22px)}
+    nav a{color:#102A43;font-size:.88rem;font-weight:800}
+    nav a:hover,nav a:focus-visible{color:#9A6827}
+    .lang-select{background:#F8F4EC;color:#102A43;border:1px solid #cbbda8}
+    .hero{min-height:430px;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:3.5rem 1rem;background:linear-gradient(90deg,rgba(8,36,59,.94),rgba(8,36,59,.74)),url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=2000&q=85') center/cover no-repeat;border-bottom:4px solid #C9923E}
+    .hero::before{background:url('logo.png') center/ min(720px,75vw) auto no-repeat;opacity:.10}
+    .hero h1{color:#E2B76E;font-size:clamp(3.2rem,7vw,5.7rem)}
+    .hero p{color:#F3E8D4;max-width:780px}
+    .hero .btn{border-radius:9px}
+    .section-title{color:#102A43!important;text-shadow:none}
+    .page h1,.page h2,.page h3{color:#102A43}
+    .grid{gap:1.25rem}
+    .card{background:#fff;border:1px solid #e1d8ca;border-top:4px solid #C9923E;border-radius:12px;box-shadow:0 8px 22px #102a430c}
+    .card img{height:180px}
+    .card h3{color:#102A43}
+    .card p{color:#667789}
+    .card .btn{background:#102A43;color:#fff}
+    .panel{background:#fff;color:#172B3D;border:1px solid #e1d8ca;border-inline-start:5px solid #C9923E;box-shadow:0 8px 22px #102a430c}
+    .panel h3{color:#102A43}
+    .field,.lang-select{background:#fff;color:#172B3D;border:1px solid #cbbda8}
+    .notice{background:#f1ece3;color:#34495e;border:1px solid #d8cbb5}
+    .help,.status,.text-link{color:#8A6028}
+    .article-item{background:#fff;color:#172B3D;border:1px solid #e1d8ca}
+    .article-item h3{color:#102A43}
+    .article-meta{color:#8A6028}
+    footer{background:#102A43;color:#E5C58F;border-top:1px solid #C9923E}
+    @media(max-width:1000px){header{justify-content:space-between}}
+    @media(max-width:620px){header{padding:10px 12px}.logo img{width:112px;height:42px}.hero{min-height:360px}.card img{height:190px}}
   </style>
 </head>
 <body>
@@ -99,9 +132,9 @@
         <h2 class="section-title" data-i18n="audienceTitle">الفئات المستهدفة</h2>
         <div class="grid">
           <article class="card"><img loading="lazy" src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=700&q=80" alt="Students"><div class="card-body"><h3 data-i18n="studentsTitle">الطلاب والأكاديميون</h3><p data-i18n="studentsText">دعم وإرشادات للطلاب الجامعيين والباحثين.</p><a class="btn" href="#student" data-page="student" data-i18n="explore">استكشف المزيد</a></div></article>
-          <article class="card"><img loading="lazy" src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=700&q=80" alt="Community support"><div class="card-body"><h3 data-i18n="refugeeTitle">اللاجئون والحماية</h3><p data-i18n="refugeeText">شرح مبسط للجوء ولم شمل الأسرة والحماية.</p><a class="btn" href="#refugee" data-page="refugee" data-i18n="explore">استكشف المزيد</a></div></article>
-          <article class="card"><img loading="lazy" src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=700&q=80" alt="People working"><div class="card-body"><h3 data-i18n="residentTitle">المقيمون والعمل</h3><p data-i18n="residentText">معلومات عامة عن الإقامة وعقود العمل والاندماج.</p><a class="btn" href="#resident" data-page="resident" data-i18n="explore">استكشف المزيد</a></div></article>
-          <article class="card"><img loading="lazy" src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=700&q=80" alt="Professional work"><div class="card-body"><h3 data-i18n="generalTitle">الشؤون العامة والمهنية</h3><p data-i18n="generalText">مقالات توعوية قانونية للأفراد والمهنيين.</p><a class="btn" href="#general" data-page="general" data-i18n="explore">استكشف المزيد</a></div></article>
+          <article class="card"><img loading="lazy" src="https://images.unsplash.com/photo-1542810634-71277d95dcbb?auto=format&fit=crop&w=700&q=85" alt="Community support"><div class="card-body"><h3 data-i18n="refugeeTitle">اللاجئون والحماية</h3><p data-i18n="refugeeText">شرح مبسط للجوء ولم شمل الأسرة والحماية.</p><a class="btn" href="#refugee" data-page="refugee" data-i18n="explore">استكشف المزيد</a></div></article>
+          <article class="card"><img loading="lazy" src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=700&q=85" alt="People working"><div class="card-body"><h3 data-i18n="residentTitle">المقيمون والعمل</h3><p data-i18n="residentText">معلومات عامة عن الإقامة وعقود العمل والاندماج.</p><a class="btn" href="#resident" data-page="resident" data-i18n="explore">استكشف المزيد</a></div></article>
+          <article class="card"><img loading="lazy" src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=700&q=85" alt="Professional work"><div class="card-body"><h3 data-i18n="generalTitle">الشؤون العامة والمهنية</h3><p data-i18n="generalText">مقالات توعوية قانونية للأفراد والمهنيين.</p><a class="btn" href="#general" data-page="general" data-i18n="explore">استكشف المزيد</a></div></article>
         </div>
       </section>
     </section>
