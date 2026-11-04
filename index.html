@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#102A43">
+  <meta name="theme-color" content="#0B2033">
   <meta name="description" content="منصة القانون AQ: تبسيط القوانين الهولندية باللغة العربية ولغات أخرى، مع الإحالة إلى المصادر الرسمية.">
-  <title>منصة القانون AQ</title>
+  <title>القانون AQ | المعرفة القانونية للجميع</title>
   <link rel="canonical" href="https://aq-law.nl/">
   <meta property="og:type" content="website">
   <meta property="og:title" content="منصة القانون AQ">
@@ -63,6 +63,80 @@
     @media(max-width:620px){.grid,.form-grid,.two-col{grid-template-columns:1fr}.form-row.full{grid-column:auto}nav ul{justify-content:center;gap:10px}nav a{font-size:.85rem}.logo img{width:150px;height:58px}.hero{padding:2rem .8rem 2.5rem}.hero::before{background-size:115vw auto;opacity:.09}.hero h1{font-size:clamp(3.2rem,15vw,4.5rem);gap:.6rem}.hero h1::before,.hero h1::after{height:3px}.hero p{font-size:1rem}.hero .btn{font-size:1rem;padding:.75rem 1.2rem}.card img{height:190px}}
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important}}
       @media(prefers-reduced-motion:reduce){.hero h1{animation:none!important;background-position:100% 0!important}}
+  
+/* AQ Design 2 — rebuilt from the approved reference */
+:root{--aq-navy:#0B2033;--aq-navy-2:#102A43;--aq-gold:#C9923E;--aq-paper:#F5F0E7;--aq-beige:#EAE5DA;--aq-ink:#172B3D}
+html{scroll-behavior:smooth}
+body{background:var(--aq-paper);color:var(--aq-ink);font-family:'Cairo',sans-serif}
+header{background:var(--aq-beige);border-bottom:1px solid #d8cbb8;box-shadow:0 3px 14px #0b203310;padding:9px clamp(14px,4vw,52px)}
+header .logo img{width:155px;height:60px;object-fit:contain}
+.nav-container{gap:18px}
+nav a{color:var(--aq-navy);font-size:12px;font-weight:800}
+nav a:hover,nav a:focus-visible{color:#9A6C2D}
+nav ul{gap:clamp(8px,1.2vw,17px)}
+.lang-select{background:#f7f2e9;color:var(--aq-navy);border:1px solid #d8cbb8;border-radius:24px;padding:8px 12px}
+#page-home{background:var(--aq-paper);color:var(--aq-ink);overflow:hidden}
+.aq-hero{position:relative;background:var(--aq-navy);color:#fff;overflow:hidden;border-bottom:5px solid var(--aq-gold);padding:28px clamp(14px,3vw,42px)}
+.aq-hero:after{content:"";position:absolute;inset:auto 0 -1px;height:12px;background:linear-gradient(90deg,#C9923E,#E8BD72,#C9923E);clip-path:polygon(0 0,35% 0,58% 100%,100% 20%,100% 100%,0 100%)}
+.aq-hero-grid{width:min(1320px,100%);margin:auto;display:grid;direction:ltr;grid-template-columns:190px minmax(300px,1fr) minmax(300px,40%);gap:clamp(18px,3vw,42px);align-items:center;min-height:320px;padding-bottom:8px}
+.aq-hero-brand{direction:rtl;border-right:1px solid rgba(201,146,62,.7);padding-right:22px;display:flex;align-items:center;justify-content:center;min-height:190px}
+.aq-hero-brand img{width:100%;max-width:180px;height:auto;max-height:130px;object-fit:contain;filter:none}
+.aq-hero-copy{direction:rtl;text-align:right;max-width:680px}
+.aq-eyebrow,.aq-kicker{display:block;color:#E5B45E;font-size:10px;font-weight:900;letter-spacing:1.4px;margin-bottom:9px}
+.aq-hero-copy h1{font-family:'Cairo',sans-serif;font-size:clamp(34px,4.3vw,56px);font-weight:900;line-height:1.35;color:#fff;margin:0 0 12px;text-shadow:none;display:block;width:auto;background:none;-webkit-text-fill-color:initial;animation:none}
+.aq-hero-copy h1:before,.aq-hero-copy h1:after{display:none}
+.aq-hero-copy h1 span{color:#E5B45E}
+.aq-hero-copy p{max-width:620px;color:#E2E8EE;font-size:15px;line-height:2.1;margin:0 0 21px}
+.aq-actions{display:flex;gap:11px;flex-wrap:wrap}
+.aq-btn-gold,.aq-btn-outline,.aq-btn-navy{display:inline-flex;align-items:center;justify-content:center;min-height:43px;padding:10px 20px;border-radius:28px;font-size:12px;font-weight:900;text-decoration:none}
+.aq-btn-gold{background:linear-gradient(135deg,#F0C36D,#D99D3F);color:#172B3D;box-shadow:0 5px 14px #0002}
+.aq-btn-outline{border:1px solid #e7d6b8;color:#fff;background:#ffffff0c}
+.aq-btn-navy{background:var(--aq-navy);color:#fff}
+.aq-hero-visual{height:300px;min-width:0;overflow:hidden;border-radius:10px 2px 2px 10px;position:relative;box-shadow:0 12px 28px #0003}
+.aq-hero-visual:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--aq-navy) 0%,transparent 38%),linear-gradient(0deg,#0b203355,transparent 45%)}
+.aq-hero-visual img{width:100%;height:100%;display:block;object-fit:cover;object-position:center 42%}
+.aq-stats{background:var(--aq-navy);color:#fff;border-bottom:1px solid #c9923e55}
+.aq-stats-inner{width:min(1180px,calc(100% - 36px));margin:auto;display:grid;grid-template-columns:repeat(3,1fr);padding:17px 0}
+.aq-stats-inner>div{display:flex;align-items:center;gap:13px;padding:4px 22px;border-left:1px solid #ffffff24}
+.aq-stats-inner>div:last-child{border:0}
+.aq-stats b{font:26px Georgia,serif;color:var(--aq-gold);font-weight:400}
+.aq-stats span{font-size:11px;color:#d5dee6}
+#page-home>.container{width:min(1180px,calc(100% - 36px));padding:42px 0;margin:0 auto}
+.aq-section-head{text-align:center;margin-bottom:22px}
+.aq-section-head>span{font-size:10px;color:#9A6C2D;font-weight:900;letter-spacing:1.5px}
+#page-home .section-title{font-family:'Cairo',sans-serif;color:var(--aq-navy)!important;font-size:27px;margin:4px 0 4px;text-shadow:none}
+.aq-section-head p{font-size:12px;color:#6f7d89;margin:0}
+#page-home .grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:17px}
+#page-home .card{border:1px solid #e0d6c8;border-top:0;border-radius:12px;background:#fff;box-shadow:0 7px 20px #102a4310;overflow:hidden}
+#page-home .card img{height:165px;object-fit:cover}
+#page-home .card-body{background:var(--aq-navy);color:#fff;padding:13px 15px;gap:8px}
+#page-home .card h3{color:#fff;font-size:14px;margin:0}
+#page-home .card p{color:#d5dee6;font-size:11px;line-height:1.8}
+#page-home .card .btn{background:var(--aq-gold);color:var(--aq-navy);border-radius:24px;font-size:11px}
+.aq-about{background:#DCD1BF;padding:44px 18px}
+.aq-about-inner{width:min(1180px,100%);margin:auto;display:grid;grid-template-columns:.78fr 1.22fr;gap:55px;align-items:center}
+.aq-about-mark{min-height:215px;background:var(--aq-navy);border-radius:7px;padding:30px;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 12px 24px #102a4315}
+.aq-about-mark img{width:min(270px,100%);max-height:105px;object-fit:contain}
+.aq-about-mark span{font-size:9px;color:#E5B45E;letter-spacing:2px;margin-top:16px}
+.aq-about-copy{direction:rtl;text-align:right}
+.aq-about-copy h2,.aq-volunteer-copy h2,.aq-latest h2{color:var(--aq-navy);font-size:27px;font-weight:900;margin:0 0 10px}
+.aq-about-copy p,.aq-volunteer-copy p,.aq-latest p{color:#566979;font-size:13px;line-height:2.1;margin:0 0 13px}
+.aq-text-link{font-size:12px;font-weight:900;color:#8b6229;text-decoration:none}
+.aq-volunteer{width:min(1180px,calc(100% - 36px));margin:25px auto;min-height:190px;display:grid;grid-template-columns:1.1fr .9fr;border:1px solid var(--aq-gold);border-radius:12px;overflow:hidden;background:var(--aq-navy);box-shadow:0 8px 22px #102a4318}
+.aq-volunteer-copy{direction:rtl;text-align:right;padding:24px 30px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center}
+.aq-volunteer-copy h2{color:#fff;margin:0 0 5px;font-size:25px}
+.aq-volunteer-copy p{color:#e1e7ec;margin:0 0 13px;font-size:12px}
+.aq-volunteer-photo{min-height:190px;background:linear-gradient(90deg,var(--aq-navy) 0%,transparent 45%),url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1000&q=85') center/cover no-repeat}
+.aq-latest{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-top:14px!important;padding-bottom:38px!important}
+.aq-latest h2{font-size:24px;margin:2px 0 4px}.aq-latest p{margin:0;font-size:12px}
+footer{margin-top:0;background:#0B2033;color:#c1ccd5;border-top:3px solid var(--aq-gold);padding:32px 18px 22px}
+footer p,footer small{color:#aebdca}
+footer a{color:#e5b45e}
+@media(max-width:1050px){.aq-hero-grid{grid-template-columns:145px minmax(250px,1fr) minmax(240px,34%);gap:18px}.aq-hero-visual{height:270px}#page-home .grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:760px){header{justify-content:center;padding:8px 12px}.nav-container{width:100%;justify-content:center;gap:9px}.logo img{width:125px;height:48px}nav ul{justify-content:center;gap:8px 12px}nav a{font-size:10px}.aq-hero{padding:20px 15px 24px}.aq-hero-grid{grid-template-columns:1fr;gap:16px;direction:rtl;padding:0}.aq-hero-brand{border:0;border-bottom:1px solid #c9923e;padding:0 0 10px;min-height:unset;justify-content:flex-start}.aq-hero-brand img{width:140px;height:50px;object-position:right}.aq-hero-copy{max-width:none}.aq-hero-copy h1{font-size:32px}.aq-hero-copy p{font-size:13px}.aq-hero-visual{height:230px;grid-row:3;border-radius:8px}.aq-hero-visual:after{background:linear-gradient(0deg,#0b203344,transparent 45%)}.aq-stats-inner{grid-template-columns:1fr;padding:8px 0}.aq-stats-inner>div{border:0;border-bottom:1px solid #ffffff20;padding:10px 8px}.aq-stats-inner>div:last-child{border:0}#page-home>.container{padding:30px 0}#page-home .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}#page-home .card img{height:125px}#page-home .card-body{padding:10px}#page-home .card h3{font-size:12px}.aq-about-inner{grid-template-columns:1fr;gap:22px}.aq-about-mark{min-height:150px}.aq-about-copy h2,.aq-volunteer-copy h2{font-size:23px}.aq-volunteer{grid-template-columns:1fr}.aq-volunteer-photo{min-height:130px;order:-1}.aq-volunteer-copy{padding:20px}.aq-latest{align-items:flex-start;flex-direction:column}}
+@media(max-width:420px){#page-home .grid{grid-template-columns:1fr}.aq-hero-copy h1{font-size:28px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+
   </style>
 </head>
 <body>
@@ -76,6 +150,7 @@
         <li><a href="#private-law" data-page="private-law" data-i18n="navPrivate">القانون الخاص</a></li>
         <li><a href="#articles" data-page="articles" data-i18n="navArticles">المقالات</a></li>
         <li><a href="#about" data-page="about" data-i18n="navAbout">من نحن</a></li>
+        <li><a href="#volunteer" data-page="volunteer" data-i18n="navVolunteer">تطوع معنا</a></li>
         <li><a href="#admin" data-page="admin" data-i18n="navAdmin">الإدارة</a></li>
         <li><a href="#volunteer" id="navVolunteerMembers" data-i18n="navVolunteers">المتطوعون</a></li>
       </ul></nav>
@@ -87,26 +162,52 @@
   </header>
 
   <main id="main">
-    <section class="page active" id="page-home">
-      <div class="hero">
-        <h1 class="hero-brand"><span lang="ar">القانون</span></h1>
+    
+<section class="page active" id="page-home">
+  <section class="aq-hero">
+    <div class="aq-hero-grid">
+      <div class="aq-hero-brand"><img src="logo.png" alt="شعار القانون AQ"></div>
+      <div class="aq-hero-copy">
+        <span class="aq-eyebrow">AL-QANUN AQ · NEDERLAND</span>
+        <h1 data-i18n="heroTitle">القانون <span>AQ</span></h1>
         <p data-i18n="heroText">منصة لتبسيط وشرح القوانين الهولندية باللغة العربية، مع محتوى توعوي بلغات متعددة.</p>
-        <a class="btn" href="#volunteer" data-page="volunteer" data-i18n="heroCta">تطوع معنا / أرسل سيرتك</a>
-
-
-      </div>
-      <section class="container">
-        <h2 class="section-title" data-i18n="audienceTitle">الفئات المستهدفة</h2>
-        <div class="grid">
-          <article class="card"><img loading="lazy" src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=700&q=80" alt="Students"><div class="card-body"><h3 data-i18n="studentsTitle">الطلاب والأكاديميون</h3><p data-i18n="studentsText">دعم وإرشادات للطلاب الجامعيين والباحثين.</p><a class="btn" href="#student" data-page="student" data-i18n="explore">استكشف المزيد</a></div></article>
-          <article class="card"><img loading="lazy" src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=700&q=80" alt="Community support"><div class="card-body"><h3 data-i18n="refugeeTitle">اللاجئون والحماية</h3><p data-i18n="refugeeText">شرح مبسط للجوء ولم شمل الأسرة والحماية.</p><a class="btn" href="#refugee" data-page="refugee" data-i18n="explore">استكشف المزيد</a></div></article>
-          <article class="card"><img loading="lazy" src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=700&q=80" alt="People working"><div class="card-body"><h3 data-i18n="residentTitle">المقيمون والعمل</h3><p data-i18n="residentText">معلومات عامة عن الإقامة وعقود العمل والاندماج.</p><a class="btn" href="#resident" data-page="resident" data-i18n="explore">استكشف المزيد</a></div></article>
-          <article class="card"><img loading="lazy" src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=700&q=80" alt="Professional work"><div class="card-body"><h3 data-i18n="generalTitle">الشؤون العامة والمهنية</h3><p data-i18n="generalText">مقالات توعوية قانونية للأفراد والمهنيين.</p><a class="btn" href="#general" data-page="general" data-i18n="explore">استكشف المزيد</a></div></article>
+        <div class="aq-actions">
+          <a class="aq-btn-gold" href="#articles" data-page="articles" data-i18n="explore">اكتشف المزيد</a>
+          <a class="aq-btn-outline" href="#volunteer" data-page="volunteer" data-i18n="heroCta">تطوع معنا / أرسل سيرتك</a>
         </div>
-      </section>
-    </section>
-
-    <section class="page container" id="page-public-law"><h1 class="section-title" data-i18n="navPublic">القانون العام</h1><div class="panel"><p data-i18n="publicIntro">محتوى توعوي حول القانون العام.</p><div id="publicArticles" class="article-list"></div></div><a class="btn secondary" href="#home" data-page="home" data-i18n="back">العودة للرئيسية</a></section>
+      </div>
+      <div class="aq-hero-visual"><img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAA8LDA0MCg8NDA0REA8SFyYZFxUVFy8iJBwmODE7OjcxNjU9RVhLPUFUQjU2TWlOVFteY2RjPEpsdGxgc1hhY1//2wBDARARERcUFy0ZGS1fPzY/X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX1//wgARCAEdAaQDASIAAhEBAxEB/8QAGgAAAgMBAQAAAAAAAAAAAAAAAgQBAwUABv/EABgBAAMBAQAAAAAAAAAAAAAAAAABAgME/9oADAMBAAIQAxAAAAFeaS1yumqRWzUTLOCQMqzAxlSaZiuctL5Gd8SISCSnk7OgpoTmQmC6WPTDIiRagCipiC4QyXAPFwDxQyOngjp4I7uDong7u4I6eCOngxSEgIhIUz0smYIOKJAEnM7HbQRsslvT3dHOZBJVpUSgyrkL4qIC4eAuHgnu4O7uDp7g7ukI6eAemAjp4I6Ya7u4O7uDu7g7u4O6eTxCEgKYIJnpFM9IT3SxXM3EMtX6XKpZzE74zMSEzEh09IcUEHdMJ9CFEU/UhZF6xZzdTf0TpE93J9PSEDPCjr4HTFoCHu5ru7g7pMdZXWzSnNcn5ghK4IxIJmJApgg6ekUV20zVwwjhvqcxR0c8zE0pmJCZ6UcUEPs7RyZqjUUXz0srvdmsVtRlDbqD+uc9PXHRJgNtkxddV1LQkPVPR0NT3SB21lndk0yqs4ODzZCWmREJMJpWvO3qY5opuBgJtRL7KfTx23Jx96pXnp6Ofp6R8USEz0hGbpqy0VW5x2R1y0U8jMZVaLWzXqWjMdrkV1BzVojyfcMNSFwNBMyIJLg6YAZyHBZ1fBhEJNEUGHLskjPfoDLV5SplOyUrUzrasDDa5VPcsXa2yie7TOSgkTMEOAsFGSNk479KdcVoBVkXOppLaemc9YVTWY8gqyFkT3Nd3SFN2fGOujEFpnHT1KOEwji4ME7rstFiILkyr5pZ3O1M7GTLSF8zbKazqdVOXRANZ6U7/nNIHq6GtMxmbNIApNOJkUY2P6vKmsq2NbPRDP8AW+UqXvQeZ3KTfR2mU93B3TwR1N6cVWiCXKq47asQQcBVhY3VWxzkOJqvTaTKnu0gqrKmuurKaamqbm0qSA4iQDM2KpefXpIxaOmgE1vHh6NLUnKbqHorNqtVzCaT1szRy1b8r6vBC4l72bZwW2MdPB3V0y0GaHstYUZTTUuILk3sfQi74trc0NVxJT1vZNE6z7+czAkyDrUw4Tl2zE3EkMjLukOrtXQvqZmjNI5u+knjWV2zV7+BoMu0859qxZ0EYztqs28g1ejBPZWpNNZ+lUDNV1SCj/nZrTyeZTz9JfhwNlqdd5kK7mlpqugKc1Z09JQQn34SUEiLarU6r6rhhbQwLpiWpmCHK91Utd1ZhOyZ65z870OdneNsVMTVymymPGZvoal2BTvm3pds1VAdyfIvi7Pa0sXQQuRkVqRNZmpLmghKvq6hO0nlshV1Q1BcfQ1iE+/IhKE7CiWgupvTqvrsRMyTBnpFTbQ0mtPSqakSqZqtFPNzXEctHbcphpis6KVy1TE1davM1yTNFTS0iyjbtrclh57SooC1muoiOsGNprp3oaFcphM0YDCWQX63pYGBduJCpTnel2dM1p34/J7I5F9LYmsrgiEArZpuBS+l1MbFWhSuwgGUBXKqWyrA0x0EVo7aCa9wVj67gEoO/wCel6mlg67LEmkgchCu5acy2ppuiuxVHXo5JmFaiXwX0QX5fmWGJdWYpaPS8yNEJpDtAx5jLrQusHrk1mKE25EhLtIPJrtrMAebo1BgXNIJ1OZ0D0kAZChhYUbK2c6NfmEmt/H0z5tMPZxmtp9Hg7ibSXWVubrV7SruNdO/OYplJ3WUKbiWpBvo5FpAXVBkBI6kLVV5qMp2lE1MzwoqWLPi3BTmaZZzKg2GvNvUvSEJVObkeqwkUB2gPPOwEHbc8n55XUmli2NRI9dK3Noupo53ROroYHokZtZ5ukuM5bybVMRNRS5wLr7gqcSdchY3a/Mx5LtZmQtzCIATZvUuYDQUU2l6Lkml7lVS46cDzLXmELvoMNNHkuVM5JcCtlHBpro6SpDWvxhPM5esGPSwkxwqdHO0rSvFi6udbR6HKYeRmCJhCGnli3K1+A2VnKXVxU09wcPECaqibKDzLeEoZMp2TWjRbXpSDSZTOorai6116loetYtWnGni6bVSxJNHfUxtGY4q6C51tzWpB5wU6adrS2Zs0hw5e0nnupuMTW081Du75rYTRsfQpdjbGQLR6THY0npOc+NCAr5jg8zIHpEWUnLLisml3EnQkb0xxbesi2q9UHEHUE9DqiVUvZbzmJzmLVzKbAs/uNFDCZzWhKrrJrqba1K7Ih+QYNGk5pIVsdTvqaX1s8or0+W6LlQCPXKtbQVjRUrspNuxGpjHK8h4teIrH7WFGdGiMiDNxBXDVdtEwsSbTcoHas7VLug+GtopttLLvq6QmvcrUsKaOXNaw49waatqg2W1YFpuUynnZGzn0o0MdiXqUqXDtzyCo2H/AD/pIvzlVamubcpSDlqrcXzVV6F+0uR//8QALRAAAgICAQIFBAICAwEAAAAAAQIAAxESIQQTECAiMTIUIzAzNEEkQkBDUET/2gAIAQEAAQUC7tk7tk7lk7lk7lk7lk7lk3sm7zd5s8ZrNaGsLI9mN3m7zZ5s82eBmnM9Uy0GZgzmczmczmczLTLTLTLTLTLTLTLTLTLTLTLTLTLTLTLTLTLTLTLTLTLfjzO5Y5FvbKWVk+bPkz5MzP8A4T/FvkN9awvf848uf/FfOuUUh6TKfU//AKNwOgXZtcdHQuK/zF2ld6tFOy/8QTDfkRNXs/jIMV/ksugLNEyHrdtnPpWxdPwBYcTPnxwg/M/x6s/4/Ttun473fNSdwrZUktVLWspdBX1DJBcrNVZlvKBmAY8D5wv/AALCJ1hzV0z6vYPx3tvbgIpuQSqzDHVpYpVqeoxNR3B7eIXxMxMeYeOZnzU9slgh8vcXvWNXYPY9O+6Mup/DZ6b6AZaa2YduI9YRkDh6WzXhx0pzV4g+O0z+DMz+CopTboFc8TQBfSYSAPTXXX9yOMGl9WyGX2/DdqqjqXqm1NhqRdmZVWxFc9yxY4adKDr5ceA8MQ8CY8M/isTMFp1Kl1As0KWdywB68KxsXV+pXDDgpZiK+w/AwBHUYLWsdOmbE33jKEV6dw7ejp00q8MeGPNY4WZ4zn8uqxqcvraLLBa87l1MVu6ioWhAtFnTnA5lC5jDB85HAqLrXUnbdlUBsS2zas8TpwLK4B+InJ9TAKAviGU/h29fiyhgodLLhYQLkNbDA6hdWou7bBkcFMfg6kMs2adxhNiy1VEg/LprMP8AidSQazHsWoMdq8sJ3Hj2bJViqCxZsksX1ehY64PgTxjkcjExMTExLqtlrt7atk1otlMvb7dPU7R+IvqGvkIhnUUZOuprqQS7iv8A3dNTT57G1g9Xg3x7j2s66PT6qJiFdhjMZdTxHfL+hpZ4vP7rzjzWIHXF3TxbBm2zvTlZR1OI447wz5b/AGf5JOqPpf5UY7Pe0sB81m5m5EqDCGx9awQGHFFnbce8c9tanf6izmzWyDXYdsQtk+Hu6/NBj8DjIVhYbaNJnMxiLaVhdbFpsOO9rAwbxr/XaeemBNtiF36irS27Hbp7bzAHkdtFa6WlwK1xW19aG3hK8dsg+HTlj4dQpYLXi0nJ9B8pOAg4X5H5+e39fT53lvT5hJE9pWfV0xDQEGFHram7cXetDipOGnTvrO+8v+5FR659kyn4+JUNEQKXvRJZfZae2VN8V9AzFoEwenBHg6voo7bu0GG8pOJ/S/JgIOR5rMxPS3hfW7k+6DDT6hXVXGFYQMhjKGhoUQYQ5M3eHLRtkPT1FDHPjbbY0prBgA71rdtlBaafcs4rb59P6pwsbqEWPcbJqTF4Hk/uJ7n2X283DXf6r7eHUU7RfbHro6bhqrIUaOSJ9S2UUuR07zsPF4PvCuY+UlT7S5eabe4AymU/sXg89/qRgVfEc3N8WdIlhRiWc9ubCEAQBj5V9pX4LwfKTgVAiVjMr9vG2vVqUld5LctGpSNrleVrFKRrjnp7NkvPpNilRekbqkytyZY7KCtT1gCUYLhlVnsJdvjWRrvi1iSAkPFnCxnyf9SczHkJg8E9oeH8tnsg9NPyX02eGJcPtDiv2bubQOIx+yzaz5AvFcqm5wrZoNhgc5BnT25hAMbiLnKVktoFv6v9Srmdv7rj7X9nm7OoLAuMYHu1mp8f7h9k9owzByPI3qeVfKzhvFvgD9p1bfMHsxA6Wv1pysDpbLVdQPuVVD7mmAZXidMoEdJhnfpxmKfvMSeo6r9PT+zZ+qJyo5hTFrnUHZmUcllMyh8TmAqJ3UndTCvXgEGEcVEY8ictKsdywZWvmvwvOKam1R+48SswqAlZD1nNdlyZnb3lN2oKNW9npfqZ2mFae4sAgewBDk1Rf3Phb73Vq+n+LOB1DFcbPruZ3hjYEaCajOuPFiS3l2Kyu54CGHg5wlYAWVfsIytXj1f6qOSi6zmHImzVudHWheLaTWzdq0VWv0738yjFiWk/TSvJnT9PUymlanV9G7j759TKQq/HB2KnREyjjNnAhPKOVNkfZm8GTaEYPhz4YldJaIAq+FuCfBP2zkW+HW/r6bhrnsWfUWCL1FbhqQ0KOkRzF6mys9qm8NQwVGKxfRbHpbFfpah8WWjMC7WFAr/93UjHT9OMo2PqWINVeSt3pt52wNmsLRSHJbHkIBnaENZE7TTtQVL5VJL+Cfvli8qcrLaxYnaNFT3PD6oQTAk7bmGpsuGiuRB1dgB7dyseKvUpUiWDR0bipu5WV0dz615svx9P0/6z+8uNS5RH5sJCj+wpM/20rPlLagsSd+B7eSxlE7+J37J3rYt1m31Dw9UrLVYpPh1SMQlWQMKS0GWZWZpvwWVoa0MNbCD0mzmdMPteqWpstZwems1bqE2UjLj0PaU7dBXt7qLGeuC18Hl/UFOTNSZrvBhfITgZJZcxMkrx5M83VFjMzM2hM5nT1MzeLeqV6xVHacxrMitEujIJcv3nrxHqy4SvuJiM3JbC2Lgg8Ut3K+qRksM0bWsEoa2yUxFrECL39allgQKupYspGjP4f0IcmBR4V/KFsvkCI2wyS4aWV1vOwYamWCtiFoYxOkVYuMeD2AV3fxqxsqWdk6B4UxFZuncEWjB3cZS87JSBt6Rbu5mp1NZapTrOnfScXJgrdZk1J/Eq5Wv2HB/+qxfvX/rT9uIg4nsBMzaA85g5OJrq23NPuVyvDMwyADNDNMTZryd1DNY0c4Sw8289PWcMwzFLoU6kGPSrKemYNSh+p95Yua1USpNW9pYGMUfctXVzZ6enaWoDHfMqP+HSwad7m+wolLF7L3dbbSRShPedfu0fCMZ/Zg8P6X2/t/ZYh4M9rEbI2lfMbGnTHgwfJrNmf9r/AMX/ALdZryEBla+izCijmL8BytuA/TaRtbbG/c2e7ZzZiUn01ndb1Zb6/wCF0fsf2dT+rpvl1X7L/wCMn8jqf2dKftxszMHJX3Bi+yHwfOM8KZ/rYw3pbjeVNmb80Ngo+wctkfM8lh/jD5seA2Sg9W06m30gdtScJ06FquqqlbYIrQMwO753r56g+mVH19O2D1S+mv8Ah9J7N+zqf09J7dUcWY3q0AOpyMzHBXMKQLiKpBCQp6U1ELTB0WvhVQTdSzIrMLEUZrYrdN8RbK0m5RO4iwOHNU94oypbMHB2gsMrHdv32awlog1l4yrDD1MVIB7x9skMvK/EhofXVhEVQpnbDAqWnrqsGWfE35BsjMyk8QNNoHnGZs8wPB1OyE4t9RcEqqFZWOHXNi1gg/EVZllTGrVkWtiUzpah9bfavsTI8FBjfZoTidMubBYNrp1K4IYiWsHVbLFDV2NNXwa30padM2VZcWdt8pU6xtArAuGpeF3BNmRkzJmmZqJrMYgmYIOfAjjMU+D57iCEepBColXEBjLy4xLuYrHfqRsKrDWft2TthIrKZY29o5hfUV82WfK8ZW0ShjMzu4m67NcmDwaXw94yh6mG9jO8Zu2otsgrVm0VLCimfTpNFnbWdpJ2VnYWfTrPpxFqxNYwhgn9H5LD8h7n2T3hjjIY8bEEc04mZWcxPSBFOFT3qH3H+bfK1ftBik+oaC7J2l4+5X71H0p6q+oXW7xR2UDqbBB1bRepyFdCP//EACIRAAICAgMBAQADAQAAAAAAAAABEBECIBIhMUEwE0BRYf/aAAgBAwEBPwGyy2WWY2zK/hbLZ2WWWWciy2Wy2Wy2Wy2Wy2Wy2Wy3th4ZeTcX/VxfRn5vx/04oeGtarE47Y+w1T1x9FOa+zQ9EXpgZenFmEZY2tVFRl5Ci4qLLLldHL/AE5I6nNffwyKhzx6Hpw7H1GSKF0LKXgUVCyhmS60oXs0NWcBMydsUWXCdCf+wzjCh6LFuW+4YtPh90RkLKWJaNRiWYeFqzF9ualj9HKHGLF+GSqEuivBJF6KHFbuFKjKMfD6jH3VI4o4o4y5W7UPyMUUWXomWWXCh7XNXDhfgtEdHX4ocr8qKKKKKKhar+gyyxDej/S9Fo5sU+6dijL/AIdmOOTHi0OruP4zgziytvg9PmyfcVHw6j//xAAkEQACAgEEAgIDAQAAAAAAAAAAARARAhIgITFBURMwA0Bhcf/aAAgBAgEBPwGkUikUikZUjGr5KRSKRRRRRpKRSKRSKRSKRSKRSKRSKRS3Z9mPc1Ffq5Lmz8fe/X6NTFn723teRq3ZdQna25dDnB+JsWxlFTn0Y9GtGbKMcqe1xcY9w9lzRUvk0+jSzmcH42PZiXt1cid7Pk4E7Vxiyx8jxnHP2WXDxhGL52ah8qbYsmjWZKujBUhxRUNWPH1CNUOFseSUqEZ5V0XlPk8bGYjxlDexMsyVlGR4MlwV7G+TXKF0KWKGhxQ9lmLuG+Sy2Z2Lg1Yw4X0eRKGVDUYxlH5MkkdjK/kNmpmpmqV9WGWpQu4bLM8b7NJ/WX/AGGiiiocLdUp6WMUMsyP8K9mhSy5bOTn6LFeoUuaKKjUajVZY2clll0NifA47l97EuCtzQ5zPByWN8nLhwosrZ43uHsWxz0dbHGMMufmR8qNaNUPZ5EuRijzua4iyx2Wy2f/xAA0EAABAwIDBwMCBQUBAQAAAAABAAIRITEQElEDICIyQWFxMIGRUnITM0JioSNAULHBBOH/2gAIAQEABj8C5yucrnK5yucrnK5yucrmK5iuYqjzKdLyQFzlcxXMVzFcxXMVzK6urq6urq6vhdXV1dXVyrq6urq6urq6urq6urq6urq6v6n9NtFG02ZYSsv8/wCStM0hf1NpH29FwPbtm/SUMttNP8lwwO+itm8qchYdWlOefH+TjAd/W6L+mzN7o5uFw6KRP9rb1X+EAh6sUHlQwZgszz2XEwOI+VEbQdzVCsi0/wCBlCFHqZGDpKn9I/lXUsch+pcIX5eUm5WQyfa3+AyzCEGcMw9MbNsyocYGigMX5V1wGD9LkSKahQ6C3uhtNi7yP7p3UhSzpcbtG5inUyvi2ELt6TnACctE/O0uNypmFcqH54/cFwOzDtcLhCyGjuhVbg/3Pm6Kqsz3QFOzcHKSmuDhsy7rCq4Py9UQp9POeihzPIVJ4v4UNwzbPhPZcZcdJVYkDMHAIk9f7mRdfhPE6dkWNymKXqEwbRrTlOt1n2OzhH8SW+Vsp+iibtGcJ6qRhlXf0aqxLr0WY7HL3lOfhmQcXSFDbNEIan0wD1UqnqieZZg5AjijVc8dgr0X0ubUJpPLfhrKcCQ06HopY5u0jTAH0Sn8UVr3XMFkYZGuEKE0U4enqSoFk3co4H0SctD13IK4RxIZaCIhqybcSRYhM2mxppHVDaBsBwqu2FPQGTVVK6KyLnIoD0zB9kIcoJzOWzdqFQnAhw+CjfDmCEKOu7U17i2/QcSLXNJaUeIlm0sT0KL8oohtJh14UFZhUKRvQVIQapviHs5Cs00cJ3wB7qmBWVnCi1facYmFxfKrgI6KUMaGFE2FlW+/BRIgtRLtkQ28IUgDCHWWbYuiTZcW9CagoRW0zmRFkyLRvjKLqOpFYTjalkfCc8GIR6KvKaFbSKilcBDauRY/4RqqLsp3Oi6I6T6HiqoKd1mZbGV3sgPYFcYXCZxeb1Q1Q7LsoTMnL18pua4VNyVSiblpKbIr1WUm+iK2mWlk8374OE0w2YajtZqcOJxB3pvPVWU+gawu1sJZfRRFcXbJ36reV+FtqO11WZrqDquIQsrDCiDCMniFkYj3X5a4mlSOJvULqxHincqESAq8ygU8JuqATmxMqtuy4k4kUOBLbrMZsptCn8Mu7zuik4FAkxCB3wIkdVpH84yyMApUbZvuFDHkjQhVaoDhOirhcKhWvsvy/wDio0fCkGmishDok4ltvC4tYTh+xNcw2wIvAX/F8J7SbHDXwtFVcrt3tgcK7/2ok8oMoY5m36pvZyLVJarT7qrMvfPC/Mc7wvy4EInZvodFzn5VwfKtUXG7KPZUIW0cei2sfULrWWIao+yd9qKBqaBGP1KpLlxUjD2XCDv+KYed6VWPZbQK0VtuSLO/2jtDrRVXNA7KvEe6gW6p56gz7IENGZVoqr8RvM1SqqMtFTA0o5ZitrGq2s14uikcNOilGSBZZm1pFVX4WmA6CE6LLwhUK+4AL7sz7b0TEpqdZFsf/dxyZ4wuR2UfJTj9RyhN2reoWbZW+nqMPKg6L7ce6gqD0K9rnoiBVEOpCaL06pvlUWU6Sih9oRmi1MKXIzM9FzCFG52xpbAdK7w0Btg40qpiptuFD9tEaKG/KhMm8mEdn1FlmbQj+F/Uo76gmzZfuZ/pFn1DcmEXTHsiCVtVtTeoTLWQqjTRDpRGTKH2hZoogjBJUusgdFUTjRVorq651RwPuiFERoN3PelcHa9VUSBcJpxcs2hquaRh3RbFW1CzN6IbbZ8p/hSzmF2rJtOJhQ2uy4moOb5QeLPWeMLuJ7L9DPucplvlpW2W18hbIuoFlEmOqMaBAk0joqA+SozUUFeFooJ+FC4nEHrGMTA3uFxC4qtHVSLHcoKYGtTcaIjVOER23Ht6OCh3sVRVCDm9FnBp/pEULCszZoubK9QbLMKg9V+G42qnCKRhlacq4pcVmE6LaUmU50xOilSRRDwrIlVk0lWjshbzhWykGFJgY99/sgB0xyH284uPR2HbEeUXm1llbRVgrK8ZVwuDpwLQcsrJtOId1LL6LK6oH8I7N1ivKDXdUT+nDzg+Zon9csXWy90PK9ghGidlTdMqchNip6DVUNfCiT/9UW3KqiuF0XRVru8tJmcXa9dMGGYqgcC0qldaLja0rk+FYK8LmdTCqvBXFxKW8LtENUCFqoQODnahbU/tC2J8ql1XsmeE5qZHVil1EIAmEEaGinoq7Uz2G+Zuhu8Zp/tcDad10XMpp3VQ1Fr20KysdLdNMQ5vS6zu9kZjtK6n2X5fysuUfK4mZh5XEHV1Co6qOAOqqj/xTbsoUFHutoB9C2WelVAfJ7KpigTXVICoyupKABt2QLldSgoAUbQGdyVPsporb2Yb8187hNmBOJ4c1johBzVuqUKmMrxos7TH1BA/StmdSgRQdVWigvlUMjsrUCIa6/RSpwzTQ4TFEICAhczflCTWJhNbCuFXrYwg0Zq3TgNmKKZHvjdRi7AAWVca2RM5VSq5CuQ/Ct8rNtChFsc2tkO4UKLsKzMqEVmFlOzPkLO6gbyjVFvZA+6E07oHZvpNUQpIUqMKrZh15TsxJohBiqr+7AH9gWzRKZ5Q8raUN8bbk4Sh2RdMIgHhXZRKaJiLrmqsxdVZc0jrhEQFRZR5QqUBo0pvgIjCQo2o91RcJhAOMxVE6rw4hODjGizgy3qjQCut0/6QEylPw8BF0E1+ic3JFDVSmlo1uoGzaFs4y8" alt="تمثال العدالة حاملاً ميزان العدالة في أمستردام"></div>
+    </div>
+  </section>
+  <section class="aq-stats">
+    <div class="aq-stats-inner">
+      <div><b>01</b><span>معلومة قانونية واضحة ومبسّطة</span></div>
+      <div><b>02</b><span>مصادر رسمية يمكن الرجوع إليها</span></div>
+      <div><b>03</b><span>محتوى بأربع لغات</span></div>
+    </div>
+  </section>
+  <section class="container aq-audience">
+    <div class="aq-section-head"><span>EXPLORE THE KNOWLEDGE</span><h2 class="section-title" data-i18n="audienceTitle">الفئات المستهدفة</h2><p>محتوى قانوني مبسّط موجّه إلى فئات مختلفة، وبأربع لغات: العربية والهولندية والتركية والإنجليزية.</p></div>
+    <div class="grid">
+      <article class="card"><img loading="lazy" src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=900&q=85" alt="طلاب جامعيون"><div class="card-body"><h3 data-i18n="studentsTitle">الطلاب والأكاديميون</h3><p data-i18n="studentsText">دعم وإرشادات للطلاب الجامعيين والباحثين.</p><a class="btn" href="#student" data-page="student" data-i18n="explore">استكشف المزيد</a></div></article>
+      <article class="card"><img loading="lazy" src="https://images.unsplash.com/photo-1542810634-71277d95dcbb?auto=format&fit=crop&w=900&q=85" alt="أم تحتضن طفلها"><div class="card-body"><h3 data-i18n="refugeeTitle">اللاجئون والحماية</h3><p data-i18n="refugeeText">شرح مبسط للجوء ولم شمل الأسرة والحماية.</p><a class="btn" href="#refugee" data-page="refugee" data-i18n="explore">استكشف المزيد</a></div></article>
+      <article class="card"><img loading="lazy" src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=900&q=85" alt="زملاء يعملون معاً"><div class="card-body"><h3 data-i18n="residentTitle">المقيمون والعمل</h3><p data-i18n="residentText">معلومات عامة عن الإقامة وعقود العمل والاندماج.</p><a class="btn" href="#resident" data-page="resident" data-i18n="explore">استكشف المزيد</a></div></article>
+      <article class="card"><img loading="lazy" src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=900&q=85" alt="باحث يقرأ في مكتبة"><div class="card-body"><h3 data-i18n="generalTitle">الشؤون العامة والمهنية</h3><p data-i18n="generalText">مقالات توعوية قانونية للأفراد والمهنيين.</p><a class="btn" href="#general" data-page="general" data-i18n="explore">استكشف المزيد</a></div></article>
+    </div>
+  </section>
+  <section class="aq-about">
+    <div class="aq-about-inner">
+      <div class="aq-about-mark"><img src="logo.png" alt="شعار القانون AQ"><span>KNOWLEDGE · RIGHTS · CLARITY</span></div>
+      <div class="aq-about-copy"><span class="aq-kicker">ABOUT AL-QANUN</span><h2 data-i18n="aboutHeading">عن منصة القانون AQ</h2><p data-i18n="aboutText">نسعى إلى جعل المعلومات القانونية الهولندية أوضح وأسهل وصولاً، مع توضيح المصادر والتمييز بين المعلومات العامة والاستشارة القانونية الفردية.</p><a class="aq-text-link" href="#about" data-page="about">اكتشف رؤيتنا ←</a></div>
+    </div>
+  </section>
+  <section class="aq-volunteer">
+    <div class="aq-volunteer-photo" role="img" aria-label="المساهمة في المعرفة القانونية"></div>
+    <div class="aq-volunteer-copy"><span class="aq-kicker">JOIN OUR COMMUNITY</span><h2 data-i18n="volunteerTitle">تطوع معنا</h2><p data-i18n="volunteerIntro">إذا كنت ترغب بالمساهمة معنا في الترجمة أو البحث أو التحرير القانوني، راسل المشرفة نور عبر البريد الإلكتروني وأرفق سيرتك الذاتية.</p><a class="aq-btn-gold" href="#volunteer" data-page="volunteer" data-i18n="sendRequest">إرسال طلب التطوع</a></div>
+  </section>
+  <section class="aq-latest container"><div><span class="aq-kicker">LATEST KNOWLEDGE</span><h2>أحدث المقالات القانونية</h2><p>تصفّح المواد المنشورة بعد مراجعتها، واستفد من المعلومات والمصادر الرسمية.</p></div><a class="aq-btn-navy" href="#articles" data-page="articles" data-i18n="navArticles">المقالات القانونية ←</a></section>
+</section>
+<section class="page container" id="page-public-law"><h1 class="section-title" data-i18n="navPublic">القانون العام</h1><div class="panel"><p data-i18n="publicIntro">محتوى توعوي حول القانون العام.</p><div id="publicArticles" class="article-list"></div></div><a class="btn secondary" href="#home" data-page="home" data-i18n="back">العودة للرئيسية</a></section>
     <section class="page container" id="page-private-law"><h1 class="section-title" data-i18n="navPrivate">القانون الخاص</h1><div class="panel"><p data-i18n="privateIntro">محتوى توعوي حول القانون الخاص.</p><div id="privateArticles" class="article-list"></div></div><a class="btn secondary" href="#home" data-page="home" data-i18n="back">العودة للرئيسية</a></section>
     <section class="page container" id="page-student"><h1 class="section-title" data-i18n="studentsTitle">الطلاب والأكاديميون</h1><div class="panel"><p data-i18n="studentsText">دعم وإرشادات للطلاب الجامعيين والباحثين.</p><div id="studentArticles" class="article-list"></div></div><a class="btn secondary" href="#home" data-page="home" data-i18n="back">العودة للرئيسية</a></section>
     <section class="page container" id="page-refugee"><h1 class="section-title" data-i18n="refugeeTitle">اللاجئون والحماية</h1><div class="panel"><p data-i18n="refugeeText">شرح مبسط للجوء ولم شمل الأسرة والحماية.</p><div id="refugeeArticles" class="article-list"></div></div><a class="btn secondary" href="#home" data-page="home" data-i18n="back">العودة للرئيسية</a></section>
