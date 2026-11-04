@@ -64,6 +64,16 @@
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important}}
       @media(prefers-reduced-motion:reduce){.hero h1{animation:none!important;background-position:100% 0!important}}
 
+
+    /* Approved AQ hero composition: retain the exact original logo asset and existing CTA */
+    .hero{position:relative;display:grid;grid-template-columns:minmax(150px,22%) minmax(280px,1fr) minmax(220px,34%);align-items:center;gap:1.25rem;text-align:center;min-height:420px;padding:3rem clamp(1rem,3vw,3rem);background:linear-gradient(90deg,rgba(8,36,59,.97) 0%,rgba(8,36,59,.92) 56%,rgba(8,36,59,.28) 100%),url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=1600&q=85') right center/cover no-repeat;border-bottom:5px solid #C9923E}
+    .hero-logo{display:block;width:min(100%,210px);height:auto;max-height:210px;object-fit:contain;justify-self:center;filter:none}
+    .hero-copy{grid-column:2;min-width:0}
+    .hero-brand{margin:0 auto 1rem}
+    .hero p{margin:0 auto 1.5rem}
+    .hero .btn{margin-top:.3rem}
+    @media(max-width:760px){.hero{grid-template-columns:1fr;gap:.75rem;min-height:380px;background:linear-gradient(rgba(8,36,59,.9),rgba(8,36,59,.84)),url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=1000&q=80') center/cover}.hero-logo{width:112px;max-height:100px}.hero-copy{grid-column:1}}
+
     /* AQ Design 2 visual layer — keeps every existing functional ID and handler intact */
     body{background:#F8F4EC;color:#172B3D}
     header{background:#EAE5DA;border-bottom:1px solid #d7cbb8;box-shadow:0 2px 8px #102a4310;padding:10px 3.5%;color:#102A43}
@@ -122,11 +132,12 @@
   <main id="main">
     <section class="page active" id="page-home">
       <div class="hero">
+        <img class="hero-logo" src="logo.png" alt="شعار منصة القانون AQ">
+        <div class="hero-copy">
         <h1 class="hero-brand"><span lang="ar">القانون</span></h1>
         <p data-i18n="heroText">منصة لتبسيط وشرح القوانين الهولندية باللغة العربية، مع محتوى توعوي بلغات متعددة.</p>
         <a class="btn" href="#volunteer" data-page="volunteer" data-i18n="heroCta">تطوع معنا / أرسل سيرتك</a>
-
-
+        </div>
       </div>
       <section class="container">
         <h2 class="section-title" data-i18n="audienceTitle">الفئات المستهدفة</h2>
