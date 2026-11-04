@@ -16,6 +16,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa+Ink:wght@400;700&family=Cairo:wght@300;400;600;700;800&family=Amiri:wght@700&display=swap" rel="stylesheet">
   <style>
 
+
 :root{--navy:#102A43;--navy-deep:#081B2C;--navy-card:#163758;--gold:#C9923E;--cream:#F8F4EC;--cream-deep:#F0E5D2;--ink:#172B3D;--muted:#667789;--line:#E5DCCF;--white:#fff;--soft:#EAE5DA}
 *{box-sizing:border-box}html{scroll-behavior:smooth}
 body{margin:0;background:var(--cream);color:var(--ink);font-family:'Cairo',sans-serif;line-height:1.75}
@@ -67,71 +68,126 @@ footer{margin-top:0;padding:28px 20px;text-align:center;background:var(--navy-de
 @media(max-width:620px){.container{width:calc(100% - 30px)}header{padding:10px 12px}.nav-container{width:100%;justify-content:center;gap:10px}nav ul{justify-content:center;gap:9px}nav a{font-size:.78rem}.lang-select{padding:.45rem .5rem;font-size:.82rem}.grid,.form-grid,.two-col{grid-template-columns:1fr}.form-row.full{grid-column:auto}#page-home>.container{padding:26px 0 34px}#page-home>.container>.section-title,.home-articles .section-title{gap:10px;font-size:1.4rem}#page-home>.container>.section-title::before,#page-home>.container>.section-title::after,.home-articles .section-title::before,.home-articles .section-title::after{width:10%}.card img{height:190px}.about-preview{margin-bottom:24px}.volunteer-preview{width:calc(100% - 30px);margin-bottom:26px}.volunteer-preview-copy h2{font-size:1.25rem}.volunteer-preview-copy p{font-size:.85rem}.home-articles{padding-bottom:36px}.home-latest-articles{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important}}
 
+
+/* Design 2 layout + Design 1 palette */
+
+:root{--navy:#102A43;--navy2:#163758;--gold:#C9923E;--paper:#D8CBB5;--white:#fff;--ink:#1C2B39;--muted:#687786;--line:#E5E1D8;--soft:#CDBFA6}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:'Cairo',sans-serif}a{color:inherit;text-decoration:none}.wrap{width:min(1180px,calc(100% - 48px));margin:auto}
+.top{background:#081B2C;color:#F4F0E8;font-size:11px;padding:8px 0}.top .wrap{display:flex;justify-content:space-between;gap:15px}
+header{background:#0B2033;border-bottom:1px solid rgba(201,146,62,.55);box-shadow:0 4px 16px rgba(5,18,30,.12)}.nav{min-height:94px;display:flex;align-items:center;justify-content:space-between;gap:28px}.brand{display:flex;align-items:center;gap:12px}.brand img{width:165px;height:60px;object-fit:contain;object-position:right center;filter:brightness(0) invert(1)}.navlinks{display:flex;gap:24px;font-size:12px;font-weight:800;color:#F4F0E8}.navlinks a{color:#F4F0E8;text-decoration:none}.navlinks a:hover{color:#F4F0E8;text-decoration:none}.navside{display:flex;align-items:center;gap:20px}.lang{border:1px solid rgba(244,240,232,.55);padding:9px 12px;border-radius:4px;font-size:11px;font-weight:800;color:#F4F0E8;background:transparent}.member{display:inline-flex;align-items:center;justify-content:center;background:transparent;color:#F4F0E8;padding:8px 2px;border:0;border-bottom:1px solid rgba(201,146,62,.8);border-radius:0;font-size:12px;font-weight:800;box-shadow:none;text-decoration:none;white-space:nowrap}.member:hover{background:transparent;color:#F4F0E8;border-bottom-color:rgba(201,146,62,.8)}
+.hero{padding:68px 0 60px;background:linear-gradient(90deg,#EAE5DA 0%,#EAE5DA 67%,#D8CBB5 67%,#D8CBB5 100%)}.hero-grid{display:grid;grid-template-columns:1fr 330px;gap:70px;align-items:center}.eyebrow{color:#9A6C2D;font-size:11px;font-weight:900;letter-spacing:1px;display:flex;align-items:center;gap:12px}.eyebrow:before{content:"";width:38px;height:2px;background:var(--gold)}h1{font-size:clamp(38px,5vw,62px);line-height:1.4;color:var(--navy);margin:17px 0 15px;font-weight:900;letter-spacing:-1px}.hero p{font-size:14px;line-height:2.2;color:#34495E;max-width:670px;margin:0}.actions{display:flex;gap:12px;margin-top:27px;flex-wrap:wrap}.primary{background:var(--gold);color:#172b3d;padding:13px 23px;border-radius:3px;font-size:12px;font-weight:900}.secondary{border:1px solid #b8b4aa;color:var(--navy);padding:12px 21px;border-radius:3px;font-size:12px;font-weight:800}.hero-side{border-right:1px solid #D6CFC2;padding:20px 28px 20px 0}.hero-side img{width:205px;height:80px;object-fit:contain;object-position:right center}.hero-side .quote{font-size:19px;line-height:1.9;color:var(--navy);font-weight:800;margin-top:25px}.hero-side small{display:block;color:#8a765b;font-size:10px;letter-spacing:1px;margin-top:10px;direction:ltr;text-align:right}
+.stats{background:var(--navy);color:#fff}.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);padding:22px 0}.stat{padding:0 25px;border-left:1px solid rgba(255,255,255,.15);display:flex;align-items:center;gap:14px}.stat:last-child{border:0}.stat b{font-family:Georgia,serif;font-size:25px;color:var(--gold);font-weight:400}.stat span{font-size:11px;color:#d5dee6}
+.section{padding:76px 0}.section-head{display:flex;align-items:end;justify-content:space-between;gap:25px;margin-bottom:28px}.kicker{font-size:10px;color:#9a6c2d;font-weight:900;letter-spacing:1.5px;direction:ltr;text-align:right}.section h2{font-size:29px;color:var(--navy);margin:6px 0 0}.section-head p{max-width:460px;color:var(--muted);font-size:12px;line-height:2;margin:0}
+.topics{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#CDBFA6;border:1px solid #CDBFA6}.topic{background:#fff;padding:27px 25px 25px;min-height:205px;position:relative;transition:.2s}.topic:hover{background:#FBF8F1}.topic .number{font-family:Georgia,serif;font-size:13px;color:#A77A3A;border-bottom:1px solid #D8C6A9;width:34px;padding-bottom:8px}.topic h3{font-size:17px;color:var(--navy);margin:17px 0 7px}.topic p{font-size:11px;line-height:2;color:#73808b;margin:0;max-width:290px}.topic .go{position:absolute;left:23px;bottom:20px;color:var(--gold);font-size:18px}
+.band{background:#CDBFA6;padding:58px 0}.band-grid{display:grid;grid-template-columns:.75fr 1.25fr;gap:60px;align-items:center}.band-mark{background:var(--navy);padding:32px;min-height:220px;display:grid;place-items:center}.band-mark img{width:100%;max-width:280px;filter:none}.band-copy h2{font-size:29px;line-height:1.6;color:var(--navy);margin:8px 0 10px}.band-copy p{font-size:12px;line-height:2.2;color:#687786;margin:0}.checks{display:flex;gap:18px;flex-wrap:wrap;margin-top:20px}.checks span{font-size:11px;font-weight:800;color:var(--navy)}.checks span:before{content:"";display:inline-block;width:6px;height:6px;background:var(--gold);margin-left:8px;vertical-align:middle}
+.articles{background:#fff}.article-grid{display:grid;grid-template-columns:1.15fr 1fr 1fr;gap:18px}.article{border-top:3px solid var(--gold);background:var(--paper);padding:24px 22px 20px;min-height:225px}.article .type{font-size:10px;color:#9A6C2D;font-weight:900}.article h3{font-size:15px;line-height:1.9;color:var(--navy);margin:13px 0 7px}.article p{font-size:11px;line-height:2;color:#73808b;margin:0}.article .meta{font-size:10px;color:#929ba2;margin-top:18px}
+.cta{background:var(--navy);color:white;padding:45px 0}.cta-inner{display:flex;align-items:center;justify-content:space-between;gap:25px}.cta h2{font-size:24px;margin:0 0 5px}.cta p{font-size:11px;color:#c2ccd5;margin:0}.footer{background:#0b2033;color:#c1ccd5;padding:42px 0 18px}.footgrid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;padding-bottom:25px}.footbrand img{width:175px;height:65px;object-fit:contain;object-position:right center;filter:brightness(0) invert(1)}.footer p{font-size:11px;line-height:2;color:#9eafbe;max-width:350px}.footer h4{font-size:12px;color:#fff;margin:0 0 12px}.footer a{display:block;font-size:11px;color:#b4c0ca;margin:8px 0}.copy{border-top:1px solid #ffffff20;padding-top:15px;display:flex;justify-content:space-between;font-size:10px;color:#8194a5}
+@media(max-width:850px){.audience-grid{grid-template-columns:repeat(2,1fr)}.navlinks{gap:12px}.hero-grid{grid-template-columns:1fr 250px;gap:30px}.hero-side img{width:170px}.topics{grid-template-columns:repeat(2,1fr)}.band-grid{gap:30px}}
+@media(max-width:620px){.audience-grid{grid-template-columns:1fr}.wrap{width:calc(100% - 30px)}.top .wrap{font-size:9px}.nav{min-height:75px}.brand img{width:125px;height:50px}.navlinks{display:none}.member{padding:9px}.hero{padding:48px 0;background:var(--paper)}.hero-grid{grid-template-columns:1fr;gap:30px}.hero-side{border-right:2px solid var(--gold);padding:5px 18px}.hero-side img{width:160px;height:60px}.hero-side .quote{font-size:16px;margin-top:10px}.stats-grid{grid-template-columns:1fr;gap:0;padding:8px 0}.stat{padding:12px 8px;border-left:0;border-bottom:1px solid #ffffff20}.stat:last-child{border:0}.section{padding:55px 0}.section-head{display:block}.section-head p{margin-top:10px}.section h2{font-size:25px}.topics{grid-template-columns:1fr}.topic{min-height:175px}.band-grid{grid-template-columns:1fr;gap:25px}.band-mark{min-height:170px}.band-mark img{max-width:220px}.band-copy h2{font-size:25px}.article-grid{grid-template-columns:1fr}.cta-inner{display:block;text-align:center}.cta .primary{display:inline-block;margin-top:18px}.footgrid{grid-template-columns:1fr 1fr;gap:25px}.footgrid>div:first-child{grid-column:span 2}.copy{display:block;line-height:2}}
+
+/* AQ refinements: approved palette, clean hero identity, accessible category art */
+.hero-side{background:var(--navy);border-radius:8px;min-height:250px;display:flex;align-items:center;justify-content:center;padding:28px;overflow:hidden}
+.hero-side .hero-logo{width:min(100%,330px);height:auto;max-height:150px;object-fit:contain;background:transparent;padding:0;border-radius:0;display:block}
+.hero-logo-holder{background:transparent!important;padding:0!important;border:0!important;box-shadow:none!important}
+.topic-illustration{display:block;width:100%;height:145px;margin:0 0 16px;border-radius:6px;background:#F3EEE4}
+.topic{overflow:hidden;border:1px solid #E3D9C8;border-top:3px solid transparent;border-radius:5px}
+.topic:hover{transform:none;box-shadow:none;border-top-color:transparent;background:#fff}
+.footbrand img{filter:none!important;object-fit:contain}
+.cta{background:var(--navy)}
+@media(max-width:620px){.hero-side{min-height:190px;padding:20px}.hero-side .hero-logo{max-width:260px;max-height:115px}.topic-illustration{height:130px}}
+
+
+/* AQ palette alignment: design 2 layout + design 1 colors */
+:root{--navy:#102A43;--navy2:#163758;--gold:#C9923E;--paper:#F6F4EF;--white:#fff;--ink:#172B3D;--muted:#718092;--line:#E5E2DA;--soft:#EAE5DA}
+body{background:var(--paper);color:var(--ink)}
+.top{background:#0b2033;color:#e8edf1;border-bottom:3px solid var(--gold)}
+header{background:rgba(255,255,255,.96);border-bottom:1px solid rgba(16,42,67,.1)}
+.navlinks a{color:#F4F0E8;transition:color .2s ease}.navlinks a:hover{color:#E0B96F}
+.member{background:var(--navy);border-radius:7px}
+.hero{background:var(--navy);color:#fff;position:relative;overflow:hidden}
+.hero:before{content:"";position:absolute;width:480px;height:480px;border:1px solid rgba(201,146,62,.25);border-radius:50%;left:-155px;top:-250px;box-shadow:0 0 0 40px rgba(201,146,62,.035),0 0 0 85px rgba(201,146,62,.025)}
+.hero-grid{position:relative;z-index:1}
+.eyebrow{color:#e2b875}
+.eyebrow:before{background:var(--gold)}
+.hero h1{color:var(--navy)}
+.hero p{color:#c6d1dc}
+.hero-side{border-right:1px solid rgba(201,146,62,.45)}
+.hero-side .quote{color:#fff}
+.hero-side small{color:#d5b47f}
+.stats{background:#0b2033;border-top:1px solid rgba(201,146,62,.25)}
+.stat b{color:var(--gold)}
+.section h2{color:var(--navy)}
+.kicker{color:var(--gold)}
+.topic{border-top:2px solid transparent}
+.topic:hover{border-top-color:var(--gold);background:#fff}.audience-grid{grid-template-columns:repeat(4,1fr)}.topic img{width:100%;height:145px;object-fit:cover;border-radius:6px;margin-bottom:16px}.topic{padding:18px}
+.topic .number{color:#a8752e;border-color:#d7bd94}
+.topic h3{color:var(--navy)}
+.topic .go{color:var(--gold)}
+.band{background:#eae5da}
+.band-mark{background:var(--navy);position:relative;overflow:hidden}
+.band-mark:before{content:"";position:absolute;width:280px;height:280px;border:1px solid rgba(201,146,62,.35);border-radius:50%;box-shadow:0 0 0 35px rgba(201,146,62,.04),0 0 0 75px rgba(201,146,62,.025)}
+.band-mark img{position:relative;z-index:1}
+.band-copy h2{color:var(--navy)}
+.checks span:before{background:var(--gold)}
+.article{border-top:3px solid var(--gold);background:#fff}
+.article .type{color:#a8752e}
+.cta{background:var(--navy);border-top:1px solid rgba(201,146,62,.25)}
+.primary{background:var(--gold);color:#172b3d;border-radius:7px}
+.footer{background:#0b2033}
+@media(max-width:620px){.hero{background:var(--navy)}}
+
+/* Header palette: match the warm beige used in the lower ABOUT section */
+.top{background:#eae5da !important;color:#102a43 !important;border-bottom:1px solid #d8cdbb !important}
+.top .wrap,.top a{color:#102a43 !important}
+header{background:#eae5da !important;border-bottom:1px solid #d8cdbb !important;box-shadow:none !important}
+.brand img{filter:none !important}
+.navlinks,.navlinks a{color:#102a43 !important}
+.navlinks a:hover{color:#102a43 !important;text-decoration:none !important}
+.lang{color:#102a43 !important;border:1px solid #102a43 !important;background:transparent !important}
+.member{color:#102a43 !important;border:0 !important;border-bottom:1px solid #c9923e !important;background:transparent !important;box-shadow:none !important}
+
+/* Hero title replaced with the exact original AQ logo */
+.hero-logo-holder{display:flex;align-items:center;justify-content:flex-start;margin:14px 0 18px}
+.hero-logo{display:block;width:min(100%,410px);height:auto;max-height:150px;object-fit:contain;background:#EAE5DA;padding:11px 15px;border-radius:3px}
+@media(max-width:620px){.hero-logo{width:min(100%,330px);max-height:125px;padding:9px 12px}}
+
+
+/* Integration safeguards */
+#main>.page{min-height:50vh}
+#main>.page.container{width:min(1180px,calc(100% - 48px));margin:0 auto;padding:42px 0}
+#page-admin .panel,#page-volunteer .panel{background:#fff;border:1px solid var(--line);border-radius:10px;padding:clamp(16px,3vw,28px);margin:18px 0;box-shadow:0 8px 24px rgba(16,42,67,.06)}
+#page-admin h2,#page-volunteer h2{color:var(--navy)}
+#page-admin .field,#page-volunteer .field{width:100%;min-height:44px}
+#page-admin .btn,#page-volunteer .btn{display:inline-flex;align-items:center;justify-content:center}
+.home-latest-articles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.home-latest-articles .article-item{background:#fff;border:1px solid var(--line);border-top:3px solid var(--gold);padding:20px;border-radius:6px;min-width:0}
+.home-latest-articles .article-item h3{color:var(--navy);margin-top:0}
+.navlinks{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:clamp(10px,1.7vw,24px)}
+.navlinks a{font-size:12px;font-weight:800;white-space:nowrap}
+.navside{display:flex;align-items:center;gap:12px}
+@media(max-width:900px){.nav{flex-wrap:wrap;justify-content:center;padding:14px 0}.brand{margin-inline:auto}.navlinks{width:100%;justify-content:center}.navside{margin-inline:auto}}
+@media(max-width:620px){.wrap{width:calc(100% - 28px)}.navlinks{gap:9px 14px}.navlinks a{font-size:11px}.home-latest-articles{grid-template-columns:1fr}.section{padding:48px 0}#main>.page.container{width:calc(100% - 28px);padding:28px 0}}
+
 </style>
 </head>
-<body>
-  <a class="skip" href="#main" data-i18n="skip">تجاوز إلى المحتوى</a>
-  <header>
-   <a class="logo" href="#home" data-page="home" aria-label="AQ القانون"><img src="logo.png" alt="شعار منصة القانون AQ"></a>
-    <div class="nav-container">
-      <nav aria-label="Main navigation"><ul>
-        <li><a href="#home" data-page="home" data-i18n="navHome">الرئيسية</a></li>
-        <li><a href="#public-law" data-page="public-law" data-i18n="navPublic">القانون العام</a></li>
-        <li><a href="#private-law" data-page="private-law" data-i18n="navPrivate">القانون الخاص</a></li>
-        <li><a href="#articles" data-page="articles" data-i18n="navArticles">المقالات</a></li>
-        <li><a href="#about" data-page="about" data-i18n="navAbout">من نحن</a></li>
-        <li><a href="#admin" data-page="admin" data-i18n="navAdmin">الإدارة</a></li>
-        <li><a href="#volunteer" id="navVolunteerMembers" data-i18n="navVolunteers">المتطوعون</a></li>
-      </ul></nav>
-      <label class="hidden" for="langSelect" data-i18n="language">اللغة</label>
-      <select class="lang-select" id="langSelect" aria-label="Language">
-        <option value="ar">العربية</option><option value="nl">Nederlands</option><option value="tr">Türkçe</option><option value="en">English</option>
-      </select>
-    </div>
-  </header>
-
-  <main id="main">
-    <section class="page active" id="page-home">
-      <div class="hero">
-        <img class="hero-logo" src="logo.png" alt="شعار منصة القانون AQ">
-        <div class="hero-copy">
-        <h1 class="hero-brand" data-i18n="heroTitle">معاً لفهم القانون وبناء مستقبل آمن في هولندا</h1>
-        <p data-i18n="heroText">منصة لتبسيط وشرح القوانين الهولندية باللغة العربية، مع محتوى توعوي بلغات متعددة.</p>
-        <a class="btn" href="#volunteer" data-page="volunteer" data-i18n="heroCta">تطوع معنا / أرسل سيرتك</a>
-        </div>
-      </div>
-      <section class="container">
-        <h2 class="section-title" data-i18n="audienceTitle">الفئات المستهدفة</h2>
-        <div class="grid">
-          <article class="card"><img loading="lazy" src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=700&q=80" alt="Students"><div class="card-body"><h3 data-i18n="studentsTitle">الطلاب والأكاديميون</h3><p data-i18n="studentsText">دعم وإرشادات للطلاب الجامعيين والباحثين.</p><a class="btn" href="#student" data-page="student" data-i18n="explore">استكشف المزيد</a></div></article>
-          <article class="card"><img loading="lazy" src="https://images.unsplash.com/photo-1542810634-71277d95dcbb?auto=format&fit=crop&w=700&q=85" alt="Community support"><div class="card-body"><h3 data-i18n="refugeeTitle">اللاجئون والحماية</h3><p data-i18n="refugeeText">شرح مبسط للجوء ولم شمل الأسرة والحماية.</p><a class="btn" href="#refugee" data-page="refugee" data-i18n="explore">استكشف المزيد</a></div></article>
-          <article class="card"><img loading="lazy" src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=700&q=85" alt="People working"><div class="card-body"><h3 data-i18n="residentTitle">المقيمون والعمل</h3><p data-i18n="residentText">معلومات عامة عن الإقامة وعقود العمل والاندماج.</p><a class="btn" href="#resident" data-page="resident" data-i18n="explore">استكشف المزيد</a></div></article>
-          <article class="card"><img loading="lazy" src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=700&q=85" alt="Professional work"><div class="card-body"><h3 data-i18n="generalTitle">الشؤون العامة والمهنية</h3><p data-i18n="generalText">مقالات توعوية قانونية للأفراد والمهنيين.</p><a class="btn" href="#general" data-page="general" data-i18n="explore">استكشف المزيد</a></div></article>
-        </div>
-      </section>
-      <section class="about-preview" aria-label="About AQ">
-        <div class="about-preview-media" role="img" aria-label="كتب قانونية وميزان العدالة"></div>
-        <div class="about-preview-copy">
-          <div class="kicker">ABOUT AQ</div>
-          <h2 data-i18n="aboutHeading">عن منصة القانون AQ</h2>
-          <p data-i18n="aboutText">نسعى إلى جعل المعلومات القانونية الهولندية أوضح وأسهل وصولاً، مع توضيح المصادر والتمييز بين المعلومات العامة والاستشارة القانونية الفردية.</p>
-        </div>
-      </section>
-      <section class="volunteer-preview" aria-label="Volunteer with AQ">
-        <div class="volunteer-preview-icon" aria-hidden="true">✉</div>
-        <div class="volunteer-preview-copy">
-          <h2 data-i18n="volunteerTitle">تطوع معنا</h2>
-          <p data-i18n="volunteerIntro">إذا كنت ترغب بالمساهمة معنا، راسل المشرفة نور عبر البريد الإلكتروني وأرفق سيرتك الذاتية.</p>
-        </div>
-        <div class="volunteer-preview-photo" role="img" aria-label="شخص يكتب على حاسوب محمول"></div>
-      </section>
-      <section class="container home-articles" aria-label="Latest articles">
-        <h2 class="section-title" data-i18n="navArticles">أحدث المقالات</h2>
-        <div class="article-list home-latest-articles"></div>
-      </section>
-    </section>
-
-    <section class="page container" id="page-public-law"><h1 class="section-title" data-i18n="navPublic">القانون العام</h1><div class="panel"><p data-i18n="publicIntro">محتوى توعوي حول القانون العام.</p><div id="publicArticles" class="article-list"></div></div><a class="btn secondary" href="#home" data-page="home" data-i18n="back">العودة للرئيسية</a></section>
+<body><a class="skip" href="#main" data-i18n="skip">تجاوز إلى المحتوى</a>
+<div class="top"><div class="wrap"><span>مرجع مبسّط لشرح القوانين الهولندية</span><span>AR · NL · TR · EN</span></div></div>
+<header><div class="wrap nav"><a class="brand" href="#home" data-page="home" aria-label="AQ القانون"><img src="logo.png" alt="شعار منصة القانون AQ"></a>
+<nav class="navlinks" aria-label="Main navigation">
+<a href="#home" data-page="home" data-i18n="navHome">الرئيسية</a><a href="#public-law" data-page="public-law" data-i18n="navPublic">القانون العام</a><a href="#private-law" data-page="private-law" data-i18n="navPrivate">القانون الخاص</a><a href="#articles" data-page="articles" data-i18n="navArticles">المقالات</a><a href="#about" data-page="about" data-i18n="navAbout">من نحن</a><a href="#admin" data-page="admin" data-i18n="navAdmin">الإدارة</a><a href="#volunteer" id="navVolunteerMembers" data-page="volunteer" data-i18n="navVolunteers">المتطوعون</a>
+</nav><div class="navside"><select class="lang" id="langSelect" aria-label="Language"><option value="ar">العربية</option><option value="nl">Nederlands</option><option value="tr">Türkçe</option><option value="en">English</option></select></div></div></header><main id="main"><section class="page active" id="page-home">
+<section class="hero"><div class="wrap hero-grid"><div><p>مرجع مبسّط لشرح القوانين وتوضيحها من اللغة الهولندية إلى اللغة العربية عبر مقالات ومحتوى مبسّط.</p><div class="actions"><a class="primary" href="#fields">تطوع معنا / أرسل سيرتك</a><a class="secondary" href="#about">اكتشف رؤيتنا</a></div></div><aside class="hero-side"><img alt="شعار القانون AQ" class="hero-logo" src="logo.png"/></aside></div></section>
+<div class="stats"><div class="wrap stats-grid"><div class="stat"><b>01</b><span>معلومة واضحة ومبسّطة</span></div><div class="stat"><b>02</b><span>مصادر رسمية يمكن الرجوع إليها</span></div><div class="stat"><b>03</b><span>محتوى بأربع لغات</span></div></div></div>
+<section class="section" id="fields"><div class="wrap"><div class="section-head"><div><div class="kicker">EXPLORE THE KNOWLEDGE</div><h2>الفئات المستهدفة</h2></div><p>محتوى قانوني مبسّط موجّه إلى فئات مختلفة، وبأربع لغات: العربية والهولندية والتركية والإنجليزية.</p></div><div class="topics audience-grid">
+<a class="topic" href="#student" data-page="student"><svg aria-label="رمز الطلاب والأكاديميين" class="topic-illustration" role="img" viewbox="0 0 320 150"><circle cx="160" cy="75" fill="#EAE5DA" r="58"></circle><path d="M92 62 160 30l68 32-68 32-68-32Z" fill="#C9923E"></path><path d="M117 76v28c23 18 63 18 86 0V76l-43 20-43-20Z" fill="#102A43"></path><path d="M228 62v42" stroke="#102A43" stroke-linecap="round" stroke-width="5"></path><circle cx="228" cy="111" fill="#C9923E" r="7"></circle><path d="M140 112h40" stroke="#C9923E" stroke-linecap="round" stroke-width="5"></path></svg><div class="number">01 / STUDENTS</div><h3>الطلاب والأكاديميون</h3><p>دعم وإرشادات للطلاب الجامعيين والباحثين.</p><span class="go">←</span></a>
+<a class="topic" href="#refugee" data-page="refugee"><svg aria-label="رمز الحماية" class="topic-illustration" role="img" viewbox="0 0 320 150"><circle cx="160" cy="75" fill="#EAE5DA" r="58"></circle><path d="M160 27 215 48v36c0 31-23 51-55 64-32-13-55-33-55-64V48l55-21Z" fill="#102A43"></path><path d="m133 76 18 18 37-40" fill="none" stroke="#C9923E" stroke-linecap="round" stroke-linejoin="round" stroke-width="9"></path><path d="M122 116h76" stroke="#C9923E" stroke-linecap="round" stroke-width="5"></path></svg><div class="number">02 / REFUGEES</div><h3>اللاجئون والحماية</h3><p>شرح مبسط للجوء ولم شمل الأسرة والحماية.</p><span class="go">←</span></a>
+<a class="topic" href="#resident" data-page="resident"><svg aria-label="رمز الإقامة والعمل" class="topic-illustration" role="img" viewbox="0 0 320 150"><circle cx="160" cy="75" fill="#EAE5DA" r="58"></circle><rect fill="#102A43" height="66" rx="9" width="96" x="112" y="54"></rect><path d="M142 54V43a9 9 0 0 1 9-9h18a9 9 0 0 1 9 9v11" fill="none" stroke="#C9923E" stroke-width="7"></path><path d="M112 78h96M151 78v12h18V78" fill="none" stroke="#C9923E" stroke-linejoin="round" stroke-width="6"></path></svg><div class="number">03 / RESIDENTS</div><h3>المقيمون والعمل</h3><p>معلومات عامة عن الإقامة وعقود العمل والاندماج.</p><span class="go">←</span></a>
+<a class="topic" href="#general" data-page="general"><svg aria-label="رمز الشؤون العامة والمهنية" class="topic-illustration" role="img" viewbox="0 0 320 150"><circle cx="160" cy="75" fill="#EAE5DA" r="58"></circle><path d="M105 61h110M118 61v49m28-49v49m28-49v49m28-49v49M105 112h110M95 61l65-31 65 31" fill="none" stroke="#102A43" stroke-linecap="round" stroke-linejoin="round" stroke-width="7"></path><path d="M139 86h42" stroke="#C9923E" stroke-linecap="round" stroke-width="7"></path></svg><div class="number">04 / GENERAL</div><h3>الشؤون العامة والمهنية</h3><p>مقالات توعوية قانونية للأفراد والمهنيين.</p><span class="go">←</span></a>
+</div></div></section>
+<section class="band" id="about"><div class="wrap band-grid"><div class="band-mark"><img alt="شعار القانون AQ" src="logo.png"/></div><div class="band-copy"><div class="kicker">ABOUT AL-QANUN</div><h2>القانون ليس حكراً على المختصين.</h2><p>نؤمن أن الوصول إلى المعلومة القانونية الواضحة يساعد الأفراد على فهم حقوقهم واتخاذ قرارات أكثر وعياً. لذلك نعمل على تقديم محتوى مبسّط ومتعدد اللغات، مع الحرص على مراجعة المساهمات والرجوع إلى المصادر الرسمية.</p><div class="checks"><span>شرح واضح</span><span>مصادر موثوقة</span><span>مراجعة المحتوى</span></div></div></div></section>
+<section class="section articles" id="articles"><div class="wrap"><div class="section-head"><div><div class="kicker">LATEST KNOWLEDGE</div><h2>أحدث ما في مكتبة المعرفة</h2></div><p>مواد تعريفية تساعدك على فهم الموضوع القانوني وتحديد الخطوة التالية.</p></div><div class="article-grid home-latest-articles"></div><div class="actions"><a class="secondary" href="#articles" data-page="articles">عرض مكتبة المقالات كاملة</a></div></div></section>
+<section class="cta" id="contact"><div class="wrap cta-inner"><div><h2>هل لديك سؤال أو مساهمة؟</h2><p>المعرفة القانونية تصبح أقوى عندما نتشاركها بمسؤولية.</p></div><a class="primary" href="#volunteer" data-page="volunteer">تطوع معنا / أرسل سيرتك</a></div></section>
+</section><section class="page container" id="page-public-law"><h1 class="section-title" data-i18n="navPublic">القانون العام</h1><div class="panel"><p data-i18n="publicIntro">محتوى توعوي حول القانون العام.</p><div id="publicArticles" class="article-list"></div></div><a class="btn secondary" href="#home" data-page="home" data-i18n="back">العودة للرئيسية</a></section>
     <section class="page container" id="page-private-law"><h1 class="section-title" data-i18n="navPrivate">القانون الخاص</h1><div class="panel"><p data-i18n="privateIntro">محتوى توعوي حول القانون الخاص.</p><div id="privateArticles" class="article-list"></div></div><a class="btn secondary" href="#home" data-page="home" data-i18n="back">العودة للرئيسية</a></section>
     <section class="page container" id="page-student"><h1 class="section-title" data-i18n="studentsTitle">الطلاب والأكاديميون</h1><div class="panel"><p data-i18n="studentsText">دعم وإرشادات للطلاب الجامعيين والباحثين.</p><div id="studentArticles" class="article-list"></div></div><a class="btn secondary" href="#home" data-page="home" data-i18n="back">العودة للرئيسية</a></section>
     <section class="page container" id="page-refugee"><h1 class="section-title" data-i18n="refugeeTitle">اللاجئون والحماية</h1><div class="panel"><p data-i18n="refugeeText">شرح مبسط للجوء ولم شمل الأسرة والحماية.</p><div id="refugeeArticles" class="article-list"></div></div><a class="btn secondary" href="#home" data-page="home" data-i18n="back">العودة للرئيسية</a></section>
@@ -269,16 +325,8 @@ footer{margin-top:0;padding:28px 20px;text-align:center;background:var(--navy-de
         </div>
       </div>
     </section>
-  </main>
-
-  <footer>
-    <p data-i18n="footer">جميع الحقوق محفوظة © 2026 - منصة <span>AQ القانون</span></p>
-    <small data-i18n="footerNote">منصة القانون AQ تقدّم معلومات قانونية مبسّطة، ولا تُغني عن استشارة محامٍ مختص.</small>
-    <p><a href="privacy-policy.html" style="color:var(--gold);text-decoration:underline" data-i18n="privacyPolicyLink">سياسة الخصوصية / Privacyverklaring / Privacy Policy</a></p>
-  </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script>
+  </main><footer class="footer"><div class="wrap"><div class="footgrid"><div><div class="footbrand"><img alt="القانون AQ" src="logo.png"/></div><p>مرجع معرفي لتبسيط القوانين الهولندية وتسهيل الوصول إلى المعلومات القانونية بلغات متعددة.</p></div><div><h4>تصفّح الموقع</h4><a href="#public-law" data-page="public-law">القانون العام</a><a href="#private-law" data-page="private-law">القانون الخاص</a><a href="#articles" data-page="articles">المقالات</a><a href="#about" data-page="about">عن القانون</a></div><div><h4>معلومات مهمة</h4><a href="#volunteer" data-page="volunteer">تطوع معنا</a><a href="#contact">ساهم معنا</a><a href="#contact">سياسة الخصوصية</a></div></div><div class="copy"><span>© 2026 القانون AQ — جميع الحقوق محفوظة</span><span>المحتوى للتوعية العامة ولا يُعد استشارة قانونية.</span></div></div></footer><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
   'use strict';
   const SUPABASE_URL = 'https://vmrhohvvdapvebxxiilu.supabase.co';
   const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_00z1UqTfpp_24yZf3-_KKA_l2sa41-3';
@@ -730,6 +778,5 @@ footer{margin-top:0;padding:28px 20px;text-align:center;background:var(--navy-de
         showVolunteerWorkspace();
       }else await endVolunteerSession('انتهت جلسة الدخول. سجّل الدخول مجدداً.');}else if(savedExpiry){await endVolunteerSession('انتهت جلسة الدخول. سجّل الدخول مجدداً.');}
   })();
-  </script>
-</body>
+  </script></body>
 </html>
