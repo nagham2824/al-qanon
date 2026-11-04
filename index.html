@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#102A43">
-  <meta name="description" content="منصة القانون AQ: تبسيط القوانين الهولندية باللغة العربية ولغات أخرى، مع الإحالة إلى المصادر الرسمية.">
-  <title>منصة القانون AQ</title>
+  <meta name="description" content="القانون AQ: تبسيط القوانين الهولندية باللغة العربية ولغات أخرى، مع الإحالة إلى المصادر الرسمية.">
+  <title>القانون AQ | معلومات قانونية مبسّطة في هولندا</title>
   <link rel="canonical" href="https://aq-law.nl/">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="منصة القانون AQ">
+  <meta property="og:title" content="القانون AQ">
   <meta property="og:description" content="تبسيط القوانين الهولندية باللغة العربية ولغات أخرى، مع الإحالة إلى المصادر الرسمية.">
   <meta property="og:url" content="https://aq-law.nl/">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -63,38 +63,82 @@
     @media(max-width:620px){.grid,.form-grid,.two-col{grid-template-columns:1fr}.form-row.full{grid-column:auto}nav ul{justify-content:center;gap:10px}nav a{font-size:.85rem}.logo img{width:150px;height:58px}.hero{padding:2rem .8rem 2.5rem}.hero::before{background-size:115vw auto;opacity:.09}.hero h1{font-size:clamp(3.2rem,15vw,4.5rem);gap:.6rem}.hero h1::before,.hero h1::after{height:3px}.hero p{font-size:1rem}.hero .btn{font-size:1rem;padding:.75rem 1.2rem}.card img{height:190px}}
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important}}
       @media(prefers-reduced-motion:reduce){.hero h1{animation:none!important;background-position:100% 0!important}}
+  
+:root{--muted:#d1d8e0;--danger:#ffb4ab;--success:#b7efc5;--heading-yellow:#C9923E}
+.aq-hero::before{display:none!important}
+.topbar{position:sticky;top:0;z-index:100;background:#EAE5DA;border-bottom:1px solid #d7cbb8;box-shadow:0 2px 8px #102a4310;padding:0}
+.aq-nav-wrap{width:min(1180px,calc(100% - 36px));min-height:70px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.aq-brand{display:flex;align-items:center;flex:0 0 auto}.aq-brand img{display:block;width:126px;height:48px;object-fit:contain}
+.aq-navlinks{display:flex;align-items:center;justify-content:center;gap:clamp(8px,1.35vw,20px);flex-wrap:wrap}
+.aq-navlinks a{font-size:12px;font-weight:800;color:#102A43;white-space:nowrap}.aq-navlinks a:hover,.aq-navlinks a[aria-current=page]{color:#9a6c2d}
+.aq-nav-tools{flex:0 0 auto}.aq-nav-tools .lang-select{background:#f4ecdf;color:#102A43;border:1px solid #dfd1bc;border-radius:24px;padding:8px 12px;font:800 12px 'Cairo',sans-serif}
+#page-home{background:#F8F4EC;color:#172B3D}
+#page-home .aq-hero{position:relative;isolation:isolate;min-height:340px;display:block;overflow:hidden;text-align:initial;padding:0 clamp(14px,4vw,48px);background:linear-gradient(90deg,rgba(7,34,55,.98) 0%,rgba(7,34,55,.96) 38%,rgba(7,34,55,.70) 61%,rgba(7,34,55,.08) 100%),url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=2000&q=85') center 45%/cover no-repeat;border:0;color:#fff}
+.aq-hero-layout{width:min(1180px,100%);margin:auto;display:grid;grid-template-columns:250px minmax(300px,1fr);gap:48px;align-items:center;padding:42px 0 50px}
+.aq-hero-brand{border-left:2px solid #C9923E;padding-left:32px;display:flex;align-items:center;justify-content:center;min-height:150px}.aq-hero-brand img{width:220px;max-width:100%;height:auto;max-height:120px;object-fit:contain}
+.aq-hero-copy{max-width:680px}.aq-hero-copy h1{font-size:clamp(30px,4vw,48px);line-height:1.4;margin:0 0 8px;color:#fff;font-weight:900;text-shadow:none;display:block;width:auto;animation:none;background:none;-webkit-text-fill-color:initial}
+.aq-hero-copy h1 span{color:#E5B45E}.aq-hero-copy p{font-size:16px;line-height:2;color:#f3f0e9;margin:12px 0 22px;font-weight:600}
+.aq-hero-actions{display:flex;gap:12px;flex-wrap:wrap}.aq-btn-gold,.aq-btn-outline{display:inline-flex;align-items:center;justify-content:center;padding:11px 22px;border-radius:28px;font-size:13px;font-weight:900}
+.aq-btn-gold{background:linear-gradient(135deg,#F1C56F,#D99D3F);color:#182d40}.aq-btn-outline{border:1px solid #e6d8bf;color:#fff;background:#ffffff12}
+#page-home>.container{width:min(1180px,calc(100% - 36px));padding:26px 0 32px;margin:0 auto}
+#page-home .section-title{font-family:'Cairo',sans-serif;color:#102A43!important;font-size:27px;margin:0 0 20px;text-shadow:none}
+#page-home .grid{grid-template-columns:repeat(5,minmax(0,1fr));gap:16px}
+#page-home .card{overflow:hidden;border-radius:13px;background:#fff;border:1px solid #e2d8c9;box-shadow:0 5px 16px #102a4312;border-top:0}
+#page-home .card img{width:100%;height:145px;object-fit:cover;display:block}#page-home .card-body{background:#102A43;color:#fff;padding:12px 14px;gap:7px}
+#page-home .card h3{font-size:14px;color:#fff;margin:0}#page-home .card p{font-size:11px;line-height:1.7;color:#dbe3e9}#page-home .card .btn{margin-top:5px;background:#C9923E;color:#102A43;width:100%;font-size:11px}
+.aq-about-strip{display:grid;grid-template-columns:1fr 1fr;align-items:stretch;background:#f4eadb;border-top:1px solid #e6d9c7;border-bottom:1px solid #e6d9c7}
+.aq-about-photo{min-height:220px;background:url('https://images.unsplash.com/photo-1589216532372-1c2a367900d9?auto=format&fit=crop&w=1200&q=85') center/cover no-repeat}
+.aq-about-copy{padding:28px clamp(22px,5vw,65px);display:flex;flex-direction:column;justify-content:center;align-items:flex-start}
+.aq-about-copy h2,.aq-volunteer-copy h2,.aq-home-articles h2{font-size:26px;color:#102A43;margin:0 0 8px;font-weight:900}.aq-about-copy p{font-size:14px;line-height:2;color:#33485b;margin:0 0 14px}
+.aq-about-link{color:#fff;background:#102A43;padding:8px 18px;border-radius:25px;font-size:12px;font-weight:800}
+.aq-volunteer-strip{width:min(1180px,calc(100% - 36px));margin:22px auto 24px;display:grid;grid-template-columns:1.25fr .85fr;min-height:178px;overflow:hidden;border-radius:13px;border:1px solid #C9923E;background:linear-gradient(110deg,#08243b,#163758);box-shadow:0 7px 18px #102a4318}
+.aq-volunteer-copy{padding:22px 30px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;color:#fff}.aq-volunteer-copy h2{color:#fff;font-size:24px}.aq-volunteer-copy p{font-size:13px;line-height:1.9;color:#e3e9ed;margin:0 0 12px}
+.aq-volunteer-photo{min-height:178px;background:linear-gradient(90deg,#102A43 0%,transparent 35%),url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1000&q=85') center/cover no-repeat}
+.aq-home-articles{width:min(1180px,calc(100% - 36px));margin:0 auto 32px}.aq-home-articles-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}.aq-home-articles-head a{color:#102A43;font-weight:800;font-size:12px}
+.aq-footer-brand{margin:0 auto 12px}.aq-footer-brand img{width:150px;height:58px;object-fit:contain;filter:none}
+@media(max-width:1000px){.aq-nav-wrap{flex-wrap:wrap;justify-content:center;padding:8px 0}.aq-navlinks{gap:8px 13px}#page-home .grid{grid-template-columns:repeat(3,minmax(0,1fr))}.aq-hero-layout{grid-template-columns:210px 1fr;gap:25px}}
+@media(max-width:620px){.aq-nav-wrap{width:calc(100% - 24px);flex-direction:column;align-items:flex-start;gap:6px}.aq-brand img{width:105px;height:40px}.aq-navlinks{width:100%;justify-content:flex-start;gap:7px 12px}.aq-navlinks a{font-size:10px}.aq-nav-tools .lang-select{font-size:10px;padding:6px 10px}.aq-hero-layout{grid-template-columns:1fr;gap:14px;padding:26px 0 38px}.aq-hero-brand{border-left:0;border-bottom:1px solid #C9923E;padding:0 0 12px;min-height:unset;justify-content:flex-start}.aq-hero-brand img{width:150px;height:55px;object-position:right}.aq-hero-copy h1{font-size:29px}.aq-hero-copy p{font-size:13px}#page-home .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}#page-home .card img{height:115px}#page-home .card-body{padding:9px}#page-home .card h3{font-size:12px}.aq-about-strip{grid-template-columns:1fr}.aq-about-photo{min-height:165px;order:2}.aq-about-copy{padding:22px}.aq-volunteer-strip{grid-template-columns:1fr}.aq-volunteer-photo{min-height:125px;order:-1}.aq-volunteer-copy{padding:19px}.aq-home-articles-head{align-items:flex-start;flex-direction:column}}
+
   </style>
 </head>
 <body>
   <a class="skip" href="#main" data-i18n="skip">تجاوز إلى المحتوى</a>
-  <header>
-   <a class="logo" href="#home" data-page="home" aria-label="AQ القانون"><img src="logo.png" alt="شعار منصة القانون AQ"></a>
-    <div class="nav-container">
-      <nav aria-label="Main navigation"><ul>
-        <li><a href="#home" data-page="home" data-i18n="navHome">الرئيسية</a></li>
-        <li><a href="#public-law" data-page="public-law" data-i18n="navPublic">القانون العام</a></li>
-        <li><a href="#private-law" data-page="private-law" data-i18n="navPrivate">القانون الخاص</a></li>
-        <li><a href="#articles" data-page="articles" data-i18n="navArticles">المقالات</a></li>
-        <li><a href="#about" data-page="about" data-i18n="navAbout">من نحن</a></li>
-        <li><a href="#admin" data-page="admin" data-i18n="navAdmin">الإدارة</a></li>
-        <li><a href="#volunteer" id="navVolunteerMembers" data-i18n="navVolunteers">المتطوعون</a></li>
-      </ul></nav>
-      <label class="hidden" for="langSelect" data-i18n="language">اللغة</label>
+  <header class="topbar">
+  <div class="aq-nav-wrap">
+    <a class="aq-brand" href="#home" data-page="home" aria-label="القانون AQ"><img src="logo.png" alt="شعار القانون AQ"></a>
+    <nav class="aq-navlinks" aria-label="التنقل الرئيسي">
+      <a href="#home" data-page="home" data-i18n="navHome">الرئيسية</a>
+      <a href="#public-law" data-page="public-law" data-i18n="navPublic">القانون العام</a>
+      <a href="#private-law" data-page="private-law" data-i18n="navPrivate">القانون الخاص</a>
+      <a href="#articles" data-page="articles" data-i18n="navArticles">المقالات</a>
+      <a href="#about" data-page="about" data-i18n="navAbout">من نحن</a>
+      <a href="#volunteer" data-page="volunteer" data-i18n="navVolunteer">تطوع معنا</a>
+      <a href="#volunteer" id="navVolunteerMembers" data-page="volunteer" data-i18n="navVolunteers">المتطوعون</a>
+      <a href="#admin" data-page="admin" data-i18n="navAdmin">الإدارة</a>
+    </nav>
+    <div class="aq-nav-tools"><label class="hidden" for="langSelect" data-i18n="language">اللغة</label>
       <select class="lang-select" id="langSelect" aria-label="Language">
         <option value="ar">العربية</option><option value="nl">Nederlands</option><option value="tr">Türkçe</option><option value="en">English</option>
       </select>
     </div>
-  </header>
+  </div>
+</header>
 
   <main id="main">
     <section class="page active" id="page-home">
-      <div class="hero">
-        <h1 class="hero-brand"><span lang="ar">القانون</span></h1>
-        <p data-i18n="heroText">منصة لتبسيط وشرح القوانين الهولندية باللغة العربية، مع محتوى توعوي بلغات متعددة.</p>
-        <a class="btn" href="#volunteer" data-page="volunteer" data-i18n="heroCta">تطوع معنا / أرسل سيرتك</a>
-
-
+      <div class="hero aq-hero">
+  <div class="aq-hero-layout">
+    <div class="aq-hero-brand"><img src="logo.png" alt="شعار القانون AQ"></div>
+    <div class="aq-hero-copy">
+      <h1>القانون <span>AQ</span></h1>
+      <p data-i18n="heroText">معلومات قانونية مبسّطة وواضحة باللغة العربية ولغات أخرى، تساعدك على فهم حقوقك وخياراتك في هولندا.</p>
+      <div class="aq-hero-actions">
+        <a class="aq-btn-gold" href="#articles" data-page="articles" data-i18n="explore">اكتشف المزيد</a>
+        <a class="aq-btn-outline" href="#about" data-page="about" data-i18n="navAbout">تعرّف على القانون AQ</a>
       </div>
+    </div>
+  </div>
+</div>
       <section class="container">
         <h2 class="section-title" data-i18n="audienceTitle">الفئات المستهدفة</h2>
         <div class="grid">
@@ -102,9 +146,12 @@
           <article class="card"><img loading="lazy" src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=700&q=80" alt="Community support"><div class="card-body"><h3 data-i18n="refugeeTitle">اللاجئون والحماية</h3><p data-i18n="refugeeText">شرح مبسط للجوء ولم شمل الأسرة والحماية.</p><a class="btn" href="#refugee" data-page="refugee" data-i18n="explore">استكشف المزيد</a></div></article>
           <article class="card"><img loading="lazy" src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=700&q=80" alt="People working"><div class="card-body"><h3 data-i18n="residentTitle">المقيمون والعمل</h3><p data-i18n="residentText">معلومات عامة عن الإقامة وعقود العمل والاندماج.</p><a class="btn" href="#resident" data-page="resident" data-i18n="explore">استكشف المزيد</a></div></article>
           <article class="card"><img loading="lazy" src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=700&q=80" alt="Professional work"><div class="card-body"><h3 data-i18n="generalTitle">الشؤون العامة والمهنية</h3><p data-i18n="generalText">مقالات توعوية قانونية للأفراد والمهنيين.</p><a class="btn" href="#general" data-page="general" data-i18n="explore">استكشف المزيد</a></div></article>
+          <article class="card aq-admin-card"><img loading="lazy" src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=88" alt="فريق إداري يعمل في مكتب حديث"><div class="card-body"><h3 data-i18n="navAdmin">الإدارة</h3><p>إدارة المحتوى ومراجعته ونشره.</p><a class="btn" href="#admin" data-page="admin" data-i18n="explore">استكشف المزيد</a></div></article>
         </div>
       </section>
-    </section>
+
+      <section class="aq-about-strip"><div class="aq-about-photo" role="img" aria-label="كتب قانونية ومكان عمل"></div><div class="aq-about-copy"><h2>عن القانون AQ</h2><p>نسعى إلى جعل المعلومات القانونية الهولندية أوضح وأسهل وصولاً، مع توضيح المصادر والتمييز بين المعلومات العامة والاستشارة القانونية الفردية.</p><a class="aq-about-link" href="#about" data-page="about">اعرف المزيد</a></div></section>
+      <section class="aq-volunteer-strip"><div class="aq-volunteer-photo" role="img" aria-label="شخص يعمل على حاسوب محمول"></div><div class="aq-volunteer-copy"><h2 data-i18n="volunteerTitle">تطوّع معنا</h2><p data-i18n="volunteerIntro">إذا كنت ترغب بالمساهمة معنا، راسل المشرفة نور عبر البريد الإلكتروني وأرفق سيرتك الذاتية.</p><a class="aq-btn-gold" href="#volunteer" data-page="volunteer" data-i18n="sendRequest">أرسل سيرتك الذاتية</a></div></section></section>
 
     <section class="page container" id="page-public-law"><h1 class="section-title" data-i18n="navPublic">القانون العام</h1><div class="panel"><p data-i18n="publicIntro">محتوى توعوي حول القانون العام.</p><div id="publicArticles" class="article-list"></div></div><a class="btn secondary" href="#home" data-page="home" data-i18n="back">العودة للرئيسية</a></section>
     <section class="page container" id="page-private-law"><h1 class="section-title" data-i18n="navPrivate">القانون الخاص</h1><div class="panel"><p data-i18n="privateIntro">محتوى توعوي حول القانون الخاص.</p><div id="privateArticles" class="article-list"></div></div><a class="btn secondary" href="#home" data-page="home" data-i18n="back">العودة للرئيسية</a></section>
@@ -238,6 +285,7 @@
   </main>
 
   <footer>
+    <div class="aq-footer-brand"><img src="logo.png" alt="شعار القانون AQ"></div>
     <p data-i18n="footer">جميع الحقوق محفوظة © 2026 - منصة <span>AQ القانون</span></p>
     <small data-i18n="footerNote">منصة القانون AQ تقدّم معلومات قانونية مبسّطة، ولا تُغني عن استشارة محامٍ مختص.</small>
     <p><a href="privacy-policy.html" style="color:var(--gold);text-decoration:underline" data-i18n="privacyPolicyLink">سياسة الخصوصية / Privacyverklaring / Privacy Policy</a></p>
