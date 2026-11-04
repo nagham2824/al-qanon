@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#102A43">
-  <meta name="description" content="منصة القانون AQ: تبسيط القوانين الهولندية باللغة العربية ولغات أخرى، مع الإحالة إلى المصادر الرسمية.">
-  <title>منصة القانون AQ</title>
+  <meta name="description" content="القانون AQ: تبسيط القوانين الهولندية باللغة العربية ولغات أخرى، مع الإحالة إلى المصادر الرسمية.">
+  <title>القانون AQ | معلومات قانونية مبسّطة في هولندا</title>
   <link rel="canonical" href="https://aq-law.nl/">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="منصة القانون AQ">
+  <meta property="og:title" content="القانون AQ">
   <meta property="og:description" content="تبسيط القوانين الهولندية باللغة العربية ولغات أخرى، مع الإحالة إلى المصادر الرسمية.">
   <meta property="og:url" content="https://aq-law.nl/">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -145,7 +145,7 @@
           <article class="card"><img loading="lazy" src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=700&q=80" alt="Community support"><div class="card-body"><h3 data-i18n="refugeeTitle">اللاجئون والحماية</h3><p data-i18n="refugeeText">شرح مبسط للجوء ولم شمل الأسرة والحماية.</p><a class="btn" href="#refugee" data-page="refugee" data-i18n="explore">استكشف المزيد</a></div></article>
           <article class="card"><img loading="lazy" src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=700&q=80" alt="People working"><div class="card-body"><h3 data-i18n="residentTitle">المقيمون والعمل</h3><p data-i18n="residentText">معلومات عامة عن الإقامة وعقود العمل والاندماج.</p><a class="btn" href="#resident" data-page="resident" data-i18n="explore">استكشف المزيد</a></div></article>
           <article class="card"><img loading="lazy" src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=700&q=80" alt="Professional work"><div class="card-body"><h3 data-i18n="generalTitle">الشؤون العامة والمهنية</h3><p data-i18n="generalText">مقالات توعوية قانونية للأفراد والمهنيين.</p><a class="btn" href="#general" data-page="general" data-i18n="explore">استكشف المزيد</a></div></article>
-          <article class="card aq-admin-card"><img loading="lazy" src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=88" alt="فريق إداري يعمل في مكتب حديث"><div class="card-body"><h3 data-i18n="adminTitle">الإدارة</h3><p>إدارة المحتوى ومراجعته ونشره.</p><a class="btn" href="#admin" data-page="admin" data-i18n="explore">استكشف المزيد</a></div></article>
+          <article class="card aq-admin-card"><img loading="lazy" src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=88" alt="فريق إداري يعمل في مكتب حديث"><div class="card-body"><h3 data-i18n="navAdmin">الإدارة</h3><p>إدارة المحتوى ومراجعته ونشره.</p><a class="btn" href="#admin" data-page="admin" data-i18n="explore">استكشف المزيد</a></div></article>
         </div>
       </section>
 
@@ -400,7 +400,6 @@
   }
   function renderArticles(){
     const published=articles.filter(article=>article.status==='published');
-    renderArticleTarget('homeArticles',published.slice(0,4),false);
     renderArticleTarget('homeArticles',published.slice(0,4),false);
     renderArticleTarget('allArticles',published,false);
     renderArticleTarget('publicArticles',published.filter(article=>article.category==='public-law'),false);
