@@ -234,7 +234,63 @@ body{background:var(--paper)!important;color:var(--ink)!important;font-family:'C
 @media(max-width:1000px){.aq-reference-header .nav{gap:12px}.aq-reference-header .navlinks{gap:12px}.aq-reference-header .brand img{width:145px}.aq-hero-grid{grid-template-columns:1fr 270px!important;gap:35px!important}}
 @media(max-width:720px){.top .wrap{width:calc(100% - 30px)}.aq-reference-header .nav{width:calc(100% - 30px);min-height:0;padding:12px 0;display:flex;flex-wrap:wrap;justify-content:center}.aq-reference-header .brand img{width:145px;height:55px}.aq-reference-header .navlinks{order:3;flex:1 0 100%;gap:10px 16px;justify-content:center}.aq-reference-header .navside{gap:8px}.aq-hero{padding:38px 0!important;background:linear-gradient(180deg,#EAE5DA 0%,#EAE5DA 72%,#D8CBB5 72%,#D8CBB5 100%)!important}.aq-hero-grid{width:calc(100% - 30px)!important;grid-template-columns:1fr!important;gap:25px!important}.aq-hero-copy{order:1}.aq-hero-brand{order:2;border-right:0;border-top:1px solid #D6CFC2;padding:22px 0 0!important}.aq-hero-brand img{width:min(100%,270px)!important;max-height:120px!important}.aq-hero-copy p{font-size:16px!important}.aq-reference-stats-grid{width:calc(100% - 30px);grid-template-columns:1fr;padding:10px 0}.aq-reference-stat{padding:12px 8px;border-left:0;border-bottom:1px solid rgba(255,255,255,.15)}.aq-reference-stat:last-child{border-bottom:0}}
 
-</style>
+
+/* AQ Design 2 — faithful homepage sections, scoped to avoid changing app pages */
+#page-home.page{display:block;width:100%;max-width:none;min-height:0;margin:0;padding:0;background:#D8CBB5;color:#1C2B39}
+#page-home .wrap{width:min(1180px,calc(100% - 48px));max-width:none;margin-left:auto;margin-right:auto;padding:0}
+.aq-reference-header .brand img{filter:brightness(0) invert(1)}
+.aq-reference-header .lang-select{border:1px solid rgba(244,240,232,.55)!important;border-radius:4px!important;padding:9px 12px!important;font-size:11px!important;font-weight:800!important}
+.aq-reference-header .member{background:transparent!important;color:#F4F0E8!important;padding:8px 2px!important;border:0!important;border-bottom:1px solid rgba(201,146,62,.8)!important;border-radius:0!important;box-shadow:none!important;font-size:12px!important}
+.aq-btn-gold{background:#C9923E!important;color:#172b3d!important;border:1px solid #C9923E!important}
+.aq-btn-outline{border:1px solid #b8b4aa!important;color:#102A43!important;background:transparent!important}
+#page-home .section{padding:76px 0;background:#D8CBB5}
+#page-home .section-head{display:flex;align-items:end;justify-content:space-between;gap:25px;margin-bottom:28px}
+#page-home .kicker{font-size:10px;color:#9a6c2d;font-weight:900;letter-spacing:1.5px;direction:ltr;text-align:right}
+#page-home .section h2{font-size:29px;color:#102A43;margin:6px 0 0;text-align:right}
+#page-home .section-head p{max-width:460px;color:#687786;font-size:12px;line-height:2;margin:0}
+#page-home .topics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:#CDBFA6;border:1px solid #CDBFA6}
+#page-home .topic{display:block;position:relative;min-height:205px;background:#fff;padding:27px 25px 25px;color:#1C2B39;text-decoration:none;transition:background .2s;overflow:hidden}
+#page-home .topic:hover{background:#FBF8F1}
+#page-home .topic-illustration{display:block;width:100%;height:145px;margin:0 0 16px;background:#F3EEE4}
+#page-home .topic .number{font-family:Georgia,serif;font-size:13px;color:#A77A3A;border-bottom:1px solid #D8C6A9;width:max-content;padding-bottom:8px}
+#page-home .topic h3{font-size:17px;color:#102A43;margin:17px 0 7px}
+#page-home .topic p{font-size:11px;line-height:2;color:#73808b;margin:0;max-width:290px}
+#page-home .topic .go{position:absolute;left:23px;bottom:20px;color:#C9923E;font-size:18px}
+#page-home .band{background:#CDBFA6;padding:58px 0}
+#page-home .band-grid{display:grid;grid-template-columns:.75fr 1.25fr;gap:60px;align-items:center}
+#page-home .band-mark{background:#102A43;padding:32px;min-height:220px;display:grid;place-items:center}
+#page-home .band-mark img{width:100%;max-width:280px;filter:none;object-fit:contain}
+#page-home .band-copy h2{font-size:29px;line-height:1.6;color:#102A43;margin:8px 0 10px}
+#page-home .band-copy p{font-size:12px;line-height:2.2;color:#687786;margin:0}
+#page-home .checks{display:flex;gap:18px;flex-wrap:wrap;margin-top:20px}
+#page-home .checks span{font-size:11px;font-weight:800;color:#102A43}
+#page-home .checks span:before{content:"";display:inline-block;width:6px;height:6px;background:#C9923E;margin-left:8px;vertical-align:middle}
+#page-home .articles{background:#fff}
+#page-home .article-grid{display:grid;grid-template-columns:1.15fr 1fr 1fr;gap:18px}
+#page-home .article{border-top:3px solid #C9923E;background:#D8CBB5;padding:24px 22px 20px;min-height:225px;color:#1C2B39}
+#page-home .article .type{font-size:10px;color:#9A6C2D;font-weight:900}
+#page-home .article h3{font-size:15px;line-height:1.9;color:#102A43;margin:13px 0 7px}
+#page-home .article p{font-size:11px;line-height:2;color:#73808b;margin:0}
+#page-home .article .meta{font-size:10px;color:#929ba2;margin-top:18px}
+#page-home .aq2-more{display:flex;justify-content:flex-start;margin-top:25px}
+#page-home .aq-btn-navy{display:inline-flex;align-items:center;justify-content:center;background:#102A43;color:#fff;padding:12px 22px;border-radius:3px;font-size:12px;font-weight:900}
+#page-home .cta{background:#102A43;color:#fff;padding:45px 0}
+#page-home .cta-inner{display:flex;align-items:center;justify-content:space-between;gap:25px}
+#page-home .cta h2{font-size:24px;color:#fff;margin:0 0 5px}
+#page-home .cta p{font-size:11px;color:#c2ccd5;margin:0}
+#page-home .cta .primary{display:inline-flex;background:#C9923E;color:#172b3d;padding:13px 23px;border-radius:3px;font-size:12px;font-weight:900}
+.aq2-footer{background:#0b2033;color:#c1ccd5;padding:42px 0 18px;margin:0;text-align:right;border:0}
+.aq2-footer .wrap{width:min(1180px,calc(100% - 48px));margin:auto}
+.aq2-footer .footgrid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;padding-bottom:25px}
+.aq2-footer .footbrand img{width:175px;height:65px;object-fit:contain;object-position:right center;filter:brightness(0) invert(1)}
+.aq2-footer p{font-size:11px;line-height:2;color:#9eafbe;max-width:350px;margin:10px 0}
+.aq2-footer h4{font-size:12px;color:#fff;margin:0 0 12px}
+.aq2-footer a{display:block;font-size:11px;color:#b4c0ca;margin:8px 0}
+.aq2-footer .copy{border-top:1px solid #ffffff20;padding-top:15px;display:flex;justify-content:space-between;font-size:10px;color:#8194a5}
+@media(max-width:850px){#page-home .topics{grid-template-columns:repeat(2,minmax(0,1fr))}#page-home .band-grid{gap:30px}}
+@media(max-width:620px){#page-home .wrap,.aq2-footer .wrap{width:calc(100% - 30px)}#page-home .section{padding:55px 0}#page-home .section-head{display:block}#page-home .section-head p{margin-top:10px}#page-home .section h2{font-size:25px}#page-home .topics{grid-template-columns:1fr}#page-home .topic{min-height:175px}#page-home .band-grid{grid-template-columns:1fr;gap:25px}#page-home .band-mark{min-height:170px}#page-home .band-mark img{max-width:220px}#page-home .band-copy h2{font-size:25px}#page-home .article-grid{grid-template-columns:1fr}#page-home .cta-inner{display:block;text-align:center}#page-home .cta .primary{display:inline-flex;margin-top:18px}.aq2-footer .footgrid{grid-template-columns:1fr 1fr;gap:25px}.aq2-footer .footgrid>div:first-child{grid-column:span 2}.aq2-footer .copy{display:block;line-height:2}}
+
+  </style>
 </head>
 <body>
   <a class="skip" href="#main" data-i18n="skip">تجاوز إلى المحتوى</a>
@@ -277,26 +333,64 @@ body{background:var(--paper)!important;color:var(--ink)!important;font-family:'C
     <div class="aq-reference-stat"><b>02</b><span data-i18n="statTwo">مصادر رسمية يمكن الرجوع إليها</span></div>
     <div class="aq-reference-stat"><b>03</b><span data-i18n="statThree">محتوى بأربع لغات</span></div>
   </div></div>
-  <section class="container aq-audience">
-    <div class="aq-section-head"><span>EXPLORE THE KNOWLEDGE</span><h2 class="section-title" data-i18n="audienceTitle">الفئات المستهدفة</h2><p>محتوى قانوني مبسّط موجّه إلى فئات مختلفة، وبأربع لغات: العربية والهولندية والتركية والإنجليزية.</p></div>
-    <div class="grid">
-      <article class="card"><img loading="lazy" src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=900&q=85" alt="طلاب جامعيون"><div class="card-body"><h3 data-i18n="studentsTitle">الطلاب والأكاديميون</h3><p data-i18n="studentsText">دعم وإرشادات للطلاب الجامعيين والباحثين.</p><a class="btn" href="#student" data-page="student" data-i18n="explore">استكشف المزيد</a></div></article>
-      <article class="card"><img loading="lazy" src="https://images.unsplash.com/photo-1542810634-71277d95dcbb?auto=format&fit=crop&w=900&q=85" alt="أم تحتضن طفلها"><div class="card-body"><h3 data-i18n="refugeeTitle">اللاجئون والحماية</h3><p data-i18n="refugeeText">شرح مبسط للجوء ولم شمل الأسرة والحماية.</p><a class="btn" href="#refugee" data-page="refugee" data-i18n="explore">استكشف المزيد</a></div></article>
-      <article class="card"><img loading="lazy" src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=900&q=85" alt="زملاء يعملون معاً"><div class="card-body"><h3 data-i18n="residentTitle">المقيمون والعمل</h3><p data-i18n="residentText">معلومات عامة عن الإقامة وعقود العمل والاندماج.</p><a class="btn" href="#resident" data-page="resident" data-i18n="explore">استكشف المزيد</a></div></article>
-      <article class="card"><img loading="lazy" src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=900&q=85" alt="باحث يقرأ في مكتبة"><div class="card-body"><h3 data-i18n="generalTitle">الشؤون العامة والمهنية</h3><p data-i18n="generalText">مقالات توعوية قانونية للأفراد والمهنيين.</p><a class="btn" href="#general" data-page="general" data-i18n="explore">استكشف المزيد</a></div></article>
+
+  <section class="section aq2-fields" id="fields">
+    <div class="wrap">
+      <div class="section-head">
+        <div><div class="kicker">EXPLORE THE KNOWLEDGE</div><h2 data-i18n="audienceTitle">الفئات المستهدفة</h2></div>
+        <p>محتوى قانوني مبسّط موجّه إلى فئات مختلفة، وبأربع لغات: العربية والهولندية والتركية والإنجليزية.</p>
+      </div>
+      <div class="topics audience-grid">
+        <a class="topic" href="#student" data-page="student">
+          <svg class="topic-illustration" role="img" aria-label="رمز الطلاب والأكاديميين" viewBox="0 0 320 150"><circle cx="160" cy="75" r="58" fill="#EAE5DA"/><path d="M92 62 160 30l68 32-68 32-68-32Z" fill="#C9923E"/><path d="M117 76v28c23 18 63 18 86 0V76l-43 20-43-20Z" fill="#102A43"/><path d="M228 62v42" stroke="#102A43" stroke-width="5" stroke-linecap="round"/><circle cx="228" cy="111" r="7" fill="#C9923E"/><path d="M140 112h40" stroke="#C9923E" stroke-width="5" stroke-linecap="round"/></svg>
+          <div class="number">01 / STUDENTS</div><h3 data-i18n="studentsTitle">الطلاب والأكاديميون</h3><p data-i18n="studentsText">دعم وإرشادات للطلاب الجامعيين والباحثين.</p><span class="go" aria-hidden="true">←</span>
+        </a>
+        <a class="topic" href="#refugee" data-page="refugee">
+          <svg class="topic-illustration" role="img" aria-label="رمز الحماية" viewBox="0 0 320 150"><circle cx="160" cy="75" r="58" fill="#EAE5DA"/><path d="M160 27 215 48v36c0 31-23 51-55 64-32-13-55-33-55-64V48l55-21Z" fill="#102A43"/><path d="m133 76 18 18 37-40" fill="none" stroke="#C9923E" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/><path d="M122 116h76" stroke="#C9923E" stroke-width="5" stroke-linecap="round"/></svg>
+          <div class="number">02 / REFUGEES</div><h3 data-i18n="refugeeTitle">اللاجئون والحماية</h3><p data-i18n="refugeeText">شرح مبسط للجوء ولم شمل الأسرة والحماية.</p><span class="go" aria-hidden="true">←</span>
+        </a>
+        <a class="topic" href="#resident" data-page="resident">
+          <svg class="topic-illustration" role="img" aria-label="رمز الإقامة والعمل" viewBox="0 0 320 150"><circle cx="160" cy="75" r="58" fill="#EAE5DA"/><rect x="112" y="54" width="96" height="66" rx="9" fill="#102A43"/><path d="M142 54V43a9 9 0 0 1 9-9h18a9 9 0 0 1 9 9v11" fill="none" stroke="#C9923E" stroke-width="7"/><path d="M112 78h96M151 78v12h18V78" fill="none" stroke="#C9923E" stroke-width="6" stroke-linejoin="round"/></svg>
+          <div class="number">03 / RESIDENTS</div><h3 data-i18n="residentTitle">المقيمون والعمل</h3><p data-i18n="residentText">معلومات عامة عن الإقامة وعقود العمل والاندماج.</p><span class="go" aria-hidden="true">←</span>
+        </a>
+        <a class="topic" href="#general" data-page="general">
+          <svg class="topic-illustration" role="img" aria-label="رمز الشؤون العامة والمهنية" viewBox="0 0 320 150"><circle cx="160" cy="75" r="58" fill="#EAE5DA"/><path d="M105 61h110M118 61v49m28-49v49m28-49v49m28-49v49M105 112h110M95 61l65-31 65 31" fill="none" stroke="#102A43" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><path d="M139 86h42" stroke="#C9923E" stroke-width="7" stroke-linecap="round"/></svg>
+          <div class="number">04 / GENERAL</div><h3 data-i18n="generalTitle">الشؤون العامة والمهنية</h3><p data-i18n="generalText">مقالات توعوية قانونية للأفراد والمهنيين.</p><span class="go" aria-hidden="true">←</span>
+        </a>
+      </div>
     </div>
   </section>
-  <section class="aq-about">
-    <div class="aq-about-inner">
-      <div class="aq-about-mark"><img src="logo.png" alt="شعار القانون AQ"><span>KNOWLEDGE · RIGHTS · CLARITY</span></div>
-      <div class="aq-about-copy"><span class="aq-kicker">ABOUT AL-QANUN</span><h2 data-i18n="aboutHeading">عن منصة القانون AQ</h2><p data-i18n="aboutText">نسعى إلى جعل المعلومات القانونية الهولندية أوضح وأسهل وصولاً، مع توضيح المصادر والتمييز بين المعلومات العامة والاستشارة القانونية الفردية.</p><a class="aq-text-link" href="#about" data-page="about">اكتشف رؤيتنا ←</a></div>
+  <section class="band aq2-band" id="about">
+    <div class="wrap band-grid">
+      <div class="band-mark"><img src="logo.png" alt="شعار القانون AQ"></div>
+      <div class="band-copy">
+        <div class="kicker">ABOUT AL-QANUN</div>
+        <h2>القانون ليس حكراً على المختصين.</h2>
+        <p data-i18n="aboutText">نؤمن أن الوصول إلى المعلومة القانونية الواضحة يساعد الأفراد على فهم حقوقهم واتخاذ قرارات أكثر وعياً. لذلك نعمل على تقديم محتوى مبسّط ومتعدد اللغات، مع الحرص على مراجعة المساهمات والرجوع إلى المصادر الرسمية.</p>
+        <div class="checks"><span>شرح واضح</span><span>مصادر موثوقة</span><span>مراجعة المحتوى</span></div>
+      </div>
     </div>
   </section>
-  <section class="aq-volunteer">
-    <div class="aq-volunteer-photo" role="img" aria-label="المساهمة في المعرفة القانونية"></div>
-    <div class="aq-volunteer-copy"><span class="aq-kicker">JOIN OUR COMMUNITY</span><h2 data-i18n="volunteerTitle">تطوع معنا</h2><p data-i18n="volunteerIntro">إذا كنت ترغب بالمساهمة معنا في الترجمة أو البحث أو التحرير القانوني، راسل المشرفة نور عبر البريد الإلكتروني وأرفق سيرتك الذاتية.</p><a class="aq-btn-gold" href="#volunteer" data-page="volunteer" data-i18n="sendRequest">إرسال طلب التطوع</a></div>
+  <section class="section articles aq2-articles" id="home-articles">
+    <div class="wrap">
+      <div class="section-head">
+        <div><div class="kicker">LATEST KNOWLEDGE</div><h2>أحدث ما في مكتبة المعرفة</h2></div>
+        <p>مواد تعريفية تساعدك على فهم الموضوع القانوني وتحديد الخطوة التالية.</p>
+      </div>
+      <div class="article-grid">
+        <article class="article"><div class="type">دليل قانوني · مبادئ عامة</div><h3>كيف تتحقق من صحة المعلومة القانونية؟</h3><p>خطوات عملية للتمييز بين المعلومات العامة والمصادر الرسمية والتحديثات القانونية.</p><div class="meta">قراءة 4 دقائق</div></article>
+        <article class="article"><div class="type">القانون العام · المقيمون</div><h3>فهم الرسائل والقرارات الإدارية في هولندا</h3><p>مصطلحات أساسية تساعدك على فهم المراسلات الرسمية.</p><div class="meta">قراءة 5 دقائق</div></article>
+        <article class="article"><div class="type">الحقوق الأساسية</div><h3>أين تبدأ عندما يكون لديك سؤال قانوني؟</h3><p>طريقة منظمة للبحث عن المعلومة والجهة المختصة.</p><div class="meta">قراءة 3 دقائق</div></article>
+      </div>
+      <div class="aq2-more"><a class="aq-btn-navy" href="#articles" data-page="articles" data-i18n="navArticles">تصفّح جميع المقالات ←</a></div>
+    </div>
   </section>
-  <section class="aq-latest container"><div><span class="aq-kicker">LATEST KNOWLEDGE</span><h2>أحدث المقالات القانونية</h2><p>تصفّح المواد المنشورة بعد مراجعتها، واستفد من المعلومات والمصادر الرسمية.</p></div><a class="aq-btn-navy" href="#articles" data-page="articles" data-i18n="navArticles">المقالات القانونية ←</a></section>
+  <section class="cta aq2-cta" id="contact">
+    <div class="wrap cta-inner">
+      <div><h2>هل لديك سؤال أو مساهمة؟</h2><p>المعرفة القانونية تصبح أقوى عندما نتشاركها بمسؤولية.</p></div>
+      <a class="primary" href="#volunteer" data-page="volunteer">تواصل معنا ←</a>
+    </div>
+  </section>
 </section>
 <section class="page container" id="page-public-law"><h1 class="section-title" data-i18n="navPublic">القانون العام</h1><div class="panel"><p data-i18n="publicIntro">محتوى توعوي حول القانون العام.</p><div id="publicArticles" class="article-list"></div></div><a class="btn secondary" href="#home" data-page="home" data-i18n="back">العودة للرئيسية</a></section>
     <section class="page container" id="page-private-law"><h1 class="section-title" data-i18n="navPrivate">القانون الخاص</h1><div class="panel"><p data-i18n="privateIntro">محتوى توعوي حول القانون الخاص.</p><div id="privateArticles" class="article-list"></div></div><a class="btn secondary" href="#home" data-page="home" data-i18n="back">العودة للرئيسية</a></section>
@@ -429,10 +523,15 @@ body{background:var(--paper)!important;color:var(--ink)!important;font-family:'C
     </section>
   </main>
 
-  <footer>
-    <p data-i18n="footer">جميع الحقوق محفوظة © 2026 - منصة <span>AQ القانون</span></p>
-    <small data-i18n="footerNote">منصة القانون AQ تقدّم معلومات قانونية مبسّطة، ولا تُغني عن استشارة محامٍ مختص.</small>
-    <p><a href="privacy-policy.html" style="color:var(--gold);text-decoration:underline" data-i18n="privacyPolicyLink">سياسة الخصوصية / Privacyverklaring / Privacy Policy</a></p>
+  <footer class="aq2-footer">
+    <div class="wrap">
+      <div class="footgrid">
+        <div><div class="footbrand"><img src="logo.png" alt="القانون AQ"></div><p>مرجع معرفي لتبسيط القوانين الهولندية وتسهيل الوصول إلى المعلومات القانونية بلغات متعددة.</p></div>
+        <div><h4>تصفّح الموقع</h4><a href="#public-law" data-page="public-law">القانون العام</a><a href="#private-law" data-page="private-law">القانون الخاص</a><a href="#articles" data-page="articles">المقالات</a><a href="#about" data-page="about">عن القانون</a></div>
+        <div><h4>معلومات مهمة</h4><a href="#volunteer" data-page="volunteer">تطوع معنا</a><a href="mailto:info@aq-law.nl">تواصل معنا</a><a href="privacy-policy.html" data-i18n="privacyPolicyLink">سياسة الخصوصية</a></div>
+      </div>
+      <div class="copy"><span>© 2026 القانون AQ — جميع الحقوق محفوظة</span><span>المحتوى للتوعية العامة ولا يُعد استشارة قانونية.</span></div>
+    </div>
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
