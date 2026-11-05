@@ -1040,7 +1040,6 @@ body>.top{display:none!important}
     document.getElementById('volunteerLoginPanel').classList.toggle('hidden',active);
     if(active&&!volunteerMustChangePassword){volunteerClaimOpen=false;document.getElementById('volunteerWelcome').textContent=t('volunteerWelcome')+(volunteerDisplayName?' '+volunteerDisplayName:'');document.getElementById('volunteerExpiry').textContent=t('volunteerExpiry');}
   }
-  });
   document.getElementById('navVolunteerMembers').addEventListener('click',event=>{
     event.preventDefault();showPage('volunteer');volunteerMemberAreaOpen=true;volunteerClaimOpen=false;showVolunteerWorkspace();
     document.getElementById('volunteerMemberArea').scrollIntoView({behavior:'smooth',block:'start'});
