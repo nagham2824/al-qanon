@@ -418,6 +418,29 @@ body>.top{display:none!important}
 }
 </style>
 
+<style id="aq-students-preview-style">
+/* Scoped to the students page; existing article data and navigation are untouched. */
+#page-student.aq-students-page{max-width:none;padding:0;background:#f6f0e8;color:#122638;overflow:hidden}
+#page-student .aq-students-hero{position:relative;display:flex;min-height:300px;background:linear-gradient(110deg,#071723,#102b40);color:#fff;isolation:isolate}
+#page-student .aq-students-hero-copy{width:100%;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:55px clamp(24px,5vw,90px);z-index:1}
+#page-student .aq-students-eyebrow{color:#dfb35d;font-size:.72rem;letter-spacing:2px;direction:ltr}
+#page-student .aq-students-hero h1{font-size:clamp(2rem,4.1vw,4.1rem);line-height:1.25;margin:18px 0 20px;background:linear-gradient(105deg,#c9923e 5%,#f7d88c 38%,#fff 72%,#d6a44e 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+#page-student .aq-students-hero p{font-size:clamp(1rem,1.45vw,1.2rem);line-height:2;color:#f4f0e9;max-width:850px}
+#page-student .aq-students-content{max-width:1240px;margin:auto;padding:48px 24px 64px}
+#page-student .aq-students-heading{display:flex;align-items:center;gap:14px;border-bottom:2px solid #c9923e;padding-bottom:12px;width:fit-content;margin-bottom:24px;color:#102a43}
+#page-student .aq-students-heading h2{font-size:clamp(1.5rem,2.5vw,2.1rem);margin:0;color:#102a43}
+#page-student .aq-students-heading span{color:#c9923e;font-size:2rem}
+#page-student #studentArticles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;margin:0}
+#page-student #studentArticles .article-item{background:#fffaf4;border:1px solid #e9ddca;border-radius:17px;box-shadow:0 10px 24px #182d3a13;padding:27px 24px;color:#142535;min-width:0;overflow-wrap:anywhere}
+#page-student #studentArticles .article-item h3{color:#102a43;font-size:1.24rem;line-height:1.6;margin:0 0 15px}
+#page-student #studentArticles .article-meta{color:#8e662c;font-size:.82rem;line-height:1.8}
+#page-student #studentArticles .article-item p{color:#263746;line-height:1.85;max-height:18em;overflow:auto}
+#page-student #studentArticles .article-source{color:#946719}
+#page-student #studentArticles .empty{grid-column:1/-1;color:#6c5b46;border:1px dashed #c9923e;background:#fffaf4;border-radius:14px}
+#page-student .aq-students-back{display:inline-block;margin-top:30px}
+@media(max-width:850px){#page-student .aq-students-hero{display:flex;flex-direction:column}#page-student .aq-students-hero-copy{order:1;padding:30px 22px 42px}#page-student #studentArticles{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){#page-student #studentArticles{grid-template-columns:1fr}#page-student .aq-students-content{padding:35px 17px 50px}#page-student .aq-students-hero h1{font-size:2.2rem}}
+</style>
 </head>
 <body>
   <a class="skip" href="#main" data-i18n="skip">تجاوز إلى المحتوى</a>
@@ -488,7 +511,7 @@ body>.top{display:none!important}
 </section>
 <section class="page container" id="page-public-law"><h1 class="section-title" data-i18n="navPublic">القانون العام</h1><div class="panel"><p data-i18n="publicIntro">محتوى توعوي حول القانون العام.</p><div id="publicArticles" class="article-list"></div></div><a class="btn secondary" href="#home" data-page="home" data-i18n="back">العودة للرئيسية</a></section>
     <section class="page container" id="page-private-law"><h1 class="section-title" data-i18n="navPrivate">القانون الخاص</h1><div class="panel"><p data-i18n="privateIntro">محتوى توعوي حول القانون الخاص.</p><div id="privateArticles" class="article-list"></div></div><a class="btn secondary" href="#home" data-page="home" data-i18n="back">العودة للرئيسية</a></section>
-    <section class="page container" id="page-student"><h1 class="section-title" data-i18n="studentsTitle">الطلاب والأكاديميون</h1><div class="panel"><p data-i18n="studentsText">دعم وإرشادات للطلاب الجامعيين والباحثين.</p><div id="studentArticles" class="article-list"></div></div><a class="btn secondary" href="#home" data-page="home" data-i18n="back">العودة للرئيسية</a></section>
+    <section class="page aq-students-page" id="page-student"><div class="aq-students-hero"><div class="aq-students-hero-copy"><span class="aq-students-eyebrow">AL-QANUN AQ · ACADEMIC KNOWLEDGE</span><h1 data-i18n="studentsTitle">الطلاب والأكاديميون</h1><p data-i18n="studentsText">دعم وإرشادات للطلاب الجامعيين والباحثين.</p></div></div><div class="aq-students-content"><div class="aq-students-heading"><span aria-hidden="true">▤</span><h2>أحدث المقالات</h2></div><div id="studentArticles" class="article-list" aria-live="polite"></div><a class="btn secondary aq-students-back" href="#home" data-page="home" data-i18n="back">العودة للرئيسية</a></div></section>
     <section class="page container" id="page-refugee"><h1 class="section-title" data-i18n="refugeeTitle">اللاجئون والحماية</h1><div class="panel"><p data-i18n="refugeeText">شرح مبسط للجوء ولم شمل الأسرة والحماية.</p><div id="refugeeArticles" class="article-list"></div></div><a class="btn secondary" href="#home" data-page="home" data-i18n="back">العودة للرئيسية</a></section>
     <section class="page container" id="page-resident"><h1 class="section-title" data-i18n="residentTitle">المقيمون والعمل</h1><div class="panel"><p data-i18n="residentText">معلومات عامة عن الإقامة وعقود العمل والاندماج.</p><div id="residentArticles" class="article-list"></div></div><a class="btn secondary" href="#home" data-page="home" data-i18n="back">العودة للرئيسية</a></section>
     <section class="page container" id="page-general"><h1 class="section-title" data-i18n="generalTitle">الشؤون العامة والمهنية</h1><div class="panel"><p data-i18n="generalText">مقالات توعوية قانونية للأفراد والمهنيين.</p><div id="generalArticles" class="article-list"></div></div><a class="btn secondary" href="#home" data-page="home" data-i18n="back">العودة للرئيسية</a></section>
