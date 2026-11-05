@@ -279,6 +279,60 @@ body{background:var(--paper)!important;color:var(--ink)!important;font-family:'C
  .aq-hero-logo{margin-top:20px!important;width:155px!important}
 }
 </style>
+
+<style id="aq-hero-layout-fix">
+/* Restore the approved two-column hero layout and keep its image in normal flow. */
+.aq-hero-grid{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+  direction:ltr!important;
+  align-items:stretch!important;
+  gap:clamp(20px,3vw,42px)!important;
+}
+.aq-hero-visual{
+  position:relative!important;
+  inset:auto!important;
+  width:100%!important;
+  height:420px!important;
+  min-height:420px!important;
+  overflow:hidden!important;
+  border-radius:12px!important;
+  box-shadow:0 12px 28px #0003!important;
+  z-index:1!important;
+}
+.aq-hero-visual img{
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  object-position:center 48%!important;
+}
+.aq-hero-copy{
+  width:100%!important;
+  max-width:680px!important;
+  margin:0 auto!important;
+}
+@media(max-width:760px){
+  .aq-hero{padding:22px 15px!important}
+  .aq-hero-grid{
+    grid-template-columns:minmax(0,1fr)!important;
+    min-height:0!important;
+    gap:16px!important;
+  }
+  .aq-hero-copy{
+    grid-row:1!important;
+    width:100%!important;
+    max-width:100%!important;
+    padding:20px 8px!important;
+  }
+  .aq-hero-visual{
+    grid-row:2!important;
+    height:230px!important;
+    min-height:230px!important;
+  }
+}
+</style>
+
 </head>
 <body>
   <a class="skip" href="#main" data-i18n="skip">تجاوز إلى المحتوى</a>
