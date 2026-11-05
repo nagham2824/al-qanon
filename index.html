@@ -278,6 +278,49 @@ body{background:var(--paper)!important;color:var(--ink)!important;font-family:'C
  .aq-hero-copy p{font-size:14px!important}
  .aq-hero-logo{margin-top:20px!important;width:155px!important}
 }
+
+/* Approved 2026-11-05 header + image-free hero, desktop/mobile. */
+.aq-reference-header{position:relative!important;background:#f4efe6!important;border:0!important;box-shadow:none!important;padding:0 3.2%!important;min-height:104px!important}
+.aq-reference-header .wrap.nav{width:100%!important;max-width:1700px!important;margin:auto!important;display:flex!important;flex-wrap:nowrap!important;align-items:center!important;justify-content:space-between!important;gap:clamp(12px,2.3vw,42px)!important}
+.aq-reference-header .brand{order:0!important;flex:0 0 auto!important;background:transparent!important;padding:0!important;border:0!important}
+.aq-reference-header .brand img{width:clamp(140px,13vw,210px)!important;height:78px!important;object-fit:contain!important}
+.aq-reference-header .navlinks{order:1!important;flex:1 1 auto!important;display:flex!important;align-items:center!important;justify-content:space-evenly!important;gap:clamp(9px,1.3vw,25px)!important;flex-wrap:nowrap!important;white-space:nowrap!important}
+.aq-reference-header .navlinks a{font-family:Cairo,sans-serif!important;font-size:clamp(12px,1.03vw,17px)!important;font-weight:800!important;color:#102a43!important}
+.aq-reference-header .navside{order:2!important;display:flex!important;flex-direction:row!important;align-items:center!important;gap:12px!important;flex:0 0 auto!important}
+.aq-reference-header .lang-select{background:#f8f3ea!important;color:#102a43!important;border:1px solid #ded4c3!important;border-radius:30px!important;padding:12px 17px!important;width:auto!important;min-width:95px!important}
+.aq-reference-header .member{background:#102a43!important;color:#fff!important;border-radius:32px!important;padding:12px 22px!important;white-space:nowrap!important}
+#page-home>.aq-hero{position:relative!important;background:linear-gradient(105deg,#09283d 0%,#103b52 52%,#2b4657 100%)!important;border-bottom:9px solid #f1b847!important;min-height:480px!important;padding:55px 4% 45px!important;overflow:hidden!important}
+#page-home .aq-hero .wrap.aq-hero-grid{display:block!important;position:relative!important;width:100%!important;max-width:1650px!important;min-height:0!important;margin:0 auto!important;direction:rtl!important}
+#page-home .aq-hero-visual{display:none!important}
+#page-home .aq-hero-copy{display:block!important;position:relative!important;max-width:none!important;width:100%!important;min-height:350px!important;padding:0 24% 0 2%!important;margin:0!important;direction:rtl!important;text-align:right!important;z-index:2!important}
+#page-home .aq-hero-copy h1{font-family:Cairo,sans-serif!important;color:#fff!important;font-size:clamp(38px,4.5vw,76px)!important;line-height:1.4!important;font-weight:800!important;margin:0 0 2px!important;white-space:nowrap!important}
+#page-home .aq-hero-tagline{color:#f6b83e!important;font-size:clamp(32px,4vw,68px)!important;font-weight:800!important;line-height:1.4!important;white-space:nowrap!important;margin:0 0 18px!important}
+#page-home .aq-hero-copy p{font-size:clamp(13px,1.2vw,19px)!important;color:#fff!important;font-weight:700!important;white-space:normal!important;margin:0 0 30px!important}
+#page-home .aq-hero-copy .aq-actions{display:flex!important;justify-content:flex-start!important;flex-direction:row!important;gap:18px!important;flex-wrap:wrap!important}
+#page-home .aq-btn-gold{background:#f6ba43!important;color:#102a43!important;border:2px solid #f6ba43!important;border-radius:50px!important;padding:12px 34px!important;font-weight:800!important;box-shadow:none!important}
+#page-home .aq-btn-outline{display:inline-flex!important;align-items:center!important;justify-content:center!important;border:2px solid #fff!important;border-radius:50px!important;padding:12px 34px!important;color:#fff!important;font-weight:800!important;background:transparent!important}
+#page-home .aq-hero-logo{position:absolute!important;top:25%!important;right:0!important;width:22%!important;height:44%!important;margin:0!important;padding:0 0 0 2%!important;border-left:3px solid #f5b73e!important;display:flex!important;align-items:center!important;justify-content:center!important}
+#page-home .aq-hero-logo img{width:100%!important;max-width:300px!important;height:auto!important;object-fit:contain!important;mix-blend-mode:screen!important}
+@media(max-width:850px){
+.aq-reference-header{min-height:0!important;padding:9px 12px!important}
+.aq-reference-header .wrap.nav{display:grid!important;grid-template-columns:1fr auto!important;gap:6px 10px!important}
+.aq-reference-header .brand{grid-column:1!important;grid-row:1!important;justify-self:start!important}
+.aq-reference-header .brand img{width:145px!important;height:53px!important}
+.aq-reference-header .navside{grid-column:2!important;grid-row:1!important;gap:6px!important}
+.aq-reference-header .member{padding:8px 10px!important;font-size:12px!important}
+.aq-reference-header .lang-select{min-width:70px!important;padding:7px!important;font-size:12px!important}
+.aq-reference-header .navlinks{grid-column:1/-1!important;grid-row:2!important;display:flex!important;flex-wrap:nowrap!important;overflow-x:auto!important;justify-content:flex-start!important;gap:22px!important;padding:6px 3px!important;scrollbar-width:thin!important}
+.aq-reference-header .navlinks a{font-size:13px!important}
+#page-home>.aq-hero{padding:30px 14px 35px!important;min-height:410px!important}
+#page-home .aq-hero-copy{padding:0!important;min-height:0!important;text-align:center!important}
+#page-home .aq-hero-copy h1{font-size:clamp(28px,8vw,44px)!important;white-space:normal!important}
+#page-home .aq-hero-tagline{font-size:clamp(25px,6.5vw,39px)!important;white-space:normal!important}
+#page-home .aq-hero-copy p{font-size:14px!important}
+#page-home .aq-hero-copy .aq-actions{justify-content:center!important;gap:10px!important}
+#page-home .aq-btn-gold,#page-home .aq-btn-outline{font-size:13px!important;padding:10px 16px!important}
+#page-home .aq-hero-logo{position:relative!important;top:auto!important;right:auto!important;width:180px!important;height:100px!important;border-left:0!important;border-top:2px solid #f5b73e!important;margin:24px auto 0!important;padding:12px 0 0!important}
+#page-home .aq-hero-logo img{max-width:165px!important}
+}
 </style>
 
 <style id="aq-hero-layout-fix">
@@ -367,10 +410,10 @@ body{background:var(--paper)!important;color:var(--ink)!important;font-family:'C
       </div>
       <div class="aq-hero-copy">
         <h1>معًا لفهم القانون</h1>
-        <h2 class="aq-hero-tagline">بناء مستقبل آمن في هولندا</h2>
-        <p>معلومات قانونية مبسطة وواضحة باللغة العربية ولغات أخرى تساعدك على فهم حقوقك وخياراتك.</p>
+        <h2 class="aq-hero-tagline">وبناء مستقبل آمن في هولندا</h2>
+        <p>معلومات قانونية مبسطة وواضحة باللغة العربية ولغات أخرى، تساعدك على فهم حقوقك وخياراتك.</p>
         <div class="aq-actions">
-          <a class="aq-btn-gold" href="#about" data-page="about">اكتشف المزيد</a>
+          <a class="aq-btn-gold" href="#about" data-page="about">اكتشف المزيد ‹</a><a class="aq-btn-outline" href="#about" data-page="about">تعرف على القانون AQ</a>
         </div>
         <div class="aq-hero-logo"><img src="logo.png" alt="شعار منصة القانون AQ"></div>
       </div>
