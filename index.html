@@ -464,6 +464,14 @@ body>.top{display:none!important}
 @media(max-width:850px){#page-volunteer .aq-students-hero{display:flex;flex-direction:column}#page-volunteer .aq-students-hero-copy{order:1;padding:30px 22px 42px}#page-volunteer #studentArticles{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:600px){#page-volunteer #studentArticles{grid-template-columns:1fr}#page-volunteer .aq-students-content{padding:35px 17px 50px}#page-volunteer .aq-students-hero h1{font-size:2.2rem}}
 </style>
+<style id="aq-volunteer-complete-style">
+#page-volunteer .aq-volunteer-lead{color:#243c4e;font-size:1.1rem;line-height:1.9;margin-bottom:20px}
+#page-volunteer .aq-volunteer-tabs{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:26px}
+#page-volunteer #volunteerApplicationPanel,#page-volunteer #volunteerMemberArea>.panel{background:#fffaf4;border:1px solid #e9ddca;border-radius:17px;box-shadow:0 10px 24px #182d3a13;padding:26px;margin-bottom:20px;color:#142535}
+#page-volunteer #volunteerMemberArea>.notice{margin:24px 0 15px}
+#page-volunteer .aq-volunteer-tabs .btn{cursor:pointer}
+</style>
+
 <style id="aq-about-vision-style">
 /* Scoped to the students page; existing article data and navigation are untouched. */
 #page-about.aq-students-page{max-width:none;padding:0;background:#f6f0e8;color:#122638;overflow:hidden}
@@ -646,7 +654,7 @@ body>.top{display:none!important}
 
     <section class="page aq-students-page" id="page-about"><div class="aq-students-hero"><div class="aq-students-hero-copy"><span class="aq-students-eyebrow">AL-QANUN AQ · OUR VISION</span><h1 data-i18n="navAbout">من نحن</h1><p data-i18n="aboutText">نسعى إلى جعل المعلومات القانونية الهولندية أوضح وأسهل وصولاً، مع توضيح المصادر والتمييز بين المعلومات العامة والاستشارة القانونية الفردية.</p></div></div><div class="aq-students-content"><div class="aq-students-heading"><span aria-hidden="true">▤</span><h2 data-i18n="aboutHeading">عن منصة القانون AQ</h2></div><div class="aq-about-vision-grid"><article class="aq-about-vision-card"><h3>من نحن</h3><p>منصة القانون AQ مساحة معرفية لتبسيط المعلومات القانونية الهولندية وإتاحتها بصورة واضحة ومفهومة.</p></article><article class="aq-about-vision-card"><h3>رؤيتنا</h3><p>أن تصبح المعرفة القانونية أكثر وضوحاً وسهولة في الوصول لكل من يحتاج إليها.</p></article><article class="aq-about-vision-card"><h3>رسالتنا</h3><p>تقديم محتوى قانوني توعوي بلغات متعددة، مع الإحالة إلى المصادر الرسمية وتوضيح حدود المعلومات العامة.</p></article><article class="aq-about-vision-card"><h3>مبادئنا</h3><p>الدقة والحياد والشفافية والاعتماد على المصادر الرسمية وتحديث المعلومات عند الحاجة.</p></article></div><p class="aq-about-vision-disclaimer" data-i18n="disclaimer">المحتوى للتوعية العامة ولا يُعد استشارة قانونية أو بديلاً عن محامٍ مختص. تحقّق دائمًا من المصادر الرسمية وتاريخ تحديث المعلومات.</p><a class="btn secondary aq-students-back" href="#home" data-page="home" data-i18n="back">العودة للرئيسية</a></div></section>
 
-    <section class="page aq-students-page" id="page-volunteer"><div class="aq-students-hero"><div class="aq-students-hero-copy"><span class="aq-students-eyebrow">AL-QANUN AQ · JOIN OUR COMMUNITY</span><h1 data-i18n="volunteerTitle">تطوع معنا</h1><p>ساهم معنا في نشر المعرفة القانونية، وانضم إلى مجتمع المتطوعين في منصة القانون AQ.</p></div></div><div class="aq-students-content"><div class="aq-students-heading"><span aria-hidden="true">▤</span><h2>المساهمة والتطوع</h2></div>
+    <section class="page aq-students-page" id="page-volunteer"><div class="aq-students-hero"><div class="aq-students-hero-copy"><span class="aq-students-eyebrow">AL-QANUN AQ · JOIN OUR COMMUNITY</span><h1 data-i18n="volunteerTitle">تطوع معنا</h1><p>ساهم معنا في نشر المعرفة القانونية، وانضم إلى مجتمع المتطوعين في منصة القانون AQ.</p></div></div><div class="aq-students-content"><div class="aq-students-heading"><span aria-hidden="true">▤</span><h2>المساهمة والتطوع</h2></div><p class="aq-volunteer-lead">اختاري المسار المناسب إلك: قدّمي طلب انضمام جديد، أو ادخلي إلى مساحة المتطوعين الحاليين.</p><div class="aq-volunteer-tabs"><a class="btn" href="#volunteerApplicationPanel">أريد التطوع</a><button class="btn" type="button" id="openVolunteerMembers">أنا متطوع بالفعل — تسجيل الدخول</button></div>
       <div class="panel" id="volunteerApplicationPanel">
         <p data-i18n="volunteerIntro">إذا كنت ترغب بالمساهمة معنا، راسل المشرفة نور عبر البريد الإلكتروني وأرفق سيرتك الذاتية.</p>
         <a class="btn" href="mailto:nour.dlikan@gmail.com?subject=Volunteer%20Application%20%E2%80%94%20AQ%20Law" data-i18n="sendRequest">إرسال طلب التطوع بالبريد الإلكتروني</a>
@@ -1032,6 +1040,7 @@ body>.top{display:none!important}
     document.getElementById('volunteerLoginPanel').classList.toggle('hidden',active||volunteerClaimOpen);
     if(active&&!volunteerMustChangePassword){volunteerClaimOpen=false;document.getElementById('volunteerWelcome').textContent=t('volunteerWelcome')+(volunteerDisplayName?' '+volunteerDisplayName:'');document.getElementById('volunteerExpiry').textContent=t('volunteerExpiry');}
   }
+  document.getElementById('openVolunteerMembers').addEventListener('click',()=>{showPage('volunteer');volunteerMemberAreaOpen=true;volunteerClaimOpen=false;showVolunteerWorkspace();document.getElementById('volunteerMemberArea').scrollIntoView({behavior:'smooth',block:'start'});});
   document.getElementById('navVolunteerMembers').addEventListener('click',event=>{
     event.preventDefault();showPage('volunteer');volunteerMemberAreaOpen=true;volunteerClaimOpen=false;showVolunteerWorkspace();
     document.getElementById('volunteerMemberArea').scrollIntoView({behavior:'smooth',block:'start'});
