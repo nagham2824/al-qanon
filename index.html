@@ -252,7 +252,33 @@ body{background:var(--paper)!important;color:var(--ink)!important;font-family:'C
 .aq-reference-header .member::before,
 .aq-reference-header .member::after{content:none!important;display:none!important}
 
-  </style>
+  
+/* Hero update only — approved Arabic copy, Amsterdam image and original AQ logo */
+.aq-hero{background:#102A43!important;padding:34px clamp(14px,3vw,42px)!important}
+.aq-hero-grid{width:min(1320px,100%);grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;gap:clamp(20px,3vw,42px)!important;min-height:420px!important;align-items:stretch!important;direction:ltr!important}
+.aq-hero-visual{height:420px!important;min-height:100%!important;border-radius:12px!important;box-shadow:0 12px 28px #0003!important}
+.aq-hero-visual:after{background:linear-gradient(0deg,#0b203344,transparent 42%)!important}
+.aq-hero-visual img{object-position:center 48%!important}
+.aq-hero-copy{direction:rtl!important;text-align:right!important;max-width:680px!important;display:flex!important;flex-direction:column!important;align-items:flex-start!important;justify-content:center!important;padding:18px clamp(4px,2vw,24px)!important}
+.aq-hero-copy h1{color:#fff!important;font-family:'Cairo',sans-serif!important;font-size:clamp(34px,4.3vw,58px)!important;font-weight:900!important;line-height:1.35!important;margin:0 0 8px!important;background:none!important;-webkit-text-fill-color:#fff!important;filter:none!important;animation:none!important;text-shadow:none!important}
+.aq-hero-copy h1:before,.aq-hero-copy h1:after{display:none!important}
+.aq-hero-tagline{color:#C9923E!important;font-size:clamp(20px,2.5vw,30px)!important;font-weight:800!important;margin:0 0 18px!important;line-height:1.6!important}
+.aq-hero-copy p{color:#fff!important;font-size:clamp(14px,1.4vw,17px)!important;line-height:2.1!important;max-width:620px!important;margin:0 0 22px!important}
+.aq-hero .aq-actions{margin:0!important}
+.aq-hero .aq-btn-gold{background:#C9923E!important;color:#102A43!important;border:0!important;border-radius:28px!important;padding:12px 28px!important;font-size:14px!important;min-height:48px!important}
+.aq-hero-logo{margin-top:24px!important;width:190px!important;max-width:65%!important;display:flex!important;justify-content:flex-start!important}
+.aq-hero-logo img{display:block!important;width:100%!important;max-height:100px!important;object-fit:contain!important}
+@media(max-width:760px){
+ .aq-hero{padding:18px 14px 24px!important}
+ .aq-hero-grid{grid-template-columns:1fr!important;gap:18px!important;min-height:0!important;direction:rtl!important}
+ .aq-hero-visual{height:250px!important;min-height:250px!important;grid-row:1!important}
+ .aq-hero-copy{padding:0 4px!important;max-width:none!important}
+ .aq-hero-copy h1{font-size:clamp(30px,9vw,42px)!important}
+ .aq-hero-tagline{font-size:21px!important}
+ .aq-hero-copy p{font-size:14px!important}
+ .aq-hero-logo{margin-top:20px!important;width:155px!important}
+}
+</style>
 </head>
 <body>
   <a class="skip" href="#main" data-i18n="skip">تجاوز إلى المحتوى</a>
@@ -282,14 +308,18 @@ body{background:var(--paper)!important;color:var(--ink)!important;font-family:'C
 <section class="page active" id="page-home">
   <section class="aq-hero">
     <div class="wrap aq-hero-grid">
-      <div class="aq-hero-copy">
-        <p data-i18n="heroText">مرجع مبسّط لشرح القوانين وتوضيحها من اللغة الهولندية إلى اللغة العربية عبر مقالات ومحتوى مبسّط.</p>
-        <div class="aq-actions">
-          <a class="aq-btn-gold" href="#volunteer" data-page="volunteer" data-i18n="heroVolunteer">تطوع معنا / أرسل سيرتك</a>
-          <a class="aq-btn-outline" href="#about" data-page="about" data-i18n="heroAbout">اكتشف رؤيتنا</a>
-        </div>
+      <div class="aq-hero-visual">
+        <img src="https://webassets.transavia.com/78ae936f-d39d-01b0-c3ef-dc738304142f/551ffbc6-17d1-46f0-9ba3-4cf65af20c5e/Amsterdam.jpg?auto=format&fm=jpg&h=1467&w=2200" alt="امرأة تطل على قناة أمستردام ومبانيها التاريخية" loading="eager">
       </div>
-      <aside class="aq-hero-brand"><img src="logo.png" alt="شعار القانون AQ"></aside>
+      <div class="aq-hero-copy">
+        <h1>معًا لفهم القانون</h1>
+        <h2 class="aq-hero-tagline">بناء مستقبل آمن في هولندا</h2>
+        <p>معلومات قانونية مبسطة وواضحة باللغة العربية ولغات أخرى تساعدك على فهم حقوقك وخياراتك.</p>
+        <div class="aq-actions">
+          <a class="aq-btn-gold" href="#about" data-page="about">اكتشف المزيد</a>
+        </div>
+        <div class="aq-hero-logo"><img src="logo.png" alt="شعار منصة القانون AQ"></div>
+      </div>
     </div>
   </section>  <div class="aq-reference-stats"><div class="wrap aq-reference-stats-grid">
     <div class="aq-reference-stat"><b>01</b><span data-i18n="statOne">معلومة واضحة ومبسّطة</span></div>
