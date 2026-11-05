@@ -240,10 +240,17 @@ body{background:var(--paper)!important;color:var(--ink)!important;font-family:'C
 .aq-reference-header .navlinks{color:#102A43!important}
 .aq-reference-header .navlinks a{color:#102A43!important}
 .aq-reference-header .navlinks a:hover,.aq-reference-header .navlinks a:focus-visible{color:#9A6C2D!important}
-.aq-reference-header .lang-select{background:#F7F2E9!important;color:#102A43!important;border:0!important;box-shadow:none!important}
-.aq-reference-header .lang-select option{background:#F7F2E9!important;color:#102A43!important}
-.aq-reference-header .member{color:#102A43!important;border:0!important;box-shadow:none!important}
-.aq-reference-header .member:hover{color:#102A43!important;background:#D8CBB5!important;border:0!important}
+.aq-reference-header .lang-select,
+.aq-reference-header .lang-select:focus,
+.aq-reference-header .lang-select:active{background:#EAE5DA!important;background-color:#EAE5DA!important;color:#102A43!important;border:0!important;outline:0!important;box-shadow:none!important}
+.aq-reference-header .lang-select option{background:#EAE5DA!important;color:#102A43!important}
+.aq-reference-header .member,
+.aq-reference-header .member:hover,
+.aq-reference-header .member:focus,
+.aq-reference-header .member:focus-visible,
+.aq-reference-header .member:active{color:#102A43!important;background:transparent!important;border:0!important;border-bottom:0!important;outline:0!important;box-shadow:none!important;text-decoration:none!important}
+.aq-reference-header .member::before,
+.aq-reference-header .member::after{content:none!important;display:none!important}
 
   </style>
 </head>
