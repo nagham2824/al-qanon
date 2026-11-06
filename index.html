@@ -650,6 +650,17 @@ body>.top{display:none!important}
   for(const id of ['publicLawSearch','privateLawSearch','allArticlesSearch']){const el=document.getElementById(id);if(el)el.placeholder=values[15];}
  };
 })();
+<script id="aq-home-language-preview">
+(function(){
+const selectors=["#page-home .aq-hero-copy h1","#page-home .aq-hero-tagline","#page-home .aq-hero-copy > p","#page-home .aq-actions .aq-btn-gold","#page-home .aq-actions .aq-btn-outline","#page-home .aq-text-link","#page-student .aq-students-heading h2","#page-refugee .aq-students-heading h2","#page-resident .aq-students-heading h2","#page-general .aq-students-heading h2"];
+const values={"ar":["معًا لفهم القانون","وبناء مستقبل آمن في هولندا","معلومات قانونية مبسطة وواضحة باللغة العربية ولغات أخرى، تساعدك على فهم حقوقك وخياراتك.","اكتشف المزيد ‹","تعرف على القانون AQ","اكتشف رؤيتنا ←","أحدث المقالات","أحدث المقالات","أحدث المقالات","أحدث المقالات"],"en":["Understanding the law together","Building a secure future in the Netherlands","Clear and accessible legal information in Arabic and other languages to help you understand your rights and options.","Discover more ‹","Get to know AQ Law","Explore our vision →","Latest articles","Latest articles","Latest articles","Latest articles"],"nl":["Samen de wet begrijpen","En bouwen aan een veilige toekomst in Nederland","Duidelijke en begrijpelijke juridische informatie in het Arabisch en andere talen om uw rechten en mogelijkheden te begrijpen.","Ontdek meer ‹","Maak kennis met AQ Law","Ontdek onze visie →","Nieuwste artikelen","Nieuwste artikelen","Nieuwste artikelen","Nieuwste artikelen"],"tr":["Hukuku birlikte anlayalım","Hollanda’da güvenli bir gelecek kuralım","Haklarınızı ve seçeneklerinizi anlamanıza yardımcı olmak için Arapça ve diğer dillerde açık ve anlaşılır hukuki bilgiler.","Daha fazlasını keşfet ‹","AQ Law’u tanıyın","Vizyonumuzu keşfedin →","Son makaleler","Son makaleler","Son makaleler","Son makaleler"]};
+const original=window.aqApplyExtraTranslations;
+window.aqApplyExtraTranslations=function(lang){
+ if(original)original(lang);
+ const words=values[lang]||values.ar;
+ selectors.forEach((selector,i)=>{const el=document.querySelector(selector);if(el)el.textContent=words[i];});
+};
+})();
 </script>
 </head>
 <body>
