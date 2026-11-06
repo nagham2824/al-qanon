@@ -1,0 +1,77 @@
+name: Prepare corrected Arabic logo preview
+on:
+  push:
+    branches: [preview-logo-contrast-alignment-v4]
+permissions:
+  contents: write
+jobs:
+  fix-logo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: preview-logo-contrast-alignment-v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y fonts-noto-core
+          pip install playwright
+          python -m playwright install --with-deps chromium
+      - name: Correct Arabic shaping and English spacing in original logo
+        run: |
+          python - <<'PY'
+          import re,base64,pathlib,html
+          from playwright.sync_api import sync_playwright
+          file=pathlib.Path('index.html')
+          page_html=file.read_text()
+          matches=list(re.finditer(r'src="data:image/svg\+xml;base64,([^"]+)"',page_html))
+          assert len(matches)==2 and matches[0].group(1)==matches[1].group(1)
+          svg=base64.b64decode(matches[0].group(1)).decode('utf-8')
+          original=re.search(r'<text[^>]*font-family="\x27AlQalamTelenor\x27"[^>]*>[^<]*</text>',svg)
+          assert original, 'Original Arabic logo text not found'
+          # Use a shaped Arabic font in a foreignObject. Preserve all other SVG geometry.
+          replacement=('<foreignObject x="1170" y="44" width="820" height="370">'
+            '<div xmlns="http://www.w3.org/1999/xhtml" dir="rtl" '
+            'style="font-family: Noto Naskh Arabic, serif; font-weight:700; '
+            'font-size:278px; line-height:1.18; text-align:center; '
+            'white-space:nowrap; color:#C9923E;">القانون</div></foreignObject>')
+          svg=svg[:original.start()]+replacement+svg[original.end():]
+          # Replace English text/tspans with a single consistently spaced line.
+          english=re.search(r'<text transform="matrix\(1 0 0 1 1179\.9347 584\.096\)">[\s\S]*?</text>',svg)
+          assert english, 'Original English logo lettering not found'
+          # Keep exactly the same layout and Arabic logo in both placements.
+          # Make the small English line readable on each background.
+          def make_variant(ink):
+              english_fixed=('<text x="1180" y="584" fill="'+ink+'" '
+                'font-family="Arial, sans-serif" font-size="118" '
+                'letter-spacing="2">Al-Qanun</text>')
+              return svg[:english.start()]+english_fixed+svg[english.end():]
+          light_svg=make_variant('#31383E')
+          dark_svg=make_variant('#FFFFFF').replace('#102A43','#FFFFFF')
+          with sync_playwright() as p:
+              browser=p.chromium.launch()
+              for name,content in [('logo-header',light_svg),('logo-hero',dark_svg)]:
+                  path=pathlib.Path(name+'.svg')
+                  path.write_text(content)
+                  page=browser.new_page(viewport={"width":2000,"height":714},device_scale_factor=2)
+                  page.goto(path.resolve().as_uri())
+                  page.locator('svg').screenshot(path=name+'.png',omit_background=True)
+                  page.close()
+                  path.unlink()
+              browser.close()
+          original_src='src="data:image/svg+xml;base64,'+matches[0].group(1)+'"'
+          assert page_html.count(original_src)==2
+          page_html=page_html.replace(original_src,'src="logo-header.png"',1)
+          page_html=page_html.replace(original_src,'src="logo-hero.png"',1)
+          assert page_html.count('src="logo-header.png"')==1
+          assert page_html.count('src="logo-hero.png"')==1
+          file.write_text(page_html)
+          PY
+      - name: Commit isolated preview
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html logo-header.png logo-hero.png
+          git diff --cached --quiet || (git commit -m "Improve English logo alignment and background contrast in preview" && git push)
