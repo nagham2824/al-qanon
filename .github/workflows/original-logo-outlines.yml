@@ -1,0 +1,30 @@
+name: Inspect original logo font
+on:
+  push:
+    branches: [preview-original-logo-outlines-v5]
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect SVG font conversion capability
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y fontforge python3-fontforge
+          python3 - <<'PY'
+          import re,base64,pathlib
+          s=pathlib.Path('index.html').read_text()
+          m=re.search(r'data:image/svg\+xml;base64,([^"]+)',s)
+          assert m
+          pathlib.Path('/tmp/original.svg').write_bytes(base64.b64decode(m.group(1)))
+          PY
+          fontforge -lang=ff -c 'Open("/tmp/original.svg"); Print($fontname); Quit(0)' || true
+          python3 - <<'PY'
+          import xml.etree.ElementTree as ET
+          root=ET.parse('/tmp/original.svg').getroot()
+          for font in root.iter():
+            if font.tag.endswith('font-face'):
+              print('FONT:',font.attrib.get('font-family'))
+          PY
