@@ -663,6 +663,16 @@ window.aqApplyExtraTranslations=function(lang){
 };
 })();
 </script>
+
+<style id="aq-about-lively-approved">
+/* Approved lively treatment: About logo panel only. */
+.aq-about-mark{position:relative!important;isolation:isolate;overflow:hidden!important;background:linear-gradient(118deg,#0b2033 0%,#183d56 29%,#42677a 52%,#d7d9d1 78%,#f5f0e7 100%)!important;border:1px solid rgba(201,146,62,.65)!important;border-radius:10px!important;box-shadow:0 16px 35px rgba(11,32,51,.20),inset 0 0 0 1px rgba(255,255,255,.12)!important}
+.aq-about-mark::before{content:"";position:absolute;inset:-90% -55%;pointer-events:none;z-index:0;background:linear-gradient(105deg,transparent 40%,rgba(246,194,92,.06) 46%,rgba(255,234,174,.25) 50%,rgba(246,194,92,.06) 54%,transparent 60%);transform:translateX(-36%) rotate(-8deg);animation:aq-about-warm-glow 9s ease-in-out infinite alternate}
+.aq-about-mark::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:0;background:radial-gradient(circle at 83% 24%,rgba(245,194,100,.23),transparent 34%)}
+.aq-about-mark img{position:relative!important;z-index:1!important;filter:drop-shadow(0 4px 8px rgba(7,22,35,.18))!important}
+@keyframes aq-about-warm-glow{from{transform:translateX(-36%) rotate(-8deg)}to{transform:translateX(22%) rotate(-8deg)}}
+@media(prefers-reduced-motion:reduce){.aq-about-mark::before{animation:none!important}}
+</style>
 </head>
 <body>
   <a class="skip" href="#main" data-i18n="skip">تجاوز إلى المحتوى</a>
