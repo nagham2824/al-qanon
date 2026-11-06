@@ -1,0 +1,45 @@
+name: Build iPhone-safe logo preview
+on:
+  push:
+    branches: [preview-logo-iphone-fix]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  logo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: preview-logo-iphone-fix
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install playwright
+      - run: python -m playwright install --with-deps chromium
+      - name: Render original SVG as fixed high-resolution transparent PNG
+        run: |
+          python - <<'PY'
+          import re,base64,pathlib
+          from playwright.sync_api import sync_playwright
+          html=pathlib.Path('index.html').read_text()
+          matches=list(re.finditer(r'src="data:image/svg\+xml;base64,([^"]+)"',html))
+          assert len(matches)==2 and matches[0].group(1)==matches[1].group(1)
+          pathlib.Path('logo-original.svg').write_bytes(base64.b64decode(matches[0].group(1)))
+          with sync_playwright() as p:
+              browser=p.chromium.launch()
+              page=browser.new_page(viewport={"width":2000,"height":714},device_scale_factor=2)
+              page.goto(pathlib.Path('logo-original.svg').resolve().as_uri())
+              page.locator('svg').screenshot(path='logo-fixed.png',omit_background=True)
+              browser.close()
+          html=html.replace('data:image/svg+xml;base64,'+matches[0].group(1),'logo-fixed.png')
+          assert html.count('src="logo-fixed.png"')==2
+          pathlib.Path('index.html').write_text(html)
+          pathlib.Path('logo-original.svg').unlink()
+          PY
+      - name: Commit preview only
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html logo-fixed.png
+          git diff --cached --quiet || (git commit -m "Render existing logo as fixed PNG for Safari compatibility" && git push)
