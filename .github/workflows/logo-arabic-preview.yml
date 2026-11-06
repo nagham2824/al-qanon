@@ -39,7 +39,7 @@ jobs:
             'white-space:nowrap; color:#C9923E;">القانون</div></foreignObject>')
           svg=svg[:original.start()]+replacement+svg[original.end():]
           # Replace English text/tspans with a single consistently spaced line.
-          english=re.search(r'<text transform="matrix\\(1 0 0 1 1179\\.9347 584\\.096\\)">[\\s\\S]*?</text>',svg)
+          english=re.search(r'<text transform="matrix\(1 0 0 1 1179\.9347 584\.096\)">[\s\S]*?</text>',svg)
           assert english, 'Original English logo lettering not found'
           english_fixed='<text x="1180" y="584" fill="#31383E" font-family="Arial, sans-serif" font-size="105" letter-spacing="9">Al-Qanun</text>'
           svg=svg[:english.start()]+english_fixed+svg[english.end():]
