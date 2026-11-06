@@ -592,6 +592,27 @@ body>.top{display:none!important}
 #page-public-law #publicArticles .empty{color:#657078;padding:30px 0}
 @media(max-width:600px){#page-public-law .aq-students-hero-copy{padding:38px 22px 46px}#page-public-law .aq-students-hero h1{font-size:2.6rem}#page-public-law .aq-students-content{padding:35px 20px 65px}}
 </style>
+<style id="aq-private-law-approved-style">
+#page-private-law.aq-students-page{max-width:none;padding:0;background:#f6f0e8;color:#122638;overflow:hidden}
+#page-private-law .aq-students-hero{position:relative;display:flex;min-height:300px;background:linear-gradient(110deg,#071723,#102b40);color:#fff;isolation:isolate}
+#page-private-law .aq-students-hero-copy{width:100%;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:55px clamp(24px,5vw,90px);z-index:1}
+#page-private-law .aq-students-eyebrow{color:#dfb35d;font-size:.72rem;letter-spacing:2px;direction:ltr}
+#page-private-law .aq-students-hero h1{font-family:Cairo,sans-serif;font-size:clamp(2.6rem,5vw,4.7rem);font-weight:800;line-height:1.35;margin:18px 0 20px;background:linear-gradient(105deg,#c9923e 5%,#f7d88c 38%,#fff 72%,#d6a44e 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+#page-private-law .aq-students-hero p{font-size:clamp(1rem,1.45vw,1.2rem);line-height:2;color:#f4f0e9;max-width:850px}
+#page-private-law .aq-students-content{max-width:1240px;margin:auto;padding:48px 24px 80px}
+#page-private-law .aq-students-content h2{font-size:clamp(1.5rem,2.5vw,2.1rem);margin:0 0 20px;color:#102a43;font-weight:800}
+#page-private-law .aq-students-content h2:after{content:"";display:block;width:145px;height:3px;background:linear-gradient(90deg,#f7d88c,#c9923e);margin-top:13px}
+#page-private-law .aq-private-intro{margin-bottom:58px}
+#page-private-law .aq-private-intro p{color:#39474b;font-size:1.05rem;line-height:2.1;max-width:1100px}
+#page-private-law #privateLawSearch{display:block;background:#fffef8;border:1px solid #d8d2bd;border-radius:12px;padding:14px 17px;font:inherit;color:#102a43;width:min(100%,420px);margin:0 0 25px}
+#page-private-law #privateArticles{display:flex;flex-direction:column;gap:0}
+#page-private-law #privateArticles .article-item{padding:25px 0;border-bottom:1px solid #d8d2bd;background:transparent;box-shadow:none;color:#102a43}
+#page-private-law #privateArticles .article-item h3{font-size:1.35rem;color:#102a43;margin:0 0 8px}
+#page-private-law #privateArticles .article-item p{color:#39474b;line-height:2;white-space:pre-wrap}
+#page-private-law #privateArticles .article-meta{color:#8e662c}
+#page-private-law #privateArticles .empty{color:#657078;padding:30px 0}
+@media(max-width:600px){#page-private-law .aq-students-hero-copy{padding:38px 22px 46px}#page-private-law .aq-students-hero h1{font-size:2.6rem}#page-private-law .aq-students-content{padding:35px 20px 65px}}
+</style>
 </head>
 <body>
   <a class="skip" href="#main" data-i18n="skip">تجاوز إلى المحتوى</a>
@@ -664,7 +685,10 @@ body>.top{display:none!important}
 <div class="aq-students-hero"><div class="aq-students-hero-copy"><span class="aq-students-eyebrow">AL-QANON AQ · PUBLIC LAW</span><h1>القانون العام</h1><p>معلومات قانونية مبسّطة وموثوقة حول فروع القانون العام في هولندا، مع الإحالة إلى المصادر الرسمية.</p></div></div>
 <div class="aq-students-content"><section class="aq-public-intro"><h2>ما هو القانون العام؟</h2><p>ينظّم القانون العام العلاقة بين الدولة والأفراد، ويشمل القوانين المتعلقة بالدستور والإدارة العامة وحقوق الإنسان واللجوء والهجرة، وغيرها من المسائل ذات المصلحة العامة.</p></section>
 <section class="aq-public-articles"><h2>مقالات القانون العام</h2><input id="publicLawSearch" type="search" placeholder="ابحث في المقالات..." aria-label="البحث في مقالات القانون العام"><div id="publicArticles" class="article-list" aria-live="polite"></div></section></div></section>
-    <section class="page container" id="page-private-law"><h1 class="section-title" data-i18n="navPrivate">القانون الخاص</h1><div class="panel"><p data-i18n="privateIntro">محتوى توعوي حول القانون الخاص.</p><div id="privateArticles" class="article-list"></div></div><a class="btn secondary" href="#home" data-page="home" data-i18n="back">العودة للرئيسية</a></section>
+    <section class="page aq-students-page" id="page-private-law">
+<div class="aq-students-hero"><div class="aq-students-hero-copy"><span class="aq-students-eyebrow">AL-QANON AQ · PRIVATE LAW</span><h1>القانون الخاص</h1><p>معلومات قانونية مبسّطة وموثوقة حول فروع القانون الخاص في هولندا، مع الإحالة إلى المصادر الرسمية.</p></div></div>
+<div class="aq-students-content"><section class="aq-private-intro"><h2>ما هو القانون الخاص؟</h2><p>ينظّم القانون الخاص العلاقات القانونية بين الأفراد والشركات، ويشمل العقود والالتزامات والملكية والمسؤولية المدنية وقانون الأسرة وغيرها من المسائل الخاصة.</p></section>
+<section class="aq-private-articles"><h2>مقالات القانون الخاص</h2><input id="privateLawSearch" type="search" placeholder="ابحث في المقالات..." aria-label="البحث في مقالات القانون الخاص"><div id="privateArticles" class="article-list" aria-live="polite"></div></section></div></section>
     <section class="page aq-students-page" id="page-student"><div class="aq-students-hero"><div class="aq-students-hero-copy"><span class="aq-students-eyebrow">AL-QANUN AQ · ACADEMIC KNOWLEDGE</span><h1 data-i18n="studentsTitle">الطلاب والأكاديميون</h1><p data-i18n="studentsText">دعم وإرشادات للطلاب الجامعيين والباحثين.</p></div></div><div class="aq-students-content"><div class="aq-students-heading"><span aria-hidden="true">▤</span><h2>أحدث المقالات</h2></div><div id="studentArticles" class="article-list" aria-live="polite"></div><a class="btn secondary aq-students-back" href="#home" data-page="home" data-i18n="back">العودة للرئيسية</a></div></section>
     <section class="page aq-students-page" id="page-refugee"><div class="aq-students-hero"><div class="aq-students-hero-copy"><span class="aq-students-eyebrow">AL-QANUN AQ · REFUGEE PROTECTION</span><h1 data-i18n="refugeeTitle">اللاجئون والحماية</h1><p data-i18n="refugeeText">شرح مبسط للجوء ولم شمل الأسرة والحماية.</p></div></div><div class="aq-students-content"><div class="aq-students-heading"><span aria-hidden="true">▤</span><h2>أحدث المقالات</h2></div><div id="refugeeArticles" class="article-list" aria-live="polite"></div><a class="btn secondary aq-students-back" href="#home" data-page="home" data-i18n="back">العودة للرئيسية</a></div></section>
     <section class="page aq-students-page" id="page-resident"><div class="aq-students-hero"><div class="aq-students-hero-copy"><span class="aq-students-eyebrow">AL-QANUN AQ · RESIDENCY & WORK</span><h1 data-i18n="residentTitle">المقيمون والعمل</h1><p data-i18n="residentText">معلومات عامة عن الإقامة وعقود العمل والاندماج.</p></div></div><div class="aq-students-content"><div class="aq-students-heading"><span aria-hidden="true">▤</span><h2>أحدث المقالات</h2></div><div id="residentArticles" class="article-list" aria-live="polite"></div><a class="btn secondary aq-students-back" href="#home" data-page="home" data-i18n="back">العودة للرئيسية</a></div></section>
@@ -1226,6 +1250,9 @@ body>.top{display:none!important}
   </script>
 <script id="aq-public-law-search-script">
 (()=>{const input=document.getElementById('publicLawSearch'),root=document.getElementById('publicArticles');if(!input||!root)return;const apply=()=>{const q=input.value.trim().toLocaleLowerCase();root.querySelectorAll('.article-item').forEach(el=>{el.hidden=!!q&&!el.textContent.toLocaleLowerCase().includes(q)});};input.addEventListener('input',apply);new MutationObserver(apply).observe(root,{childList:true});})();
+</script>
+<script id="aq-private-law-search-script">
+(()=>{const input=document.getElementById('privateLawSearch'),root=document.getElementById('privateArticles');if(!input||!root)return;const apply=()=>{const q=input.value.trim().toLocaleLowerCase();root.querySelectorAll('.article-item').forEach(el=>{el.hidden=!!q&&!el.textContent.toLocaleLowerCase().includes(q)});};input.addEventListener('input',apply);new MutationObserver(apply).observe(root,{childList:true});})();
 </script>
 </body>
 </html>
