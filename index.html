@@ -667,10 +667,10 @@ window.aqApplyExtraTranslations=function(lang){
 <style id="aq-about-lively-approved">
 /* Approved lively treatment: About logo panel only. */
 .aq-about-mark{position:relative!important;isolation:isolate;overflow:hidden!important;background:linear-gradient(118deg,#0b2033 0%,#183d56 29%,#42677a 52%,#d7d9d1 78%,#f5f0e7 100%)!important;border:1px solid rgba(201,146,62,.65)!important;border-radius:10px!important;box-shadow:0 16px 35px rgba(11,32,51,.20),inset 0 0 0 1px rgba(255,255,255,.12)!important}
-.aq-about-mark::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:2;opacity:.72;mix-blend-mode:screen;background:radial-gradient(ellipse 34% 90% at 20% 50%,rgba(255,236,183,.38) 0%,rgba(140,207,220,.28) 40%,transparent 76%),radial-gradient(ellipse 28% 80% at 80% 50%,rgba(255,224,150,.28),transparent 78%);background-size:190% 140%;background-position:0% 50%;animation:aq-about-wave-motion 5s ease-in-out infinite alternate!important}
+.aq-about-mark::before{content:"";position:absolute;inset:-20%;z-index:2;pointer-events:none;background:radial-gradient(ellipse 35% 110% at 50% 50%,rgba(255,255,235,.35),rgba(180,218,225,.23) 46%,transparent 83%);mix-blend-mode:screen;animation:aq-about-wave-motion 7s ease-in-out infinite alternate!important;opacity:.82;mask-image:linear-gradient(to bottom,transparent 3%,#000 24%,#000 76%,transparent 97%)}
 .aq-about-mark::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:0;background:radial-gradient(circle at 83% 24%,rgba(245,194,100,.23),transparent 34%)}
 .aq-about-mark img{position:relative!important;z-index:1!important;filter:drop-shadow(0 4px 8px rgba(7,22,35,.18))!important}
-@keyframes aq-about-wave-motion{0%{background-position:0% 30%;opacity:.40}50%{background-position:55% 65%;opacity:.75}100%{background-position:100% 35%;opacity:.48}}
+@keyframes aq-about-wave-motion{from{transform:translateX(-58%) skewX(-3deg)}to{transform:translateX(58%) skewX(3deg)}}
 @media(prefers-reduced-motion:reduce){.aq-about-mark::before{animation:none!important}}
 </style>
 
