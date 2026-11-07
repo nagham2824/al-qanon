@@ -673,6 +673,16 @@ window.aqApplyExtraTranslations=function(lang){
 @keyframes aq-about-warm-glow{from{transform:translateX(-36%) rotate(-8deg)}to{transform:translateX(22%) rotate(-8deg)}}
 @media(prefers-reduced-motion:reduce){.aq-about-mark::before{animation:none!important}}
 </style>
+
+<style id="aq-iphone-logo-only-fix">
+/* iPhone-sized screens only: retain original SVG and all existing animations. */
+@media screen and (max-width:600px){
+ .aq-reference-header .brand{min-width:0!important;max-width:100%!important}
+ .aq-reference-header .brand img{display:block!important;width:clamp(125px,36vw,155px)!important;height:auto!important;max-height:62px!important;object-fit:contain!important;flex-shrink:0!important}
+ #page-home .aq-hero-logo{width:min(260px,88vw)!important;max-width:100%!important;height:auto!important;min-height:0!important;overflow:visible!important;margin-inline:auto!important}
+ #page-home .aq-hero-logo img{display:block!important;width:100%!important;max-width:100%!important;height:auto!important;max-height:none!important;object-fit:contain!important;mix-blend-mode:normal!important}
+}
+</style>
 </head>
 <body>
   <a class="skip" href="#main" data-i18n="skip">تجاوز إلى المحتوى</a>
