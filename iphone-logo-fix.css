@@ -1,0 +1,30 @@
+/* iPhone logo-only patch. No animation, markup, or desktop changes. */
+@media (max-width: 600px) {
+  .aq-reference-header .brand { min-width: 0 !important; max-width: 100% !important; }
+  .aq-reference-header .brand img {
+    display: block !important;
+    width: clamp(128px, 38vw, 165px) !important;
+    height: auto !important;
+    max-height: 64px !important;
+    object-fit: contain !important;
+    object-position: center !important;
+    flex-shrink: 0 !important;
+  }
+  #page-home .aq-hero-logo {
+    width: min(260px, 88vw) !important;
+    max-width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin-inline: auto !important;
+    overflow: visible !important;
+  }
+  #page-home .aq-hero-logo img {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    object-fit: contain !important;
+    mix-blend-mode: normal !important;
+  }
+}
