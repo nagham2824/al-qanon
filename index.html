@@ -770,6 +770,58 @@ window.aqApplyExtraTranslations=function(lang){
 /* Professional contrast for the original approved SVG; no changes elsewhere. */
 #page-home .aq-about-mark img{filter:drop-shadow(0 7px 12px rgba(0,0,0,.32))!important;}
 </style>
+
+<style id="audience-refinement-preview">
+/* Preview-only: target audience section; other site elements unchanged */
+#page-home .aq-audience{position:relative;isolation:isolate;max-width:1240px;margin:36px auto 52px;padding:44px 34px 48px;border:1px solid rgba(201,146,62,.26);border-radius:28px;background:linear-gradient(145deg,#fbf8f2 0%,#f4eee4 54%,#faf7f0 100%);box-shadow:0 20px 65px rgba(16,42,67,.08);overflow:hidden}
+#page-home .aq-audience::before{content:"";position:absolute;inset:0 0 auto;height:4px;background:linear-gradient(90deg,transparent,#c9923e 28%,#e8c78b 52%,#c9923e 72%,transparent);opacity:.9}
+#page-home .aq-audience::after{content:"";position:absolute;top:-160px;left:-110px;width:370px;height:370px;border-radius:50%;background:radial-gradient(circle,rgba(201,146,62,.1),transparent 70%);z-index:-1;pointer-events:none}
+#page-home .aq-audience .aq-section-head{margin:0 auto 29px;max-width:720px}
+#page-home .aq-audience .aq-section-head>span{color:#aa7a35;font-size:10px;letter-spacing:2.8px}
+#page-home .aq-audience .section-title{font-size:clamp(27px,3vw,37px)!important;font-weight:900!important;color:#102a43!important;margin:9px 0 12px!important}
+#page-home .aq-audience .aq-section-head p{color:#62717c;font-size:13px;line-height:1.95}
+#page-home .aq-audience .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+#page-home .aq-audience .card{position:relative;display:flex;flex-direction:column;min-width:0;overflow:hidden;border:1px solid rgba(201,146,62,.55)!important;border-radius:19px!important;background:#102a43!important;box-shadow:0 13px 26px rgba(16,42,67,.15)!important;transition:transform .25s ease,box-shadow .25s ease}
+#page-home .aq-audience .card:hover{transform:translateY(-5px);box-shadow:0 20px 34px rgba(16,42,67,.22)!important}
+#page-home .aq-audience .card::before{content:"";position:absolute;z-index:2;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#e6bb70,transparent)}
+#page-home .aq-audience .card img{display:block;width:100%;height:185px!important;object-fit:cover;filter:saturate(.82) contrast(1.04)}
+#page-home .aq-audience .card-body{position:relative;flex:1;display:flex;flex-direction:column;align-items:stretch;min-height:179px;padding:19px 17px 18px!important;background:linear-gradient(160deg,#173750,#0b2033)!important;text-align:center}
+#page-home .aq-audience .card-body::before{content:"";position:absolute;top:-29px;left:0;right:0;height:30px;background:linear-gradient(0deg,#173750,transparent);pointer-events:none}
+#page-home .aq-audience .card-body h3{position:relative;color:#f7f2e9!important;font-size:16px!important;margin:0 0 8px!important;font-weight:800}
+#page-home .aq-audience .card-body p{position:relative;color:#c7d0d7!important;font-size:11px!important;line-height:1.85!important;margin:0 0 17px!important;flex:1}
+#page-home .aq-audience .card-body .btn{display:flex;align-items:center;justify-content:center;min-height:39px;border:1px solid #d8ab61!important;border-radius:999px!important;background:linear-gradient(115deg,#e4b86f,#c9923e)!important;color:#142a3b!important;font-size:12px!important;font-weight:800!important;box-shadow:0 5px 13px rgba(0,0,0,.16);transition:filter .2s ease,transform .2s ease}
+#page-home .aq-audience .card-body .btn:hover{filter:brightness(1.08);transform:translateY(-1px)}
+@media(max-width:960px){#page-home .aq-audience{margin:28px 16px 42px;padding:32px 22px}#page-home .aq-audience .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}}
+@media(max-width:540px){#page-home .aq-audience{margin:22px 12px 34px;padding:30px 14px 22px;border-radius:22px}#page-home .aq-audience .grid{grid-template-columns:1fr;gap:16px}#page-home .aq-audience .card img{height:195px!important}#page-home .aq-audience .card-body{min-height:0;padding:18px 16px!important}#page-home .aq-audience .section-title{font-size:28px!important}}
+@media(prefers-reduced-motion:reduce){#page-home .aq-audience .card,#page-home .aq-audience .btn{transition:none}}
+</style>
+
+<style id="aq-audience-editorial-concept">
+/* Approved audience section; original links, content and other sections preserved */
+.aq-audience{position:relative;isolation:isolate;padding:76px 34px 90px!important;margin-block:44px!important;max-width:1250px!important;border-radius:34px;background:radial-gradient(ellipse at 85% 0%,rgba(201,146,62,.14),transparent 42%),linear-gradient(145deg,#fbf9f4 0%,#f0ede5 100%)!important;border:1px solid rgba(201,146,62,.25);box-shadow:0 22px 65px rgba(16,42,67,.09);overflow:hidden}
+.aq-audience:before{content:"";position:absolute;inset:16px;pointer-events:none;border:1px solid rgba(201,146,62,.16);border-radius:25px}
+.aq-audience .aq-section-head{position:relative;text-align:center!important;margin-bottom:42px!important}
+.aq-audience .aq-section-head>span{font-size:10px!important;letter-spacing:3px!important;color:#a87937!important;font-weight:800}
+.aq-audience .section-title{font-size:clamp(29px,3.2vw,43px)!important;color:#102a43!important;margin:12px 0!important}
+.aq-audience .aq-section-head:after{content:"";display:block;width:66px;height:3px;background:linear-gradient(90deg,transparent,#c9923e,transparent);margin:20px auto 0}
+.aq-audience .aq-section-head p{color:#536476!important;max-width:620px;margin-inline:auto}
+.aq-audience .grid{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:17px!important;align-items:stretch}
+.aq-audience .card{position:relative!important;display:flex!important;flex-direction:column!important;overflow:hidden!important;min-width:0!important;border-radius:22px!important;background:#fff!important;border:1px solid rgba(16,42,67,.10)!important;box-shadow:0 10px 25px rgba(16,42,67,.08)!important;transform:none!important;transition:transform .25s ease,box-shadow .25s ease!important}
+.aq-audience .card:nth-child(even){margin-top:25px!important}
+.aq-audience .card:hover{transform:translateY(-6px)!important;box-shadow:0 18px 35px rgba(16,42,67,.16)!important}
+.aq-audience .card:before{content:"0" counter(aqcard);counter-increment:aqcard;position:absolute;z-index:3;top:13px;right:14px;background:rgba(16,42,67,.90);color:#f5f0e7;font:700 12px/1 sans-serif;padding:11px 10px;border:1px solid rgba(201,146,62,.8);border-radius:50%}
+.aq-audience .grid{counter-reset:aqcard}
+.aq-audience .card>img{width:100%!important;height:190px!important;object-fit:cover!important;display:block!important;filter:saturate(.76) contrast(1.05)}
+.aq-audience .card-body{display:flex!important;flex-direction:column!important;flex:1!important;text-align:right!important;padding:23px 19px 20px!important;background:#fff!important}
+.aq-audience .card-body:before{content:"";width:35px;height:2px;background:#c9923e;margin-bottom:14px}
+.aq-audience .card h3{font-size:18px!important;line-height:1.5!important;color:#102a43!important;margin:0 0 9px!important}
+.aq-audience .card p{font-size:13px!important;line-height:1.9!important;color:#617081!important;flex:1!important;margin:0 0 22px!important}
+.aq-audience .card .btn{display:block!important;text-align:center!important;width:100%!important;border-radius:11px!important;padding:12px 8px!important;background:#c9923e!important;color:#102a43!important;border:1px solid #c9923e!important;font-size:13px!important;font-weight:700!important;box-shadow:none!important;text-decoration:none!important}
+.aq-audience .card .btn:hover{background:#b17c2d!important;border-color:#b17c2d!important;color:#102a43!important}
+@media(max-width:900px){.aq-audience .grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}.aq-audience .card:nth-child(even){margin-top:0!important}.aq-audience{padding:55px 24px!important}}
+@media(max-width:560px){.aq-audience{padding:44px 18px!important;border-radius:23px!important}.aq-audience .grid{grid-template-columns:1fr!important;gap:16px!important}.aq-audience .card>img{height:210px!important}}
+@media(prefers-reduced-motion:reduce){.aq-audience .card{transition:none!important}}
+</style>
 </head>
 <body>
   <a class="skip" href="#main" data-i18n="skip">تجاوز إلى المحتوى</a>
