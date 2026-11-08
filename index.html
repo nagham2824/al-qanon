@@ -879,6 +879,49 @@ window.aqApplyExtraTranslations=function(lang){
 @media(max-width:800px){#page-home .aq-latest-four{grid-template-columns:1fr!important;grid-template-rows:auto!important}#page-home .aq-latest-card:first-child{grid-row:auto;min-height:340px!important}#page-home .aq-latest-deco{width:58px;height:58px;font-size:29px}}
 @media(max-width:600px){#page-home .aq-latest-v2{padding:38px 18px!important}#page-home .aq-latest-card:first-child{padding:26px 22px!important}#page-home .aq-latest-card:first-child h3{margin:24px 0 12px!important}}
 @media(prefers-reduced-motion:reduce){#page-home .aq-latest-card{transition:none!important}}
+</style><style id="aq-latest-compact-approved">
+/* Compact editorial layout: keeps four live articles and archive unchanged. */
+#page-home .aq-latest-v2{padding:28px clamp(16px,3vw,34px) 24px!important;margin-block:24px 32px!important;border-radius:22px!important;box-shadow:0 12px 32px rgba(12,32,51,.08)!important}
+#page-home .aq-latest-heading{padding-bottom:13px!important;margin-bottom:17px!important;gap:12px!important}
+#page-home .aq-latest-heading h2{font-size:clamp(23px,2.4vw,31px)!important;margin:4px 0 6px!important}
+#page-home .aq-latest-heading p{font-size:12px!important}
+#page-home .aq-latest-deco{width:48px!important;height:48px!important;font-size:24px!important}
+#page-home .aq-latest-four{grid-template-columns:minmax(0,1.05fr) minmax(0,1fr)!important;grid-template-rows:repeat(3,minmax(0,auto))!important;gap:10px!important}
+#page-home .aq-latest-card{padding:12px 16px!important;border-radius:13px!important}
+#page-home .aq-latest-card:first-child{padding:22px 23px!important;min-height:0!important}
+#page-home .aq-latest-card:first-child:before{font-size:180px!important;bottom:-40px!important}
+#page-home .aq-latest-card:first-child h3{font-size:clamp(20px,2vw,27px)!important;margin:18px 0 9px!important}
+#page-home .aq-latest-card:first-child p{font-size:13px!important;line-height:1.75!important}
+#page-home .aq-latest-card:first-child .aq-latest-num{font-size:25px!important}
+#page-home .aq-latest-card:not(:first-child) h3{font-size:15px!important;margin:5px 0 3px!important;line-height:1.4!important}
+#page-home .aq-latest-card:not(:first-child) p{font-size:11px!important;line-height:1.5!important;margin-bottom:4px!important;-webkit-line-clamp:1!important}
+#page-home .aq-latest-card:not(:first-child) .aq-latest-num{font-size:14px!important}
+#page-home .aq-latest-card-foot{padding-top:8px!important;font-size:11px!important}
+#page-home .aq-latest-bottom{margin-top:15px!important;padding-top:14px!important}
+#page-home .aq-latest-archive-link{padding:10px 18px!important;font-size:13px!important}
+@media(max-width:800px){#page-home .aq-latest-four{grid-template-columns:1fr!important;grid-template-rows:auto!important}#page-home .aq-latest-card:first-child{grid-row:auto!important;min-height:0!important}#page-home .aq-latest-card:not(:first-child) p{-webkit-line-clamp:2!important}}
+@media(max-width:600px){#page-home .aq-latest-v2{padding:22px 14px!important}#page-home .aq-latest-card:first-child{padding:20px!important}#page-home .aq-latest-card:first-child h3{margin:12px 0 8px!important}}
+</style>
+<style id="aq-latest-slim-editorial-option">
+/* Slim legal journal: presentation-only; live article loading and archive remain unchanged */
+#page-home .aq-latest-v2{max-width:1080px!important;padding:20px 24px 18px!important;margin:20px auto 26px!important;border-radius:18px!important;background:#f8f6f0!important;box-shadow:0 7px 22px rgba(16,42,67,.07)!important}
+#page-home .aq-latest-heading{padding-bottom:10px!important;margin-bottom:12px!important;min-height:0!important}
+#page-home .aq-latest-heading h2{font-size:clamp(21px,2vw,26px)!important;margin:3px 0!important}
+#page-home .aq-latest-heading p{font-size:11px!important;margin:3px 0!important;line-height:1.6!important}
+#page-home .aq-latest-heading .aq-kicker{font-size:9px!important;letter-spacing:1.3px!important}
+#page-home .aq-latest-deco{width:38px!important;height:38px!important;font-size:19px!important}
+#page-home .aq-latest-four{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;grid-template-rows:1fr!important;gap:10px!important;align-items:stretch!important}
+#page-home .aq-latest-card,#page-home .aq-latest-card:first-child{grid-column:auto!important;grid-row:auto!important;min-height:142px!important;max-height:none!important;padding:13px 13px 12px!important;border-radius:12px!important;display:flex!important;flex-direction:column!important;justify-content:space-between!important}
+#page-home .aq-latest-card:first-child{background:#102a43!important;color:#f5f0e7!important}
+#page-home .aq-latest-card h3,#page-home .aq-latest-card:first-child h3{font-size:14px!important;line-height:1.5!important;margin:8px 0!important;display:-webkit-box!important;-webkit-line-clamp:2!important;-webkit-box-orient:vertical!important;overflow:hidden!important}
+#page-home .aq-latest-card p,#page-home .aq-latest-card:first-child p{font-size:11px!important;line-height:1.55!important;margin:4px 0!important;display:-webkit-box!important;-webkit-line-clamp:2!important;-webkit-box-orient:vertical!important;overflow:hidden!important}
+#page-home .aq-latest-card .aq-latest-meta{font-size:10px!important;margin:0!important}
+#page-home .aq-latest-card a{font-size:11px!important;margin-top:7px!important}
+#page-home .aq-latest-bottom{margin-top:11px!important;padding-top:10px!important;gap:8px!important}
+#page-home .aq-latest-bottom>span{font-size:11px!important}
+#page-home .aq-latest-archive-link{font-size:12px!important;padding:9px 15px!important;border-radius:9px!important}
+@media(max-width:850px){#page-home .aq-latest-four{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:540px){#page-home .aq-latest-v2{padding:18px 14px!important;margin-inline:10px!important}#page-home .aq-latest-four{grid-template-columns:1fr!important}#page-home .aq-latest-card,#page-home .aq-latest-card:first-child{min-height:108px!important}#page-home .aq-latest-heading p{max-width:270px}}
 </style></head>
 <body>
   <a class="skip" href="#main" data-i18n="skip">تجاوز إلى المحتوى</a>
@@ -1554,3 +1597,4 @@ window.aqApplyExtraTranslations=function(lang){
 </script>
 <script id="aq-archive-filter-events">document.addEventListener('change',function(e){if(e.target?.id==='aqArchivePeriod'||e.target?.id==='aqArchiveMonth'){document.dispatchEvent(new Event('aqArchiveChanged'));}});document.addEventListener('click',function(e){if(e.target?.id==='aqArchiveReset'){document.getElementById('aqArchivePeriod').value='all';document.getElementById('aqArchiveMonth').value='';document.dispatchEvent(new Event('aqArchiveChanged'));}});</script></body>
 </html>
+
