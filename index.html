@@ -1960,7 +1960,7 @@ render();
 })();
 </script>
 <script id="aq-member-menu-live-script">(function(){const menu=document.getElementById('aqMemberMenu'),trigger=document.getElementById('aqMemberTrigger'),options=document.getElementById('aqMemberOptions');if(!menu||!trigger||!options)return;const close=()=>{options.hidden=true;trigger.setAttribute('aria-expanded','false');};trigger.addEventListener('click',()=>{const next=options.hidden;options.hidden=!next;trigger.setAttribute('aria-expanded',String(next));});document.getElementById('aqAdminEntry')?.addEventListener('click',close);document.getElementById('aqVolunteerEntry')?.addEventListener('click',()=>{close();document.getElementById('openVolunteerMembers')?.click();document.getElementById('volunteerLoginPanel')?.scrollIntoView({behavior:'smooth',block:'start'});});document.addEventListener('click',event=>{if(!menu.contains(event.target))close();});document.addEventListener('keydown',event=>{if(event.key==='Escape')close();});})();</script>
-<script src="volunteer-entry.js"></script>
+<script src="volunteer-entry.js?v=1152b03"></script>
 </body>
 </html>
 
