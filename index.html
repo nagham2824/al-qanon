@@ -1077,7 +1077,7 @@ body > .top, .top {display:none!important;}
 #page-volunteer .aq-students-content {max-width:1120px;display:grid;grid-template-columns:minmax(0,1.65fr) minmax(0,1fr);gap:35px}
 #page-volunteer .aq-students-content > .aq-translation-context {grid-column:1 / -1;justify-self:start;margin:0}
 #page-volunteer .aq-volunteer-side {align-self:start;margin-top:24px;border:1px solid #d9b970;border-radius:80px 16px;padding:45px 28px;text-align:center;background:#fffdf8;color:#102a43;font-size:1.4rem}
-#page-volunteer .aq-volunteer-side span {display:block;color:#986619;font-size:2rem}
+#page-volunteer .aq-volunteer-side > span {display:block;color:#986619;font-size:2rem}
 #page-volunteer #volunteerApplicationPanel {padding:0 0 25px;border:0;border-bottom:1px dashed #b6aa95;border-radius:0;background:transparent;box-shadow:none}
 #page-volunteer #volunteerApplicationPanel .btn {background:linear-gradient(110deg,#ffdc8a,#e8a43d);color:#182433;border-radius:99px;font-weight:800}
 #page-volunteer #volunteerClaimPanel .btn {background:#0b3558;color:white;border-radius:99px}
@@ -1145,6 +1145,10 @@ html[dir="rtl"] #page-volunteer .aq-volunteer-arrow {transform:scaleX(-1)}
 #page-volunteer #claimStatus.error {color:#a42227}
 #page-volunteer:not(.aq-volunteer-login-requested) #volunteerLoginPanel {display:none}
 </style>
+<style id="aq-localized-volunteer-copy">
+.aq-localized-text {display:none}
+html[lang="ar"] .aq-localized-text[lang="ar"],html[lang="nl"] .aq-localized-text[lang="nl"],html[lang="en"] .aq-localized-text[lang="en"],html[lang="tr"] .aq-localized-text[lang="tr"] {display:inline}
+</style>
 </head>
 <body>
   <a class="skip" href="#main" data-i18n="skip">تجاوز إلى المحتوى</a>
@@ -1165,7 +1169,7 @@ html[dir="rtl"] #page-volunteer .aq-volunteer-arrow {transform:scaleX(-1)}
         <select class="lang-select" id="langSelect" aria-label="Language">
           <option value="ar">العربية</option><option value="nl">Nederlands</option><option value="tr">Türkçe</option><option value="en">English</option>
         </select>
-        <div class="aq-member-menu" id="aqMemberMenu"><button class="member aq-member-trigger" type="button" id="aqMemberTrigger" aria-haspopup="true" aria-expanded="false">دخول الأعضاء <span aria-hidden="true">⌄</span></button><div class="aq-member-options" id="aqMemberOptions" hidden><a href="#admin" data-page="admin" id="aqAdminEntry">⚖️ &nbsp; دخول الإدارة</a><button type="button" id="aqVolunteerEntry">♧ &nbsp; دخول المتطوعين</button></div></div>
+        <div class="aq-member-menu" id="aqMemberMenu"><button class="member aq-member-trigger" type="button" id="aqMemberTrigger" aria-haspopup="true" aria-expanded="false"><span class="aq-localized-text" lang="ar">دخول الأعضاء</span><span class="aq-localized-text" lang="nl">Inloggen voor leden</span><span class="aq-localized-text" lang="en">Member login</span><span class="aq-localized-text" lang="tr">Üye girişi</span> <span aria-hidden="true">⌄</span></button><div class="aq-member-options" id="aqMemberOptions" hidden><a href="#admin" data-page="admin" id="aqAdminEntry">⚖️ &nbsp; <span class="aq-localized-text" lang="ar">دخول الإدارة</span><span class="aq-localized-text" lang="nl">Inloggen voor beheerders</span><span class="aq-localized-text" lang="en">Admin login</span><span class="aq-localized-text" lang="tr">Yönetici girişi</span></a><button type="button" id="aqVolunteerEntry">♧ &nbsp; <span class="aq-localized-text" lang="ar">دخول المتطوعين</span><span class="aq-localized-text" lang="nl">Inloggen voor vrijwilligers</span><span class="aq-localized-text" lang="en">Volunteer login</span><span class="aq-localized-text" lang="tr">Gönüllü girişi</span></button></div></div>
       </div>
     </div>
   </header>  <main id="main">
@@ -1289,7 +1293,7 @@ html[dir="rtl"] #page-volunteer .aq-volunteer-arrow {transform:scaleX(-1)}
       </div>
       </div>
       </div>
-      <aside class="aq-volunteer-side"><span aria-hidden="true">❧</span><strong>معًا للمعرفة القانونية<br>ولمجتمع أقوى</strong></aside>
+      <aside class="aq-volunteer-side"><span aria-hidden="true">❧</span><strong><span class="aq-localized-text" lang="ar">معًا للمعرفة القانونية<br>ولمجتمع أقوى</span><span class="aq-localized-text" lang="nl">Samen voor juridische kennis<br>en een sterkere samenleving</span><span class="aq-localized-text" lang="en">Together for legal knowledge<br>and a stronger community</span><span class="aq-localized-text" lang="tr">Hukuki bilgi ve daha güçlü<br>bir toplum için birlikte</span></strong></aside>
     </div></section>
 
     <section class="page container" id="page-admin">
