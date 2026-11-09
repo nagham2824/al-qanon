@@ -1170,6 +1170,7 @@ html[lang="ar"] .aq-localized-text[lang="ar"],html[lang="nl"] .aq-localized-text
 .aq-site-footer .aq-footer-link-label{color:inherit;font-weight:inherit}
 .aq-site-footer .aq-footer-message{color:#e3e9ee}
 </style>
+<style id="aq-article-translations">.aq-article-translation{margin-block:12px}.aq-article-translation summary{cursor:pointer;font-weight:700}.aq-article-translation label{display:block;margin-block:8px}.aq-article-translation .btn{margin-inline-end:8px}.aq-article-translation [role="status"]:empty{display:none}</style>
 </head>
 <body>
   <a class="skip" href="#main" data-i18n="skip">تجاوز إلى المحتوى</a>
@@ -1456,13 +1457,117 @@ html[lang="ar"] .aq-localized-text[lang="ar"],html[lang="nl"] .aq-localized-text
   function showPage(pageId,updateHash=true){if(!document.getElementById('page-'+pageId))pageId='home';document.querySelectorAll('.page').forEach(page=>page.classList.toggle('active',page.id==='page-'+pageId));document.querySelectorAll('[data-page]').forEach(link=>{if(link.tagName==='A'&&link.closest('nav')){if(link.dataset.page===pageId)link.setAttribute('aria-current','page');else link.removeAttribute('aria-current');}});if(updateHash&&location.hash!=='#'+pageId)history.replaceState(null,'','#'+pageId);window.scrollTo({top:0,behavior:'auto'});renderArticles();}
   function articleFromRow(row){return{id:String(row.id),title:row.title||'',body:row.content||'',category:row.category||'general',author_name:row.author_name||'',status:row.status||'pending_review',language:row.language||'ar',source_url:row.source_url||'',updatedAt:row.updated_at||row.created_at||new Date().toISOString()};}
   function articleCategoryName(category){const key=({ 'public-law':'navPublic','private-law':'navPrivate',student:'studentsTitle',refugee:'refugeeTitle',resident:'residentTitle',general:'generalTitle' })[category];return key?t(key):t('generalTitle');}
+  let publishedTranslations=[];
+  const translationNames={ar:'العربية',nl:'Nederlands',en:'English',tr:'Türkçe'};
+  const translationUi={
+    ar:['ترجمات المقال','النص الأصلي','عنوان الترجمة','نص الترجمة','حفظ كمسودة خاصة','نشر الترجمة','تم الحفظ','تعذّر تحميل الترجمة أو حفظها','اللغة','مسودة خاصة','منشورة'],
+    nl:['Artikelvertalingen','Originele tekst','Vertaalde titel','Vertaalde tekst','Opslaan als privéconcept','Vertaling publiceren','Opgeslagen','Laden of opslaan is mislukt','Taal','Privéconcept','Gepubliceerd'],
+    en:['Article translations','Original text','Translated title','Translated text','Save as private draft','Publish translation','Saved','Could not load or save the translation','Language','Private draft','Published'],
+    tr:['Makale çevirileri','Orijinal metin','Çevrilen başlık','Çevrilen metin','Özel taslak olarak kaydet','Çeviriyi yayımla','Kaydedildi','Çeviri yüklenemedi veya kaydedilemedi','Dil','Özel taslak','Yayında']
+  };
+  function renderTranslationControls(item,article,title,body,adminView){
+    const ui=translationUi[currentLang]||translationUi.ar;
+    const available=publishedTranslations.filter(row=>String(row.article_id)===article.id&&row.language!==article.language);
+    if(!adminView&&!available.length)return;
+    const details=document.createElement('details');
+    details.className='aq-article-translation';
+    const summary=document.createElement('summary');
+    summary.textContent=ui[0];
+    details.append(summary);
+    const field=(label,tag)=>{
+      const wrap=document.createElement('label');
+      wrap.textContent=label;
+      const control=document.createElement(tag);
+      control.className='field';
+      wrap.append(control);
+      details.append(wrap);
+      return control;
+    };
+    const language=field(ui[8],'select');
+    item.append(details);
+    if(!adminView){
+      language.add(new Option(ui[1],article.language));
+      for(const row of available)language.add(new Option(translationNames[row.language],row.language));
+      language.addEventListener('change',()=>{
+        const row=available.find(candidate=>candidate.language===language.value);
+        title.textContent=row?.title??article.title;
+        body.textContent=row?.content??article.body;
+        title.lang=body.lang=language.value;
+        title.dir=body.dir=language.value==='ar'?'rtl':'ltr';
+      });
+      return;
+    }
+    for(const [code,name] of Object.entries(translationNames)){
+      if(code!==article.language)language.add(new Option(name,code));
+    }
+    if(article.language==='ar')language.value='nl';
+    const heading=field(ui[2],'input');
+    const text=field(ui[3],'textarea');
+    const form=document.createElement('form');
+    const status=document.createElement('p');
+    status.setAttribute('role','status');
+    form.append(language.parentElement,heading.parentElement,text.parentElement);
+    details.append(form,status);
+    heading.required=text.required=true;
+    const buttons=[];
+    const disable=value=>{
+      for(const input of [language,heading,text,...buttons])input.disabled=value;
+    };
+    const load=async()=>{
+      disable(true);
+      status.textContent='';
+      heading.value=text.value='';
+      heading.lang=text.lang=language.value;
+      heading.dir=text.dir=language.value==='ar'?'rtl':'ltr';
+      try{
+        const {data,error}=await db.from('article_translations').select('title,content,status').eq('article_id',article.id).eq('language',language.value).maybeSingle();
+        if(error)throw error;
+        heading.value=data?.title||'';
+        text.value=data?.content||'';
+        if(data)status.textContent=ui[data.status==='published'?10:9];
+        disable(false);
+      }catch{
+        status.textContent=ui[7];
+        language.disabled=false;
+      }
+    };
+    for(const [state,label] of [['draft',ui[4]],['published',ui[5]]]){
+      const button=document.createElement('button');
+      button.type='submit';
+      button.value=state;
+      button.className='btn small';
+      button.textContent=label;
+      buttons.push(button);
+      form.append(button);
+    }
+    form.addEventListener('submit',async event=>{
+      event.preventDefault();
+      const state=event.submitter?.value==='published'?'published':'draft';
+      const row={article_id:article.id,language:language.value,title:heading.value.trim(),content:text.value.trim(),status:state};
+      if(!row.title||!row.content)return;
+      disable(true);
+      try{
+        const {error}=await db.from('article_translations').upsert(row,{onConflict:'article_id,language'});
+        if(error)throw error;
+        publishedTranslations=publishedTranslations.filter(saved=>String(saved.article_id)!==article.id||saved.language!==row.language);
+        if(state==='published')publishedTranslations.push(row);
+        status.textContent=ui[6]+' · '+ui[state==='published'?10:9];
+      }catch{status.textContent=ui[7];}
+      finally{disable(false);}
+    });
+    details.addEventListener('toggle',()=>{if(details.open)load();},{once:true});
+    language.addEventListener('change',load);
+  }
   async function refreshArticles(){
     if(!db){articles=[];renderArticles();setStatus('adminSessionStatus','Supabase غير متاح. تحقق من اتصال الإنترنت ومكتبة Supabase.',true);return;}
     let query=db.from('articles').select('id,title,content,author_name,status,created_at,updated_at,category,language,source_url').order('created_at',{ascending:false});
     if(!isAdmin)query=query.eq('status','published');
     const {data,error}=await query;
     if(error){console.error('Supabase articles error:',error);articles=[];renderArticles();if(isAdmin)setStatus('adminSessionStatus',t('databaseError'),true);return;}
-    articles=(data||[]).map(articleFromRow);renderArticles();
+    articles=(data||[]).map(articleFromRow);
+    const translationsResult=await db.from('article_translations').select('article_id,language,title,content,status').eq('status','published');
+    publishedTranslations=translationsResult.data||[];
+    renderArticles();
   }
   function renderArticleTarget(id,list,adminView=false){
     const root=document.getElementById(id);if(!root)return;root.replaceChildren();
@@ -1484,6 +1589,7 @@ html[lang="ar"] .aq-localized-text[lang="ar"],html[lang="nl"] .aq-localized-text
         const remove=document.createElement('button');remove.type='button';remove.className='btn danger small';remove.textContent=t('delete');remove.addEventListener('click',()=>deleteArticle(article.id));actions.append(remove);
         item.append(actions);
       }
+      renderTranslationControls(item,article,title,body,adminView);
       root.append(item);
     });
   }
