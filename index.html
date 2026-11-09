@@ -1025,6 +1025,43 @@ body > .top, .top {display:none!important;}
   #page-volunteer .aq-students-hero-copy > h1 { animation: none; }
 }
 </style>
+<style>
+
+/* AQ mobile-only responsive refinement — preserves desktop, branding, JS and permissions */
+@media screen and (max-width: 720px) {
+  html, body { max-width:100%; overflow-x:clip; }
+  .aq-reference-header { position:sticky; top:0; z-index:1000; }
+  .aq-reference-header .nav {
+    width:100%!important; max-width:100%!important; padding:10px 14px 7px!important;
+    display:grid!important; grid-template-columns:minmax(0,1fr) auto!important;
+    gap:8px 12px!important; align-items:center!important; justify-content:initial!important;
+  }
+  .aq-reference-header .brand { grid-column:1!important; grid-row:1!important; min-width:0; justify-self:start; }
+  .aq-reference-header .brand img { width:clamp(120px,37vw,164px)!important; height:auto!important; max-height:62px!important; }
+  .aq-reference-header .navside { grid-column:2!important; grid-row:1!important; min-width:0; display:flex!important; gap:7px!important; justify-self:end; flex-wrap:nowrap!important; }
+  .aq-reference-header .navside .lang-select { width:auto!important; max-width:105px!important; min-width:0; font-size:12px!important; padding:8px 4px!important; }
+  .aq-reference-header .navside .member { white-space:nowrap!important; font-size:11px!important; padding:9px 10px!important; }
+  .aq-reference-header .navlinks {
+    grid-column:1 / -1!important; grid-row:2!important; width:100%!important; min-width:0!important;
+    display:flex!important; flex-wrap:nowrap!important; justify-content:flex-start!important;
+    gap:17px!important; overflow-x:auto!important; overscroll-behavior-x:contain;
+    scrollbar-width:thin; -webkit-overflow-scrolling:touch;
+    padding:5px 2px 10px!important; scroll-snap-type:x proximity;
+  }
+  .aq-reference-header .navlinks a { flex:0 0 auto!important; font-size:12px!important; line-height:1.6!important; scroll-snap-align:start; }
+  #page-articles .aq-archive-controls { display:grid!important; grid-template-columns:1fr!important; gap:9px!important; padding:12px!important; }
+  #page-articles .aq-archive-controls > * { max-width:100%!important; width:100%!important; min-width:0!important; }
+  #page-articles input, #page-articles select { max-width:100%; }
+  #page-articles .card, #page-articles article { max-width:100%; overflow-wrap:anywhere; }
+  #page-articles .grid { grid-template-columns:1fr!important; }
+}
+@media screen and (max-width:380px) {
+  .aq-reference-header .nav { gap:6px!important; padding-inline:9px!important; }
+  .aq-reference-header .brand img { width:112px!important; }
+  .aq-reference-header .navside .member { font-size:10px!important; padding:8px!important; }
+  .aq-reference-header .navside .lang-select { max-width:86px!important; font-size:11px!important; }
+}
+</style>
 </head>
 <body>
   <a class="skip" href="#main" data-i18n="skip">تجاوز إلى المحتوى</a>
@@ -1759,6 +1796,72 @@ function close(){modal.classList.remove('aq-open');modal.setAttribute('aria-hidd
 document.getElementById('aq-translation-close').addEventListener('click',close);modal.addEventListener('click',e=>{if(e.target===modal)close();});select.addEventListener('change',render);document.addEventListener('keydown',e=>{if(e.key==='Escape')close();});
 const globalLang=document.getElementById('langSelect');if(globalLang){select.value=copy[globalLang.value]?globalLang.value:'ar';globalLang.addEventListener('change',()=>{select.value=copy[globalLang.value]?globalLang.value:'ar';render();});}
 render();
+})();
+</script>
+
+<script id="aq-archive-i18n-fix">
+/* Archive UI labels only; preserves filter values and existing event handlers. */
+(function(){
+ const copy={
+ ar:['تصفية المقالات حسب التاريخ','الأرشيف حسب الفترة','جميع التواريخ','آخر 7 أيام','آخر 30 يوماً','أقدم من 30 يوماً','أو اختر شهراً','اختر شهر النشر','إظهار الكل','البحث في جميع المقالات'],
+ nl:['Artikelen filteren op datum','Archief per periode','Alle datums','Laatste 7 dagen','Laatste 30 dagen','Ouder dan 30 dagen','Of kies een maand','Kies publicatiemaand','Alles tonen','Zoeken in alle artikelen'],
+ en:['Filter articles by date','Archive by period','All dates','Last 7 days','Last 30 days','Older than 30 days','Or choose a month','Choose publication month','Show all','Search all articles'],
+ tr:['Makaleleri tarihe göre filtrele','Döneme göre arşiv','Tüm tarihler','Son 7 gün','Son 30 gün','30 günden eski','Veya bir ay seçin','Yayın ayını seçin','Tümünü göster','Tüm makalelerde ara']
+ };
+ function apply(){
+  const lang=document.getElementById('langSelect')?.value||'ar', v=copy[lang]||copy.ar;
+  const box=document.querySelector('.aq-archive-controls');if(!box)return;
+  box.setAttribute('aria-label',v[0]);
+  const period=document.getElementById('aqArchivePeriod');
+  const month=document.getElementById('aqArchiveMonth');
+  const first=box.querySelector('label[for="aqArchivePeriod"]');if(first)first.textContent=v[1];
+  if(period){['all','week','month','older'].forEach((key,i)=>{const opt=period.querySelector('option[value="'+key+'"]');if(opt)opt.textContent=v[i+2];});}
+  const second=box.querySelector('label[for="aqArchiveMonth"]');if(second)second.textContent=v[6];
+  if(month)month.setAttribute('aria-label',v[7]);
+  const reset=document.getElementById('aqArchiveReset');if(reset)reset.textContent=v[8];
+  const search=document.getElementById('allArticlesSearch');if(search)search.setAttribute('aria-label',v[9]);
+ }
+ function init(){apply();document.getElementById('langSelect')?.addEventListener('change',apply);}
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+
+<!-- Scoped preview fix: audience translations and mobile navigation scrollbar -->
+<style id="aq-mobile-nav-scrollbar-fix">
+@media (max-width: 900px) {
+  .aq-reference-header .navlinks {
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+  }
+  .aq-reference-header .navlinks::-webkit-scrollbar { display: none !important; width: 0 !important; height: 0 !important; }
+  .aq-reference-header .navlinks a { flex-shrink: 0; }
+}
+</style>
+<script id="aq-audience-localization-fix">
+(function(){
+  'use strict';
+  const copy={
+    ar:{eyebrow:'اكتشف المعرفة',description:'محتوى قانوني مبسّط موجّه إلى فئات مختلفة، وبأربع لغات: العربية والهولندية والتركية والإنجليزية.'},
+    nl:{eyebrow:'ONTDEK DE KENNIS',description:'Eenvoudige juridische informatie voor verschillende doelgroepen, beschikbaar in vier talen: Arabisch, Nederlands, Turks en Engels.'},
+    tr:{eyebrow:'BİLGİYİ KEŞFEDİN',description:'Farklı gruplara yönelik sadeleştirilmiş hukuki bilgiler; Arapça, Felemenkçe, Türkçe ve İngilizce olmak üzere dört dilde sunulur.'},
+    en:{eyebrow:'EXPLORE THE KNOWLEDGE',description:'Clear, simplified legal information for different audiences, available in four languages: Arabic, Dutch, Turkish and English.'}
+  };
+  function update(){
+    const lang=document.getElementById('langSelect')?.value||document.documentElement.lang||'ar';
+    const data=copy[lang]||copy.ar;
+    const head=document.querySelector('#page-home .aq-audience .aq-section-head');
+    if(!head)return;
+    const eyebrow=head.querySelector('span');
+    const description=head.querySelector('p');
+    if(eyebrow){eyebrow.textContent=data.eyebrow;eyebrow.setAttribute('lang',lang);}
+    if(description){description.textContent=data.description;description.setAttribute('lang',lang);description.setAttribute('dir',lang==='ar'?'rtl':'ltr');}
+  }
+  function init(){update();document.getElementById('langSelect')?.addEventListener('change',update);}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
 </script>
 </body>
