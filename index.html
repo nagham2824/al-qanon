@@ -367,16 +367,6 @@ body>.top{display:none!important}
 /* Approved hero image: soft navy edge blend; other site components untouched. */
 .aq-hero-visual::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:2;background:linear-gradient(90deg,rgba(10,30,49,.45) 0%,transparent 28%,transparent 78%,rgba(10,30,49,.20) 100%);}
 
-/* AQ gold radiance — preview only; decorative overlays without changing layout */
-header{box-shadow:0 8px 34px #0006,0 1px 0 #e6ba70aa!important}
-header::after{background:linear-gradient(90deg,transparent 3%,#d5a45155 20%,#fff0ba 50%,#d5a45155 80%,transparent 97%)!important;height:2px!important;box-shadow:0 0 12px #e5a84a99}
-.hero{border-bottom:2px solid #e5b15c!important;box-shadow:inset 0 -18px 55px #0004,0 4px 18px #d4a05044!important}
-.hero h1{color:#efc77e!important;text-shadow:0 2px 3px #0008,0 0 20px #e3a64a66,0 0 52px #d89d3733!important}
-.hero::after{background:radial-gradient(ellipse at 50% 4%,#ffda8a1f,transparent 60%),linear-gradient(90deg,transparent 12%,#ffc96a09 50%,transparent 88%)!important}
-.hero .btn,.hero button,.hero a[class*="btn"]{box-shadow:0 5px 20px #0005,0 0 17px #e7aa5370,inset 0 1px 0 #fff2c099!important;border-color:#edc47d!important}
-main article,main .card,main [class*="feature-card"],main [class*="article-card"]{border:1px solid #d9aa5eaa!important;box-shadow:0 13px 25px #0004,0 0 13px #dfac5333,inset 0 1px 0 #ffebbd22!important}
-main article:hover,main .card:hover{box-shadow:0 16px 32px #0005,0 0 20px #e2af5880!important}
-
 </style>
 
 <style id="aq-hero-layout-fix">
@@ -1214,6 +1204,20 @@ html[lang="ar"] .aq-localized-text[lang="ar"],html[lang="nl"] .aq-localized-text
   border-color: rgba(201,146,62,.64) !important;
   box-shadow: 0 15px 32px rgba(13,32,50,.17), 0 0 15px rgba(201,146,62,.13) !important;
 }
+</style>
+<style id="aq-luxury-precision-preview">
+/* Visual finish only. No typography, sizing, spacing, transforms, or layout overrides. */
+.aq-topbar{background:linear-gradient(110deg,#071a2b,#102c47 55%,#081b2e)!important;border-bottom-color:rgba(231,181,92,.48)!important}
+.aq-mainnav{background:linear-gradient(125deg,#081e32,#12334e 52%,#091e32)!important;box-shadow:inset 0 -1px 0 rgba(255,222,151,.58),0 9px 23px rgba(0,0,0,.18)!important}
+.aq-mainnav::after{content:"";display:block;height:1px;background:linear-gradient(90deg,transparent,rgba(255,222,153,.8),transparent);box-shadow:0 0 9px rgba(241,186,92,.5);pointer-events:none}
+.aq-hero{background:radial-gradient(ellipse at 30% 15%,rgba(68,123,157,.3),transparent 55%),radial-gradient(ellipse at 75% 85%,rgba(204,144,52,.13),transparent 55%),linear-gradient(135deg,#071c30,#123a56 54%,#081e32)!important;box-shadow:inset 0 18px 38px rgba(0,0,0,.15),inset 0 -16px 30px rgba(0,0,0,.13)!important;border-bottom-color:#e0b36a!important}
+.aq-hero-visual{box-shadow:0 14px 35px rgba(0,0,0,.32),0 0 24px rgba(230,176,83,.18)!important}
+.aq-hero-visual:after{background:linear-gradient(90deg,var(--aq-navy) 0%,transparent 38%),linear-gradient(0deg,#0b203355,transparent 45%),radial-gradient(ellipse at 90% 30%,rgba(255,207,128,.12),transparent 65%)!important}
+.aq-hero-copy h1,.aq-hero-tagline{text-shadow:0 2px 12px rgba(0,0,0,.4),0 0 20px rgba(229,180,102,.16)!important}
+.aq-btn-gold{background:linear-gradient(135deg,#f5d28d,#dba34b 55%,#b67b2c)!important;box-shadow:0 7px 18px rgba(0,0,0,.28),0 0 16px rgba(230,173,75,.38),inset 0 1px 0 rgba(255,250,217,.8)!important}
+.aq-feature-card{background:radial-gradient(ellipse at 50% 0%,rgba(227,173,89,.12),transparent 65%),linear-gradient(145deg,#143a58,#081e32)!important;border-color:#d9ad65!important;box-shadow:0 14px 29px rgba(0,0,0,.25),0 0 0 1px rgba(255,214,143,.13),inset 0 1px 0 rgba(255,230,183,.19)!important}
+.aq-feature-card:hover{box-shadow:0 18px 34px rgba(0,0,0,.3),0 0 20px rgba(227,172,78,.26)!important}
+@media(prefers-reduced-motion:reduce){.aq-feature-card{transition:none!important}}
 </style>
 </head>
 <body>
