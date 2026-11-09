@@ -9,7 +9,7 @@
   }, { capture: true });
 
   new MutationObserver(() => {
-    if (!page.classList.contains('active')) {
+    if (!page.classList.contains('active') && page.classList.contains('aq-volunteer-login-requested')) {
       page.classList.remove('aq-volunteer-login-requested');
     }
   }).observe(page, { attributes: true, attributeFilter: ['class'] });
