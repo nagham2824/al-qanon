@@ -950,6 +950,81 @@ body > .top, .top {display:none!important;}
  .aq-reference-header .lang-select{min-width:70px!important;padding:6px!important;}
 }
 </style>
+
+<style id="aq-admin-redesign-preview">
+/* Admin-only visual redesign. Preserve existing markup, ids, handlers, and permissions. */
+#page-admin{width:min(1260px,calc(100% - 32px));margin:34px auto 72px;padding:0!important;color:#152c3f}
+#page-admin>.section-title{margin:0!important;padding:29px 34px 8px;background:#102a43;border-radius:18px 18px 0 0;color:#f3c36b!important;font-family:'Cairo',sans-serif!important;text-align:right;font-size:clamp(25px,3vw,36px);letter-spacing:0}
+#page-admin>.notice{margin:0 0 22px!important;padding:0 34px 26px!important;background:#102a43!important;border:0!important;border-bottom:3px solid #c9923e!important;border-radius:0 0 18px 18px!important;color:#e1e8ed!important;font-size:13px;line-height:1.9}
+#page-admin .panel{background:#fffdf9!important;color:#142d40!important;border:1px solid #e4d8c5!important;border-right:4px solid #c9923e!important;border-left:1px solid #e4d8c5!important;border-radius:15px!important;padding:clamp(18px,2.6vw,30px)!important;box-shadow:0 10px 26px #0b203313!important;min-width:0}
+#page-admin .panel h3{font-family:'Cairo',sans-serif!important;color:#102a43!important;font-size:19px!important;font-weight:800!important;margin:0 0 21px!important;padding-bottom:13px;border-bottom:1px solid #e8dfd1}
+#page-admin .field{background:#fbfaf7!important;border:1px solid #d9d3c9!important;border-radius:9px!important;color:#142d40!important;padding:11px 13px!important;min-height:45px;box-shadow:none!important}
+#page-admin .field:focus{outline:2px solid #c9923e!important;outline-offset:1px}
+#page-admin .form-row label{font-weight:700!important;color:#334c5d!important;font-size:13px}
+#page-admin .form-grid{gap:16px!important}
+#page-admin .btn{background:#c9923e!important;color:#102a43!important;border:1px solid #c9923e!important;border-radius:9px!important;min-height:43px!important;padding:9px 18px!important;font-weight:800!important;box-shadow:none!important}
+#page-admin .btn.secondary{background:#fffdf9!important;color:#102a43!important;border-color:#c9923e!important}
+#page-admin .btn:hover{filter:brightness(1.05)}
+#page-admin .actions{gap:10px!important;align-items:center}
+#page-admin #adminWorkspace{display:grid;gap:20px}
+#page-admin #adminWorkspace.hidden{display:none!important}
+#page-admin #volunteerManagementPanel{margin:0!important;order:3}
+#page-admin #adminWorkspace>.actions{order:4;justify-content:flex-end;padding:0 5px}
+#page-admin #adminWorkspace>.two-col{order:2;display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:20px}
+#page-admin #adminArticles .article-item,#page-admin #volunteerAdminList .article-item{background:#f8f5ee!important;border:1px solid #e7dccb!important;border-radius:11px!important;padding:17px!important;color:#172e40!important}
+#page-admin #adminArticles .article-item h3,#page-admin #volunteerAdminList .article-item h3{border:0!important;padding:0!important;margin:0 0 8px!important;font-size:16px!important}
+#page-admin #adminLoginPanel{max-width:720px;margin:0 auto 20px}
+#page-admin #adminLoginPanel .text-link{color:#986c2f!important}
+#page-admin #newVolunteerCodeBox{background:#f7f0e2!important;color:#142d40!important;border:1px solid #c9923e!important;border-radius:10px!important}
+#page-admin .status{overflow-wrap:anywhere}
+#page-admin textarea.field{min-height:190px!important}
+@media(max-width:800px){#page-admin #adminWorkspace>.two-col{grid-template-columns:1fr}#page-admin>.section-title{padding:22px 20px 7px}#page-admin>.notice{padding:0 20px 22px!important}#page-admin{width:calc(100% - 24px);margin:18px auto 48px}}
+@media(max-width:520px){#page-admin .form-grid{grid-template-columns:1fr!important}#page-admin .form-row.full{grid-column:auto}#page-admin .panel{padding:17px!important}}
+</style>
+
+<style id="aq-admin-title-gold-white-only">
+/* Approved admin design retained; only the admin page heading receives the gold/white treatment. */
+#page-admin > h1.section-title > span {
+  display: inline-block;
+  background-image: linear-gradient(110deg,#E7B85E 0%,#F2C66E 38%,#FFFFFF 55%,#F2C66E 72%,#E7B85E 100%) !important;
+  background-size: 220% 100% !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: #F2C66E !important;
+  animation: aq-admin-title-shine 9s ease-in-out infinite;
+}
+@keyframes aq-admin-title-shine {0%,100% {background-position:100% 0} 50% {background-position:0 0}}
+@media (prefers-reduced-motion: reduce) {#page-admin > h1.section-title > span {animation:none !important}}
+</style>
+<style>
+/* Preview only: animated gold/ivory wave on five INNER page titles. */
+@keyframes aqInnerTitleWave {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+#page-public-law .aq-students-hero-copy > h1,
+#page-private-law .aq-students-hero-copy > h1,
+#page-articles .aq-students-hero-copy > h1,
+#page-about .aq-students-hero-copy > h1,
+#page-volunteer .aq-students-hero-copy > h1 {
+  color: #e4bd62;
+  background-image: linear-gradient(110deg, #d8aa45 0%, #f5e4ad 24%, #fffdf4 42%, #e4b94d 58%, #fffaf0 78%, #d8aa45 100%);
+  background-size: 260% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: aqInnerTitleWave 7s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  #page-public-law .aq-students-hero-copy > h1,
+  #page-private-law .aq-students-hero-copy > h1,
+  #page-articles .aq-students-hero-copy > h1,
+  #page-about .aq-students-hero-copy > h1,
+  #page-volunteer .aq-students-hero-copy > h1 { animation: none; }
+}
+</style>
 </head>
 <body>
   <a class="skip" href="#main" data-i18n="skip">تجاوز إلى المحتوى</a>
@@ -1094,7 +1169,7 @@ body > .top, .top {display:none!important;}
     </div></section>
 
     <section class="page container" id="page-admin">
-      <h1 class="section-title" data-i18n="adminTitle">لوحة الإدارة</h1>
+      <h1 class="section-title"><span data-i18n="adminTitle">لوحة الإدارة</span></h1>
       <div class="notice" data-i18n="adminNotice">الدخول مخصص لحساب الإدارة. لا تكتب كلمة المرور داخل الكود أو تشاركها مع أي شخص.</div>
       <div class="panel" id="adminLoginPanel">
         <h3 data-i18n="adminLoginTitle">دخول المشرفة</h3>
