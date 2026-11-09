@@ -1066,6 +1066,29 @@ body > .top, .top {display:none!important;}
 .aq-member-menu{position:relative;display:inline-flex;z-index:150}.aq-member-trigger{cursor:pointer;font:inherit;display:flex;align-items:center;gap:9px;white-space:nowrap}.aq-member-options{position:absolute;top:calc(100% + 9px);inset-inline-start:0;min-width:215px;padding:8px;background:#fffdf8;border:1px solid #d8b568;border-radius:13px;box-shadow:0 14px 34px rgba(9,27,44,.24);z-index:200}.aq-member-options[hidden]{display:none!important}.aq-member-options a,.aq-member-options button{display:block;width:100%;padding:13px 15px;border:0;border-radius:9px;text-align:right;direction:rtl;color:#102a43;background:transparent;text-decoration:none;font:600 14px/1.5 inherit;cursor:pointer}.aq-member-options a:hover,.aq-member-options button:hover,.aq-member-options a:focus-visible,.aq-member-options button:focus-visible{background:#f7eedb;outline:2px solid #d5a13d;outline-offset:-2px}
 #page-volunteer .aq-volunteer-lead{color:#243c4e;font-size:1.1rem;line-height:1.9;margin-bottom:20px}#page-volunteer #volunteerApplicationPanel,#page-volunteer #volunteerMemberArea>.panel{background:#fffaf4;border:1px solid #e9ddca;border-radius:17px;box-shadow:0 10px 24px #182d3a13;padding:26px;margin-bottom:20px;color:#142535}#page-volunteer #volunteerMemberArea>.notice{margin:24px 0 15px}#page-volunteer .aq-card-symbol{color:#b48b36;font-size:27px;margin-bottom:12px}#page-volunteer .aq-card-description{line-height:1.9;color:#455666;margin-bottom:18px}@media(max-width:600px){.aq-member-options{min-width:190px;inset-inline-start:auto;left:0}}
 </style>
+<style id="aq-volunteer-approved-layout">
+#page-volunteer {background:#faf8f2}
+#page-volunteer .aq-students-hero {display:block;overflow:hidden;background:radial-gradient(ellipse at 14% 75%,#37698e,#0c2f50 44%,#081d2f 78%)}
+#page-volunteer .aq-students-hero-copy {position:relative;max-width:1220px;margin:auto;padding:60px 28px 125px}
+#page-volunteer .aq-students-hero h1 {font-size:clamp(3rem,7vw,5.8rem);animation:none;background-image:linear-gradient(to left,#fff 42%,#ffd47e 63%)}
+#page-volunteer .aq-students-hero p {max-width:min(470px,54%)}
+#page-volunteer .aq-volunteer-scene {position:absolute;inset-inline-end:4%;bottom:35px;width:min(37vw,430px);height:auto;opacity:.86}
+#page-volunteer .aq-volunteer-wave {position:absolute;inset-inline:0;bottom:-1px;width:100%;height:90px}
+#page-volunteer .aq-students-content {max-width:1120px;display:grid;grid-template-columns:minmax(0,1.65fr) minmax(0,1fr);gap:35px}
+#page-volunteer .aq-volunteer-side {align-self:start;margin-top:24px;border:1px solid #d9b970;border-radius:80px 16px;padding:45px 28px;text-align:center;background:#fffdf8;color:#102a43;font-size:1.4rem}
+#page-volunteer .aq-volunteer-side span {display:block;color:#986619;font-size:2rem}
+#page-volunteer #volunteerApplicationPanel {padding:0 0 25px;border:0;border-bottom:1px dashed #b6aa95;border-radius:0;background:transparent;box-shadow:none}
+#page-volunteer #volunteerApplicationPanel .btn {background:linear-gradient(110deg,#ffdc8a,#e8a43d);color:#182433;border-radius:99px;font-weight:800}
+#page-volunteer #volunteerClaimPanel .btn {background:#0b3558;color:white;border-radius:99px}
+@media(max-width:680px){
+  #page-volunteer .aq-students-hero-copy {padding:40px 22px 105px}
+  #page-volunteer .aq-students-hero p {max-width:100%}
+  #page-volunteer .aq-volunteer-scene {opacity:.3;width:65vw;inset-inline-end:-9%}
+  #page-volunteer .aq-volunteer-wave {height:65px}
+  #page-volunteer .aq-students-content {grid-template-columns:minmax(0,1fr);gap:18px}
+  #page-volunteer .aq-volunteer-side {padding:22px}
+}
+</style>
 </head>
 <body>
   <a class="skip" href="#main" data-i18n="skip">تجاوز إلى المحتوى</a>
@@ -1156,7 +1179,12 @@ body > .top, .top {display:none!important;}
 
     <section class="page aq-students-page" id="page-about"><div class="aq-students-hero"><div class="aq-students-hero-copy"><span class="aq-students-eyebrow">AL-QANUN AQ · OUR VISION</span><h1 data-i18n="navAbout">من نحن</h1><p data-i18n="aboutText">نسعى إلى جعل المعلومات القانونية الهولندية أوضح وأسهل وصولاً، مع توضيح المصادر والتمييز بين المعلومات العامة والاستشارة القانونية الفردية.</p></div></div><div class="aq-students-content"><div class="aq-students-heading"><span aria-hidden="true">▤</span><h2 data-i18n="aboutHeading">عن منصة القانون AQ</h2></div><div class="aq-about-vision-grid"><article class="aq-about-vision-card"><h3>من نحن</h3><p>منصة القانون AQ مساحة معرفية لتبسيط المعلومات القانونية الهولندية وإتاحتها بصورة واضحة ومفهومة.</p></article><article class="aq-about-vision-card"><h3>رؤيتنا</h3><p>أن تصبح المعرفة القانونية أكثر وضوحاً وسهولة في الوصول لكل من يحتاج إليها.</p></article><article class="aq-about-vision-card"><h3>رسالتنا</h3><p>تقديم محتوى قانوني توعوي بلغات متعددة، مع الإحالة إلى المصادر الرسمية وتوضيح حدود المعلومات العامة.</p></article><article class="aq-about-vision-card"><h3>مبادئنا</h3><p>الدقة والحياد والشفافية والاعتماد على المصادر الرسمية وتحديث المعلومات عند الحاجة.</p></article></div><p class="aq-about-vision-disclaimer" data-i18n="disclaimer">المحتوى للتوعية العامة ولا يُعد استشارة قانونية أو بديلاً عن محامٍ مختص. تحقّق دائمًا من المصادر الرسمية وتاريخ تحديث المعلومات.</p><a class="btn secondary aq-students-back" href="#home" data-page="home" data-i18n="back">العودة للرئيسية</a></div></section>
 
-    <section class="page aq-students-page" id="page-volunteer"><div class="aq-students-hero"><div class="aq-students-hero-copy"><span class="aq-students-eyebrow">AL-QANUN AQ · JOIN OUR COMMUNITY</span><h1 data-i18n="volunteerTitle">تطوع معنا</h1><p>ساهم معنا في نشر المعرفة القانونية، وانضم إلى مجتمع المتطوعين في منصة القانون AQ.</p></div></div><div class="aq-students-content"><div class="aq-students-heading"><span aria-hidden="true">✦</span><h2>انضم إلى مجتمع القانون</h2></div><p class="aq-volunteer-lead">خطوتان واضحتان: أرسل طلب التطوع بالبريد الإلكتروني، أو فعّل عضويتك إذا وصلك رمز من الإدارة.</p><div class="aq-volunteer-tabs" style="display:none"><button type="button" id="openVolunteerMembers">دخول المتطوعين</button></div>
+    <section class="page aq-students-page" id="page-volunteer"><div class="aq-students-hero"><svg class="aq-volunteer-scene" viewBox="0 0 390 230" aria-hidden="true" fill="none" stroke="#e5bd73" stroke-width="2.5" stroke-linejoin="round">
+<circle cx="119" cy="113" r="94" opacity=".18"/><path d="M0 204 Q95 176 187 204T390 203M0 218Q101 197 186 218T390 217" opacity=".38"/>
+<path d="M45 193h99l-15-82H68z" fill="#173b59"/><path d="M65 111l33-35 34 35M91 192v-30h16v30"/>
+<g transform="translate(97 97) rotate(-26)"><path d="M0-69v138M-69 0H69M0-69h16v51H0M69 0v16H18V0M0 69h-16V18H0M-69 0v-16h51V0"/><circle r="5" fill="#e5bd73"/></g>
+<path d="M210 193h104m-86-9h69m-35 0V71m-59 28h118m-59-35v14m-48 21-22 54h44zm96 0-22 54h44z"/><path d="M191 153q22 26 45 0m51 0q22 26 45 0"/>
+</svg><div class="aq-students-hero-copy"><span class="aq-students-eyebrow">AL-QANUN AQ · JOIN OUR COMMUNITY</span><h1 data-i18n="volunteerTitle">تطوع معنا</h1><p>ساهم معنا في نشر المعرفة القانونية، وانضم إلى مجتمع المتطوعين في منصة القانون AQ.</p></div><svg class="aq-volunteer-wave" viewBox="0 0 1200 100" preserveAspectRatio="none" aria-hidden="true"><path fill="#d6a758" d="M0 32C200 156 360 7 590 13S940 37 1200 17V100H0Z"/><path fill="#faf8f2" d="M0 38C200 162 360 13 590 19S940 43 1200 23V100H0Z"/></svg></div><div class="aq-students-content"><div><div class="aq-volunteer-tabs" style="display:none"><button type="button" id="openVolunteerMembers">دخول المتطوعين</button></div>
       <div class="panel" id="volunteerApplicationPanel">
         <div class="aq-card-symbol" aria-hidden="true">✉</div><h3>أرسل طلب التطوع بالبريد الإلكتروني</h3><p class="aq-card-description">للانضمام إلى فريق المنصة، أرسل طلبك مباشرة عبر بريدك الإلكتروني. لا تحتاج إلى إنشاء حساب قبل الموافقة.</p>
         <a class="btn" href="mailto:nour.dlikan@gmail.com?subject=Volunteer%20Application%20%E2%80%94%20AQ%20Law" data-i18n="sendRequest">إرسال طلب التطوع بالبريد الإلكتروني</a>
@@ -1207,6 +1235,8 @@ body > .top, .top {display:none!important;}
         </form>
       </div>
       </div>
+      </div>
+      <aside class="aq-volunteer-side"><span aria-hidden="true">❧</span><strong>معًا للمعرفة القانونية<br>ولمجتمع أقوى</strong></aside>
     </div></section>
 
     <section class="page container" id="page-admin">
