@@ -1062,6 +1062,10 @@ body > .top, .top {display:none!important;}
   .aq-reference-header .navside .lang-select { max-width:86px!important; font-size:11px!important; }
 }
 </style>
+<style id="aq-member-menu-live-styles">
+.aq-member-menu{position:relative;display:inline-flex;z-index:150}.aq-member-trigger{cursor:pointer;font:inherit;display:flex;align-items:center;gap:9px;white-space:nowrap}.aq-member-options{position:absolute;top:calc(100% + 9px);inset-inline-start:0;min-width:215px;padding:8px;background:#fffdf8;border:1px solid #d8b568;border-radius:13px;box-shadow:0 14px 34px rgba(9,27,44,.24);z-index:200}.aq-member-options[hidden]{display:none!important}.aq-member-options a,.aq-member-options button{display:block;width:100%;padding:13px 15px;border:0;border-radius:9px;text-align:right;direction:rtl;color:#102a43;background:transparent;text-decoration:none;font:600 14px/1.5 inherit;cursor:pointer}.aq-member-options a:hover,.aq-member-options button:hover,.aq-member-options a:focus-visible,.aq-member-options button:focus-visible{background:#f7eedb;outline:2px solid #d5a13d;outline-offset:-2px}
+#page-volunteer .aq-volunteer-lead{color:#243c4e;font-size:1.1rem;line-height:1.9;margin-bottom:20px}#page-volunteer #volunteerApplicationPanel,#page-volunteer #volunteerMemberArea>.panel{background:#fffaf4;border:1px solid #e9ddca;border-radius:17px;box-shadow:0 10px 24px #182d3a13;padding:26px;margin-bottom:20px;color:#142535}#page-volunteer #volunteerMemberArea>.notice{margin:24px 0 15px}#page-volunteer .aq-card-symbol{color:#b48b36;font-size:27px;margin-bottom:12px}#page-volunteer .aq-card-description{line-height:1.9;color:#455666;margin-bottom:18px}@media(max-width:600px){.aq-member-options{min-width:190px;inset-inline-start:auto;left:0}}
+</style>
 </head>
 <body>
   <a class="skip" href="#main" data-i18n="skip">تجاوز إلى المحتوى</a>
@@ -1082,7 +1086,7 @@ body > .top, .top {display:none!important;}
         <select class="lang-select" id="langSelect" aria-label="Language">
           <option value="ar">العربية</option><option value="nl">Nederlands</option><option value="tr">Türkçe</option><option value="en">English</option>
         </select>
-        <a class="member" href="#admin" data-page="admin" data-i18n="navAdmin">دخول الأعضاء</a>
+        <div class="aq-member-menu" id="aqMemberMenu"><button class="member aq-member-trigger" type="button" id="aqMemberTrigger" aria-haspopup="true" aria-expanded="false">دخول الأعضاء <span aria-hidden="true">⌄</span></button><div class="aq-member-options" id="aqMemberOptions" hidden><a href="#admin" data-page="admin" id="aqAdminEntry">⚖️ &nbsp; دخول الإدارة</a><button type="button" id="aqVolunteerEntry">♧ &nbsp; دخول المتطوعين</button></div></div>
       </div>
     </div>
   </header>  <main id="main">
@@ -1152,16 +1156,16 @@ body > .top, .top {display:none!important;}
 
     <section class="page aq-students-page" id="page-about"><div class="aq-students-hero"><div class="aq-students-hero-copy"><span class="aq-students-eyebrow">AL-QANUN AQ · OUR VISION</span><h1 data-i18n="navAbout">من نحن</h1><p data-i18n="aboutText">نسعى إلى جعل المعلومات القانونية الهولندية أوضح وأسهل وصولاً، مع توضيح المصادر والتمييز بين المعلومات العامة والاستشارة القانونية الفردية.</p></div></div><div class="aq-students-content"><div class="aq-students-heading"><span aria-hidden="true">▤</span><h2 data-i18n="aboutHeading">عن منصة القانون AQ</h2></div><div class="aq-about-vision-grid"><article class="aq-about-vision-card"><h3>من نحن</h3><p>منصة القانون AQ مساحة معرفية لتبسيط المعلومات القانونية الهولندية وإتاحتها بصورة واضحة ومفهومة.</p></article><article class="aq-about-vision-card"><h3>رؤيتنا</h3><p>أن تصبح المعرفة القانونية أكثر وضوحاً وسهولة في الوصول لكل من يحتاج إليها.</p></article><article class="aq-about-vision-card"><h3>رسالتنا</h3><p>تقديم محتوى قانوني توعوي بلغات متعددة، مع الإحالة إلى المصادر الرسمية وتوضيح حدود المعلومات العامة.</p></article><article class="aq-about-vision-card"><h3>مبادئنا</h3><p>الدقة والحياد والشفافية والاعتماد على المصادر الرسمية وتحديث المعلومات عند الحاجة.</p></article></div><p class="aq-about-vision-disclaimer" data-i18n="disclaimer">المحتوى للتوعية العامة ولا يُعد استشارة قانونية أو بديلاً عن محامٍ مختص. تحقّق دائمًا من المصادر الرسمية وتاريخ تحديث المعلومات.</p><a class="btn secondary aq-students-back" href="#home" data-page="home" data-i18n="back">العودة للرئيسية</a></div></section>
 
-    <section class="page aq-students-page" id="page-volunteer"><div class="aq-students-hero"><div class="aq-students-hero-copy"><span class="aq-students-eyebrow">AL-QANUN AQ · JOIN OUR COMMUNITY</span><h1 data-i18n="volunteerTitle">تطوع معنا</h1><p>ساهم معنا في نشر المعرفة القانونية، وانضم إلى مجتمع المتطوعين في منصة القانون AQ.</p></div></div><div class="aq-students-content"><div class="aq-students-heading"><span aria-hidden="true">▤</span><h2>المساهمة والتطوع</h2></div><p class="aq-volunteer-lead">اختاري المسار المناسب إلك: قدّمي طلب انضمام جديد، أو ادخلي إلى مساحة المتطوعين الحاليين.</p><div class="aq-volunteer-tabs"><a class="btn" href="#volunteerApplicationPanel">أريد التطوع</a><button class="btn" type="button" id="openVolunteerMembers">أنا متطوع بالفعل — تسجيل الدخول</button></div>
+    <section class="page aq-students-page" id="page-volunteer"><div class="aq-students-hero"><div class="aq-students-hero-copy"><span class="aq-students-eyebrow">AL-QANUN AQ · JOIN OUR COMMUNITY</span><h1 data-i18n="volunteerTitle">تطوع معنا</h1><p>ساهم معنا في نشر المعرفة القانونية، وانضم إلى مجتمع المتطوعين في منصة القانون AQ.</p></div></div><div class="aq-students-content"><div class="aq-students-heading"><span aria-hidden="true">✦</span><h2>انضم إلى مجتمع القانون</h2></div><p class="aq-volunteer-lead">خطوتان واضحتان: أرسل طلب التطوع بالبريد الإلكتروني، أو فعّل عضويتك إذا وصلك رمز من الإدارة.</p><div class="aq-volunteer-tabs" style="display:none"><button type="button" id="openVolunteerMembers">دخول المتطوعين</button></div>
       <div class="panel" id="volunteerApplicationPanel">
-        
+        <div class="aq-card-symbol" aria-hidden="true">✉</div><h3>أرسل طلب التطوع بالبريد الإلكتروني</h3><p class="aq-card-description">للانضمام إلى فريق المنصة، أرسل طلبك مباشرة عبر بريدك الإلكتروني. لا تحتاج إلى إنشاء حساب قبل الموافقة.</p>
         <a class="btn" href="mailto:nour.dlikan@gmail.com?subject=Volunteer%20Application%20%E2%80%94%20AQ%20Law" data-i18n="sendRequest">إرسال طلب التطوع بالبريد الإلكتروني</a>
         
       </div>
       <div id="volunteerMemberArea">
         <div class="notice" data-i18n="volunteerAccessNotice">هذه المساحة مخصصة للمتطوعين الذين حصلوا على رمز عضوية من المشرفة نور.</div>
       <div class="panel" id="volunteerClaimPanel">
-        <h3 data-i18n="activateFirstTime">تفعيل العضوية لأول مرة</h3>
+        <div class="aq-card-symbol" aria-hidden="true">♙</div><h3 data-i18n="activateFirstTime">تفعيل العضوية لأول مرة</h3>
         <p class="help" data-i18n="activateHelp">أدخل رمز العضوية الذي حصلت عليه من المشرفة نور، وأنشئ كلمة مرور للدخول لاحقاً.</p>
         <form id="volunteerClaimForm" class="form-grid">
           <div class="form-row full"><label for="claimCode" data-i18n="memberCode">رمز العضوية</label><input class="field" id="claimCode" required maxlength="13" autocomplete="off" placeholder="AQ-XXXXXXXXXX"></div>
@@ -1868,6 +1872,7 @@ render();
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
 </script>
+<script id="aq-member-menu-live-script">(function(){const menu=document.getElementById('aqMemberMenu'),trigger=document.getElementById('aqMemberTrigger'),options=document.getElementById('aqMemberOptions');if(!menu||!trigger||!options)return;const close=()=>{options.hidden=true;trigger.setAttribute('aria-expanded','false');};trigger.addEventListener('click',()=>{const next=options.hidden;options.hidden=!next;trigger.setAttribute('aria-expanded',String(next));});document.getElementById('aqAdminEntry')?.addEventListener('click',close);document.getElementById('aqVolunteerEntry')?.addEventListener('click',()=>{close();document.getElementById('openVolunteerMembers')?.click();document.getElementById('volunteerLoginPanel')?.scrollIntoView({behavior:'smooth',block:'start'});});document.addEventListener('click',event=>{if(!menu.contains(event.target))close();});document.addEventListener('keydown',event=>{if(event.key==='Escape')close();});})();</script>
 </body>
 </html>
 
