@@ -1090,6 +1090,33 @@ body > .top, .top {display:none!important;}
   #page-volunteer .aq-volunteer-side {padding:22px}
 }
 </style>
+<style id="aq-volunteer-action-styles">
+#page-volunteer #volunteerApplicationPanel {padding:0;border:0;margin:0 0 14px}
+#page-volunteer .aq-volunteer-action {display:grid;grid-template-columns:42px minmax(0,1fr) 20px;gap:12px;align-items:center;min-height:82px;padding:13px 16px;border:1px solid #b9873d;border-radius:14px;text-align:start;text-decoration:none;cursor:pointer}
+#page-volunteer .aq-volunteer-gold {background:linear-gradient(130deg,#fae1a4,#dbad58);color:#102a43}
+#page-volunteer .aq-volunteer-navy {background:linear-gradient(130deg,#142f49,#0b2033);color:#fff9ed;list-style:none}
+#page-volunteer summary::-webkit-details-marker {display:none}
+#page-volunteer .aq-volunteer-icon {display:grid;place-items:center;width:42px;height:42px;border-radius:10px;background:#fff4;border:1px solid #102a4338}
+#page-volunteer .aq-volunteer-navy .aq-volunteer-icon {color:#edc478;background:#edc47812;border-color:#edc47855}
+#page-volunteer .aq-volunteer-icon svg {width:21px;height:21px}
+#page-volunteer .aq-volunteer-action strong,#page-volunteer .aq-volunteer-action small {display:block;line-height:1.45}
+#page-volunteer .aq-volunteer-action small {margin-top:4px;color:inherit}
+#page-volunteer .aq-volunteer-action:focus-visible {outline:3px solid #416889;outline-offset:4px}
+#page-volunteer .aq-volunteer-label {display:none}
+html[lang="ar"] #page-volunteer [data-volunteer-lang="ar"],html[lang="nl"] #page-volunteer [data-volunteer-lang="nl"],html[lang="en"] #page-volunteer [data-volunteer-lang="en"],html[lang="tr"] #page-volunteer [data-volunteer-lang="tr"] {display:inline}
+html[dir="rtl"] #page-volunteer .aq-volunteer-arrow {transform:scaleX(-1)}
+#page-volunteer .aq-volunteer-activation {margin-bottom:14px}
+@media(min-width:1050px) {
+  #page-volunteer .aq-volunteer-controls {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:12px;align-items:start}
+  #page-volunteer #volunteerMemberArea {display:contents}
+  #page-volunteer #volunteerMemberArea > * {grid-column:1 / -1}
+  #page-volunteer #volunteerApplicationPanel {grid-column:1;grid-row:1}
+  #page-volunteer #volunteerMemberArea > .aq-volunteer-activation {grid-column:2;grid-row:1}
+}
+#page-volunteer .aq-volunteer-activation:has(#volunteerClaimPanel.hidden) {display:none}
+#page-volunteer #volunteerClaimPanel {margin-top:12px}
+#page-volunteer:not(.aq-volunteer-login-requested) #volunteerLoginPanel {display:none}
+</style>
 </head>
 <body>
   <a class="skip" href="#main" data-i18n="skip">تجاوز إلى المحتوى</a>
@@ -1185,14 +1212,11 @@ body > .top, .top {display:none!important;}
 <path d="M45 193h99l-15-82H68z" fill="#173b59"/><path d="M65 111l33-35 34 35M91 192v-30h16v30"/>
 <g transform="translate(97 97) rotate(-26)"><path d="M0-69v138M-69 0H69M0-69h16v51H0M69 0v16H18V0M0 69h-16V18H0M-69 0v-16h51V0"/><circle r="5" fill="#e5bd73"/></g>
 <path d="M210 193h104m-86-9h69m-35 0V71m-59 28h118m-59-35v14m-48 21-22 54h44zm96 0-22 54h44z"/><path d="M191 153q22 26 45 0m51 0q22 26 45 0"/>
-</svg><div class="aq-students-hero-copy"><span class="aq-students-eyebrow">AL-QANUN AQ · JOIN OUR COMMUNITY</span><h1 data-i18n="volunteerTitle">تطوع معنا</h1><p>ساهم معنا في نشر المعرفة القانونية، وانضم إلى مجتمع المتطوعين في منصة القانون AQ.</p></div><svg class="aq-volunteer-wave" viewBox="0 0 1200 100" preserveAspectRatio="none" aria-hidden="true"><path fill="#d6a758" d="M0 32C200 156 360 7 590 13S940 37 1200 17V100H0Z"/><path fill="#faf8f2" d="M0 38C200 162 360 13 590 19S940 43 1200 23V100H0Z"/></svg></div><div class="aq-students-content"><div><div class="aq-volunteer-tabs" style="display:none"><button type="button" id="openVolunteerMembers">دخول المتطوعين</button></div>
-      <div class="panel" id="volunteerApplicationPanel">
-        <div class="aq-card-symbol" aria-hidden="true">✉</div><h3>أرسل طلب التطوع بالبريد الإلكتروني</h3><p class="aq-card-description">للانضمام إلى فريق المنصة، أرسل طلبك مباشرة عبر بريدك الإلكتروني. لا تحتاج إلى إنشاء حساب قبل الموافقة.</p>
-        <a class="btn" href="mailto:nour.dlikan@gmail.com?subject=Volunteer%20Application%20%E2%80%94%20AQ%20Law" data-i18n="sendRequest">إرسال طلب التطوع بالبريد الإلكتروني</a>
-        
-      </div>
+</svg><div class="aq-students-hero-copy"><span class="aq-students-eyebrow">AL-QANUN AQ · JOIN OUR COMMUNITY</span><h1 data-i18n="volunteerTitle">تطوع معنا</h1><p>ساهم معنا في نشر المعرفة القانونية، وانضم إلى مجتمع المتطوعين في منصة القانون AQ.</p></div><svg class="aq-volunteer-wave" viewBox="0 0 1200 100" preserveAspectRatio="none" aria-hidden="true"><path fill="#d6a758" d="M0 32C200 156 360 7 590 13S940 37 1200 17V100H0Z"/><path fill="#faf8f2" d="M0 38C200 162 360 13 590 19S940 43 1200 23V100H0Z"/></svg></div><div class="aq-students-content"><div class="aq-volunteer-controls"><div class="aq-volunteer-tabs" style="display:none"><button type="button" id="openVolunteerMembers">دخول المتطوعين</button></div>
+      <div class="panel" id="volunteerApplicationPanel"><a class="aq-volunteer-action aq-volunteer-gold" href="mailto:nour.dlikan@gmail.com?subject=Volunteer%20Application%20%E2%80%94%20AQ%20Law"><span class="aq-volunteer-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7 8 6 8-6"/></svg></span><span><strong><span class="aq-volunteer-label" data-volunteer-lang="ar" lang="ar">تقديم طلب تطوّع</span><span class="aq-volunteer-label" data-volunteer-lang="nl" lang="nl">Aanmelden als vrijwilliger</span><span class="aq-volunteer-label" data-volunteer-lang="en" lang="en">Apply to volunteer</span><span class="aq-volunteer-label" data-volunteer-lang="tr" lang="tr">Gönüllülük başvurusu</span></strong><small><span class="aq-volunteer-label" data-volunteer-lang="ar" lang="ar">للمهتمّين بالانضمام إلى الفريق</span><span class="aq-volunteer-label" data-volunteer-lang="nl" lang="nl">Voor wie ons team wil versterken</span><span class="aq-volunteer-label" data-volunteer-lang="en" lang="en">For anyone who wants to join our team</span><span class="aq-volunteer-label" data-volunteer-lang="tr" lang="tr">Ekibimize katılmak isteyenler için</span></small></span><span class="aq-volunteer-arrow" aria-hidden="true">→</span></a></div>
       <div id="volunteerMemberArea">
         <div class="notice" data-i18n="volunteerAccessNotice">هذه المساحة مخصصة للمتطوعين الذين حصلوا على رمز عضوية من المشرفة نور.</div>
+      <details class="aq-volunteer-activation"><summary class="aq-volunteer-action aq-volunteer-navy"><span class="aq-volunteer-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="15.5" cy="8.5" r="4.5"/><path d="m12 12-8 8v-4l2-2h3"/></svg></span><span><strong><span class="aq-volunteer-label" data-volunteer-lang="ar" lang="ar">تفعيل العضوية</span><span class="aq-volunteer-label" data-volunteer-lang="nl" lang="nl">Lidmaatschap activeren</span><span class="aq-volunteer-label" data-volunteer-lang="en" lang="en">Activate membership</span><span class="aq-volunteer-label" data-volunteer-lang="tr" lang="tr">Üyeliği etkinleştir</span></strong><small><span class="aq-volunteer-label" data-volunteer-lang="ar" lang="ar">للي وصلهم رمز عضوية</span><span class="aq-volunteer-label" data-volunteer-lang="nl" lang="nl">Als je een lidmaatschapscode hebt</span><span class="aq-volunteer-label" data-volunteer-lang="en" lang="en">If you received a membership code</span><span class="aq-volunteer-label" data-volunteer-lang="tr" lang="tr">Üyelik kodu aldıysan</span></small></span><span class="aq-volunteer-arrow" aria-hidden="true">→</span></summary>
       <div class="panel" id="volunteerClaimPanel">
         <div class="aq-card-symbol" aria-hidden="true">♙</div><h3 data-i18n="activateFirstTime">تفعيل العضوية لأول مرة</h3>
         <p class="help" data-i18n="activateHelp">أدخل رمز العضوية الذي حصلت عليه من المشرفة نور، وأنشئ كلمة مرور للدخول لاحقاً.</p>
@@ -1203,6 +1227,7 @@ body > .top, .top {display:none!important;}
           <div class="form-row full"><button class="btn" type="submit" data-i18n="activateMembership">تفعيل العضوية</button><p class="status" id="claimStatus" role="status" aria-live="polite"></p></div>
         </form>
       </div>
+      </details>
       <div class="panel" id="volunteerLoginPanel">
         <h3 data-i18n="volunteerLoginTitle">دخول المتطوعين</h3>
         <form id="volunteerLoginForm" class="form-grid">
@@ -1904,6 +1929,7 @@ render();
 })();
 </script>
 <script id="aq-member-menu-live-script">(function(){const menu=document.getElementById('aqMemberMenu'),trigger=document.getElementById('aqMemberTrigger'),options=document.getElementById('aqMemberOptions');if(!menu||!trigger||!options)return;const close=()=>{options.hidden=true;trigger.setAttribute('aria-expanded','false');};trigger.addEventListener('click',()=>{const next=options.hidden;options.hidden=!next;trigger.setAttribute('aria-expanded',String(next));});document.getElementById('aqAdminEntry')?.addEventListener('click',close);document.getElementById('aqVolunteerEntry')?.addEventListener('click',()=>{close();document.getElementById('openVolunteerMembers')?.click();document.getElementById('volunteerLoginPanel')?.scrollIntoView({behavior:'smooth',block:'start'});});document.addEventListener('click',event=>{if(!menu.contains(event.target))close();});document.addEventListener('keydown',event=>{if(event.key==='Escape')close();});})();</script>
+<script src="volunteer-entry.js"></script>
 </body>
 </html>
 
