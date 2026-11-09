@@ -1078,7 +1078,6 @@ body > .top, .top {display:none!important;}
 #page-volunteer .aq-volunteer-scene {position:absolute;inset-inline-end:4%;bottom:35px;width:min(37vw,430px);height:auto;opacity:.86}
 #page-volunteer .aq-volunteer-wave {position:absolute;inset-inline:0;bottom:-1px;width:100%;height:90px}
 #page-volunteer .aq-students-content {max-width:1120px;display:grid;grid-template-columns:minmax(0,1.65fr) minmax(0,1fr);gap:35px}
-#page-volunteer .aq-students-content > .aq-translation-context {grid-column:1 / -1;justify-self:start;margin:0}
 #page-volunteer .aq-volunteer-side {align-self:start;margin-top:24px;border:1px solid #d9b970;border-radius:80px 16px;padding:45px 28px;text-align:center;background:#fffdf8;color:#102a43;font-size:1.4rem}
 #page-volunteer .aq-volunteer-side > span {display:block;color:#986619;font-size:2rem}
 #page-volunteer #volunteerApplicationPanel {padding:0 0 25px;border:0;border-bottom:1px dashed #b6aa95;border-radius:0;background:transparent;box-shadow:none}
@@ -1170,7 +1169,13 @@ html[lang="ar"] .aq-localized-text[lang="ar"],html[lang="nl"] .aq-localized-text
 .aq-site-footer .aq-footer-link-label{color:inherit;font-weight:inherit}
 .aq-site-footer .aq-footer-message{color:#e3e9ee}
 </style>
-<style id="aq-article-translations">.aq-article-translation{margin-block:12px}.aq-article-translation summary{cursor:pointer;font-weight:700}.aq-article-translation label{display:block;margin-block:8px}.aq-article-translation .btn{margin-inline-end:8px}.aq-article-translation [role="status"]:empty{display:none}</style>
+<style id="aq-article-translations">
+.aq-article-language{margin-block:12px}
+.aq-article-language summary{display:list-item;list-style-position:inside;width:fit-content;cursor:pointer;background:#c9923e;color:#102a43;border-radius:30px;padding:10px 16px;font-weight:800}
+.aq-article-language-options{display:flex;flex-wrap:wrap;gap:8px;margin-block-start:8px}
+.aq-article-language-options .btn{min-height:44px}
+.aq-article-language-options [aria-pressed="true"]{background:#c9923e;color:#102a43}
+.aq-article-translation{margin-block:12px}.aq-article-translation summary{cursor:pointer;font-weight:700}.aq-article-translation label{display:block;margin-block:8px}.aq-article-translation .btn{margin-inline-end:8px}.aq-article-translation [role="status"]:empty{display:none}</style>
 </head>
 <body>
   <a class="skip" href="#main" data-i18n="skip">تجاوز إلى المحتوى</a>
@@ -1459,16 +1464,69 @@ html[lang="ar"] .aq-localized-text[lang="ar"],html[lang="nl"] .aq-localized-text
   function articleCategoryName(category){const key=({ 'public-law':'navPublic','private-law':'navPrivate',student:'studentsTitle',refugee:'refugeeTitle',resident:'residentTitle',general:'generalTitle' })[category];return key?t(key):t('generalTitle');}
   let publishedTranslations=[];
   const translationNames={ar:'العربية',nl:'Nederlands',en:'English',tr:'Türkçe'};
+  const articleReadingLanguages=new Map();
+  const articleReadingUi={
+    ar:['ترجمة المحتوى','لغة المقال'],
+    nl:['Artikel vertalen','Taal van het artikel'],
+    en:['Translate article','Article language'],
+    tr:['Makaleyi çevir','Makale dili']
+  };
+  function renderArticleLanguage(item,article,title,body){
+    const versions=new Map([[article.language,{title:article.title,content:article.body}]]);
+    for(const row of publishedTranslations){
+      if(String(row.article_id)===article.id&&row.language!==article.language&&Object.hasOwn(translationNames,row.language)){
+        versions.set(row.language,row);
+      }
+    }
+    if(versions.size===1)return;
+
+    const [action,label]=articleReadingUi[currentLang]||articleReadingUi.ar;
+    const details=document.createElement('details');
+    details.className='aq-article-language';
+    const summary=document.createElement('summary');
+    summary.textContent=action;
+    const choices=document.createElement('div');
+    choices.className='aq-article-language-options';
+    choices.setAttribute('role','group');
+    choices.setAttribute('aria-label',label);
+
+    function display(language){
+      const version=versions.get(language);
+      title.textContent=version.title;
+      body.textContent=version.content;
+      title.lang=body.lang=language;
+      title.dir=body.dir=language==='ar'?'rtl':'ltr';
+      for(const button of choices.children){
+        button.setAttribute('aria-pressed',String(button.lang===language));
+      }
+    }
+
+    for(const language of versions.keys()){
+      const button=document.createElement('button');
+      button.type='button';
+      button.className='btn secondary small';
+      button.lang=language;
+      button.textContent=translationNames[language]||language;
+      button.addEventListener('click',()=>{
+        articleReadingLanguages.set(article.id,language);
+        display(language);
+      });
+      choices.append(button);
+    }
+    const selected=articleReadingLanguages.get(article.id);
+    display(versions.has(selected)?selected:article.language);
+    details.append(summary,choices);
+    item.insertBefore(details,body);
+  }
+
   const translationUi={
     ar:['ترجمات المقال','النص الأصلي','عنوان الترجمة','نص الترجمة','حفظ كمسودة خاصة','نشر الترجمة','تم الحفظ','تعذّر تحميل الترجمة أو حفظها','اللغة','مسودة خاصة','منشورة'],
     nl:['Artikelvertalingen','Originele tekst','Vertaalde titel','Vertaalde tekst','Opslaan als privéconcept','Vertaling publiceren','Opgeslagen','Laden of opslaan is mislukt','Taal','Privéconcept','Gepubliceerd'],
     en:['Article translations','Original text','Translated title','Translated text','Save as private draft','Publish translation','Saved','Could not load or save the translation','Language','Private draft','Published'],
     tr:['Makale çevirileri','Orijinal metin','Çevrilen başlık','Çevrilen metin','Özel taslak olarak kaydet','Çeviriyi yayımla','Kaydedildi','Çeviri yüklenemedi veya kaydedilemedi','Dil','Özel taslak','Yayında']
   };
-  function renderTranslationControls(item,article,title,body,adminView){
+  function renderTranslationEditor(item,article){
     const ui=translationUi[currentLang]||translationUi.ar;
-    const available=publishedTranslations.filter(row=>String(row.article_id)===article.id&&row.language!==article.language);
-    if(!adminView&&!available.length)return;
     const details=document.createElement('details');
     details.className='aq-article-translation';
     const summary=document.createElement('summary');
@@ -1485,18 +1543,6 @@ html[lang="ar"] .aq-localized-text[lang="ar"],html[lang="nl"] .aq-localized-text
     };
     const language=field(ui[8],'select');
     item.append(details);
-    if(!adminView){
-      language.add(new Option(ui[1],article.language));
-      for(const row of available)language.add(new Option(translationNames[row.language],row.language));
-      language.addEventListener('change',()=>{
-        const row=available.find(candidate=>candidate.language===language.value);
-        title.textContent=row?.title??article.title;
-        body.textContent=row?.content??article.body;
-        title.lang=body.lang=language.value;
-        title.dir=body.dir=language.value==='ar'?'rtl':'ltr';
-      });
-      return;
-    }
     for(const [code,name] of Object.entries(translationNames)){
       if(code!==article.language)language.add(new Option(name,code));
     }
@@ -1551,6 +1597,7 @@ html[lang="ar"] .aq-localized-text[lang="ar"],html[lang="nl"] .aq-localized-text
         if(error)throw error;
         publishedTranslations=publishedTranslations.filter(saved=>String(saved.article_id)!==article.id||saved.language!==row.language);
         if(state==='published')publishedTranslations.push(row);
+        renderPublishedArticles();
         status.textContent=ui[6]+' · '+ui[state==='published'?10:9];
       }catch{status.textContent=ui[7];}
       finally{disable(false);}
@@ -1589,7 +1636,8 @@ html[lang="ar"] .aq-localized-text[lang="ar"],html[lang="nl"] .aq-localized-text
         const remove=document.createElement('button');remove.type='button';remove.className='btn danger small';remove.textContent=t('delete');remove.addEventListener('click',()=>deleteArticle(article.id));actions.append(remove);
         item.append(actions);
       }
-      renderTranslationControls(item,article,title,body,adminView);
+      if(adminView&&isAdmin)renderTranslationEditor(item,article);
+      if(!adminView)renderArticleLanguage(item,article,title,body);
       root.append(item);
     });
   }
@@ -1640,13 +1688,16 @@ html[lang="ar"] .aq-localized-text[lang="ar"],html[lang="nl"] .aq-localized-text
     });
   }
   document.addEventListener('aqArchiveChanged',()=>renderArticles());
-  function renderArticles(){
+  function renderPublishedArticles(){
     const published=articles.filter(article=>article.status==='published');
     renderArticleTarget('allArticles',filterAqArchive(published),false);
     renderAqLatestFour(published);
     renderArticleTarget('publicArticles',published.filter(article=>article.category==='public-law'),false);
     renderArticleTarget('privateArticles',published.filter(article=>article.category==='private-law'),false);
     ['student','refugee','resident','general'].forEach(category=>renderArticleTarget(category+'Articles',published.filter(article=>article.category===category),false));
+  }
+  function renderArticles(){
+    renderPublishedArticles();
     renderArticleTarget('adminArticles',isAdmin?articles:[],true);
   }
   function clearArticleForm(){document.getElementById('articleForm').reset();document.getElementById('articleId').value='';setStatus('articleStatus','');}
@@ -1977,49 +2028,6 @@ html[lang="ar"] .aq-localized-text[lang="ar"],html[lang="nl"] .aq-localized-text
 (()=>{const input=document.getElementById('allArticlesSearch'),root=document.getElementById('allArticles');if(!input||!root)return;const apply=()=>{const q=input.value.trim().toLocaleLowerCase();root.querySelectorAll('.article-item').forEach(el=>{el.hidden=!!q&&!el.textContent.toLocaleLowerCase().includes(q)});};input.addEventListener('input',apply);new MutationObserver(apply).observe(root,{childList:true});})();
 </script>
 <script id="aq-archive-filter-events">document.addEventListener('change',function(e){if(e.target?.id==='aqArchivePeriod'||e.target?.id==='aqArchiveMonth'){document.dispatchEvent(new Event('aqArchiveChanged'));}});document.addEventListener('click',function(e){if(e.target?.id==='aqArchiveReset'){document.getElementById('aqArchivePeriod').value='all';document.getElementById('aqArchiveMonth').value='';document.dispatchEvent(new Event('aqArchiveChanged'));}});</script>
-<style id="aq-translation-preview-style">
-.aq-translation-context{display:flex;justify-content:flex-start;margin:14px 0 20px}
-.aq-translation-context button{background:#c9923e;color:#102a43;border:1px solid #f3dfb4;border-radius:30px;padding:10px 18px;font-weight:800;cursor:pointer;box-shadow:0 3px 12px #102a4325}
-#aq-translation-preview-dialog{position:fixed;inset:0;background:#071b30b8;z-index:100000;display:none;align-items:center;justify-content:center;padding:16px}
-#aq-translation-preview-dialog.aq-open{display:flex}
-#aq-translation-preview-dialog .aq-translation-panel{width:min(680px,100%);max-height:90vh;overflow:auto;background:#fffaf2;color:#102a43;border:2px solid #c9923e;border-radius:20px;padding:24px;box-shadow:0 20px 65px #0006}
-#aq-translation-preview-dialog h2{margin:0 0 10px;color:#102a43}#aq-translation-preview-dialog p{line-height:1.85}
-#aq-translation-preview-dialog select{background:white;border:1px solid #bda67d;border-radius:8px;padding:10px;width:100%;margin:8px 0 12px}
-#aq-translation-preview-dialog .aq-sample{background:#fff;border:1px solid #e3d5bf;border-radius:12px;padding:18px;line-height:1.9;min-height:100px}
-#aq-translation-preview-dialog .aq-warning{border-inline-start:4px solid #c9923e;background:#f5ead5;padding:12px;border-radius:6px;font-size:14px}
-#aq-translation-preview-dialog .aq-close{float:inline-end;background:#102a43;color:white;border:0;border-radius:8px;padding:8px 12px;cursor:pointer}
-</style>
-<div id="aq-translation-preview-dialog" role="dialog" aria-modal="true" aria-labelledby="aq-preview-title" aria-hidden="true">
-<section class="aq-translation-panel"><button class="aq-close" type="button" id="aq-translation-close"></button>
-<h2 id="aq-preview-title"></h2>
-<p id="aq-preview-description"></p>
-<label for="aq-translation-preview-language"><strong id="aq-preview-language-label"></strong></label>
-<select id="aq-translation-preview-language"><option value="ar">العربية</option><option value="nl">Nederlands</option><option value="en">English</option><option value="tr">Türkçe</option></select>
-<div id="aq-translation-preview-text" class="aq-sample" lang="ar" dir="rtl"></div>
-<p id="aq-translation-preview-status" class="aq-warning"></p>
-<p id="aq-preview-future"></p>
-</section></div>
-<script id="aq-translation-preview-script">
-(()=>{'use strict';
-// Demonstration only. No external translation API and no live article translation.
-const samples={ar:'هذا مثال توضيحي: يحق للشخص الاطلاع على المعلومات القانونية العامة. يجب التحقق من النصوص الرسمية والتحديثات قبل اتخاذ أي إجراء قانوني.',nl:'Dit is een demonstratie: iedereen kan algemene juridische informatie raadplegen. Controleer officiële bronnen en recente wijzigingen voordat u juridische stappen onderneemt.',en:'This is a demonstration: people can access general legal information. Check official sources and recent updates before taking legal action.',tr:'Bu bir gösterimdir: kişiler genel hukuki bilgilere erişebilir. Hukuki işlem yapmadan önce resmî kaynakları ve güncel değişiklikleri kontrol edin.'};
-const copy={
- ar:{button:'⚖ معاينة الترجمة',close:'إغلاق ×',title:'معاينة ترجمة المحتوى',description:'تجربة توضيحية بأربع لغات. هذه النسخة لا تترجم المحتوى الحقيقي ولا ترسل أي نص إلى خدمة خارجية.',label:'اختاري لغة القراءة',note:'هذا مثال مترجم مسبقاً للمعاينة فقط — النص الأصلي هو المرجع.',future:'النسخة النهائية المقترحة: ترجمة آلية عند الطلب مع تنبيه واضح، وإمكانية اعتماد نور للترجمات بعد مراجعتها.'},
- nl:{button:'⚖ Vertaling bekijken',close:'Sluiten ×',title:'Voorbeeld van inhoudsvertaling',description:'Demonstratie in vier talen. Deze versie vertaalt geen echte inhoud en verzendt geen tekst naar een externe dienst.',label:'Kies de leestaal',note:'Dit is slechts een vooraf vertaald voorbeeld — de oorspronkelijke tekst is leidend.',future:'Voorgestelde definitieve versie: vertaling op verzoek met duidelijke waarschuwing; Noor kan vertalingen na controle goedkeuren.'},
- en:{button:'⚖ Preview translation',close:'Close ×',title:'Content translation preview',description:'A four-language demonstration. This version does not translate real content or send text to an external service.',label:'Choose reading language',note:'Pretranslated example only — the original text remains authoritative.',future:'Proposed final version: translation on request with a clear warning; Noor may approve translations after review.'},
- tr:{button:'⚖ Çeviriyi önizle',close:'Kapat ×',title:'İçerik çevirisi önizlemesi',description:'Dört dilde örnek gösterim. Bu sürüm gerçek içeriği çevirmez veya harici bir hizmete metin göndermez.',label:'Okuma dilini seçin',note:'Yalnızca önceden çevrilmiş bir örnektir — özgün metin esas alınmalıdır.',future:'Önerilen son sürüm: istek üzerine çeviri ve açık uyarı; Noor incelemeden sonra çevirileri onaylayabilir.'}
-};
-const pages=['public-law','private-law','articles','about','volunteer'];
-const modal=document.getElementById('aq-translation-preview-dialog'),select=document.getElementById('aq-translation-preview-language');
-function render(){const lang=copy[select.value]?select.value:'ar',c=copy[lang],dir=lang==='ar'?'rtl':'ltr';const panel=modal.querySelector('.aq-translation-panel');panel.dir=dir;panel.lang=lang;for(const [id,value] of [['aq-translation-close',c.close],['aq-preview-title',c.title],['aq-preview-description',c.description],['aq-preview-language-label',c.label],['aq-translation-preview-status',c.note],['aq-preview-future',c.future]])document.getElementById(id).textContent=value;const el=document.getElementById('aq-translation-preview-text');el.textContent=samples[lang];el.lang=lang;el.dir=dir;document.querySelectorAll('.aq-translation-context button').forEach(b=>b.textContent=c.button);}
-for(const page of pages){const section=document.getElementById('page-'+page);if(!section)continue;const host=section.querySelector('.aq-students-content')||section;const wrap=document.createElement('div');wrap.className='aq-translation-context';const btn=document.createElement('button');btn.type='button';btn.addEventListener('click',()=>{modal.classList.add('aq-open');modal.setAttribute('aria-hidden','false');render();document.getElementById('aq-translation-close').focus();});wrap.appendChild(btn);host.insertBefore(wrap,host.firstChild);}
-function close(){modal.classList.remove('aq-open');modal.setAttribute('aria-hidden','true');}
-document.getElementById('aq-translation-close').addEventListener('click',close);modal.addEventListener('click',e=>{if(e.target===modal)close();});select.addEventListener('change',render);document.addEventListener('keydown',e=>{if(e.key==='Escape')close();});
-const globalLang=document.getElementById('langSelect');if(globalLang){select.value=copy[globalLang.value]?globalLang.value:'ar';globalLang.addEventListener('change',()=>{select.value=copy[globalLang.value]?globalLang.value:'ar';render();});}
-render();
-})();
-</script>
-
 <script id="aq-archive-i18n-fix">
 /* Archive UI labels only; preserves filter values and existing event handlers. */
 (function(){
