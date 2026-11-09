@@ -1028,7 +1028,7 @@ body > .top, .top {display:none!important;}
 <style>
 
 /* AQ mobile-only responsive refinement — preserves desktop, branding, JS and permissions */
-@media screen and (max-width: 720px) {
+@media screen and (max-width: 900px) {
   html, body { max-width:100%; overflow-x:clip; }
   .aq-reference-header { position:sticky; top:0; z-index:1000; }
   .aq-reference-header .nav {
@@ -1043,12 +1043,15 @@ body > .top, .top {display:none!important;}
   .aq-reference-header .navside .member { white-space:nowrap!important; font-size:11px!important; padding:9px 10px!important; }
   .aq-reference-header .navlinks {
     grid-column:1 / -1!important; grid-row:2!important; width:100%!important; min-width:0!important;
-    display:flex!important; flex-wrap:nowrap!important; justify-content:flex-start!important;
-    gap:17px!important; overflow-x:auto!important; overscroll-behavior-x:contain;
-    scrollbar-width:thin; -webkit-overflow-scrolling:touch;
-    padding:5px 2px 10px!important; scroll-snap-type:x proximity;
+    display:grid!important; grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:4px 8px!important; overflow:visible!important; padding:3px 0 6px!important;
   }
-  .aq-reference-header .navlinks a { flex:0 0 auto!important; font-size:12px!important; line-height:1.6!important; scroll-snap-align:start; }
+  .aq-reference-header .navlinks a {
+    display:grid; place-items:center; min-height:38px; text-align:center;
+    white-space:normal!important; overflow-wrap:anywhere; font-size:12px!important; line-height:1.35!important;
+  }
+  .aq-reference-header .aq-member-options {inset-inline-start:auto;inset-inline-end:0;max-width:calc(100vw - 24px)}
+  .aq-reference-header .aq-member-options a,.aq-reference-header .aq-member-options button {text-align:start;direction:inherit}
   #page-articles .aq-archive-controls { display:grid!important; grid-template-columns:1fr!important; gap:9px!important; padding:12px!important; }
   #page-articles .aq-archive-controls > * { max-width:100%!important; width:100%!important; min-width:0!important; }
   #page-articles input, #page-articles select { max-width:100%; }
@@ -1064,7 +1067,7 @@ body > .top, .top {display:none!important;}
 </style>
 <style id="aq-member-menu-live-styles">
 .aq-member-menu{position:relative;display:inline-flex;z-index:150}.aq-member-trigger{cursor:pointer;font:inherit;display:flex;align-items:center;gap:9px;white-space:nowrap}.aq-member-options{position:absolute;top:calc(100% + 9px);inset-inline-start:0;min-width:215px;padding:8px;background:#fffdf8;border:1px solid #d8b568;border-radius:13px;box-shadow:0 14px 34px rgba(9,27,44,.24);z-index:200}.aq-member-options[hidden]{display:none!important}.aq-member-options a,.aq-member-options button{display:block;width:100%;padding:13px 15px;border:0;border-radius:9px;text-align:right;direction:rtl;color:#102a43;background:transparent;text-decoration:none;font:600 14px/1.5 inherit;cursor:pointer}.aq-member-options a:hover,.aq-member-options button:hover,.aq-member-options a:focus-visible,.aq-member-options button:focus-visible{background:#f7eedb;outline:2px solid #d5a13d;outline-offset:-2px}
-#page-volunteer .aq-volunteer-lead{color:#243c4e;font-size:1.1rem;line-height:1.9;margin-bottom:20px}#page-volunteer #volunteerApplicationPanel,#page-volunteer #volunteerMemberArea>.panel{background:#fffaf4;border:1px solid #e9ddca;border-radius:17px;box-shadow:0 10px 24px #182d3a13;padding:26px;margin-bottom:20px;color:#142535}#page-volunteer #volunteerMemberArea>.notice{margin:24px 0 15px}#page-volunteer .aq-card-symbol{color:#b48b36;font-size:27px;margin-bottom:12px}#page-volunteer .aq-card-description{line-height:1.9;color:#455666;margin-bottom:18px}@media(max-width:600px){.aq-member-options{min-width:190px;inset-inline-start:auto;left:0}}
+#page-volunteer .aq-volunteer-lead{color:#243c4e;font-size:1.1rem;line-height:1.9;margin-bottom:20px}#page-volunteer #volunteerApplicationPanel,#page-volunteer #volunteerMemberArea>.panel{background:#fffaf4;border:1px solid #e9ddca;border-radius:17px;box-shadow:0 10px 24px #182d3a13;padding:26px;margin-bottom:20px;color:#142535}#page-volunteer #volunteerMemberArea>.notice{margin:24px 0 15px}#page-volunteer .aq-card-symbol{color:#b48b36;font-size:27px;margin-bottom:12px}#page-volunteer .aq-card-description{line-height:1.9;color:#455666;margin-bottom:18px}@media(max-width:600px){.aq-member-options{min-width:190px}}
 </style>
 <style id="aq-volunteer-approved-layout">
 #page-volunteer {background:#faf8f2}
@@ -1938,21 +1941,6 @@ render();
 })();
 </script>
 
-<!-- Scoped preview fix: audience translations and mobile navigation scrollbar -->
-<style id="aq-mobile-nav-scrollbar-fix">
-@media (max-width: 900px) {
-  .aq-reference-header .navlinks {
-    overflow-x: auto !important;
-    overflow-y: hidden !important;
-    scrollbar-width: none !important;
-    -ms-overflow-style: none !important;
-    -webkit-overflow-scrolling: touch;
-    overscroll-behavior-x: contain;
-  }
-  .aq-reference-header .navlinks::-webkit-scrollbar { display: none !important; width: 0 !important; height: 0 !important; }
-  .aq-reference-header .navlinks a { flex-shrink: 0; }
-}
-</style>
 <script id="aq-audience-localization-fix">
 (function(){
   'use strict';
