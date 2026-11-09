@@ -1116,7 +1116,8 @@ html[dir="rtl"] #page-volunteer .aq-volunteer-arrow {transform:scaleX(-1)}
 #page-volunteer .aq-volunteer-activation:has(#volunteerClaimPanel.hidden) {display:none}
 #page-volunteer #volunteerClaimPanel {
   margin-top:12px;
-  padding:clamp(16px,2.5vw,24px);
+  padding:clamp(12px,1.6vw,18px);
+  container-type:inline-size;
   background:#fffdf8;
   color:#102a43;
   border:1px solid #ded3bd;
@@ -1127,12 +1128,18 @@ html[dir="rtl"] #page-volunteer .aq-volunteer-arrow {transform:scaleX(-1)}
 #page-volunteer #volunteerClaimPanel h3 {color:#102a43;margin:4px 0 8px}
 #page-volunteer #volunteerClaimPanel .help {color:#45596a}
 #page-volunteer #volunteerClaimPanel label {color:#102a43;font-weight:700}
-#page-volunteer #volunteerClaimPanel .form-grid {grid-template-columns:minmax(0,1fr);gap:14px}
+#page-volunteer #volunteerClaimPanel .aq-card-symbol {display:none}
+#page-volunteer #volunteerClaimPanel .help {margin:0 0 10px}
+#page-volunteer #volunteerClaimPanel .form-grid {grid-template-columns:minmax(0,1fr);gap:9px}
+@container (min-width:280px) {
+  #page-volunteer #volunteerClaimPanel .form-grid {grid-template-columns:repeat(2,minmax(0,1fr))}
+  #page-volunteer #volunteerClaimPanel .aq-claim-password-row {grid-column:auto}
+}
 #page-volunteer #volunteerClaimPanel .field {min-height:46px;background:#fff;color:#102a43;border:1px solid #9daab5}
 #page-volunteer #volunteerClaimPanel .field::placeholder {color:#536678;opacity:1}
 #page-volunteer #volunteerClaimPanel .password-toggle {background:#edf1f5;color:#102a43;border-color:#9daab5}
 #page-volunteer #volunteerClaimPanel :is(.field,.password-toggle,.btn):focus-visible {outline:2px solid #936525;outline-offset:2px}
-#page-volunteer #volunteerClaimPanel .btn {min-height:46px}
+#page-volunteer #volunteerClaimPanel .btn {min-height:44px;align-self:start;padding-inline:20px}
 #page-volunteer #claimStatus {min-height:0;color:#245c38}
 #page-volunteer #claimStatus:empty {margin:0}
 #page-volunteer #claimStatus.error {color:#a42227}
@@ -1236,15 +1243,14 @@ html[dir="rtl"] #page-volunteer .aq-volunteer-arrow {transform:scaleX(-1)}
 </svg><div class="aq-students-hero-copy"><span class="aq-students-eyebrow">AL-QANUN AQ · JOIN OUR COMMUNITY</span><h1 data-i18n="volunteerTitle">تطوع معنا</h1><p>ساهم معنا في نشر المعرفة القانونية، وانضم إلى مجتمع المتطوعين في منصة القانون AQ.</p></div><svg class="aq-volunteer-wave" viewBox="0 0 1200 100" preserveAspectRatio="none" aria-hidden="true"><path fill="#d6a758" d="M0 32C200 156 360 7 590 13S940 37 1200 17V100H0Z"/><path fill="#faf8f2" d="M0 38C200 162 360 13 590 19S940 43 1200 23V100H0Z"/></svg></div><div class="aq-students-content"><div class="aq-volunteer-controls"><div class="aq-volunteer-tabs" style="display:none"><button type="button" id="openVolunteerMembers">دخول المتطوعين</button></div>
       <div class="panel" id="volunteerApplicationPanel"><a class="aq-volunteer-action aq-volunteer-gold" href="mailto:nour.dlikan@gmail.com?subject=Volunteer%20Application%20%E2%80%94%20AQ%20Law"><span class="aq-volunteer-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7 8 6 8-6"/></svg></span><span><strong><span class="aq-volunteer-label" data-volunteer-lang="ar" lang="ar">تقديم طلب تطوّع</span><span class="aq-volunteer-label" data-volunteer-lang="nl" lang="nl">Aanmelden als vrijwilliger</span><span class="aq-volunteer-label" data-volunteer-lang="en" lang="en">Apply to volunteer</span><span class="aq-volunteer-label" data-volunteer-lang="tr" lang="tr">Gönüllülük başvurusu</span></strong><small><span class="aq-volunteer-label" data-volunteer-lang="ar" lang="ar">للمهتمّين بالانضمام إلى الفريق</span><span class="aq-volunteer-label" data-volunteer-lang="nl" lang="nl">Voor wie ons team wil versterken</span><span class="aq-volunteer-label" data-volunteer-lang="en" lang="en">For anyone who wants to join our team</span><span class="aq-volunteer-label" data-volunteer-lang="tr" lang="tr">Ekibimize katılmak isteyenler için</span></small></span><span class="aq-volunteer-arrow" aria-hidden="true">→</span></a></div>
       <div id="volunteerMemberArea">
-        <div class="notice" data-i18n="volunteerAccessNotice">هذه المساحة مخصصة للمتطوعين الذين حصلوا على رمز عضوية من المشرفة نور.</div>
       <details class="aq-volunteer-activation"><summary class="aq-volunteer-action aq-volunteer-navy"><span class="aq-volunteer-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="15.5" cy="8.5" r="4.5"/><path d="m12 12-8 8v-4l2-2h3"/></svg></span><span><strong><span class="aq-volunteer-label" data-volunteer-lang="ar" lang="ar">تفعيل العضوية</span><span class="aq-volunteer-label" data-volunteer-lang="nl" lang="nl">Lidmaatschap activeren</span><span class="aq-volunteer-label" data-volunteer-lang="en" lang="en">Activate membership</span><span class="aq-volunteer-label" data-volunteer-lang="tr" lang="tr">Üyeliği etkinleştir</span></strong><small><span class="aq-volunteer-label" data-volunteer-lang="ar" lang="ar">للي وصلهم رمز عضوية</span><span class="aq-volunteer-label" data-volunteer-lang="nl" lang="nl">Als je een lidmaatschapscode hebt</span><span class="aq-volunteer-label" data-volunteer-lang="en" lang="en">If you received a membership code</span><span class="aq-volunteer-label" data-volunteer-lang="tr" lang="tr">Üyelik kodu aldıysan</span></small></span><span class="aq-volunteer-arrow" aria-hidden="true">→</span></summary>
       <div class="panel" id="volunteerClaimPanel">
         <div class="aq-card-symbol" aria-hidden="true">♙</div><h3 data-i18n="activateFirstTime">تفعيل العضوية لأول مرة</h3>
         <p class="help" data-i18n="activateHelp">أدخل رمز العضوية الذي حصلت عليه من المشرفة نور، وأنشئ كلمة مرور للدخول لاحقاً.</p>
         <form id="volunteerClaimForm" class="form-grid">
           <div class="form-row full"><label for="claimCode" data-i18n="memberCode">رمز العضوية</label><input class="field" id="claimCode" required maxlength="13" autocomplete="off" placeholder="AQ-XXXXXXXXXX"></div>
-          <div class="form-row full"><label for="claimPassword" data-i18n="createPassword">أنشئ كلمة مرور (12 حرفاً على الأقل)</label><input class="field" id="claimPassword" type="password" minlength="12" maxlength="128" required autocomplete="new-password"></div>
-          <div class="form-row full"><label for="claimPasswordConfirm" data-i18n="confirmPassword">تأكيد كلمة المرور</label><input class="field" id="claimPasswordConfirm" type="password" minlength="12" maxlength="128" required autocomplete="new-password"></div>
+          <div class="form-row full aq-claim-password-row"><label for="claimPassword" data-i18n="createPassword">أنشئ كلمة مرور (12 حرفاً على الأقل)</label><input class="field" id="claimPassword" type="password" minlength="12" maxlength="128" required autocomplete="new-password"></div>
+          <div class="form-row full aq-claim-password-row"><label for="claimPasswordConfirm" data-i18n="confirmPassword">تأكيد كلمة المرور</label><input class="field" id="claimPasswordConfirm" type="password" minlength="12" maxlength="128" required autocomplete="new-password"></div>
           <div class="form-row full"><button class="btn" type="submit" data-i18n="activateMembership">تفعيل العضوية</button><p class="status" id="claimStatus" role="status" aria-live="polite"></p></div>
         </form>
       </div>
