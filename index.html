@@ -366,6 +366,20 @@ body>.top{display:none!important}
 
 /* Approved hero image: soft navy edge blend; other site components untouched. */
 .aq-hero-visual::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:2;background:linear-gradient(90deg,rgba(10,30,49,.45) 0%,transparent 28%,transparent 78%,rgba(10,30,49,.20) 100%);}
+
+/* AQ luxury finish preview — decorative only, no layout or functional changes */
+:root{--aq-luxe-glow:rgba(225,180,103,.19);--aq-luxe-line:rgba(222,179,105,.40)}
+header{background:linear-gradient(115deg,rgba(7,24,41,.98),rgba(17,46,71,.98))!important;box-shadow:0 8px 34px rgba(0,0,0,.22),inset 0 -1px 0 rgba(245,209,145,.16);border-bottom-color:var(--aq-luxe-line)!important}
+header::after{content:"";position:absolute;bottom:0;left:12%;right:12%;height:1px;background:linear-gradient(90deg,transparent,rgba(241,200,125,.48),transparent);pointer-events:none}
+.hero{background:radial-gradient(ellipse at 70% 20%,rgba(43,99,136,.48),transparent 53%),radial-gradient(ellipse at 20% 80%,rgba(198,143,65,.11),transparent 45%),linear-gradient(130deg,#061b30,#103553 57%,#071d31)!important;box-shadow:inset 0 -16px 45px rgba(0,0,0,.15)}
+.hero::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 3%,rgba(255,224,167,.085),transparent 60%);pointer-events:none;z-index:0}
+.hero h1{text-shadow:0 3px 18px rgba(0,0,0,.48),0 0 35px rgba(226,178,92,.17)!important}
+.hero .btn,.hero button,.hero a[class*="btn"]{box-shadow:0 8px 22px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,240,205,.26)}
+main article,main .card,main [class*="feature-card"],main [class*="article-card"]{box-shadow:0 14px 38px rgba(0,0,0,.15),inset 0 1px 0 rgba(255,230,175,.07);border-color:rgba(213,169,91,.43)}
+main article:hover,main .card:hover{box-shadow:0 18px 42px rgba(0,0,0,.2),0 0 0 1px rgba(221,179,105,.12)}
+:focus-visible{outline:2px solid #e7bf7c;outline-offset:3px}
+@media(prefers-reduced-motion:reduce){main article,main .card{transition:none!important}}
+
 </style>
 
 <style id="aq-hero-layout-fix">
