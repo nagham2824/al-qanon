@@ -268,14 +268,34 @@ Deno.serve(async (req: Request) => {
       return json({ success: true }, 200, origin);
     }
 
-    if (action === "submit_article") {
+    if (action === "submit_article" || action === "list_articles") {
       const user = await identify(token);
       if (!user) return json({ error: "انتهت جلسة الدخول. سجّل الدخول مجدداً." }, 401, origin);
-      if (user.app_metadata?.must_change_password === true) return json({ error: "يجب تغيير كلمة المرور المؤقتة قبل إرسال المقالات." }, 403, origin);
+      if (user.app_metadata?.must_change_password === true) return json({ error: "يجب تغيير كلمة المرور المؤقتة قبل الوصول إلى المقالات." }, 403, origin);
       const volunteer = await volunteerFor(user.id);
       if (!volunteer || volunteer.status !== "active" || !volunteer.session_expires_at || new Date(volunteer.session_expires_at).getTime() < Date.now()) {
         return json({ error: "انتهت الجلسة أو أن العضوية موقوفة. سجّل الدخول مجدداً." }, 401, origin);
       }
+      if (action === "list_articles") {
+        const status = body.status ?? "all";
+        const page = body.page ?? 0;
+        if (!["all","published","rejected","pending_review"].includes(status) ||
+            !Number.isSafeInteger(page) || page < 0 || page > Math.floor(Number.MAX_SAFE_INTEGER / 25) - 1) {
+          return json({ error: "Invalid article filter or page." }, 400, origin);
+        }
+        const pageSize = 25;
+        const offset = page * pageSize;
+        let query = admin.from("articles")
+          .select("id,title,content,language,status,rejection_reason")
+          .eq("volunteer_id", volunteer.id)
+          .order("id", { ascending: false })
+          .range(offset, offset + pageSize);
+        if (status !== "all") query = query.eq("status", status);
+        const { data, error } = await query;
+        if (error) throw error;
+        return json({ articles: data.slice(0, pageSize), hasMore: data.length > pageSize }, 200, origin);
+      }
+
       const title = String(body.title ?? "").trim();
       const content = String(body.content ?? "").trim();
       const category = String(body.category ?? "general");
