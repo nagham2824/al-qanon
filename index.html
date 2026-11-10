@@ -1202,6 +1202,22 @@ html[lang="ar"] .aq-localized-text[lang="ar"],html[lang="nl"] .aq-localized-text
 }
 @media(max-width:440px){.aq-reference-header .wrap.nav{gap:5px!important}.aq-reference-header .brand img{max-width:100px!important}.aq-reference-header .navside{gap:4px!important}.aq-reference-header .navside .lang-select{max-width:84px!important;font-size:11px!important}.aq-reference-header .navside .member{font-size:10px!important;padding:8px 6px!important}}
 </style>
+<style id="aq-article-filters">
+#page-articles .aq-archive-controls {
+  display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));align-items:end;
+  gap:12px;padding:16px;margin-block-end:18px;
+}
+#page-articles .aq-article-filter {display:grid;gap:5px;min-width:0}
+#page-articles .aq-article-filter :is(input,select) {width:100%;min-width:0;min-height:44px;box-sizing:border-box;margin:0}
+#page-articles .aq-article-search {grid-column:span 2}
+#page-articles #allArticlesSearch {width:100%;margin:0;padding:8px 12px}
+#page-articles #aqArchiveReset {min-height:44px;margin:0}
+@media(max-width:760px){
+  #page-articles .aq-archive-controls {grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  #page-articles .aq-article-search {grid-column:2}
+  #page-articles #aqArchiveReset {grid-column:1/-1}
+}
+</style>
 </head>
 <body>
   <a class="skip" href="#main" data-i18n="skip">تجاوز إلى المحتوى</a>
@@ -1322,7 +1338,25 @@ html[lang="ar"] .aq-localized-text[lang="ar"],html[lang="nl"] .aq-localized-text
 </svg><div class="aq-students-hero-copy"><span class="aq-students-eyebrow">AL-QANON AQ · LEGAL ARTICLES</span><h1>المقالات</h1><p>مقالات قانونية مبسّطة وموثوقة لفهم القوانين الهولندية، مع الإحالة إلى المصادر الرسمية.</p></div><svg class="aq-volunteer-wave" viewBox="0 0 1200 100" preserveAspectRatio="none" aria-hidden="true"><path fill="#d6a758" d="M0 32C200 156 360 7 590 13S940 37 1200 17V100H0Z"/><path fill="#faf8f2" d="M0 38C200 162 360 13 590 19S940 43 1200 23V100H0Z"/></svg></div>
       <div class="aq-students-content">
         <section class="aq-articles-intro"><h2>المقالات القانونية</h2><p>تصفّح المقالات القانونية المنشورة في مختلف المجالات، وابحث عن الموضوع الذي يهمّك.</p></section>
-        <section class="aq-articles-list"><h2>جميع المقالات</h2><div class="aq-archive-controls" aria-label="تصفية المقالات حسب التاريخ"><label for="aqArchivePeriod">الأرشيف حسب الفترة</label><select id="aqArchivePeriod"><option value="all">جميع التواريخ</option><option value="week">آخر 7 أيام</option><option value="month">آخر 30 يوماً</option><option value="older">أقدم من 30 يوماً</option></select><label for="aqArchiveMonth">أو اختر شهراً</label><input id="aqArchiveMonth" type="month" aria-label="اختر شهر النشر"><button type="button" id="aqArchiveReset">إظهار الكل</button></div><input id="allArticlesSearch" type="search" placeholder="ابحث في المقالات..." aria-label="البحث في جميع المقالات"><p class="aq-articles-note" data-i18n="articleNotice">المقالات المنشورة متاحة للقراءة فقط. إرسال المقالات للمراجعة متاح للمتطوعين أصحاب العضوية الفعّالة من مساحة المتطوع.</p><div id="allArticles" class="article-list" aria-live="polite"></div></section>
+        <section class="aq-articles-list"><h2>جميع المقالات</h2><div class="aq-archive-controls" aria-label="تصفية المقالات">
+<div class="aq-article-filter" id="aqCategoryField">
+  <label for="aqArchiveCategory">القسم القانوني</label>
+  <select id="aqArchiveCategory">
+    <option value="all">كل الأقسام</option>
+    <option value="public-law">القانون العام</option>
+    <option value="private-law">القانون الخاص</option>
+  </select>
+</div>
+
+<div class="aq-article-filter" id="aqBranchField">
+  <label for="aqArchiveBranch">الفرع القانوني</label>
+  <select id="aqArchiveBranch"><option value="all">كل الأفرع</option></select>
+</div>
+<div class="aq-article-filter" id="aqSubjectField">
+  <label for="aqArchiveSubject">الموضوع</label>
+  <select id="aqArchiveSubject"><option value="all">كل المواضيع</option></select>
+</div>
+<div class="aq-article-filter aq-article-search"><input id="allArticlesSearch" type="search" placeholder="ابحث في المقالات..." aria-label="البحث في جميع المقالات"></div><button type="button" id="aqArchiveReset">إظهار الكل</button></div><p class="aq-articles-note" data-i18n="articleNotice">المقالات المنشورة متاحة للقراءة فقط. إرسال المقالات للمراجعة متاح للمتطوعين أصحاب العضوية الفعّالة من مساحة المتطوع.</p><div id="allArticles" class="article-list" aria-live="polite"></div></section>
       </div>
     </section>
 
@@ -1436,6 +1470,9 @@ html[lang="ar"] .aq-localized-text[lang="ar"],html[lang="nl"] .aq-localized-text
               <input type="hidden" id="articleId">
               <div class="form-row full"><label for="articleTitle" data-i18n="articleTitle">عنوان المقال</label><input class="field" id="articleTitle" maxlength="180" required></div>
               <div class="form-row"><label for="articleCategory" data-i18n="category">القسم</label><select class="field" id="articleCategory"><option value="public-law" data-i18n="navPublic">القانون العام</option><option value="private-law" data-i18n="navPrivate">القانون الخاص</option><option value="student" data-i18n="studentsTitle">الطلاب والأكاديميون</option><option value="refugee" data-i18n="refugeeTitle">اللاجئون والحماية</option><option value="resident" data-i18n="residentTitle">المقيمون والعمل</option><option value="general" data-i18n="generalTitle">الشؤون العامة والمهنية</option></select></div>
+              <div class="form-row"><label for="articleLegalArea">القسم القانوني</label><select class="field" id="articleLegalArea"><option value="all">بدون تحديد</option><option value="public-law">القانون العام</option><option value="private-law">القانون الخاص</option></select></div>
+              <div class="form-row"><label for="articleLegalBranch">الفرع القانوني</label><select class="field" id="articleLegalBranch"><option value="all">بدون تحديد</option></select></div>
+              <div class="form-row"><label for="articleLegalSubject">الموضوع</label><select class="field" id="articleLegalSubject"><option value="all">بدون تحديد</option></select></div>
               <div class="form-row"><label for="articleLang" data-i18n="articleLanguage">لغة المقال</label><select class="field" id="articleLang"><option value="ar">العربية</option><option value="nl">Nederlands</option><option value="tr">Türkçe</option><option value="en">English</option></select></div>
               <div class="form-row full"><label for="articleBody" data-i18n="articleBody">نص المقال</label><textarea class="field" id="articleBody" maxlength="30000" required></textarea></div>
               <div class="form-row full"><label for="articleSource" data-i18n="source">المصدر الرسمي / الرابط</label><input class="field" id="articleSource" type="url" maxlength="1000" placeholder="https://"></div>
@@ -1527,7 +1564,7 @@ html[lang="ar"] .aq-localized-text[lang="ar"],html[lang="nl"] .aq-localized-text
   function volunteerErrorMessage(error){const message=String(error?.message||error||'');if(/رمز العضوية|كلمة المرور|بيانات الدخول|غير نشط|غير مفعّل|غير فعّال|credentials|invalid login/i.test(message))return t('invalidCredentials');if(/انتهت جلسة|انتهاء الجلسة|session expired/i.test(message))return t('sessionExpired');if(/[\u0600-\u06FF]/.test(message))return t('genericVolunteerError');return message||t('genericVolunteerError');}
   function safeHttpUrl(value){if(!value)return '';try{const url=new URL(value);return url.protocol==='https:'?url.href:null;}catch{return null;}}
   function showPage(pageId,updateHash=true){if(!document.getElementById('page-'+pageId))pageId='home';document.querySelectorAll('.page').forEach(page=>page.classList.toggle('active',page.id==='page-'+pageId));document.querySelectorAll('[data-page]').forEach(link=>{if(link.tagName==='A'&&link.closest('nav')){if(link.dataset.page===pageId)link.setAttribute('aria-current','page');else link.removeAttribute('aria-current');}});if(updateHash&&location.hash!=='#'+pageId)history.replaceState(null,'','#'+pageId);window.scrollTo({top:0,behavior:'auto'});renderArticles();}
-  function articleFromRow(row){return{id:String(row.id),title:row.title||'',body:row.content||'',category:row.category||'general',author_name:row.author_name||'',status:row.status||'pending_review',language:row.language||'ar',source_url:row.source_url||'',updatedAt:row.updated_at||row.created_at||new Date().toISOString()};}
+  function articleFromRow(row){return{id:String(row.id),title:row.title||'',body:row.content||'',category:row.category||'general',legalArea:row.legal_area,legalBranch:row.legal_branch,legalSubject:row.legal_subject,author_name:row.author_name||'',status:row.status||'pending_review',language:row.language||'ar',source_url:row.source_url||'',updatedAt:row.updated_at||row.created_at||new Date().toISOString()};}
   function articleCategoryName(category){const key=({ 'public-law':'navPublic','private-law':'navPrivate',student:'studentsTitle',refugee:'refugeeTitle',resident:'residentTitle',general:'generalTitle' })[category];return key?t(key):t('generalTitle');}
   let publishedTranslations=[];
   const translationNames={ar:'العربية',nl:'Nederlands',en:'English',tr:'Türkçe'};
@@ -1674,7 +1711,7 @@ html[lang="ar"] .aq-localized-text[lang="ar"],html[lang="nl"] .aq-localized-text
   }
   async function refreshArticles(){
     if(!db){articles=[];renderArticles();setStatus('adminSessionStatus','Supabase غير متاح. تحقق من اتصال الإنترنت ومكتبة Supabase.',true);return;}
-    let query=db.from('articles').select('id,title,content,author_name,status,created_at,updated_at,category,language,source_url').order('created_at',{ascending:false});
+    let query=db.from('articles').select('id,title,content,author_name,status,created_at,updated_at,category,language,source_url,legal_area,legal_branch,legal_subject').order('created_at',{ascending:false});
     if(!isAdmin)query=query.eq('status','published');
     const {data,error}=await query;
     if(error){console.error('Supabase articles error:',error);articles=[];renderArticles();if(isAdmin)setStatus('adminSessionStatus',t('databaseError'),true);return;}
@@ -1708,14 +1745,24 @@ html[lang="ar"] .aq-localized-text[lang="ar"],html[lang="nl"] .aq-localized-text
       root.append(item);
     });
   }
-  function filterAqArchive(list){
-    const period=document.getElementById('aqArchivePeriod')?.value||'all';
-    const month=document.getElementById('aqArchiveMonth')?.value||'';
-    const now=Date.now();
-    return list.filter(article=>{const date=new Date(article.updatedAt);if(!Number.isFinite(date.getTime()))return period==='all'&&!month;
-      if(month&&date.toISOString().slice(0,7)!==month)return false;
-      const days=(now-date.getTime())/86400000;
-      return period==='week'?days>=0&&days<=7:period==='month'?days>=0&&days<=30:period==='older'?days>30:true;
+  function filterAqArchive(list) {
+    const {category,branch,subject,search} = articleFilters;
+    const query = search.value.trim().toLocaleLowerCase(currentLang);
+    const translated = new Map();
+    if (query) {
+      for (const row of publishedTranslations) {
+        const key = String(row.article_id);
+        const text = [row.title,row.content].filter(Boolean).join(' ');
+        translated.set(key, [translated.get(key),text].filter(Boolean).join(' '));
+      }
+    }
+    return list.filter(article => {
+      if (category.value !== 'all' && (article.legalArea || article.category) !== category.value) return false;
+      if (branch.value !== 'all' && article.legalBranch !== branch.value) return false;
+      if (subject.value !== 'all' && article.legalSubject !== subject.value) return false;
+      if (!query) return true;
+      return [article.title,article.body,article.author_name,articleCategoryName(article.category),translated.get(article.id)]
+        .some(text => text?.toLocaleLowerCase(currentLang).includes(query));
     });
   }
   // Scoped translations for the latest-articles section; does not change article content.
@@ -1751,13 +1798,101 @@ html[lang="ar"] .aq-localized-text[lang="ar"],html[lang="nl"] .aq-localized-text
       const summary=document.createElement('p');summary.textContent=(article.body||'').replace(/\s+/g,' ').slice(0,135)+(article.body?.length>135?'…':'');card.append(summary);
       const foot=document.createElement('div');foot.className='aq-latest-card-foot';
       const date=document.createElement('time');if(article.updatedAt)date.dateTime=article.updatedAt;date.textContent=article.updatedAt?new Date(article.updatedAt).toLocaleDateString(currentLang,{year:'numeric',month:'short',day:'numeric'}):'';foot.append(date);
-      const link=document.createElement('a');link.href='#articles';link.dataset.page='articles';link.textContent=(latestUi[currentLang]||latestUi.ar).read+(currentLang==='ar'?' ←':' →');link.addEventListener('click',()=>{const month=document.getElementById('aqArchiveMonth');const period=document.getElementById('aqArchivePeriod');if(month)month.value='';if(period)period.value='all';renderArticleTarget('allArticles',articles.filter(x=>x.status==='published'),false);});foot.append(link);card.append(foot);root.append(card);
+      const link=document.createElement('a');link.href='#articles';link.dataset.page='articles';link.textContent=(latestUi[currentLang]||latestUi.ar).read+(currentLang==='ar'?' ←':' →');link.addEventListener('click', () => { resetArticleFilters(); showPage('articles'); });foot.append(link);card.append(foot);root.append(card);
     });
   }
-  document.addEventListener('aqArchiveChanged',()=>renderArticles());
+  const articleTaxonomy = [["public-law","constitutional",["القانون الدستوري","Staatsrecht","Constitutional law","Anayasa hukuku"],[["fundamental","الحقوق الأساسية","Grondrechten","Fundamental rights","Temel haklar"],["government","سلطات الدولة والانتخابات","Staatsinrichting en verkiezingen","Government and elections","Devlet yapısı ve seçimler"]]],["public-law","administrative",["القانون الإداري","Bestuursrecht","Administrative law","İdare hukuku"],[["appeals","الاعتراض والطعن الإداري","Bezwaar en beroep","Administrative objections and appeals","İdari itiraz ve dava"],["permits","التراخيص والقرارات الإدارية","Vergunningen en besluiten","Permits and administrative decisions","İzinler ve idari kararlar"],["transparency","الشفافية والمعلومات العامة","Openbaarheid van bestuur","Public access to information","Kamu bilgilerine erişim"],["enforcement","الرقابة والجزاءات الإدارية","Toezicht en handhaving","Administrative enforcement","İdari denetim ve yaptırımlar"]]],["public-law","criminal",["القانون الجنائي","Strafrecht","Criminal law","Ceza hukuku"],[["investigation","التحقيق والحقوق أثناء التوقيف","Opsporing en rechten bij aanhouding","Investigation and rights on arrest","Soruşturma ve gözaltı hakları"],["criminal-trial","المحاكمة والعقوبات","Strafproces en straffen","Criminal trials and penalties","Ceza yargılaması ve yaptırımlar"],["victims","حقوق الضحايا والشهود","Rechten van slachtoffers en getuigen","Victims’ and witnesses’ rights","Mağdur ve tanık hakları"],["juvenile-crime","العدالة الجنائية للأحداث","Jeugdstrafrecht","Juvenile justice","Çocuk ceza hukuku"]]],["public-law","immigration",["الهجرة واللجوء والجنسية","Vreemdelingenrecht en nationaliteit","Immigration, asylum and nationality","Göç, iltica ve vatandaşlık"],[["residence","الإقامة والتأشيرات","Verblijf en visa","Residence and visas","İkamet ve vizeler"],["asylum","اللجوء والحماية","Asiel en bescherming","Asylum and protection","İltica ve koruma"],["reunification","لمّ الشمل","Gezinshereniging","Family reunification","Aile birleşimi"],["nationality","الجنسية والاندماج","Nationaliteit en inburgering","Nationality and integration","Vatandaşlık ve uyum"],["removals","الاحتجاز والترحيل","Bewaring en uitzetting","Immigration detention and removal","Göçmen gözetimi ve sınır dışı"]]],["public-law","tax",["الضرائب والجمارك","Belasting- en douanerecht","Tax and customs law","Vergi ve gümrük hukuku"],[["income-tax","ضريبة الدخل والأجور","Inkomsten- en loonbelasting","Income and payroll taxes","Gelir ve ücret vergileri"],["business-tax","ضرائب الشركات والقيمة المضافة","Vennootschapsbelasting en btw","Corporate tax and VAT","Kurumlar vergisi ve KDV"],["customs","الجمارك والرسوم المحلية","Douane en lokale heffingen","Customs and local taxes","Gümrük ve yerel vergiler"]]],["public-law","social-security",["الضمان الاجتماعي","Socialezekerheidsrecht","Social security law","Sosyal güvenlik hukuku"],[["benefits","المساعدات والبدلات","Uitkeringen en toeslagen","Benefits and allowances","Sosyal yardımlar ve ödenekler"],["disability","المرض والعجز والبطالة","Ziekte, arbeidsongeschiktheid en werkloosheid","Sickness, disability and unemployment","Hastalık, iş göremezlik ve işsizlik"],["public-pension","التقاعد الحكومي","AOW en volksverzekeringen","State pension and national insurance","Devlet emekliliği ve ulusal sigorta"]]],["public-law","environment",["البيئة والتخطيط العمراني","Omgevingsrecht","Environmental and planning law","Çevre ve imar hukuku"],[["planning","التخطيط والبناء","Ruimtelijke ordening en bouwen","Planning and construction","İmar ve yapılaşma"],["environment-protection","البيئة والطبيعة والمياه","Milieu, natuur en water","Environment, nature and water","Çevre, doğa ve su"],["housing","السكن","Wonen","Housing","Konut"]]],["public-law","regulation",["التنظيم الاقتصادي والرقابة","Economisch bestuursrecht en toezicht","Economic regulation and supervision","Ekonomik düzenleme ve denetim"],[["competition","المنافسة والرقابة على الأسواق","Mededinging en markttoezicht","Competition and market supervision","Rekabet ve piyasa denetimi"],["procurement","المشتريات العامة","Aanbestedingsrecht","Public procurement","Kamu ihale hukuku"],["regulated-sectors","الطاقة والاتصالات والإعلام","Energie, telecom en media","Energy, telecoms and media","Enerji, telekomünikasyon ve medya"]]],["public-law","education",["قانون التعليم","Onderwijsrecht","Education law","Eğitim hukuku"],[["admission","القبول والقرارات الدراسية","Toelating en onderwijsbesluiten","Admissions and education decisions","Kabul ve eğitim kararları"],["student-support","تمويل الدراسة والتعليم الإلزامي","Studiefinanciering en leerplicht","Student finance and compulsory education","Öğrenci finansmanı ve zorunlu eğitim"]]],["public-law","health-public",["الصحة العامة وتنظيم الرعاية","Publieke gezondheid en zorgtoezicht","Public health and care regulation","Halk sağlığı ve sağlık denetimi"],[["health-regulation","الرقابة الصحية والمهنية","Zorgtoezicht en beroepsregels","Health supervision and professional rules","Sağlık denetimi ve meslek kuralları"],["compulsory-care","الرعاية الإلزامية","Verplichte zorg","Compulsory care","Zorunlu bakım"]]],["public-law","eu-public",["القانون الأوروبي والدولي العام","Europees en internationaal publiekrecht","EU and public international law","AB hukuku ve uluslararası kamu hukuku"],[["eu-rights","حرية التنقل وحقوق الاتحاد الأوروبي","Vrij verkeer en EU-rechten","Free movement and EU rights","Serbest dolaşım ve AB hakları"],["treaties","المعاهدات وحقوق الإنسان","Verdragen en mensenrechten","Treaties and human rights","Antlaşmalar ve insan hakları"]]],["private-law","contracts",["العقود والالتزامات","Contracten- en verbintenissenrecht","Contract and obligations law","Sözleşmeler ve borçlar hukuku"],[["performance","تنفيذ العقد وفسخه","Nakoming en ontbinding","Performance and termination","İfa ve sözleşmenin feshi"],["purchase","البيع والخدمات","Koop en dienstverlening","Sales and services","Satış ve hizmetler"]]],["private-law","liability",["المسؤولية المدنية والتعويض","Aansprakelijkheidsrecht","Civil liability and damages","Hukuki sorumluluk ve tazminat"],[["damages","التعويض وإصابات الأشخاص","Schadevergoeding en letselschade","Damages and personal injury","Tazminat ve bedensel zarar"],["tort","المسؤولية عن الفعل الضار","Onrechtmatige daad","Tort liability","Haksız fiil sorumluluğu"]]],["private-law","property",["الملكية والحقوق العينية","Goederenrecht","Property law","Eşya hukuku"],[["ownership","الملكية والحيازة","Eigendom en bezit","Ownership and possession","Mülkiyet ve zilyetlik"],["security","الرهن والضمانات","Pand, hypotheek en zekerheden","Pledges, mortgages and security","Rehin, ipotek ve teminatlar"],["neighbors","حقوق الجوار والارتفاق","Burenrecht en erfdienstbaarheden","Neighbour disputes and easements","Komşuluk ve irtifak hakları"]]],["private-law","tenancy",["الإيجار والسكن","Huurrecht","Tenancy and housing","Kira ve konut hukuku"],[["housing","السكن","Wonen","Housing","Konut"],["rent","الأجرة والصيانة وإنهاء الإيجار","Huurprijs, onderhoud en opzegging","Rent, maintenance and termination","Kira bedeli, bakım ve fesih"]]],["private-law","family-law",["قانون الأشخاص والأسرة","Personen- en familierecht","Family and personal status law","Kişiler ve aile hukuku"],[["family","الأحوال الشخصية ووثائق الأسرة","Burgerlijke staat en familiedocumenten","Civil status and family documents","Medeni hâl ve aile belgeleri"],["divorce","الزواج والطلاق والنفقة","Huwelijk, scheiding en alimentatie","Marriage, divorce and maintenance","Evlilik, boşanma ve nafaka"],["children","النسب والحضانة وحماية الطفل","Afstamming, gezag en kinderbescherming","Parentage, custody and child protection","Soybağı, velayet ve çocuk koruma"],["guardianship","الوصاية والولاية القانونية","Voogdij, curatele en bewind","Guardianship and legal protection","Vesayet ve hukuki koruma"]]],["private-law","inheritance",["الميراث والوصايا","Erfrecht","Inheritance law","Miras hukuku"],[["wills","الوصايا وتوزيع التركة","Testament en verdeling","Wills and estate distribution","Vasiyet ve miras paylaşımı"],["estate","قبول التركة أو رفضها","Aanvaarden of verwerpen van een erfenis","Accepting or rejecting an inheritance","Mirasın kabulü veya reddi"]]],["private-law","employment",["قانون العمل والتقاعد المهني","Arbeidsrecht en pensioenrecht","Employment and occupational pensions","İş hukuku ve mesleki emeklilik"],[["work","عقود العمل والأجور","Arbeidscontracten en loon","Employment contracts and wages","İş sözleşmeleri ve ücret"],["dismissal","الفصل والإجازات والمرض","Ontslag, verlof en ziekte","Dismissal, leave and sickness","İşten çıkarma, izin ve hastalık"],["collective","الاتفاقيات الجماعية والتقاعد","Cao en pensioen","Collective agreements and pensions","Toplu iş sözleşmeleri ve emeklilik"]]],["private-law","consumer",["حماية المستهلك","Consumentenrecht","Consumer law","Tüketici hukuku"],[["online-sales","الشراء الإلكتروني والإرجاع","Online aankopen en herroeping","Online purchases and cancellation","Çevrimiçi alışveriş ve cayma"],["warranty","الضمان والشكاوى","Garantie en klachten","Guarantees and complaints","Garanti ve şikâyetler"],["credit","القروض الاستهلاكية","Consumentenkrediet","Consumer credit","Tüketici kredisi"]]],["private-law","corporate",["الشركات والقانون التجاري","Ondernemingsrecht en handelsrecht","Company and commercial law","Şirketler ve ticaret hukuku"],[["formation","تأسيس الشركات وإدارتها","Oprichting en bestuur","Company formation and governance","Şirket kuruluşu ve yönetimi"],["commerce","المعاملات التجارية والنقل","Handelstransacties en vervoer","Commercial transactions and transport","Ticari işlemler ve taşıma"],["finance","الخدمات المالية والتأمين","Financiële diensten en verzekeringen","Financial services and insurance","Finansal hizmetler ve sigorta"]]],["private-law","insolvency",["الإفلاس والديون","Insolventie- en schuldenrecht","Insolvency and debt law","İflas ve borç hukuku"],[["bankruptcy","الإفلاس وإعادة الهيكلة","Faillissement en herstructurering","Bankruptcy and restructuring","İflas ve yeniden yapılandırma"],["debt-relief","تحصيل الديون وتسويتها","Incasso en schuldsanering","Debt collection and relief","Borç tahsilatı ve yapılandırma"]]],["private-law","ip",["الملكية الفكرية","Intellectueel-eigendomsrecht","Intellectual property law","Fikrî mülkiyet hukuku"],[["copyright","حقوق المؤلف","Auteursrecht","Copyright","Telif hakkı"],["industrial-ip","العلامات والبراءات والتصاميم","Merken, octrooien en modellen","Trademarks, patents and designs","Markalar, patentler ve tasarımlar"]]],["private-law","civil-procedure",["الإجراءات المدنية وتسوية النزاعات","Burgerlijk procesrecht en geschiloplossing","Civil procedure and dispute resolution","Medeni usul ve uyuşmazlık çözümü"],[["civil-claims","الدعاوى والإجراءات المستعجلة","Civiele procedures en kort geding","Civil claims and urgent proceedings","Hukuk davaları ve ivedi yargılama"],["enforcement-civil","التنفيذ والحجز","Executie en beslag","Enforcement and attachment","İcra ve haciz"],["dispute-resolution","الوساطة والتحكيم","Mediation en arbitrage","Mediation and arbitration","Arabuluculuk ve tahkim"]]],["private-law","private-international",["القانون الدولي الخاص","Internationaal privaatrecht","Private international law","Milletlerarası özel hukuk"],[["conflict","الاختصاص والقانون الواجب التطبيق","Bevoegdheid en toepasselijk recht","Jurisdiction and applicable law","Yetki ve uygulanacak hukuk"],["recognition","الاعتراف بالأحكام الأجنبية","Erkenning van buitenlandse uitspraken","Recognition of foreign judgments","Yabancı kararların tanınması"]]],["both","privacy",["الخصوصية وحماية البيانات","Privacy en gegevensbescherming","Privacy and data protection","Gizlilik ve veri koruma"],[["data","البيانات الشخصية وحقوق الأفراد","Persoonsgegevens en individuele rechten","Personal data and individual rights","Kişisel veriler ve bireysel haklar"],["digital","الخدمات الرقمية والأمن الإلكتروني","Digitale diensten en cyberveiligheid","Digital services and cybersecurity","Dijital hizmetler ve siber güvenlik"]]],["both","equal-treatment",["المساواة وعدم التمييز","Gelijke behandeling","Equal treatment and non-discrimination","Eşit muamele ve ayrımcılık yasağı"],[["equality","التمييز في العمل والسكن والخدمات","Discriminatie op het werk, bij wonen en diensten","Discrimination at work, in housing and services","İş, konut ve hizmetlerde ayrımcılık"]]],["private-law","patient-rights",["حقوق المرضى والعلاج","Patiëntenrechten en behandeling","Patient rights and treatment","Hasta hakları ve tedavi"],[["patient","الموافقة على العلاج والملف الطبي","Toestemming en medisch dossier","Treatment consent and medical records","Tedavi onayı ve tıbbi dosya"],["care-dispute","شكاوى الرعاية والمسؤولية الطبية","Zorgklachten en medische aansprakelijkheid","Care complaints and medical liability","Sağlık şikâyetleri ve tıbbi sorumluluk"]]]];
+  const articleFilters = {
+    category: document.getElementById('aqArchiveCategory'),
+    branch: document.getElementById('aqArchiveBranch'),
+    subject: document.getElementById('aqArchiveSubject'),
+    search: document.getElementById('allArticlesSearch'),
+    reset: document.getElementById('aqArchiveReset')
+  };
+  const filterLabels = {
+    ar:['تصفية المقالات','القسم القانوني','كل الأقسام','القانون العام','القانون الخاص','الفرع القانوني','كل الأفرع','الموضوع','كل المواضيع','إظهار الكل','ابحث في المقالات'],
+    nl:['Artikelen filteren','Rechtsgebied','Alle rechtsgebieden','Publiekrecht','Privaatrecht','Rechtstak','Alle rechtstakken','Onderwerp','Alle onderwerpen','Alles tonen','Zoek in de artikelen'],
+    en:['Filter articles','Area of law','All areas','Public law','Private law','Legal branch','All branches','Subject','All subjects','Show all','Search articles'],
+    tr:['Makaleleri filtrele','Hukuk alanı','Tüm hukuk alanları','Kamu hukuku','Özel hukuk','Hukuk dalı','Tüm dallar','Konu','Tüm konular','Tümünü göster','Makalelerde ara']
+  };
+
+  const articleEditor = {
+    category:document.getElementById('articleLegalArea'),
+    branch:document.getElementById('articleLegalBranch'),
+    subject:document.getElementById('articleLegalSubject')
+  };
+
+  function syncLegalOptions({category,branch,subject}, editing = false) {
+    const langIndex = ['ar','nl','en','tr'].indexOf(currentLang);
+    const [,categoryLabel,allCategories,publicLabel,privateLabel,branchLabel,allBranches,subjectLabel,allSubjects] = filterLabels[currentLang];
+    const unspecified = {ar:'بدون تحديد',nl:'Niet gespecificeerd',en:'Unspecified',tr:'Belirtilmemiş'}[currentLang];
+    const branches = articleTaxonomy.filter(([area]) => (!editing && category.value === 'all') || (category.value !== 'all' && (area === 'both' || area === category.value)));
+    const fill = (select, all, entries) => {
+      const value = select.value;
+      select.replaceChildren(new Option(all, 'all'), ...entries.map(([id,label]) => new Option(label,id)));
+      select.value = entries.some(([id]) => id === value) ? value : 'all';
+    };
+    fill(branch, editing ? unspecified : allBranches, branches.map(([,id,labels]) => [id,labels[langIndex]]));
+    const topics = new Map();
+    for (const [,id,,entries] of branches) {
+      if ((!editing && branch.value === 'all') || id === branch.value) {
+        for (const [topic,...labels] of entries) topics.set(topic,labels[langIndex]);
+      }
+    }
+    fill(subject, editing ? unspecified : allSubjects, [...topics]);
+    [editing ? unspecified : allCategories,publicLabel,privateLabel].forEach((text,index) => category.options[index].textContent=text);
+    for (const [control,label] of [[category,categoryLabel],[branch,branchLabel],[subject,subjectLabel]]) {
+      control.labels[0].textContent=label;
+    }
+    branch.disabled = editing && category.value === 'all';
+    subject.disabled = editing && branch.value === 'all';
+  }
+
+  function syncArticleFilters() {
+    const [aria,,,,,,,,,resetLabel,searchLabel] = filterLabels[currentLang];
+    syncLegalOptions(articleFilters);
+    syncLegalOptions(articleEditor,true);
+    document.querySelector('.aq-archive-controls').setAttribute('aria-label',aria);
+    articleFilters.search.setAttribute('aria-label',searchLabel);
+    articleFilters.reset.textContent=resetLabel;
+  }
+
+  function setEditorClassification(article = {}) {
+    articleEditor.category.value=article.legalArea || 'all';
+    syncLegalOptions(articleEditor,true);
+    articleEditor.branch.value=article.legalBranch || 'all';
+    syncLegalOptions(articleEditor,true);
+    articleEditor.subject.value=article.legalSubject || 'all';
+    syncLegalOptions(articleEditor,true);
+  }
+
+  function renderFilteredArticles(list = articles.filter(article => article.status === 'published')) {
+    renderArticleTarget('allArticles', filterAqArchive(list));
+  }
+
+  function resetArticleFilters() {
+    const {category,branch,subject,search} = articleFilters;
+    category.value=branch.value=subject.value='all';
+    search.value='';
+    syncArticleFilters();
+    renderFilteredArticles();
+  }
+
+  for (const field of [articleFilters.category,articleFilters.branch,articleFilters.subject]) {
+    field.addEventListener('change', () => {
+      syncArticleFilters();
+      renderFilteredArticles();
+    });
+  }
+  articleFilters.search.addEventListener('input', () => renderFilteredArticles());
+  articleFilters.reset.addEventListener('click', resetArticleFilters);
+  for (const field of [articleEditor.category,articleEditor.branch]) {
+    field.addEventListener('change', () => syncLegalOptions(articleEditor,true));
+  }
+  syncArticleFilters();
   function renderPublishedArticles(){
     const published=articles.filter(article=>article.status==='published');
-    renderArticleTarget('allArticles',filterAqArchive(published),false);
+    renderFilteredArticles(published);
     renderAqLatestFour(published);
     renderArticleTarget('publicArticles',published.filter(article=>article.category==='public-law'),false);
     renderArticleTarget('privateArticles',published.filter(article=>article.category==='private-law'),false);
@@ -1767,8 +1902,8 @@ html[lang="ar"] .aq-localized-text[lang="ar"],html[lang="nl"] .aq-localized-text
     renderPublishedArticles();
     renderArticleTarget('adminArticles',isAdmin?articles:[],true);
   }
-  function clearArticleForm(){document.getElementById('articleForm').reset();document.getElementById('articleId').value='';setStatus('articleStatus','');}
-  function editArticle(id){const article=articles.find(item=>item.id===String(id));if(!article)return;document.getElementById('articleId').value=article.id;document.getElementById('articleTitle').value=article.title;document.getElementById('articleCategory').value=article.category;document.getElementById('articleLang').value=article.language||'ar';document.getElementById('articleBody').value=article.body;document.getElementById('articleSource').value=article.source_url||'';document.getElementById('articlePublished').checked=article.status==='published';showPage('admin');document.getElementById('articleTitle').focus();}
+  function clearArticleForm(){document.getElementById('articleForm').reset();setEditorClassification();document.getElementById('articleId').value='';setStatus('articleStatus','');}
+  function editArticle(id){const article=articles.find(item=>item.id===String(id));if(!article)return;document.getElementById('articleId').value=article.id;document.getElementById('articleTitle').value=article.title;document.getElementById('articleCategory').value=article.category;setEditorClassification(article);document.getElementById('articleLang').value=article.language||'ar';document.getElementById('articleBody').value=article.body;document.getElementById('articleSource').value=article.source_url||'';document.getElementById('articlePublished').checked=article.status==='published';showPage('admin');document.getElementById('articleTitle').focus();}
   async function updateArticleStatus(id,status){if(!isAdmin||!db)return;const {error}=await db.from('articles').update({status,updated_at:new Date().toISOString()}).eq('id',Number(id));if(error){console.error(error);setStatus('articleStatus',t('saveError'),true);return;}setStatus('articleStatus',t(status));await refreshArticles();}
   async function deleteArticle(id){if(!isAdmin||!db)return;if(!window.confirm(t('confirmDelete')))return;const {error}=await db.from('articles').delete().eq('id',Number(id));if(error){console.error(error);setStatus('articleStatus',t('saveError'),true);return;}setStatus('articleStatus',t('deleted'));await refreshArticles();}
   async function setAdminUI(user){
@@ -1862,7 +1997,7 @@ html[lang="ar"] .aq-localized-text[lang="ar"],html[lang="nl"] .aq-localized-text
   document.querySelectorAll('[data-page]').forEach(element=>element.addEventListener('click',event=>{const page=element.dataset.page;if(!page)return;event.preventDefault();showPage(page);}));
   window.addEventListener('hashchange',()=>{const page=(location.hash||'#home').slice(1);showPage(page,false);});
   function applyTranslations(){document.documentElement.lang=currentLang;document.documentElement.dir=currentLang==='ar'?'rtl':'ltr';document.body.dir=currentLang==='ar'?'rtl':'ltr';document.title=t('brand');document.getElementById('langSelect').setAttribute('aria-label',t('language'));document.querySelectorAll('[data-i18n]').forEach(element=>{const key=element.dataset.i18n;const value=translations[currentLang]?.[key];if(value!==undefined){if(element.tagName==='INPUT'||element.tagName==='TEXTAREA'){if(element.hasAttribute('placeholder'))element.placeholder=value;}else element.textContent=value;}});if(window.aqApplyExtraTranslations)window.aqApplyExtraTranslations(currentLang);updateLatestUi();renderArticles();if(isAdmin)refreshVolunteers();}
-  document.getElementById('langSelect').addEventListener('change',event=>{currentLang=translations[event.target.value]?event.target.value:'ar';applyTranslations();});
+  document.getElementById('langSelect').addEventListener('change',event=>{currentLang=translations[event.target.value]?event.target.value:'ar';syncArticleFilters();applyTranslations();});
 
   // Article submission is restricted to authenticated, active volunteers via volunteer-auth.
 
@@ -1879,7 +2014,12 @@ html[lang="ar"] .aq-localized-text[lang="ar"],html[lang="nl"] .aq-localized-text
     event.preventDefault();if(!isAdmin||currentAdminId!==ADMIN_USER_ID||!db){setStatus('articleStatus',t('loginRequired'),true);return;}
     const id=document.getElementById('articleId').value;const title=document.getElementById('articleTitle').value.trim();const content=document.getElementById('articleBody').value.trim();const category=document.getElementById('articleCategory').value;const language=document.getElementById('articleLang').value;const sourceInput=document.getElementById('articleSource').value.trim();const source_url=safeHttpUrl(sourceInput);
     if(!title||!content){setStatus('articleStatus',t('needTitleBody'),true);return;}if(source_url===null){setStatus('articleStatus',t('badUrl'),true);return;}
-    const status=document.getElementById('articlePublished').checked?'published':'pending_review';const payload={title,content,category,language,source_url:source_url||null,status,updated_at:new Date().toISOString()};
+    const status=document.getElementById('articlePublished').checked?'published':'pending_review';const selected = field => field.value === 'all' ? null : field.value;
+    const payload={title,content,category,language,source_url:source_url||null,status,updated_at:new Date().toISOString(),
+      legal_area:selected(articleEditor.category),
+      legal_branch:selected(articleEditor.branch),
+      legal_subject:selected(articleEditor.subject)
+    };
     const result=id?await db.from('articles').update(payload).eq('id',Number(id)):await db.from('articles').insert([payload]);
     if(result.error){console.error(result.error);setStatus('articleStatus',t('saveError'),true);return;}
     clearArticleForm();setStatus('articleStatus',id?t('updated'):t('saved'));await refreshArticles();
@@ -2091,36 +2231,9 @@ html[lang="ar"] .aq-localized-text[lang="ar"],html[lang="nl"] .aq-localized-text
 <script id="aq-private-law-search-script">
 (()=>{const input=document.getElementById('privateLawSearch'),root=document.getElementById('privateArticles');if(!input||!root)return;const apply=()=>{const q=input.value.trim().toLocaleLowerCase();root.querySelectorAll('.article-item').forEach(el=>{el.hidden=!!q&&!el.textContent.toLocaleLowerCase().includes(q)});};input.addEventListener('input',apply);new MutationObserver(apply).observe(root,{childList:true});})();
 </script>
-<script id="aq-articles-search-script">
-(()=>{const input=document.getElementById('allArticlesSearch'),root=document.getElementById('allArticles');if(!input||!root)return;const apply=()=>{const q=input.value.trim().toLocaleLowerCase();root.querySelectorAll('.article-item').forEach(el=>{el.hidden=!!q&&!el.textContent.toLocaleLowerCase().includes(q)});};input.addEventListener('input',apply);new MutationObserver(apply).observe(root,{childList:true});})();
-</script>
-<script id="aq-archive-filter-events">document.addEventListener('change',function(e){if(e.target?.id==='aqArchivePeriod'||e.target?.id==='aqArchiveMonth'){document.dispatchEvent(new Event('aqArchiveChanged'));}});document.addEventListener('click',function(e){if(e.target?.id==='aqArchiveReset'){document.getElementById('aqArchivePeriod').value='all';document.getElementById('aqArchiveMonth').value='';document.dispatchEvent(new Event('aqArchiveChanged'));}});</script>
-<script id="aq-archive-i18n-fix">
-/* Archive UI labels only; preserves filter values and existing event handlers. */
-(function(){
- const copy={
- ar:['تصفية المقالات حسب التاريخ','الأرشيف حسب الفترة','جميع التواريخ','آخر 7 أيام','آخر 30 يوماً','أقدم من 30 يوماً','أو اختر شهراً','اختر شهر النشر','إظهار الكل','البحث في جميع المقالات'],
- nl:['Artikelen filteren op datum','Archief per periode','Alle datums','Laatste 7 dagen','Laatste 30 dagen','Ouder dan 30 dagen','Of kies een maand','Kies publicatiemaand','Alles tonen','Zoeken in alle artikelen'],
- en:['Filter articles by date','Archive by period','All dates','Last 7 days','Last 30 days','Older than 30 days','Or choose a month','Choose publication month','Show all','Search all articles'],
- tr:['Makaleleri tarihe göre filtrele','Döneme göre arşiv','Tüm tarihler','Son 7 gün','Son 30 gün','30 günden eski','Veya bir ay seçin','Yayın ayını seçin','Tümünü göster','Tüm makalelerde ara']
- };
- function apply(){
-  const lang=document.getElementById('langSelect')?.value||'ar', v=copy[lang]||copy.ar;
-  const box=document.querySelector('.aq-archive-controls');if(!box)return;
-  box.setAttribute('aria-label',v[0]);
-  const period=document.getElementById('aqArchivePeriod');
-  const month=document.getElementById('aqArchiveMonth');
-  const first=box.querySelector('label[for="aqArchivePeriod"]');if(first)first.textContent=v[1];
-  if(period){['all','week','month','older'].forEach((key,i)=>{const opt=period.querySelector('option[value="'+key+'"]');if(opt)opt.textContent=v[i+2];});}
-  const second=box.querySelector('label[for="aqArchiveMonth"]');if(second)second.textContent=v[6];
-  if(month)month.setAttribute('aria-label',v[7]);
-  const reset=document.getElementById('aqArchiveReset');if(reset)reset.textContent=v[8];
-  const search=document.getElementById('allArticlesSearch');if(search)search.setAttribute('aria-label',v[9]);
- }
- function init(){apply();document.getElementById('langSelect')?.addEventListener('change',apply);}
- if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
-})();
-</script>
+
+
+
 
 <script id="aq-audience-localization-fix">
 (function(){
