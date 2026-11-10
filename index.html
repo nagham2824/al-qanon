@@ -1218,6 +1218,26 @@ html[lang="ar"] .aq-localized-text[lang="ar"],html[lang="nl"] .aq-localized-text
   #page-articles #aqArchiveReset {grid-column:1/-1}
 }
 </style>
+<style id="aq-language-globe-style">
+.aq-language-picker {position:relative;display:inline-flex;align-items:center;flex:0 0 auto;isolation:isolate}
+.aq-language-picker svg {position:absolute;top:50%;transform:translateY(-50%);z-index:1;pointer-events:none;fill:none;stroke:currentColor;stroke-width:1.55;stroke-linecap:round;stroke-linejoin:round}
+.aq-language-globe {inset-inline-start:9px;width:16px;height:16px;color:#eac285}
+.aq-language-chevron {inset-inline-end:7px;width:13px;height:13px;color:#f4ede0}
+.aq-reference-header .navside .aq-language-picker .lang-select {
+  appearance:none!important;min-height:40px;min-width:100px!important;max-width:140px!important;
+  padding-inline:31px 25px!important;text-align:start;cursor:pointer;
+}
+.aq-reference-header .navside .aq-language-picker .lang-select:focus-visible {outline:2px solid #edc37f!important;outline-offset:2px!important}
+@media(max-width:700px) {
+ .aq-language-globe {inset-inline-start:6px;width:14px;height:14px}
+ .aq-language-chevron {inset-inline-end:5px;width:11px;height:11px}
+ .aq-reference-header .navside .aq-language-picker .lang-select {min-width:0!important;max-width:110px!important;min-height:36px;padding-inline:24px 18px!important}
+}
+@media(max-width:360px) {
+ .aq-language-chevron {display:none}
+ .aq-reference-header .navside .aq-language-picker .lang-select {max-width:94px!important;padding-inline-end:7px!important}
+}
+</style>
 </head>
 <body>
   <a class="skip" href="#main" data-i18n="skip">تجاوز إلى المحتوى</a>
@@ -1236,9 +1256,13 @@ html[lang="ar"] .aq-localized-text[lang="ar"],html[lang="nl"] .aq-localized-text
       </nav>
       <div class="navside">
         <label class="sr-only" for="langSelect" data-i18n="language">اللغة</label>
-        <select class="lang-select" id="langSelect" aria-label="Language">
+        <span class="aq-language-picker">
+          <svg class="aq-language-globe" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.35 2.5 3.5 5.5 3.5 9s-1.15 6.5-3.5 9c-2.35-2.5-3.5-5.5-3.5-9S9.65 5.5 12 3Z"/></svg>
+          <select class="lang-select" id="langSelect" aria-label="Language">
           <option value="ar">العربية</option><option value="nl">Nederlands</option><option value="tr">Türkçe</option><option value="en">English</option>
         </select>
+          <svg class="aq-language-chevron" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="m4 6 4 4 4-4"/></svg>
+        </span>
         <div class="aq-member-menu" id="aqMemberMenu"><button class="member aq-member-trigger" type="button" id="aqMemberTrigger" aria-haspopup="true" aria-expanded="false"><span class="aq-localized-text" lang="ar">دخول الأعضاء</span><span class="aq-localized-text" lang="nl">Inloggen voor leden</span><span class="aq-localized-text" lang="en">Member login</span><span class="aq-localized-text" lang="tr">Üye girişi</span> <span aria-hidden="true">⌄</span></button><div class="aq-member-options" id="aqMemberOptions" hidden><a href="#admin" data-page="admin" id="aqAdminEntry">⚖️ &nbsp; <span class="aq-localized-text" lang="ar">دخول الإدارة</span><span class="aq-localized-text" lang="nl">Inloggen voor beheerders</span><span class="aq-localized-text" lang="en">Admin login</span><span class="aq-localized-text" lang="tr">Yönetici girişi</span></a><button type="button" id="aqVolunteerEntry">♧ &nbsp; <span class="aq-localized-text" lang="ar">دخول المتطوعين</span><span class="aq-localized-text" lang="nl">Inloggen voor vrijwilligers</span><span class="aq-localized-text" lang="en">Volunteer login</span><span class="aq-localized-text" lang="tr">Gönüllü girişi</span></button></div></div>
       </div>
     </div>
