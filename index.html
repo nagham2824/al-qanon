@@ -575,12 +575,12 @@ body>.top{display:none!important}
 @media(max-width:600px){#page-general #studentArticles{grid-template-columns:1fr}#page-general .aq-students-content{padding:35px 17px 50px}#page-general .aq-students-hero h1{font-size:2.2rem}}
 </style>
 <style id="aq-public-law-approved-style">
-#page-public-law.aq-students-page{max-width:none;padding:0;background:#f6f0e8;color:#122638;overflow:hidden}
-#page-public-law .aq-students-hero{position:relative;display:flex;min-height:300px;background:linear-gradient(110deg,#071723,#102b40);color:#fff;isolation:isolate}
-#page-public-law .aq-students-hero-copy{width:100%;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:55px clamp(24px,5vw,90px);z-index:1}
-#page-public-law .aq-students-eyebrow{color:#dfb35d;font-size:.72rem;letter-spacing:2px;direction:ltr}
-#page-public-law .aq-students-hero h1{font-family:Cairo,sans-serif;font-size:clamp(2.6rem,5vw,4.7rem);font-weight:800;line-height:1.35;margin:18px 0 20px;background:linear-gradient(105deg,#c9923e 5%,#f7d88c 38%,#fff 72%,#d6a44e 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
-#page-public-law .aq-students-hero p{font-size:clamp(1rem,1.45vw,1.2rem);line-height:2;color:#f4f0e9;max-width:850px}
+:is(#page-public-law,#page-faq).aq-students-page{max-width:none;padding:0;background:#f6f0e8;color:#122638;overflow:hidden}
+:is(#page-public-law,#page-faq) .aq-students-hero{position:relative;display:flex;min-height:300px;background:linear-gradient(110deg,#071723,#102b40);color:#fff;isolation:isolate}
+:is(#page-public-law,#page-faq) .aq-students-hero-copy{width:100%;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:55px clamp(24px,5vw,90px);z-index:1}
+:is(#page-public-law,#page-faq) .aq-students-eyebrow{color:#dfb35d;font-size:.72rem;letter-spacing:2px;direction:ltr}
+:is(#page-public-law,#page-faq) .aq-students-hero h1{font-family:Cairo,sans-serif;font-size:clamp(2.6rem,5vw,4.7rem);font-weight:800;line-height:1.35;margin:18px 0 20px;background:linear-gradient(105deg,#c9923e 5%,#f7d88c 38%,#fff 72%,#d6a44e 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+:is(#page-public-law,#page-faq) .aq-students-hero p{font-size:clamp(1rem,1.45vw,1.2rem);line-height:2;color:#f4f0e9;max-width:850px}
 #page-public-law .aq-students-content{max-width:1240px;margin:auto;padding:48px 24px 80px}
 #page-public-law .aq-students-content h2{font-size:clamp(1.5rem,2.5vw,2.1rem);margin:0 0 20px;color:#102a43;font-weight:800}
 #page-public-law .aq-students-content h2:after{content:"";display:block;width:145px;height:3px;background:linear-gradient(90deg,#f7d88c,#c9923e);margin-top:13px}
@@ -1009,6 +1009,7 @@ body > .top, .top {display:none!important;}
 #page-private-law .aq-students-hero-copy > h1,
 #page-articles .aq-students-hero-copy > h1,
 #page-about .aq-students-hero-copy > h1,
+#page-faq .aq-students-hero-copy > h1,
 #page-volunteer .aq-students-hero-copy > h1 {
   color: #e4bd62;
   background-image: linear-gradient(110deg, #d8aa45 0%, #f5e4ad 24%, #fffdf4 42%, #e4b94d 58%, #fffaf0 78%, #d8aa45 100%);
@@ -1023,6 +1024,7 @@ body > .top, .top {display:none!important;}
   #page-private-law .aq-students-hero-copy > h1,
   #page-articles .aq-students-hero-copy > h1,
   #page-about .aq-students-hero-copy > h1,
+#page-faq .aq-students-hero-copy > h1,
   #page-volunteer .aq-students-hero-copy > h1 { animation: none; }
 }
 </style>
@@ -1178,13 +1180,13 @@ html[lang="ar"] .aq-localized-text[lang="ar"],html[lang="nl"] .aq-localized-text
 .aq-article-language-options [aria-pressed="true"]{background:#c9923e;color:#102a43}
 .aq-article-translation{margin-block:12px}.aq-article-translation summary{cursor:pointer;font-weight:700}.aq-article-translation label{display:block;margin-block:8px}.aq-article-translation .btn{margin-inline-end:8px}.aq-article-translation [role="status"]:empty{display:none}</style>
 <style id="aq-unified-volunteer-hero-preview">
-:is(#page-public-law,#page-private-law,#page-student,#page-refugee,#page-resident,#page-general,#page-articles,#page-about) .aq-students-hero{position:relative;display:block;overflow:hidden;background:radial-gradient(ellipse at 14% 75%,#37698e,#0c2f50 44%,#081d2f 78%)!important;isolation:isolate}
-:is(#page-public-law,#page-private-law,#page-student,#page-refugee,#page-resident,#page-general,#page-articles,#page-about) .aq-students-hero-copy{position:relative;max-width:1220px;margin:auto;padding:60px 28px 125px;z-index:1}
-:is(#page-public-law,#page-private-law,#page-student,#page-refugee,#page-resident,#page-general,#page-articles,#page-about) .aq-students-hero h1{font-size:clamp(3rem,7vw,5.8rem);line-height:1.25}
-:is(#page-public-law,#page-private-law,#page-student,#page-refugee,#page-resident,#page-general,#page-articles,#page-about) .aq-students-hero p{max-width:min(470px,54%)}
-:is(#page-public-law,#page-private-law,#page-student,#page-refugee,#page-resident,#page-general,#page-articles,#page-about) .aq-volunteer-scene{position:absolute;inset-inline-end:4%;bottom:35px;width:min(37vw,430px);height:auto;opacity:.86;pointer-events:none}
-:is(#page-public-law,#page-private-law,#page-student,#page-refugee,#page-resident,#page-general,#page-articles,#page-about) .aq-volunteer-wave{position:absolute;inset-inline:0;bottom:-1px;width:100%;height:90px;pointer-events:none}
-@media(max-width:850px){:is(#page-public-law,#page-private-law,#page-student,#page-refugee,#page-resident,#page-general,#page-articles,#page-about) .aq-students-hero-copy{padding:40px 22px 105px}:is(#page-public-law,#page-private-law,#page-student,#page-refugee,#page-resident,#page-general,#page-articles,#page-about) .aq-students-hero p{max-width:100%}:is(#page-public-law,#page-private-law,#page-student,#page-refugee,#page-resident,#page-general,#page-articles,#page-about) .aq-volunteer-scene{opacity:.3;width:65vw;inset-inline-end:0;bottom:48px}}
+:is(#page-public-law,#page-private-law,#page-student,#page-refugee,#page-resident,#page-general,#page-articles,#page-about,#page-faq) .aq-students-hero{position:relative;display:block;overflow:hidden;background:radial-gradient(ellipse at 14% 75%,#37698e,#0c2f50 44%,#081d2f 78%)!important;isolation:isolate}
+:is(#page-public-law,#page-private-law,#page-student,#page-refugee,#page-resident,#page-general,#page-articles,#page-about,#page-faq) .aq-students-hero-copy{position:relative;max-width:1220px;margin:auto;padding:60px 28px 125px;z-index:1}
+:is(#page-public-law,#page-private-law,#page-student,#page-refugee,#page-resident,#page-general,#page-articles,#page-about,#page-faq) .aq-students-hero h1{font-size:clamp(3rem,7vw,5.8rem);line-height:1.25}
+:is(#page-public-law,#page-private-law,#page-student,#page-refugee,#page-resident,#page-general,#page-articles,#page-about,#page-faq) .aq-students-hero p{max-width:min(470px,54%)}
+:is(#page-public-law,#page-private-law,#page-student,#page-refugee,#page-resident,#page-general,#page-articles,#page-about,#page-faq) .aq-volunteer-scene{position:absolute;inset-inline-end:4%;bottom:35px;width:min(37vw,430px);height:auto;opacity:.86;pointer-events:none}
+:is(#page-public-law,#page-private-law,#page-student,#page-refugee,#page-resident,#page-general,#page-articles,#page-about,#page-faq) .aq-volunteer-wave{position:absolute;inset-inline:0;bottom:-1px;width:100%;height:90px;pointer-events:none}
+@media(max-width:850px){:is(#page-public-law,#page-private-law,#page-student,#page-refugee,#page-resident,#page-general,#page-articles,#page-about,#page-faq) .aq-students-hero-copy{padding:40px 22px 105px}:is(#page-public-law,#page-private-law,#page-student,#page-refugee,#page-resident,#page-general,#page-articles,#page-about,#page-faq) .aq-students-hero p{max-width:100%}:is(#page-public-law,#page-private-law,#page-student,#page-refugee,#page-resident,#page-general,#page-articles,#page-about,#page-faq) .aq-volunteer-scene{opacity:.3;width:65vw;inset-inline-end:0;bottom:48px}}
 </style>
 <style id="aq-mobile-hamburger-20261110">
 .aq-mobile-toggle{display:none;align-items:center;justify-content:center;flex-direction:column;gap:5px;width:44px;height:44px;border:1px solid #C9923E;border-radius:10px;background:#102A43;color:#F5F0E7;cursor:pointer;flex-shrink:0}
@@ -1238,6 +1240,25 @@ html[lang="ar"] .aq-localized-text[lang="ar"],html[lang="nl"] .aq-localized-text
  .aq-reference-header .navside .aq-language-picker .lang-select {max-width:94px!important;padding-inline-end:7px!important}
 }
 </style>
+<style id="aq-faq-style">
+@media(max-width:700px){
+  html[lang="ar"] #page-faq .aq-students-hero-copy > h1 {
+    font-size:clamp(1.55rem,8.5vw,2.85rem);
+    line-height:3.75rem;
+    white-space:nowrap;
+  }
+  html[lang="ar"] #page-faq .aq-students-hero-copy > p {min-block-size:6em}
+}
+#page-faq .aq-faq-list {width:min(calc(100% - 32px),920px);margin:18px auto 38px;display:grid;gap:10px}
+#page-faq .aq-faq-list details {border:1px solid #e4d6b7;border-radius:12px;background:#fffdf7;color:#102a43;overflow:hidden}
+#page-faq .aq-faq-list summary {display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 17px;font-weight:800;line-height:1.5;cursor:pointer;list-style:none;min-height:50px}
+#page-faq .aq-faq-list summary::-webkit-details-marker {display:none}
+#page-faq .aq-faq-list summary::after {content:'+';color:#80551d;font:600 1.3rem/1 system-ui,sans-serif;flex:none}
+#page-faq .aq-faq-list details[open] summary {background:#112e46;color:#fff4e2}
+#page-faq .aq-faq-list details[open] summary::after {content:'−';color:#edc98c}
+#page-faq .aq-faq-list summary:focus-visible {outline:2px solid #c28d42;outline-offset:-3px}
+#page-faq .aq-faq-list p {margin:0;padding:13px 17px 17px;line-height:1.75;color:#405466}
+</style>
 </head>
 <body>
   <a class="skip" href="#main" data-i18n="skip">تجاوز إلى المحتوى</a>
@@ -1252,6 +1273,7 @@ html[lang="ar"] .aq-localized-text[lang="ar"],html[lang="nl"] .aq-localized-text
         <a href="#private-law" data-page="private-law" data-i18n="navPrivate">القانون الخاص</a>
         <a href="#articles" data-page="articles" data-i18n="navArticles">المقالات</a>
         <a href="#about" data-page="about" data-i18n="navAbout">عن القانون</a>
+        <a href="#faq" data-page="faq" data-aq-faq="0">الأسئلة الشائعة</a>
         <a href="#volunteer" data-page="volunteer" data-i18n="navVolunteer">تطوع معنا</a>
       </nav>
       <div class="navside">
@@ -1391,6 +1413,24 @@ html[lang="ar"] .aq-localized-text[lang="ar"],html[lang="nl"] .aq-localized-text
 <g transform="translate(97 97) rotate(-26)"><path d="M0-69v138M-69 0H69M0-69h16v51H0M69 0v16H18V0M0 69h-16V18H0M-69 0v-16h51V0"/><circle r="5" fill="#e5bd73"/></g>
 <path d="M210 193h104m-86-9h69m-35 0V71m-59 28h118m-59-35v14m-48 21-22 54h44zm96 0-22 54h44z"/><path d="M191 153q22 26 45 0m51 0q22 26 45 0"/>
 </svg><div class="aq-students-hero-copy"><span class="aq-students-eyebrow">AL-QANUN AQ · OUR VISION</span><h1 data-i18n="navAbout">من نحن</h1><p data-i18n="aboutText">نسعى إلى جعل المعلومات القانونية الهولندية أوضح وأسهل وصولاً، مع توضيح المصادر والتمييز بين المعلومات العامة والاستشارة القانونية الفردية.</p></div><svg class="aq-volunteer-wave" viewBox="0 0 1200 100" preserveAspectRatio="none" aria-hidden="true"><path fill="#d6a758" d="M0 32C200 156 360 7 590 13S940 37 1200 17V100H0Z"/><path fill="#faf8f2" d="M0 38C200 162 360 13 590 19S940 43 1200 23V100H0Z"/></svg></div><div class="aq-students-content"><div class="aq-students-heading"><span aria-hidden="true">▤</span><h2 data-i18n="aboutHeading">عن منصة القانون AQ</h2></div><div class="aq-about-vision-grid"><article class="aq-about-vision-card"><h3>من نحن</h3><p>منصة القانون AQ مساحة معرفية لتبسيط المعلومات القانونية الهولندية وإتاحتها بصورة واضحة ومفهومة.</p></article><article class="aq-about-vision-card"><h3>رؤيتنا</h3><p>أن تصبح المعرفة القانونية أكثر وضوحاً وسهولة في الوصول لكل من يحتاج إليها.</p></article><article class="aq-about-vision-card"><h3>رسالتنا</h3><p>تقديم محتوى قانوني توعوي بلغات متعددة، مع الإحالة إلى المصادر الرسمية وتوضيح حدود المعلومات العامة.</p></article><article class="aq-about-vision-card"><h3>مبادئنا</h3><p>الدقة والحياد والشفافية والاعتماد على المصادر الرسمية وتحديث المعلومات عند الحاجة.</p></article></div><p class="aq-about-vision-disclaimer" data-i18n="disclaimer">المحتوى للتوعية العامة ولا يُعد استشارة قانونية أو بديلاً عن محامٍ مختص. تحقّق دائمًا من المصادر الرسمية وتاريخ تحديث المعلومات.</p><a class="btn secondary aq-students-back" href="#home" data-page="home" data-i18n="back">العودة للرئيسية</a></div></section>
+
+    <section class="page aq-students-page" id="page-faq">
+<div class="aq-students-hero"><svg class="aq-volunteer-scene" viewBox="0 0 390 230" aria-hidden="true" fill="none" stroke="#e5bd73" stroke-width="2.5" stroke-linejoin="round">
+<circle cx="119" cy="113" r="94" opacity=".18"/><path d="M0 204 Q95 176 187 204T390 203M0 218Q101 197 186 218T390 217" opacity=".38"/>
+<path d="M45 193h99l-15-82H68z" fill="#173b59"/><path d="M65 111l33-35 34 35M91 192v-30h16v30"/>
+<g transform="translate(97 97) rotate(-26)"><path d="M0-69v138M-69 0H69M0-69h16v51H0M69 0v16H18V0M0 69h-16V18H0M-69 0v-16h51V0"/><circle r="5" fill="#e5bd73"/></g>
+<path d="M210 193h104m-86-9h69m-35 0V71m-59 28h118m-59-35v14m-48 21-22 54h44zm96 0-22 54h44z"/><path d="M191 153q22 26 45 0m51 0q22 26 45 0"/>
+</svg><div class="aq-students-hero-copy"><span class="aq-students-eyebrow">AL-QANUN AQ · FAQ</span><h1 data-aq-faq="0">الأسئلة الشائعة</h1><p data-aq-faq="1">أجوبة سريعة تساعدك على تصفّح منصة القانون والعثور على المعلومات التي تبحث عنها.</p></div><svg class="aq-volunteer-wave" viewBox="0 0 1200 100" preserveAspectRatio="none" aria-hidden="true"><path fill="#d6a758" d="M0 32C200 156 360 7 590 13S940 37 1200 17V100H0Z"/><path fill="#faf8f2" d="M0 38C200 162 360 13 590 19S940 43 1200 23V100H0Z"/></svg></div>
+      <div class="aq-faq-list">
+        <details><summary data-aq-faq="2">كيف أجد مقالاً عن موضوع معيّن؟</summary><p data-aq-faq="3">افتح مكتبة المقالات، ثم اكتب كلمة في البحث أو اختر القسم القانوني والفرع والموضوع. اضغط «إظهار الكل» لمسح التصفية.</p></details>
+        <details><summary data-aq-faq="4">كيف أغيّر لغة الموقع؟</summary><p data-aq-faq="5">تغيير اللغة من القائمة أعلى الصفحة يبدّل لغة القوائم والأزرار في الموقع.</p></details>
+        <details><summary data-aq-faq="6">كيف أغيّر لغة نص المقال؟</summary><p data-aq-faq="7">افتح «ترجمة المحتوى» داخل المقال واختر إحدى اللغات الظاهرة. سيتغيّر عنوان المقال ونصّه، ويمكنك العودة إلى اللغة الأصلية من القائمة نفسها.</p></details>
+        <details><summary data-aq-faq="14">لماذا لا تظهر ترجمة المقال بلغتي؟</summary><p data-aq-faq="15">تظهر فقط اللغات التي نُشرت ترجمتها لهذا المقال. إذا لم تُنشر أي ترجمة بعد، يبقى النص بلغته الأصلية ويختفي خيار «ترجمة المحتوى».</p></details>
+        <details><summary data-aq-faq="8">أين أجد المصادر الرسمية؟</summary><p data-aq-faq="9">تجد روابط المصادر الرسمية في المقالات التي تشير إليها. افتح الرابط للرجوع إلى الجهة الناشرة والاطلاع على آخر تحديث.</p></details>
+        <details><summary data-aq-faq="10">كيف أقدّم طلب تطوّع؟</summary><p data-aq-faq="11">افتح «تطوع معنا» واختر «تقديم طلب تطوّع». ستجد هناك خطوات التقديم وإرفاق السيرة الذاتية.</p></details>
+        <details><summary data-aq-faq="12">هل يمكنني اقتراح مقال؟</summary><p data-aq-faq="13">يمكن للمتطوعين ذوي العضوية الفعّالة إرسال مسوداتهم من مساحة المتطوع. تراجع المشرفة المسودات قبل نشرها.</p></details>
+      </div>
+    </section>
 
     <section class="page aq-students-page" id="page-volunteer"><div class="aq-students-hero"><svg class="aq-volunteer-scene" viewBox="0 0 390 230" aria-hidden="true" fill="none" stroke="#e5bd73" stroke-width="2.5" stroke-linejoin="round">
 <circle cx="119" cy="113" r="94" opacity=".18"/><path d="M0 204 Q95 176 187 204T390 203M0 218Q101 197 186 218T390 217" opacity=".38"/>
@@ -2327,6 +2367,20 @@ html[lang="ar"] .aq-localized-text[lang="ar"],html[lang="nl"] .aq-localized-text
   mobile.addEventListener('change', () => setOpen(false));
   language.addEventListener('change', () => setOpen(false));
   setOpen(false);
+})();
+</script>
+<script id="aq-faq-copy">
+(() => {
+  const copy = {"ar": ["الأسئلة الشائعة", "أجوبة سريعة تساعدك على تصفّح منصة القانون والعثور على المعلومات التي تبحث عنها.", "كيف أجد مقالاً عن موضوع معيّن؟", "افتح مكتبة المقالات، ثم اكتب كلمة في البحث أو اختر القسم القانوني والفرع والموضوع. اضغط «إظهار الكل» لمسح التصفية.", "كيف أغيّر لغة الموقع؟", "تغيير اللغة من القائمة أعلى الصفحة يبدّل لغة القوائم والأزرار في الموقع.", "كيف أغيّر لغة نص المقال؟", "افتح «ترجمة المحتوى» داخل المقال واختر إحدى اللغات الظاهرة. سيتغيّر عنوان المقال ونصّه، ويمكنك العودة إلى اللغة الأصلية من القائمة نفسها.", "أين أجد المصادر الرسمية؟", "تجد روابط المصادر الرسمية في المقالات التي تشير إليها. افتح الرابط للرجوع إلى الجهة الناشرة والاطلاع على آخر تحديث.", "كيف أقدّم طلب تطوّع؟", "افتح «تطوع معنا» واختر «تقديم طلب تطوّع». ستجد هناك خطوات التقديم وإرفاق السيرة الذاتية.", "هل يمكنني اقتراح مقال؟", "يمكن للمتطوعين ذوي العضوية الفعّالة إرسال مسوداتهم من مساحة المتطوع. تراجع المشرفة المسودات قبل نشرها.", "لماذا لا تظهر ترجمة المقال بلغتي؟", "تظهر فقط اللغات التي نُشرت ترجمتها لهذا المقال. إذا لم تُنشر أي ترجمة بعد، يبقى النص بلغته الأصلية ويختفي خيار «ترجمة المحتوى»."], "nl": ["Veelgestelde vragen", "Korte antwoorden om je weg te vinden op Al-Qanon en de informatie te vinden die je zoekt.", "Hoe vind ik een artikel over een bepaald onderwerp?", "Open de artikelenbibliotheek. Zoek op een trefwoord of filter op rechtsgebied, rechtstak en onderwerp. Kies ‘Alles tonen’ om de filters te wissen.", "Hoe verander ik de taal van de website?", "Met het menu bovenaan verander je de taal van de menu’s en knoppen op de website.", "Hoe verander ik de taal van de artikeltekst?", "Open de vertaaloptie in het artikel en kies een beschikbare taal. De titel en tekst veranderen. Via hetzelfde menu kun je terug naar de oorspronkelijke taal.", "Waar vind ik de officiële bronnen?", "Artikelen die naar officiële bronnen verwijzen, bevatten links. Open een link om de publicerende instantie en de laatste update te bekijken.", "Hoe meld ik me aan als vrijwilliger?", "Open ‘Word vrijwilliger’ en kies ‘Aanmelden als vrijwilliger’. Daar lees je hoe je je aanmeldt en je cv toevoegt.", "Kan ik een artikel voorstellen?", "Vrijwilligers met een actief lidmaatschap kunnen via de vrijwilligersomgeving een concept indienen. De beheerder beoordeelt concepten vóór publicatie.", "Waarom is het artikel niet vertaald in mijn taal?", "Alleen talen met een gepubliceerde vertaling voor dit artikel worden getoond. Zolang er geen vertaling is gepubliceerd, blijft de oorspronkelijke tekst zichtbaar en verschijnt de vertaaloptie niet."], "en": ["Frequently asked questions", "Quick answers to help you navigate Al-Qanon and find the information you need.", "How do I find an article on a specific topic?", "Open the article library. Search by keyword or filter by area of law, legal branch and subject. Select “Show all” to clear the filters.", "How do I change the website language?", "The language menu at the top of the page changes the language of the website’s menus and buttons.", "How do I change the language of an article?", "Open “Translate article” within the article and select an available language. The title and text change, and you can return to the original language from the same menu.", "Where can I find the official sources?", "Articles that refer to official sources include links. Open a link to consult the publishing authority and check the latest update.", "How do I apply to volunteer?", "Open the volunteer page and choose the volunteer application option. It explains how to apply and attach your CV.", "Can I propose an article?", "Volunteers with active membership can submit drafts from the volunteer area. The editor reviews drafts before publication.", "Why is the article unavailable in my language?", "Only languages with a published translation for that article appear. If no translation has been published, the original text remains visible and the translation option is hidden."], "tr": ["Sıkça sorulan sorular", "Al-Qanon platformunda aradığınız bilgiyi bulmanıza yardımcı olacak kısa yanıtlar.", "Belirli bir konuda makaleyi nasıl bulabilirim?", "Makale kütüphanesini açın. Anahtar kelimeyle arayın veya hukuk alanı, hukuk dalı ve konuya göre filtreleyin. Filtreleri temizlemek için “Tümünü göster”i seçin.", "Sitenin dilini nasıl değiştirebilirim?", "Sayfanın üst kısmındaki dil menüsü, sitedeki menü ve düğmelerin dilini değiştirir.", "Makale metninin dilini nasıl değiştiririm?", "Makalenin içindeki “Makaleyi çevir” seçeneğini açın ve mevcut dillerden birini seçin. Başlık ve metin değişir. Aynı menüden özgün dile dönebilirsiniz.", "Resmî kaynakları nerede bulabilirim?", "Resmî kaynaklara atıfta bulunan makalelerde bağlantılar yer alır. Yayımlayan kuruma ve son güncellemeye ulaşmak için bağlantıyı açın.", "Gönüllü olmak için nasıl başvurabilirim?", "Gönüllülük sayfasını açın ve gönüllü başvurusu seçeneğini seçin. Başvuru ve özgeçmiş ekleme adımları burada açıklanır.", "Bir makale önerebilir miyim?", "Aktif üyeliği olan gönüllüler, gönüllü alanından taslak gönderebilir. Editör, taslakları yayımlanmadan önce inceler.", "Makalenin çevirisi neden benim dilimde görünmüyor?", "Yalnızca bu makale için çevirisi yayımlanan diller gösterilir. Hiç çeviri yayımlanmadıysa özgün metin görünür ve çeviri seçeneği gösterilmez."]};
+  const selector = document.getElementById('langSelect');
+  function translate() {
+    const text = copy[selector.value] || copy.ar;
+    document.querySelectorAll('[data-aq-faq]').forEach(element => {
+      element.textContent=text[element.dataset.aqFaq];
+    });
+  }
+  selector.addEventListener('change',translate);
+  translate();
 })();
 </script>
 </body>
