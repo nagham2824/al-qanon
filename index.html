@@ -2441,9 +2441,12 @@ footer .aq-footer-privacy[href="privacy-policy.html"] .aq-footer-link-label,foot
         const title=document.createElement('strong');title.textContent=v.display_name||t('volunteerLabel');item.append(title);
         const statusLabel=v.status==='active'?t('statusActive'):v.status==='suspended'?t('statusSuspended'):t('statusPending');
         const meta=document.createElement('p');meta.className='article-meta';meta.textContent=t('codeEndsWith')+(v.member_code_hint||'----')+' · '+statusLabel;item.append(meta);
+        const actions=document.createElement('div');
+        actions.className='actions';
+        item.append(actions);
         const button=document.createElement('button');button.type='button';button.className='btn small '+(v.status==='suspended'?'':'danger');button.textContent=v.status==='suspended'?t('reactivateMembership'):t('suspendMembership');
         button.addEventListener('click',async()=>{button.disabled=true;try{await volunteerRequest('set_volunteer_status',{volunteerId:v.id,status:v.status==='suspended'?'active':'suspended'},session?.access_token||'');await refreshVolunteers();}catch(e){setStatus('createVolunteerStatus',volunteerErrorMessage(e),true);button.disabled=false;}});
-        item.append(button);
+        actions.append(button);
         const deleteButton=document.createElement('button');deleteButton.type='button';deleteButton.className='btn small danger';deleteButton.textContent=t('deleteMembership');
         deleteButton.addEventListener('click',async()=>{
           if(!window.confirm(t('confirmDeleteMembership')))return;
@@ -2454,7 +2457,7 @@ footer .aq-footer-privacy[href="privacy-policy.html"] .aq-footer-link-label,foot
             setStatus('createVolunteerStatus',t('membershipDeleted'));
           }catch(e){setStatus('createVolunteerStatus',volunteerErrorMessage(e),true);deleteButton.disabled=false;}
         });
-        item.append(deleteButton);
+        actions.append(deleteButton);
         if(v.status==='active'){
           const resetButton=document.createElement('button');resetButton.type='button';resetButton.className='btn small secondary';resetButton.textContent=t('resetVolunteerPassword');
           resetButton.addEventListener('click',async()=>{
@@ -2469,7 +2472,7 @@ footer .aq-footer-privacy[href="privacy-policy.html"] .aq-footer-link-label,foot
               box.append(copy);item.append(box);resetButton.remove();
             }catch(e){setStatus('createVolunteerStatus',volunteerErrorMessage(e),true);resetButton.disabled=false;}
           });
-          item.append(resetButton);
+          actions.append(resetButton);
           const resetCodeButton=document.createElement('button');resetCodeButton.type='button';resetCodeButton.className='btn small secondary';resetCodeButton.textContent=t('resetVolunteerCode');
           resetCodeButton.addEventListener('click',async()=>{
             if(!window.confirm(t('confirmResetVolunteerCode')))return;
@@ -2485,7 +2488,7 @@ footer .aq-footer-privacy[href="privacy-policy.html"] .aq-footer-link-label,foot
               box.append(copy);item.append(box);resetCodeButton.remove();
             }catch(e){setStatus('createVolunteerStatus',volunteerErrorMessage(e),true);resetCodeButton.disabled=false;}
           });
-          item.append(resetCodeButton);
+          actions.append(resetCodeButton);
         }
         root.append(item);
       });
