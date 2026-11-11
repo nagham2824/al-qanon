@@ -2407,6 +2407,7 @@ footer .aq-footer-privacy[href="privacy-policy.html"] .aq-footer-link-label,foot
     document.getElementById('volunteerWorkspace').classList.toggle('hidden',!active||volunteerMustChangePassword);
     document.getElementById('volunteerPasswordChangePanel').classList.toggle('hidden',!active||!volunteerMustChangePassword);
     document.getElementById('volunteerMemberArea').classList.remove('hidden');
+    document.getElementById('volunteerApplicationPanel').classList.toggle('hidden',active);
     document.getElementById('volunteerClaimPanel').classList.toggle('hidden',active);
     document.getElementById('volunteerLoginPanel').classList.toggle('hidden',active);
     if(active&&!volunteerMustChangePassword){volunteerClaimOpen=false;document.getElementById('volunteerWelcome').textContent=t('volunteerWelcome')+(volunteerDisplayName?' '+volunteerDisplayName:'');document.getElementById('volunteerExpiry').textContent=t('volunteerExpiry');if(volunteerArticles.state==='idle')void loadVolunteerArticles();}
