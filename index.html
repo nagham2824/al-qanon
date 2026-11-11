@@ -1469,6 +1469,47 @@ footer .aq-footer-privacy[href="privacy-policy.html"] .aq-footer-link-label,foot
 #page-admin #adminArticleManager #adminArticles{margin-top:8px}
 @media(max-width:580px){#page-admin #adminArticleManager .aq-admin-article-filters{grid-template-columns:minmax(0,1fr);padding:13px}#page-admin #adminArticleManager .aq-admin-filter-reset label{display:none}}
 </style>
+<style id="aq-premium-hero-transition-20261111">
+/* AQ design: preserve original hero image, logo and moving wave; eliminate beige separation. */
+#page-home{
+  --aq-transition-paper:#f6f0e8;
+  background:var(--aq-transition-paper)!important;
+}
+#page-home > .aq-hero{
+  --heading-wave-height:clamp(32px,4vw,54px);
+  padding-block-end:0!important;
+  border-bottom:0!important;
+  overflow:hidden!important;
+}
+#page-home > .aq-hero .aq-heading-wave{
+  height:var(--heading-wave-height)!important;
+  inset-block-end:-1px!important;
+  color:var(--aq-transition-paper)!important;
+  z-index:5!important;
+}
+#page-home > .aq-hero .aq-heading-wave path:first-child{fill:#c59a58!important}
+#page-home > .aq-hero .aq-heading-wave path:last-child{fill:var(--aq-transition-paper)!important}
+#page-home > .aq-latest.aq-latest-v2.container{
+  position:relative!important;
+  z-index:7!important;
+  margin-block-start:-24px!important;
+  margin-block-end:32px!important;
+  box-shadow:0 16px 38px rgba(9,31,48,.11),0 2px 7px rgba(9,31,48,.04)!important;
+  border-color:rgba(191,147,83,.46)!important;
+}
+#page-home .aq-hero-visual{
+  background:radial-gradient(ellipse at 82% 40%,#34546a 0%,transparent 55%),linear-gradient(108deg,#061a2e,#102e46 62%,#27485e)!important;
+}
+@media(max-width:700px){
+  #page-home > .aq-hero{--heading-wave-height:clamp(28px,8vw,38px)}
+  #page-home > .aq-latest.aq-latest-v2.container{
+    margin-block-start:-12px!important;
+    margin-block-end:22px!important;
+    width:calc(100% - 26px)!important;
+  }
+}
+@media(prefers-reduced-motion:reduce){#page-home .aq-heading-wave > g{animation:none!important}}
+</style>
 </head>
 <body>
   <a class="skip" href="#main" data-i18n="skip">تجاوز إلى المحتوى</a>
