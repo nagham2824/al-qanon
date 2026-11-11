@@ -1167,7 +1167,7 @@ html[dir="rtl"] #page-volunteer .aq-volunteer-arrow {transform:scaleX(-1)}
 #page-volunteer #claimStatus.error {color:#a42227}
 #page-volunteer-login{width:min(1080px,calc(100% - 32px));margin:clamp(20px,4vw,52px) auto 64px;padding:0;color:#102a43}
 body:has(#page-volunteer-login.active){--paper:#f6f0e8}
-.aq-member-page-heading{margin:0;background:linear-gradient(145deg,#193a56,#0b2033 72%);color:#e6b66a;border-radius:19px 19px 0 0;border-block-end:3px solid #c9923e;padding:clamp(24px,5vw,47px);font-size:clamp(26px,4vw,39px);line-height:1.3}
+.aq-member-page-heading{margin:0;background:linear-gradient(145deg,#193a56,#0b2033 72%);color:var(--aq-gold);border-radius:19px 19px 0 0;border-block-end:3px solid #c9923e;padding:clamp(24px,5vw,47px);font-size:clamp(26px,4vw,39px);line-height:1.3}
 #page-volunteer-login .panel{margin:0 auto;background:#fffdf9;color:#102a43;border:1px solid #e4d8c5;border-block-start:0;border-radius:0 0 19px 19px;padding:clamp(18px,4vw,36px);box-shadow:0 14px 36px #102a4312}
 #page-volunteer-login:not(:has(#volunteerWorkspace:not(.hidden))){max-width:570px}
 #page-volunteer-login .field{background:#fffdf8;color:#102a43;border:1px solid #9daab5;min-height:46px}
@@ -1188,10 +1188,6 @@ body:has(#page-volunteer-login.active){--paper:#f6f0e8}
 #page-volunteer-login .btn:not(.secondary){
   background:var(--aq-gold) linear-gradient(135deg,#efd39c,var(--aq-gold));
   box-shadow:inset 0 1px 0 #fff5dc80,0 3px 8px #74480e20;
-}
-#page-volunteer-login #volunteerArticleForm .btn[type="submit"]{
-  background:var(--aq-gold);
-  min-height:46px;
 }
 #page-volunteer-login .btn.secondary{
   background:#fffdf9;
