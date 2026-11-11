@@ -1529,27 +1529,32 @@ html[dir="rtl"] #page-home .aq-volunteer-copy {direction:rtl}
   line-height:1.8!important;
 }
 #page-home :is(.aq-hero-copy,.aq-about-copy,.aq-volunteer-copy,.aq-latest-bottom) a.aq-home-cta {
-  --cta-ink:#fdf5e6;
-  --cta-accent:#e5c48d;
+  --cta-ink:#11263a;
+  --cta-accent:#745329;
+  --cta-border:#e9cc96;
+  --cta-surface:linear-gradient(158deg,#fcf0d4 0%,#ead0a1 46%,#d6b27a 100%);
+  --cta-inset:#fff7e366;
+  --cta-shadow:#030c1960;
+  position:relative;
   display:inline-flex!important;
   align-items:center!important;
   justify-content:space-between!important;
-  gap:18px;
+  gap:clamp(16px,2.5vw,34px);
   box-sizing:border-box;
   max-inline-size:100%;
-  min-block-size:48px!important;
-  padding:10px 16px!important;
-  border:1px solid var(--cta-accent)!important;
-  border-radius:4px!important;
-  background:#0e2539!important;
+  min-block-size:56px!important;
+  padding:12px clamp(19px,2.1vw,28px)!important;
+  border:1px solid var(--cta-border)!important;
+  border-radius:999px!important;
+  background:var(--cta-surface)!important;
   color:var(--cta-ink)!important;
-  box-shadow:none!important;
-  font-size:clamp(.875rem,1.1vw,.9375rem)!important;
-  font-weight:750!important;
+  box-shadow:inset 0 0 0 2px var(--cta-inset),0 7px 16px -8px var(--cta-shadow)!important;
+  font-size:clamp(.875rem,1.1vw,1rem)!important;
+  font-weight:800!important;
   line-height:1.5;
   text-decoration:none!important;
   text-align:start;
-  transition:background-color .18s,color .18s,border-color .18s;
+  transition:box-shadow .22s,transform .22s;
 }
 #page-home .aq-home-cta .aq-home-cta-label {
   min-inline-size:0;
@@ -1562,42 +1567,44 @@ html[dir="rtl"] #page-home .aq-volunteer-copy {direction:rtl}
   flex:none;
   inline-size:24px;
   color:var(--cta-accent);
-  font:400 21px/1 system-ui,sans-serif;
+  font:400 23px/1 system-ui,sans-serif;
   direction:ltr;
 }
 html[dir="rtl"] #page-home .aq-home-cta .aq-home-cta-arrow {transform:scaleX(-1)}
 html[dir="ltr"] #page-home .aq-home-cta {direction:ltr}
 html[dir="rtl"] #page-home .aq-home-cta {direction:rtl}
-#page-home :is(.aq-hero-copy,.aq-volunteer-copy) a.aq-home-cta:hover {background:#1a3852!important}
-#page-home .aq-volunteer-copy a.aq-home-cta {
-  --cta-ink:#102a43;
-  --cta-accent:#102a43;
-  background:#e8ce9f!important;
-  border-color:#e8ce9f!important;
-}
-#page-home .aq-volunteer-copy a.aq-home-cta:hover {background:#f2dfbb!important}
 #page-home .aq-about-copy a.aq-home-cta-secondary {
-  justify-content:flex-start!important;
-  padding-inline:0!important;
-  border:0!important;
-  border-radius:0!important;
-  background:transparent!important;
+  --cta-ink:#fff1d7;
+  --cta-accent:#ebca90;
+  --cta-border:#bd965d;
+  --cta-surface:#102a43b3;
+  --cta-inset:#e8c38b24;
 }
-#page-home .aq-about-copy .aq-home-cta-label {
-  padding-block-end:3px;
-  border-block-end:1px solid #c9a363;
-}
-#page-home .aq-about-copy a.aq-home-cta-secondary:hover {color:#f3d9ad!important}
 #page-home .aq-latest-bottom a.aq-home-cta {
-  --cta-ink:#102a43;
-  --cta-accent:#89642f;
-  background:transparent!important;
-  border-color:#ba9a68!important;
+  --cta-ink:#fff7e8;
+  --cta-accent:#e9c586;
+  --cta-border:#ae8752;
+  --cta-surface:linear-gradient(148deg,#244660,#102a43 65%,#0a2034);
+  --cta-inset:#e8c38b37;
+  --cta-shadow:#102a4360;
 }
-#page-home .aq-latest-bottom a.aq-home-cta:hover {background:#f2e8d6!important}
+@media (hover:hover) {
+  #page-home :is(.aq-hero-copy,.aq-about-copy,.aq-volunteer-copy,.aq-latest-bottom) a.aq-home-cta:hover {
+    background:var(--cta-surface)!important;
+    color:var(--cta-ink)!important;
+    border-color:var(--cta-border)!important;
+    box-shadow:inset 0 0 0 2px var(--cta-inset),0 11px 19px -8px var(--cta-shadow)!important;
+  }
+}
+@media (hover:hover) and (prefers-reduced-motion:no-preference) {
+  #page-home .aq-home-cta:hover {transform:translateY(-2px)}
+}
 #page-home .aq-home-cta:focus-visible {
-  outline:2px solid #b58a4b;
-  outline-offset:3px;
+  outline:2px solid #ac7b38;
+  outline-offset:4px;
+}
+@media(max-width:600px) {
+  #page-home .aq-latest-bottom a.aq-home-cta {align-self:flex-start}
 }
 @media(max-width:760px) {
   #page-home .aq-volunteer {
