@@ -1025,18 +1025,17 @@ body:has(#page-admin.active){--paper:#f6f0e8}
 </style>
 
 <style id="aq-admin-title-gold-white-only">
-/* Approved admin design retained; only the admin page heading receives the gold/white treatment. */
+/* Match the existing legal section title colors and animation, while keeping the smaller admin banner. */
 #page-admin .aq-admin-heading > h1.section-title > span {
   display: inline-block;
-  background-image: linear-gradient(110deg,#E7B85E 0%,#F2C66E 38%,#FFFFFF 55%,#F2C66E 72%,#E7B85E 100%) !important;
-  background-size: 220% 100% !important;
+  color: #e4bd62 !important;
+  background-image: linear-gradient(110deg,#d8aa45 0%,#f5e4ad 24%,#fffdf4 42%,#e4b94d 58%,#fffaf0 78%,#d8aa45 100%) !important;
+  background-size: 260% 100% !important;
   -webkit-background-clip: text !important;
   background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
-  color: #F2C66E !important;
-  animation: aq-admin-title-shine 9s ease-in-out infinite;
+  animation: aqInnerTitleWave 7s ease-in-out infinite;
 }
-@keyframes aq-admin-title-shine {0%,100% {background-position:100% 0} 50% {background-position:0 0}}
 @media (prefers-reduced-motion: reduce) {#page-admin .aq-admin-heading > h1.section-title > span {animation:none !important}}
 </style>
 <style>
@@ -1422,8 +1421,10 @@ footer .aq-footer-privacy[href="privacy-policy.html"] .aq-footer-link-label,foot
 .aq-heading-wave{position:absolute;inset-inline:0;inset-block-end:-1px;width:100%;height:var(--heading-wave-height);pointer-events:none;color:var(--paper);z-index:3}
 #page-home > .aq-hero{--heading-wave-height:clamp(44px,6vw,76px);padding-block-end:var(--heading-wave-height)!important}
 #page-home > .aq-hero::after{display:none!important}
-#page-admin .aq-admin-heading{--heading-wave-height:clamp(32px,5vw,52px);position:relative;overflow:hidden;margin-block-end:22px}
-#page-admin .aq-admin-heading > .notice{margin:0!important;padding-block-end:calc(var(--heading-wave-height) + 8px)!important;border-bottom:0!important;border-radius:0!important}
+#page-admin .aq-admin-heading{--heading-wave-height:clamp(32px,5vw,52px);position:relative;overflow:hidden;margin-block-end:22px;border-radius:18px 18px 0 0;background:linear-gradient(110deg,#071723 0%,#102b40 64%,#173b59 100%);box-shadow:inset 0 1px 0 #f5e4ad20;border:1px solid #d6a75844}
+#page-admin .aq-admin-heading > .section-title,
+#page-admin .aq-admin-heading > .notice{background:transparent!important}
+#page-admin .aq-admin-heading > .notice{margin:0!important;padding-block-end:calc(var(--heading-wave-height) + 8px)!important;border-bottom:0!important;border-radius:0!important;color:#f4f0e9!important}
 .aq-students-hero > .aq-volunteer-wave{pointer-events:none}
 </style>
 <style id="aq-admin-article-filters-css">
