@@ -1115,10 +1115,8 @@ html[dir="rtl"] #page-volunteer .aq-volunteer-arrow {transform:scaleX(-1)}
 #page-volunteer .aq-volunteer-activation {margin-bottom:14px}
 @media(min-width:1050px) {
   #page-volunteer .aq-volunteer-controls {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:12px;align-items:start}
-  #page-volunteer #volunteerMemberArea {display:contents}
-  #page-volunteer #volunteerMemberArea > * {grid-column:1 / -1}
   #page-volunteer #volunteerApplicationPanel {grid-column:1;grid-row:1}
-  #page-volunteer #volunteerMemberArea > .aq-volunteer-activation {grid-column:2;grid-row:1}
+  #page-volunteer .aq-volunteer-controls > .aq-volunteer-activation {grid-column:2;grid-row:1}
 }
 #page-volunteer .aq-volunteer-activation:has(#volunteerClaimPanel.hidden) {display:none}
 #page-volunteer #volunteerClaimPanel {
@@ -1167,8 +1165,20 @@ html[dir="rtl"] #page-volunteer .aq-volunteer-arrow {transform:scaleX(-1)}
 #page-volunteer #claimStatus {min-height:0;color:#245c38}
 #page-volunteer #claimStatus:empty {margin:0}
 #page-volunteer #claimStatus.error {color:#a42227}
-#page-volunteer:not(.aq-volunteer-login-requested) #volunteerLoginPanel {display:none}
-#page-volunteer.aq-volunteer-login-requested :is(#volunteerApplicationPanel,.aq-volunteer-activation) {display:none}
+#page-volunteer-login{width:min(1080px,calc(100% - 32px));margin:clamp(20px,4vw,52px) auto 64px;padding:0;color:#102a43}
+body:has(#page-volunteer-login.active){--paper:#f6f0e8}
+.aq-member-page-heading{margin:0;background:linear-gradient(145deg,#193a56,#0b2033 72%);color:#fff5e1;border-radius:19px 19px 0 0;border-block-end:3px solid #c9923e;padding:clamp(24px,5vw,47px);font-size:clamp(26px,4vw,39px);line-height:1.3}
+#page-volunteer-login .panel{margin:0 auto;background:#fffdf9;color:#102a43;border:1px solid #e4d8c5;border-block-start:0;border-radius:0 0 19px 19px;padding:clamp(18px,4vw,36px);box-shadow:0 14px 36px #102a4312}
+#page-volunteer-login:not(:has(#volunteerWorkspace:not(.hidden))){max-width:570px}
+#page-volunteer-login .field{background:#fffdf8;color:#102a43;border:1px solid #9daab5;min-height:46px}
+#page-volunteer-login label{font-weight:700;color:#233d53}
+#page-volunteer-login .help{color:#43586c}
+#page-volunteer-login .text-link{color:#805317}
+#page-volunteer-login :is(.field,.btn,.password-toggle,.text-link):focus-visible{outline:2px solid #916323;outline-offset:2px}
+#page-volunteer-login :is(#volunteerLoginForm,#volunteerPasswordChangeForm) .btn{width:100%;min-height:46px}
+#volunteerWorkspace > .actions:first-child{justify-content:space-between;margin-block-start:0}
+#volunteerWelcome{color:#102a43;margin:0;overflow-wrap:anywhere}
+@media(max-width:520px){#page-volunteer-login .form-grid{grid-template-columns:minmax(0,1fr)}}
 </style>
 <style id="aq-localized-volunteer-copy">
 .aq-localized-text {display:none}
@@ -1380,7 +1390,7 @@ footer .aq-footer-privacy[href="privacy-policy.html"] .aq-footer-link-label,foot
         </select>
           <svg class="aq-language-chevron" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="m4 6 4 4 4-4"/></svg>
         </span>
-        <div class="aq-member-menu" id="aqMemberMenu"><button class="member aq-member-trigger" type="button" id="aqMemberTrigger" aria-haspopup="true" aria-expanded="false"><span class="aq-localized-text" lang="ar">دخول الأعضاء</span><span class="aq-localized-text" lang="nl">Inloggen voor leden</span><span class="aq-localized-text" lang="en">Member login</span><span class="aq-localized-text" lang="tr">Üye girişi</span> <span aria-hidden="true">⌄</span></button><div class="aq-member-options" id="aqMemberOptions" hidden><a href="#admin" data-page="admin" id="aqAdminEntry">⚖️ &nbsp; <span class="aq-localized-text" lang="ar">دخول الإدارة</span><span class="aq-localized-text" lang="nl">Inloggen voor beheerders</span><span class="aq-localized-text" lang="en">Admin login</span><span class="aq-localized-text" lang="tr">Yönetici girişi</span></a><button type="button" id="aqVolunteerEntry">♧ &nbsp; <span class="aq-localized-text" lang="ar">دخول المتطوعين</span><span class="aq-localized-text" lang="nl">Inloggen voor vrijwilligers</span><span class="aq-localized-text" lang="en">Volunteer login</span><span class="aq-localized-text" lang="tr">Gönüllü girişi</span></button></div></div>
+        <div class="aq-member-menu" id="aqMemberMenu"><button class="member aq-member-trigger" type="button" id="aqMemberTrigger" aria-haspopup="true" aria-expanded="false"><span class="aq-localized-text" lang="ar">دخول الأعضاء</span><span class="aq-localized-text" lang="nl">Inloggen voor leden</span><span class="aq-localized-text" lang="en">Member login</span><span class="aq-localized-text" lang="tr">Üye girişi</span> <span aria-hidden="true">⌄</span></button><div class="aq-member-options" id="aqMemberOptions" hidden><a href="#admin" data-page="admin" id="aqAdminEntry">⚖️ &nbsp; <span class="aq-localized-text" lang="ar">دخول الإدارة</span><span class="aq-localized-text" lang="nl">Inloggen voor beheerders</span><span class="aq-localized-text" lang="en">Admin login</span><span class="aq-localized-text" lang="tr">Yönetici girişi</span></a><a href="#volunteer-login" data-page="volunteer-login" id="aqVolunteerEntry">♧ &nbsp; <span class="aq-localized-text" lang="ar">دخول المتطوعين</span><span class="aq-localized-text" lang="nl">Inloggen voor vrijwilligers</span><span class="aq-localized-text" lang="en">Volunteer login</span><span class="aq-localized-text" lang="tr">Gönüllü girişi</span></a></div></div>
       </div>
     </div>
   </header>  <main id="main">
@@ -1532,9 +1542,8 @@ footer .aq-footer-privacy[href="privacy-policy.html"] .aq-footer-link-label,foot
 <path d="M45 193h99l-15-82H68z" fill="#173b59"/><path d="M65 111l33-35 34 35M91 192v-30h16v30"/>
 <g transform="translate(97 97) rotate(-26)"><path d="M0-69v138M-69 0H69M0-69h16v51H0M69 0v16H18V0M0 69h-16V18H0M-69 0v-16h51V0"/><circle r="5" fill="#e5bd73"/></g>
 <path d="M210 193h104m-86-9h69m-35 0V71m-59 28h118m-59-35v14m-48 21-22 54h44zm96 0-22 54h44z"/><path d="M191 153q22 26 45 0m51 0q22 26 45 0"/>
-</svg><div class="aq-students-hero-copy"><span class="aq-students-eyebrow">AL-QANUN AQ · JOIN OUR COMMUNITY</span><h1 data-i18n="volunteerTitle">تطوع معنا</h1><p>ساهم معنا في نشر المعرفة القانونية، وانضم إلى مجتمع المتطوعين في منصة القانون AQ.</p></div><svg class="aq-volunteer-wave" viewBox="0 0 1200 100" preserveAspectRatio="none" aria-hidden="true"><path fill="#d6a758" d="M0 32C200 156 360 7 590 13S940 37 1200 17V100H0Z"/><path fill="#faf8f2" d="M0 38C200 162 360 13 590 19S940 43 1200 23V100H0Z"/></svg></div><div class="aq-students-content"><div class="aq-volunteer-controls"><div class="aq-volunteer-tabs" style="display:none"><button type="button" id="openVolunteerMembers">دخول المتطوعين</button></div>
+</svg><div class="aq-students-hero-copy"><span class="aq-students-eyebrow">AL-QANUN AQ · JOIN OUR COMMUNITY</span><h1 data-i18n="volunteerTitle">تطوع معنا</h1><p>ساهم معنا في نشر المعرفة القانونية، وانضم إلى مجتمع المتطوعين في منصة القانون AQ.</p></div><svg class="aq-volunteer-wave" viewBox="0 0 1200 100" preserveAspectRatio="none" aria-hidden="true"><path fill="#d6a758" d="M0 32C200 156 360 7 590 13S940 37 1200 17V100H0Z"/><path fill="#faf8f2" d="M0 38C200 162 360 13 590 19S940 43 1200 23V100H0Z"/></svg></div><div class="aq-students-content"><div class="aq-volunteer-controls">
       <div class="panel" id="volunteerApplicationPanel"><a class="aq-volunteer-action aq-volunteer-gold" href="mailto:info@aq-law.nl?subject=Volunteer%20Application%20%E2%80%94%20AQ%20Law"><span class="aq-volunteer-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7 8 6 8-6"/></svg></span><span><strong><span class="aq-volunteer-label" data-volunteer-lang="ar" lang="ar">تقديم طلب تطوّع</span><span class="aq-volunteer-label" data-volunteer-lang="nl" lang="nl">Aanmelden als vrijwilliger</span><span class="aq-volunteer-label" data-volunteer-lang="en" lang="en">Apply to volunteer</span><span class="aq-volunteer-label" data-volunteer-lang="tr" lang="tr">Gönüllülük başvurusu</span></strong><small><span class="aq-volunteer-label" data-volunteer-lang="ar" lang="ar">للمهتمّين بالانضمام إلى الفريق</span><span class="aq-volunteer-label" data-volunteer-lang="nl" lang="nl">Voor wie ons team wil versterken</span><span class="aq-volunteer-label" data-volunteer-lang="en" lang="en">For anyone who wants to join our team</span><span class="aq-volunteer-label" data-volunteer-lang="tr" lang="tr">Ekibimize katılmak isteyenler için</span></small></span><span class="aq-volunteer-arrow" aria-hidden="true">→</span></a></div>
-      <div id="volunteerMemberArea">
       <details class="aq-volunteer-activation"><summary class="aq-volunteer-action aq-volunteer-navy"><span class="aq-volunteer-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="15.5" cy="8.5" r="4.5"/><path d="m12 12-8 8v-4l2-2h3"/></svg></span><span><strong><span class="aq-volunteer-label" data-volunteer-lang="ar" lang="ar">تفعيل العضوية</span><span class="aq-volunteer-label" data-volunteer-lang="nl" lang="nl">Lidmaatschap activeren</span><span class="aq-volunteer-label" data-volunteer-lang="en" lang="en">Activate membership</span><span class="aq-volunteer-label" data-volunteer-lang="tr" lang="tr">Üyeliği etkinleştir</span></strong><small><span class="aq-volunteer-label" data-volunteer-lang="ar" lang="ar">للي وصلهم رمز عضوية</span><span class="aq-volunteer-label" data-volunteer-lang="nl" lang="nl">Als je een lidmaatschapscode hebt</span><span class="aq-volunteer-label" data-volunteer-lang="en" lang="en">If you received a membership code</span><span class="aq-volunteer-label" data-volunteer-lang="tr" lang="tr">Üyelik kodu aldıysan</span></small></span><span class="aq-volunteer-arrow" aria-hidden="true">→</span></summary>
       <div class="panel" id="volunteerClaimPanel">
         <div class="aq-card-symbol" aria-hidden="true">♙</div><h3 data-i18n="activateFirstTime">تفعيل العضوية لأول مرة</h3>
@@ -1547,8 +1556,13 @@ footer .aq-footer-privacy[href="privacy-policy.html"] .aq-footer-link-label,foot
         </form>
       </div>
       </details>
+      </div>
+      <aside class="aq-volunteer-side"><span aria-hidden="true">❧</span><strong><span class="aq-localized-text" lang="ar">معًا للمعرفة القانونية<br>ولمجتمع أقوى</span><span class="aq-localized-text" lang="nl">Samen voor juridische kennis<br>en een sterkere samenleving</span><span class="aq-localized-text" lang="en">Together for legal knowledge<br>and a stronger community</span><span class="aq-localized-text" lang="tr">Hukuki bilgi ve daha güçlü<br>bir toplum için birlikte</span></strong></aside>
+    </div></section>
+
+    <section class="page container" id="page-volunteer-login" aria-labelledby="volunteerMemberHeading">
+      <h1 id="volunteerMemberHeading" class="aq-member-page-heading" data-i18n="volunteerLoginTitle">دخول المتطوعين</h1>
       <div class="panel" id="volunteerLoginPanel">
-        <h3 data-i18n="volunteerLoginTitle">دخول المتطوعين</h3>
         <form id="volunteerLoginForm" class="form-grid">
           <div class="form-row full"><label for="volunteerCode" data-i18n="memberCode">رمز العضوية</label><input class="field" id="volunteerCode" required maxlength="13" autocomplete="username"></div>
           <div class="form-row full"><label for="volunteerPassword" data-i18n="volunteerPassword">كلمة المرور</label><input class="field" id="volunteerPassword" type="password" required maxlength="128" autocomplete="current-password"></div>
@@ -1567,7 +1581,7 @@ footer .aq-footer-privacy[href="privacy-policy.html"] .aq-footer-link-label,foot
         </form>
       </div>
       <div class="panel hidden" id="volunteerWorkspace">
-        <div class="actions"><h3 id="volunteerWelcome" data-i18n="volunteerWorkspaceTitle">مساحة المتطوع</h3><button class="btn secondary" id="volunteerLogout" type="button" data-i18n="logoutVolunteer">تسجيل الخروج</button></div>
+        <div class="actions"><h3 id="volunteerWelcome"><span data-i18n="volunteerWelcome">أهلاً</span> <bdi id="volunteerWelcomeName"></bdi></h3><button class="btn secondary" id="volunteerLogout" type="button" data-i18n="logoutVolunteer">تسجيل الخروج</button></div>
         <p class="help" id="volunteerExpiry" data-i18n="volunteerExpiry"></p>
         <section class="aq-volunteer-articles" aria-labelledby="volunteerArticlesHeading">
           <h3 id="volunteerArticlesHeading" data-i18n="volunteerArticlesHeading">مقالاتي</h3>
@@ -1599,10 +1613,7 @@ footer .aq-footer-privacy[href="privacy-policy.html"] .aq-footer-link-label,foot
           <div class="form-row full"><button class="btn" type="submit" data-i18n="submitReview">إرسال للمراجعة</button><p class="status" id="volunteerArticleStatus" role="status" aria-live="polite"></p></div>
         </form>
       </div>
-      </div>
-      </div>
-      <aside class="aq-volunteer-side"><span aria-hidden="true">❧</span><strong><span class="aq-localized-text" lang="ar">معًا للمعرفة القانونية<br>ولمجتمع أقوى</span><span class="aq-localized-text" lang="nl">Samen voor juridische kennis<br>en een sterkere samenleving</span><span class="aq-localized-text" lang="en">Together for legal knowledge<br>and a stronger community</span><span class="aq-localized-text" lang="tr">Hukuki bilgi ve daha güçlü<br>bir toplum için birlikte</span></strong></aside>
-    </div></section>
+    </section>
 
     <section class="page container" id="page-admin">
       <h1 class="section-title"><span data-i18n="adminTitle">لوحة الإدارة</span></h1>
@@ -1815,14 +1826,8 @@ footer .aq-footer-privacy[href="privacy-policy.html"] .aq-footer-link-label,foot
   function volunteerErrorMessage(error){const message=String(error?.message||error||'');if(/رمز العضوية|كلمة المرور|بيانات الدخول|غير نشط|غير مفعّل|غير فعّال|credentials|invalid login/i.test(message))return t('invalidCredentials');if(/انتهت جلسة|انتهاء الجلسة|session expired/i.test(message))return t('sessionExpired');if(/[\u0600-\u06FF]/.test(message))return t('genericVolunteerError');return message||t('genericVolunteerError');}
   function safeHttpUrl(value){if(!value)return '';try{const url=new URL(value);return url.protocol==='https:'?url.href:null;}catch{return null;}}
   function showPage(pageId,updateHash=true){
-    const volunteerLogin=pageId==='volunteer-login';
-    const sectionId=volunteerLogin?'volunteer':pageId;
-    if(!document.getElementById('page-'+sectionId))pageId='home';
-    const visiblePage=volunteerLogin?'volunteer':pageId;
-    const volunteerPage=document.getElementById('page-volunteer');
-    volunteerPage.classList.toggle('aq-volunteer-login-requested',volunteerLogin);
-    if(volunteerLogin)volunteerPage.querySelector('.aq-volunteer-activation').open=false;
-    document.querySelectorAll('.page').forEach(page=>page.classList.toggle('active',page.id==='page-'+visiblePage));
+    if(!document.getElementById('page-'+pageId))pageId='home';
+    document.querySelectorAll('.page').forEach(page=>page.classList.toggle('active',page.id==='page-'+pageId));
     document.querySelectorAll('nav a[data-page]').forEach(link=>{
       if(link.dataset.page===pageId)link.setAttribute('aria-current','page');
       else link.removeAttribute('aria-current');
@@ -2423,24 +2428,13 @@ footer .aq-footer-privacy[href="privacy-policy.html"] .aq-footer-link-label,foot
     const active=!!volunteerExpiresAt&&Date.now()<volunteerExpiresAt;
     document.getElementById('volunteerWorkspace').classList.toggle('hidden',!active||volunteerMustChangePassword);
     document.getElementById('volunteerPasswordChangePanel').classList.toggle('hidden',!active||!volunteerMustChangePassword);
-    document.getElementById('volunteerMemberArea').classList.remove('hidden');
-    document.getElementById('volunteerApplicationPanel').classList.toggle('hidden',active);
     document.getElementById('volunteerClaimPanel').classList.toggle('hidden',active);
     document.getElementById('volunteerLoginPanel').classList.toggle('hidden',active);
-    if(active&&!volunteerMustChangePassword){document.getElementById('volunteerWelcome').textContent=t('volunteerWelcome')+(volunteerDisplayName?' '+volunteerDisplayName:'');document.getElementById('volunteerExpiry').textContent=t('volunteerExpiry');if(volunteerArticles.state==='idle')void loadVolunteerArticles();}
+    const heading=document.getElementById('volunteerMemberHeading');
+    heading.dataset.i18n=active?'volunteerWorkspaceTitle':'volunteerLoginTitle';
+    heading.textContent=t(heading.dataset.i18n);
+    if(active&&!volunteerMustChangePassword){document.getElementById('volunteerWelcomeName').textContent=volunteerDisplayName;document.getElementById('volunteerExpiry').textContent=t('volunteerExpiry');if(volunteerArticles.state==='idle')void loadVolunteerArticles();}
   }
-  document.getElementById('openVolunteerMembers')?.addEventListener('click',event=>{
-    event.preventDefault();
-    showPage('volunteer-login');
-    showVolunteerWorkspace();
-    const panel=document.querySelector('#volunteerMemberArea > .panel:not(.hidden)');
-    panel?.scrollIntoView({behavior:'smooth',block:'start'});
-  });
-  document.querySelector('#page-volunteer .aq-volunteer-tabs a[href="#volunteerApplicationPanel"]')?.addEventListener('click',event=>{
-    event.preventDefault();showPage('volunteer');
-    document.getElementById('volunteerApplicationPanel').scrollIntoView({behavior:'smooth',block:'start'});
-  });
-  
   async function endVolunteerSession(message=''){
     volunteerExpiresAt=null;volunteerDisplayName='';volunteerMustChangePassword=false;sessionStorage.removeItem('aqVolunteerExpiresAt');sessionStorage.removeItem('aqVolunteerDisplayName');sessionStorage.removeItem('aqVolunteerMustChangePassword');
     Object.assign(volunteerArticles,{rows:[],page:0,hasMore:false,state:'idle',request:volunteerArticles.request+1});
@@ -2518,7 +2512,7 @@ footer .aq-footer-privacy[href="privacy-policy.html"] .aq-footer-link-label,foot
     event.preventDefault();const code=document.getElementById('claimCode').value.trim().toUpperCase();const password=document.getElementById('claimPassword').value;const confirm=document.getElementById('claimPasswordConfirm').value;
     if(password!==confirm){setStatus('claimStatus',t('passwordMismatch'),true);return;}
     const button=event.currentTarget.querySelector('button');button.disabled=true;setStatus('claimStatus',t('activatingMembership'));
-    try{const result=await volunteerRequest('claim',{code,password});await acceptVolunteerSession(result);setStatus('volunteerArticleStatus',t('membershipActivated'));}
+    try{const result=await volunteerRequest('claim',{code,password});await acceptVolunteerSession(result);showPage('volunteer-login');setStatus('volunteerArticleStatus',t('membershipActivated'));}
     catch(e){setStatus('claimStatus',volunteerErrorMessage(e),true);}finally{button.disabled=false;document.getElementById('claimPassword').value='';document.getElementById('claimPasswordConfirm').value='';}
   });
   document.getElementById('volunteerLoginForm').addEventListener('submit',async event=>{
@@ -2634,7 +2628,7 @@ footer .aq-footer-privacy[href="privacy-policy.html"] .aq-footer-link-label,foot
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
 </script>
-<script id="aq-member-menu-live-script">(function(){const menu=document.getElementById('aqMemberMenu'),trigger=document.getElementById('aqMemberTrigger'),options=document.getElementById('aqMemberOptions');if(!menu||!trigger||!options)return;const close=()=>{options.hidden=true;trigger.setAttribute('aria-expanded','false');};trigger.addEventListener('click',()=>{const next=options.hidden;options.hidden=!next;trigger.setAttribute('aria-expanded',String(next));});document.getElementById('aqAdminEntry')?.addEventListener('click',close);document.getElementById('aqVolunteerEntry')?.addEventListener('click',()=>{close();document.getElementById('openVolunteerMembers')?.click();});document.addEventListener('click',event=>{if(!menu.contains(event.target))close();});document.addEventListener('keydown',event=>{if(event.key==='Escape')close();});})();</script>
+<script id="aq-member-menu-live-script">(function(){const menu=document.getElementById('aqMemberMenu'),trigger=document.getElementById('aqMemberTrigger'),options=document.getElementById('aqMemberOptions');if(!menu||!trigger||!options)return;const close=()=>{options.hidden=true;trigger.setAttribute('aria-expanded','false');};trigger.addEventListener('click',()=>{const next=options.hidden;options.hidden=!next;trigger.setAttribute('aria-expanded',String(next));});document.getElementById('aqAdminEntry')?.addEventListener('click',close);document.getElementById('aqVolunteerEntry')?.addEventListener('click',close);document.addEventListener('click',event=>{if(!menu.contains(event.target))close();});document.addEventListener('keydown',event=>{if(event.key==='Escape')close();});})();</script>
 <script id="aq-mobile-hamburger-script-20261110">
 (() => {
   const toggle = document.getElementById('aqMobileToggle');
