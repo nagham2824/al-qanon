@@ -1387,6 +1387,19 @@ footer .aq-footer-privacy[href="privacy-policy.html"] .aq-footer-link-label,foot
 #page-admin .aq-admin-heading > .notice{margin:0!important;padding-block-end:calc(var(--heading-wave-height) + 8px)!important;border-bottom:0!important;border-radius:0!important}
 .aq-students-hero > .aq-volunteer-wave{pointer-events:none}
 </style>
+<style id="aq-admin-article-filters-css">
+/* Isolated styling for the admin article filters. */
+#page-admin #adminArticleManager .aq-admin-article-filters{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 14px;margin:4px 0 12px;padding:16px;background:#f8f5ee;border:1px solid #e7dccb;border-radius:12px}
+#page-admin #adminArticleManager .form-row{min-width:0}
+#page-admin #adminArticleManager .form-row>.field{width:100%;min-width:0}
+#page-admin #adminArticleManager .aq-admin-filter-reset{justify-content:end}
+#page-admin #adminArticleManager .aq-admin-filter-reset label{visibility:hidden}
+#page-admin #adminArticleManager #aqAdminArticleReset{width:100%}
+#page-admin #adminArticleManager .aq-admin-article-count{font-size:12px;font-weight:700;color:#476071;margin:8px 0 10px}
+#page-admin #adminArticleManager .field:disabled{color:#697782!important;background:#eee9e0!important;opacity:.85!important;cursor:not-allowed}
+#page-admin #adminArticleManager #adminArticles{margin-top:8px}
+@media(max-width:580px){#page-admin #adminArticleManager .aq-admin-article-filters{grid-template-columns:minmax(0,1fr);padding:13px}#page-admin #adminArticleManager .aq-admin-filter-reset label{display:none}}
+</style>
 </head>
 <body>
   <a class="skip" href="#main" data-i18n="skip">تجاوز إلى المحتوى</a>
@@ -1720,7 +1733,19 @@ footer .aq-footer-privacy[href="privacy-policy.html"] .aq-footer-link-label,foot
               <div class="form-row full"><div class="actions"><button class="btn" type="submit" data-i18n="saveArticle">حفظ المقال</button><button class="btn secondary" id="clearArticle" type="button" data-i18n="clear">مسح الحقول</button></div><p class="status" id="articleStatus" role="status" aria-live="polite"></p></div>
             </form>
           </div>
-          <div class="panel"><h3 data-i18n="manageArticles">إدارة المقالات</h3><div id="adminArticles" class="article-list"></div></div>
+          <div class="panel" id="adminArticleManager">
+            <h3 data-i18n="manageArticles">إدارة المقالات</h3>
+            <div class="aq-admin-article-filters" id="aqAdminFilterGroup" role="group" aria-label="تصفية مقالات الإدارة">
+              <div class="form-row"><label for="aqAdminArticleStatus">حالة المقال</label><select class="field" id="aqAdminArticleStatus"><option value="all">كل المقالات</option><option value="published">مقبولة ومنشورة</option><option value="rejected">مرفوضة</option><option value="pending_review">قيد المراجعة</option></select></div>
+              <div class="form-row"><label for="aqAdminLegalArea">القسم القانوني</label><select class="field" id="aqAdminLegalArea"><option value="all">كل الأقسام</option></select></div>
+              <div class="form-row"><label for="aqAdminLegalBranch">الفرع القانوني</label><select class="field" id="aqAdminLegalBranch"><option value="all">كل الأفرع</option></select></div>
+              <div class="form-row"><label for="aqAdminLegalSubject">الموضوع</label><select class="field" id="aqAdminLegalSubject"><option value="all">كل المواضيع</option></select></div>
+              <div class="form-row"><label for="aqAdminArticleSearch">بحث في المقالات</label><input class="field" type="search" id="aqAdminArticleSearch" placeholder="ابحث في العنوان أو المحتوى أو الكاتب"></div>
+              <div class="form-row aq-admin-filter-reset"><label aria-hidden="true">&nbsp;</label><button class="btn secondary" type="button" id="aqAdminArticleReset">إظهار الكل</button></div>
+            </div>
+            <p id="aqAdminArticleCount" class="aq-admin-article-count" role="status" aria-live="polite"></p>
+            <div id="adminArticles" class="article-list" aria-live="polite"></div>
+          </div>
         </div>
       </div>
     </section>
@@ -2143,6 +2168,22 @@ footer .aq-footer-privacy[href="privacy-policy.html"] .aq-footer-link-label,foot
     search: document.getElementById('allArticlesSearch'),
     reset: document.getElementById('aqArchiveReset')
   };
+
+  // Admin-only article filters use the same legal taxonomy as the public library.
+  const adminArticleFilters={
+    status:document.getElementById('aqAdminArticleStatus'),
+    category:document.getElementById('aqAdminLegalArea'),
+    branch:document.getElementById('aqAdminLegalBranch'),
+    subject:document.getElementById('aqAdminLegalSubject'),
+    search:document.getElementById('aqAdminArticleSearch'),
+    reset:document.getElementById('aqAdminArticleReset')
+  };
+  const adminFilterCopy={
+    ar:{group:'تصفية مقالات الإدارة',status:'حالة المقال',all:'كل المقالات',published:'مقبولة ومنشورة',rejected:'مرفوضة',pending_review:'قيد المراجعة',search:'بحث في المقالات',hint:'ابحث في العنوان أو المحتوى أو الكاتب',reset:'إظهار الكل',count:'عرض {shown} من أصل {total} مقال',empty:'لا توجد مقالات مطابقة للتصفية الحالية.'},
+    nl:{group:'Beheerartikelen filteren',status:'Artikelstatus',all:'Alle artikelen',published:'Goedgekeurd en gepubliceerd',rejected:'Afgewezen',pending_review:'In beoordeling',search:'Zoek artikelen',hint:'Zoek op titel, inhoud of auteur',reset:'Alles tonen',count:'{shown} van {total} artikelen weergegeven',empty:'Geen artikelen komen overeen met deze filters.'},
+    en:{group:'Filter admin articles',status:'Article status',all:'All articles',published:'Approved and published',rejected:'Declined',pending_review:'Pending review',search:'Search articles',hint:'Search title, content or author',reset:'Show all',count:'Showing {shown} of {total} articles',empty:'No articles match these filters.'},
+    tr:{group:'Yönetici makalelerini filtrele',status:'Makale durumu',all:'Tüm makaleler',published:'Onaylandı ve yayımlandı',rejected:'Reddedildi',pending_review:'İnceleniyor',search:'Makale ara',hint:'Başlık, içerik veya yazara göre ara',reset:'Tümünü göster',count:'{total} makaleden {shown} tanesi gösteriliyor',empty:'Bu filtrelerle eşleşen makale yok.'}
+  };
   const filterLabels = {
     ar:['تصفية المقالات','القسم القانوني','كل الأقسام','القانون العام','القانون الخاص','الفرع القانوني','كل الأفرع','الموضوع','كل المواضيع','إظهار الكل','ابحث في المقالات'],
     nl:['Artikelen filteren','Rechtsgebied','Alle rechtsgebieden','Publiekrecht','Privaatrecht','Rechtstak','Alle rechtstakken','Onderwerp','Alle onderwerpen','Alles tonen','Zoek in de artikelen'],
@@ -2182,6 +2223,65 @@ footer .aq-footer-privacy[href="privacy-policy.html"] .aq-footer-link-label,foot
     subject.disabled = editing && branch.value === 'all';
   }
 
+  // Populate only values actually present in the admin-visible article records.
+  // Do not advertise branches or topics from the theoretical taxonomy until an article uses them.
+  function syncAdminArticleFilters(){
+    const {status,category,branch,subject,search,reset}=adminArticleFilters;
+    const copy=adminFilterCopy[currentLang]||adminFilterCopy.ar;
+    const langIndex=['ar','nl','en','tr'].indexOf(currentLang);
+    const [,categoryLabel,allCategories,,,branchLabel,allBranches,subjectLabel,allSubjects]=filterLabels[currentLang];
+    const localizedUnclassified={
+      ar:['لا توجد أفرع مصنّفة بعد','لا توجد مواضيع مصنّفة بعد'],
+      nl:['Nog geen ingedeelde rechtstakken','Nog geen ingedeelde onderwerpen'],
+      en:['No classified legal branches yet','No classified subjects yet'],
+      tr:['Henüz sınıflandırılmış hukuk dalı yok','Henüz sınıflandırılmış konu yok']
+    }[currentLang]||['لا توجد أفرع مصنّفة بعد','لا توجد مواضيع مصنّفة بعد'];
+    const eligible=isAdmin?articles.filter(a=>status.value==='all'||a.status===status.value):[];
+    const unique=(values)=>[...new Set(values.filter(value=>typeof value==='string'&&value.trim()&&value!=='all'))];
+    const areaOf=(a)=>a.legalArea||a.category;
+    const areas=unique(eligible.map(areaOf));
+    const visibleByArea=eligible.filter(a=>category.value==='all'||areaOf(a)===category.value);
+    const branches=unique(visibleByArea.map(a=>a.legalBranch));
+    const visibleByBranch=visibleByArea.filter(a=>branch.value==='all'||a.legalBranch===branch.value);
+    const subjects=unique(visibleByBranch.map(a=>a.legalSubject));
+    function labelOfBranch(id){
+      const match=articleTaxonomy.find(([,branchId])=>branchId===id);
+      return match?.[2]?.[langIndex]||id;
+    }
+    function labelOfSubject(id){
+      for(const [,branchId,,topics] of articleTaxonomy){
+        if(branch.value!=='all'&&branchId!==branch.value)continue;
+        const match=topics.find(([topicId])=>topicId===id);
+        if(match)return match[langIndex+1]||id;
+      }
+      return id;
+    }
+    function fill(select,placeholder,values,labelOf,missing){
+      const previous=select.value;
+      select.replaceChildren(new Option(values.length?placeholder:missing,'all'),
+        ...values.map(value=>new Option(labelOf(value),value)));
+      select.value=values.includes(previous)?previous:'all';
+      select.disabled=values.length===0;
+    }
+    // Order matters: a former category/branch selection may no longer exist after status changes.
+    fill(category,allCategories,areas,id=>articleCategoryName(id),allCategories);
+    const selectedArea=category.value;
+    const scope=eligible.filter(a=>selectedArea==='all'||areaOf(a)===selectedArea);
+    const availableBranches=unique(scope.map(a=>a.legalBranch));
+    fill(branch,allBranches,availableBranches,labelOfBranch,localizedUnclassified[0]);
+    const availableSubjects=unique(scope.filter(a=>branch.value==='all'||a.legalBranch===branch.value).map(a=>a.legalSubject));
+    fill(subject,allSubjects,availableSubjects,labelOfSubject,localizedUnclassified[1]);
+    document.getElementById('aqAdminFilterGroup').setAttribute('aria-label',copy.group);
+    status.labels[0].textContent=copy.status;
+    for(const option of status.options)option.textContent=copy[option.value]||option.textContent;
+    category.labels[0].textContent=categoryLabel;
+    branch.labels[0].textContent=branchLabel;
+    subject.labels[0].textContent=subjectLabel;
+    search.labels[0].textContent=copy.search;
+    search.placeholder=copy.hint;
+    search.setAttribute('aria-label',copy.hint);
+    reset.textContent=copy.reset;
+  }
   function syncArticleFilters() {
     const [aria,,,,,,,,,resetLabel,searchLabel] = filterLabels[currentLang];
     syncLegalOptions(articleFilters);
@@ -2189,6 +2289,7 @@ footer .aq-footer-privacy[href="privacy-policy.html"] .aq-footer-link-label,foot
     document.querySelector('.aq-archive-controls').setAttribute('aria-label',aria);
     articleFilters.search.setAttribute('aria-label',searchLabel);
     articleFilters.reset.textContent=resetLabel;
+    syncAdminArticleFilters();
   }
 
   function setEditorClassification(article = {}) {
@@ -2223,6 +2324,21 @@ footer .aq-footer-privacy[href="privacy-policy.html"] .aq-footer-link-label,foot
   for (const field of [articleEditor.category,articleEditor.branch]) {
     field.addEventListener('change', () => syncLegalOptions(articleEditor,true));
   }
+
+  for(const field of [adminArticleFilters.category,adminArticleFilters.branch,adminArticleFilters.subject]){
+    field.addEventListener('change',()=>{syncAdminArticleFilters();renderAdminFilteredArticles();});
+  }
+  adminArticleFilters.status.addEventListener('change',renderAdminFilteredArticles);
+  adminArticleFilters.search.addEventListener('input',renderAdminFilteredArticles);
+  adminArticleFilters.reset.addEventListener('click',()=>{
+    adminArticleFilters.status.value='all';
+    adminArticleFilters.category.value='all';
+    adminArticleFilters.branch.value='all';
+    adminArticleFilters.subject.value='all';
+    adminArticleFilters.search.value='';
+    syncAdminArticleFilters();
+    renderAdminFilteredArticles();
+  });
   syncArticleFilters();
   function renderPublishedArticles(){
     const published=articles.filter(article=>article.status==='published');
@@ -2232,9 +2348,30 @@ footer .aq-footer-privacy[href="privacy-policy.html"] .aq-footer-link-label,foot
     renderArticleTarget('privateArticles',published.filter(article=>article.category==='private-law'),false);
     ['student','refugee','resident','general'].forEach(category=>renderArticleTarget(category+'Articles',published.filter(article=>article.category===category),false));
   }
+  function renderAdminFilteredArticles(){
+    syncAdminArticleFilters();
+    const copy=adminFilterCopy[currentLang]||adminFilterCopy.ar;
+    const {status,category,branch,subject,search}=adminArticleFilters;
+    const query=search.value.trim().toLocaleLowerCase(currentLang);
+    const matches=isAdmin?articles.filter(article=>{
+      if(status.value!=='all'&&article.status!==status.value)return false;
+      if(category.value!=='all'&&(article.legalArea||article.category)!==category.value)return false;
+      if(branch.value!=='all'&&article.legalBranch!==branch.value)return false;
+      if(subject.value!=='all'&&article.legalSubject!==subject.value)return false;
+      if(!query)return true;
+      return [article.title,article.body,article.author_name,articleCategoryName(article.category),article.rejectionReason].some(value=>String(value||'').toLocaleLowerCase(currentLang).includes(query));
+    }):[];
+    renderArticleTarget('adminArticles',matches,true);
+    const counter=document.getElementById('aqAdminArticleCount');
+    counter.textContent=isAdmin?copy.count.replace('{shown}',String(matches.length)).replace('{total}',String(articles.length)):'';
+    if(isAdmin&&articles.length&&!matches.length){
+      const empty=document.querySelector('#adminArticles .empty');
+      if(empty)empty.textContent=copy.empty;
+    }
+  }
   function renderArticles(){
     renderPublishedArticles();
-    renderArticleTarget('adminArticles',isAdmin?articles:[],true);
+    renderAdminFilteredArticles();
   }
   function clearArticleForm(){document.getElementById('articleForm').reset();setEditorClassification();document.getElementById('articleId').value='';setStatus('articleStatus','');}
   function editArticle(id){const article=articles.find(item=>item.id===String(id));if(!article)return;document.getElementById('articleId').value=article.id;document.getElementById('articleTitle').value=article.title;document.getElementById('articleCategory').value=article.category;setEditorClassification(article);document.getElementById('articleLang').value=article.language||'ar';document.getElementById('articleBody').value=article.body;document.getElementById('articleSource').value=article.source_url||'';document.getElementById('articlePublished').checked=article.status==='published';showPage('admin');document.getElementById('articleTitle').focus();}
