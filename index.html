@@ -1448,13 +1448,18 @@ footer .aq-footer-privacy[href="privacy-policy.html"] .aq-footer-link-label,foot
 </style>
 <style id="aq-title-container-waves">
 .aq-heading-wave{position:absolute;inset-inline:0;inset-block-end:-1px;width:100%;height:var(--heading-wave-height);pointer-events:none;color:var(--paper);z-index:3}
-#page-home > .aq-hero{--heading-wave-height:clamp(44px,6vw,76px);padding-block-end:var(--heading-wave-height)!important}
+#page-home > .aq-hero{--heading-wave-height:clamp(26px,3.2vw,42px);padding-block-end:0!important}
 #page-home > .aq-hero::after{display:none!important}
 #page-admin .aq-admin-heading{--heading-wave-height:clamp(32px,5vw,52px);position:relative;overflow:hidden;margin-block-end:22px;border-radius:18px 18px 0 0;background:linear-gradient(110deg,#071723 0%,#102b40 64%,#173b59 100%);box-shadow:inset 0 1px 0 #f5e4ad20;border:1px solid #d6a75844}
 #page-admin .aq-admin-heading > .section-title,
 #page-admin .aq-admin-heading > .notice{background:transparent!important}
 #page-admin .aq-admin-heading > .notice{margin:0!important;padding-block-end:calc(var(--heading-wave-height) + 8px)!important;border-bottom:0!important;border-radius:0!important;color:#f4f0e9!important}
 .aq-students-hero > .aq-volunteer-wave{pointer-events:none}
+</style>
+<style id="aq-hero-wave-gap-fix-20261111">
+/* Keep the animated gold/ivory wave over the photographic hero rather than adding a beige band. */
+#page-home > .aq-latest.aq-latest-v2.container{margin-block-start:10px!important}
+@media(max-width:600px){#page-home > .aq-latest.aq-latest-v2.container{margin-block-start:8px!important}}
 </style>
 <style id="aq-admin-article-filters-css">
 /* Isolated styling for the admin article filters. */
