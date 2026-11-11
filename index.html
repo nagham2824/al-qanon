@@ -1690,6 +1690,13 @@ html[dir="rtl"] #page-home .aq-home-cta {direction:rtl}
   outline:2px solid #edc37f!important;
   outline-offset:2px!important;
 }
+#aqMemberOptions > a {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  color:#102a43!important;
+}
+#aqMemberOptions > a > [aria-hidden="true"] {color:#946522;flex:none}
 .aq-member-trigger > [aria-hidden="true"] {
   display:inline-grid;
   place-items:center;
@@ -1791,7 +1798,7 @@ html[dir="rtl"] #page-home .aq-home-cta {direction:rtl}
         </select>
           <svg class="aq-language-chevron" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="m4 6 4 4 4-4"/></svg>
         </span>
-        <div class="aq-member-menu" id="aqMemberMenu"><button class="member aq-member-trigger" type="button" id="aqMemberTrigger" aria-haspopup="true" aria-expanded="false"><span class="aq-localized-text" lang="ar">دخول الأعضاء</span><span class="aq-localized-text" lang="nl">Inloggen voor leden</span><span class="aq-localized-text" lang="en">Member login</span><span class="aq-localized-text" lang="tr">Üye girişi</span> <span aria-hidden="true">⌄</span></button><div class="aq-member-options" id="aqMemberOptions" hidden><a href="#admin" data-page="admin" id="aqAdminEntry">⚖️ &nbsp; <span class="aq-localized-text" lang="ar">دخول الإدارة</span><span class="aq-localized-text" lang="nl">Inloggen voor beheerders</span><span class="aq-localized-text" lang="en">Admin login</span><span class="aq-localized-text" lang="tr">Yönetici girişi</span></a><a href="#volunteer-login" data-page="volunteer-login" id="aqVolunteerEntry">♧ &nbsp; <span class="aq-localized-text" lang="ar">دخول المتطوعين</span><span class="aq-localized-text" lang="nl">Inloggen voor vrijwilligers</span><span class="aq-localized-text" lang="en">Volunteer login</span><span class="aq-localized-text" lang="tr">Gönüllü girişi</span></a></div></div>
+        <div class="aq-member-menu" id="aqMemberMenu"><button class="member aq-member-trigger" type="button" id="aqMemberTrigger" aria-haspopup="true" aria-expanded="false"><span id="aqMemberButtonLabel">دخول الأعضاء</span> <span aria-hidden="true">⌄</span></button><div class="aq-member-options" id="aqMemberOptions" hidden><a href="#admin" data-page="admin" id="aqAdminEntry"><span aria-hidden="true">⚖️</span> <span id="aqMemberAdminLabel">دخول الإدارة</span></a><a href="#volunteer-login" data-page="volunteer-login" id="aqVolunteerEntry"><span aria-hidden="true">♧</span> <span id="aqMemberVolunteerLabel">دخول المتطوعين</span></a></div></div>
       </div>
     </div>
   </header>
@@ -3269,6 +3276,9 @@ html[dir="rtl"] #page-home .aq-home-cta {direction:rtl}
    quick.setAttribute('aria-label',a[0]);quick.setAttribute('title',a[0]);
    memberQuick.setAttribute('aria-label',a[2]);
    memberQuickText.textContent=shortMemberLabel[lang]||shortMemberLabel.ar;
+   ['aqMemberButtonLabel','aqMemberAdminLabel','aqMemberVolunteerLabel'].forEach((id,index)=>{
+     document.getElementById(id).textContent=a[index+2];
+   });
    ['aqMobileLanguageTitle','aqMobileMemberTitle','aqMobileAdminTitle','aqMobileVolunteerTitle'].forEach((id,i)=>{document.getElementById(id).textContent=a[i+1]});
    panel.querySelectorAll('[data-aq-mobile-language]').forEach(btn=>btn.setAttribute('aria-pressed',String(btn.dataset.aqMobileLanguage===lang)));
  }
