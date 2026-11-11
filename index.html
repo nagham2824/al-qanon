@@ -1168,6 +1168,7 @@ html[dir="rtl"] #page-volunteer .aq-volunteer-arrow {transform:scaleX(-1)}
 #page-volunteer #claimStatus:empty {margin:0}
 #page-volunteer #claimStatus.error {color:#a42227}
 #page-volunteer:not(.aq-volunteer-login-requested) #volunteerLoginPanel {display:none}
+#page-volunteer.aq-volunteer-login-requested :is(#volunteerApplicationPanel,.aq-volunteer-activation) {display:none}
 </style>
 <style id="aq-localized-volunteer-copy">
 .aq-localized-text {display:none}
@@ -1567,7 +1568,7 @@ footer .aq-footer-privacy[href="privacy-policy.html"] .aq-footer-link-label,foot
       </div>
       <div class="panel hidden" id="volunteerWorkspace">
         <div class="actions"><h3 id="volunteerWelcome" data-i18n="volunteerWorkspaceTitle">مساحة المتطوع</h3><button class="btn secondary" id="volunteerLogout" type="button" data-i18n="logoutVolunteer">تسجيل الخروج</button></div>
-        <p class="help" id="volunteerExpiry"></p>
+        <p class="help" id="volunteerExpiry" data-i18n="volunteerExpiry"></p>
         <section class="aq-volunteer-articles" aria-labelledby="volunteerArticlesHeading">
           <h3 id="volunteerArticlesHeading" data-i18n="volunteerArticlesHeading">مقالاتي</h3>
           <div class="actions">
@@ -1813,7 +1814,23 @@ footer .aq-footer-privacy[href="privacy-policy.html"] .aq-footer-link-label,foot
   }
   function volunteerErrorMessage(error){const message=String(error?.message||error||'');if(/رمز العضوية|كلمة المرور|بيانات الدخول|غير نشط|غير مفعّل|غير فعّال|credentials|invalid login/i.test(message))return t('invalidCredentials');if(/انتهت جلسة|انتهاء الجلسة|session expired/i.test(message))return t('sessionExpired');if(/[\u0600-\u06FF]/.test(message))return t('genericVolunteerError');return message||t('genericVolunteerError');}
   function safeHttpUrl(value){if(!value)return '';try{const url=new URL(value);return url.protocol==='https:'?url.href:null;}catch{return null;}}
-  function showPage(pageId,updateHash=true){if(!document.getElementById('page-'+pageId))pageId='home';document.querySelectorAll('.page').forEach(page=>page.classList.toggle('active',page.id==='page-'+pageId));document.querySelectorAll('[data-page]').forEach(link=>{if(link.tagName==='A'&&link.closest('nav')){if(link.dataset.page===pageId)link.setAttribute('aria-current','page');else link.removeAttribute('aria-current');}});if(updateHash&&location.hash!=='#'+pageId)history.replaceState(null,'','#'+pageId);window.scrollTo({top:0,behavior:'auto'});renderArticles();}
+  function showPage(pageId,updateHash=true){
+    const volunteerLogin=pageId==='volunteer-login';
+    const sectionId=volunteerLogin?'volunteer':pageId;
+    if(!document.getElementById('page-'+sectionId))pageId='home';
+    const visiblePage=volunteerLogin?'volunteer':pageId;
+    const volunteerPage=document.getElementById('page-volunteer');
+    volunteerPage.classList.toggle('aq-volunteer-login-requested',volunteerLogin);
+    if(volunteerLogin)volunteerPage.querySelector('.aq-volunteer-activation').open=false;
+    document.querySelectorAll('.page').forEach(page=>page.classList.toggle('active',page.id==='page-'+visiblePage));
+    document.querySelectorAll('nav a[data-page]').forEach(link=>{
+      if(link.dataset.page===pageId)link.setAttribute('aria-current','page');
+      else link.removeAttribute('aria-current');
+    });
+    if(updateHash&&location.hash!=='#'+pageId)history.replaceState(null,'','#'+pageId);
+    window.scrollTo({top:0,behavior:'auto'});
+    renderArticles();
+  }
   function articleFromRow(row){return{id:String(row.id),title:row.title||'',body:row.content||'',category:row.category||'general',legalArea:row.legal_area,legalBranch:row.legal_branch,legalSubject:row.legal_subject,author_name:row.author_name||'',status:row.status||'pending_review',language:row.language||'ar',source_url:row.source_url||'',rejectionReason:row.rejection_reason||'',updatedAt:row.updated_at||row.created_at||new Date().toISOString()};}
   function articleCategoryName(category){const key=({ 'public-law':'navPublic','private-law':'navPrivate',student:'studentsTitle',refugee:'refugeeTitle',resident:'residentTitle',general:'generalTitle' })[category];return key?t(key):t('generalTitle');}
   let publishedTranslations=[];
@@ -2402,7 +2419,6 @@ footer .aq-footer-privacy[href="privacy-policy.html"] .aq-footer-link-label,foot
     sessionStorage.setItem('aqVolunteerMustChangePassword',String(volunteerMustChangePassword));
     showVolunteerWorkspace();
   }
-  let volunteerClaimOpen=false, volunteerMemberAreaOpen=false;
   function showVolunteerWorkspace(){
     const active=!!volunteerExpiresAt&&Date.now()<volunteerExpiresAt;
     document.getElementById('volunteerWorkspace').classList.toggle('hidden',!active||volunteerMustChangePassword);
@@ -2411,11 +2427,14 @@ footer .aq-footer-privacy[href="privacy-policy.html"] .aq-footer-link-label,foot
     document.getElementById('volunteerApplicationPanel').classList.toggle('hidden',active);
     document.getElementById('volunteerClaimPanel').classList.toggle('hidden',active);
     document.getElementById('volunteerLoginPanel').classList.toggle('hidden',active);
-    if(active&&!volunteerMustChangePassword){volunteerClaimOpen=false;document.getElementById('volunteerWelcome').textContent=t('volunteerWelcome')+(volunteerDisplayName?' '+volunteerDisplayName:'');document.getElementById('volunteerExpiry').textContent=t('volunteerExpiry');if(volunteerArticles.state==='idle')void loadVolunteerArticles();}
+    if(active&&!volunteerMustChangePassword){document.getElementById('volunteerWelcome').textContent=t('volunteerWelcome')+(volunteerDisplayName?' '+volunteerDisplayName:'');document.getElementById('volunteerExpiry').textContent=t('volunteerExpiry');if(volunteerArticles.state==='idle')void loadVolunteerArticles();}
   }
   document.getElementById('openVolunteerMembers')?.addEventListener('click',event=>{
-    event.preventDefault();showPage('volunteer');volunteerMemberAreaOpen=true;volunteerClaimOpen=false;showVolunteerWorkspace();
-    document.getElementById('volunteerLoginPanel').scrollIntoView({behavior:'smooth',block:'start'});
+    event.preventDefault();
+    showPage('volunteer-login');
+    showVolunteerWorkspace();
+    const panel=document.querySelector('#volunteerMemberArea > .panel:not(.hidden)');
+    panel?.scrollIntoView({behavior:'smooth',block:'start'});
   });
   document.querySelector('#page-volunteer .aq-volunteer-tabs a[href="#volunteerApplicationPanel"]')?.addEventListener('click',event=>{
     event.preventDefault();showPage('volunteer');
@@ -2572,7 +2591,7 @@ footer .aq-footer-privacy[href="privacy-policy.html"] .aq-footer-link-label,foot
   
   installPasswordToggles();
   (async function init(){
-    const page=(location.hash||'#home').slice(1);showPage(document.getElementById('page-'+page)?page:'home',false);
+    const page=(location.hash||'#home').slice(1);showPage(page,false);
     if(!db){setStatus('adminLoginStatus',t('databaseError'),true);return;}
     const {data,error}=await db.auth.getSession();if(error)console.error(error);if(!adminPasswordRecoveryMode)await setAdminUI(data?.session?.user||null);const savedExpiry=Number(sessionStorage.getItem('aqVolunteerExpiresAt')||0);if(savedExpiry>Date.now()){volunteerExpiresAt=savedExpiry;volunteerDisplayName=sessionStorage.getItem('aqVolunteerDisplayName')||'';const {data:{session:volSession}}=await volunteerDb.auth.getSession();if(volSession){
         const {data:{user:volUser}}=await volunteerDb.auth.getUser();
@@ -2615,8 +2634,7 @@ footer .aq-footer-privacy[href="privacy-policy.html"] .aq-footer-link-label,foot
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
 </script>
-<script id="aq-member-menu-live-script">(function(){const menu=document.getElementById('aqMemberMenu'),trigger=document.getElementById('aqMemberTrigger'),options=document.getElementById('aqMemberOptions');if(!menu||!trigger||!options)return;const close=()=>{options.hidden=true;trigger.setAttribute('aria-expanded','false');};trigger.addEventListener('click',()=>{const next=options.hidden;options.hidden=!next;trigger.setAttribute('aria-expanded',String(next));});document.getElementById('aqAdminEntry')?.addEventListener('click',close);document.getElementById('aqVolunteerEntry')?.addEventListener('click',()=>{close();document.getElementById('openVolunteerMembers')?.click();document.getElementById('volunteerLoginPanel')?.scrollIntoView({behavior:'smooth',block:'start'});});document.addEventListener('click',event=>{if(!menu.contains(event.target))close();});document.addEventListener('keydown',event=>{if(event.key==='Escape')close();});})();</script>
-<script src="volunteer-entry.js?v=1152b03"></script>
+<script id="aq-member-menu-live-script">(function(){const menu=document.getElementById('aqMemberMenu'),trigger=document.getElementById('aqMemberTrigger'),options=document.getElementById('aqMemberOptions');if(!menu||!trigger||!options)return;const close=()=>{options.hidden=true;trigger.setAttribute('aria-expanded','false');};trigger.addEventListener('click',()=>{const next=options.hidden;options.hidden=!next;trigger.setAttribute('aria-expanded',String(next));});document.getElementById('aqAdminEntry')?.addEventListener('click',close);document.getElementById('aqVolunteerEntry')?.addEventListener('click',()=>{close();document.getElementById('openVolunteerMembers')?.click();});document.addEventListener('click',event=>{if(!menu.contains(event.target))close();});document.addEventListener('keydown',event=>{if(event.key==='Escape')close();});})();</script>
 <script id="aq-mobile-hamburger-script-20261110">
 (() => {
   const toggle = document.getElementById('aqMobileToggle');
