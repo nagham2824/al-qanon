@@ -1167,6 +1167,7 @@ html[dir="rtl"] #page-volunteer .aq-volunteer-arrow {transform:scaleX(-1)}
 #page-volunteer #claimStatus.error {color:#a42227}
 #page-volunteer-login{width:min(1080px,calc(100% - 32px));margin:clamp(20px,4vw,52px) auto 64px;padding:0;color:#102a43}
 body:has(#page-volunteer-login.active){--paper:#f6f0e8}
+.aq-member-page-heading span{display:inline-block;background:linear-gradient(105deg,#c9923e 5%,#f7d88c 38%,#fff 72%,#d6a44e 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
 .aq-member-page-heading{margin:0;background:linear-gradient(145deg,#193a56,#0b2033 72%);color:var(--aq-gold);border-radius:19px 19px 0 0;border-block-end:3px solid #c9923e;padding:clamp(24px,5vw,47px);font-size:clamp(26px,4vw,39px);line-height:1.3}
 #page-volunteer-login .panel{margin:0 auto;background:#fffdf9;color:#102a43;border:1px solid #e4d8c5;border-block-start:0;border-radius:0 0 19px 19px;padding:clamp(18px,4vw,36px);box-shadow:0 14px 36px #102a4312}
 #page-volunteer-login:not(:has(#volunteerWorkspace:not(.hidden))){max-width:570px}
@@ -1584,7 +1585,7 @@ footer .aq-footer-privacy[href="privacy-policy.html"] .aq-footer-link-label,foot
     </div></section>
 
     <section class="page container" id="page-volunteer-login" aria-labelledby="volunteerMemberHeading">
-      <h1 id="volunteerMemberHeading" class="aq-member-page-heading" data-i18n="volunteerLoginTitle">دخول المتطوعين</h1>
+      <h1 id="volunteerMemberHeading" class="aq-member-page-heading"><span id="volunteerMemberHeadingText" data-i18n="volunteerLoginTitle">دخول المتطوعين</span></h1>
       <div class="panel" id="volunteerLoginPanel">
         <form id="volunteerLoginForm" class="form-grid">
           <div class="form-row full"><label for="volunteerCode" data-i18n="memberCode">رمز العضوية</label><input class="field" id="volunteerCode" required maxlength="13" autocomplete="username"></div>
@@ -2465,7 +2466,7 @@ footer .aq-footer-privacy[href="privacy-policy.html"] .aq-footer-link-label,foot
     document.getElementById('volunteerPasswordChangePanel').classList.toggle('hidden',!active||!volunteerMustChangePassword);
     document.getElementById('volunteerClaimPanel').classList.toggle('hidden',active);
     document.getElementById('volunteerLoginPanel').classList.toggle('hidden',active);
-    const heading=document.getElementById('volunteerMemberHeading');
+    const heading=document.getElementById('volunteerMemberHeadingText');
     heading.dataset.i18n=active?'volunteerWorkspaceTitle':'volunteerLoginTitle';
     heading.textContent=t(heading.dataset.i18n);
     if(active&&!volunteerMustChangePassword){document.getElementById('volunteerWelcomeName').textContent=volunteerDisplayName;document.getElementById('volunteerExpiry').textContent=t('volunteerExpiry');if(volunteerArticles.state==='idle')void loadVolunteerArticles();}
