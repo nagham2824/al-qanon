@@ -1395,7 +1395,8 @@ footer .aq-footer-privacy[href="privacy-policy.html"] .aq-footer-link-label,foot
 #page-admin #adminArticleManager .aq-admin-filter-reset{justify-content:end}
 #page-admin #adminArticleManager .aq-admin-filter-reset label{visibility:hidden}
 #page-admin #adminArticleManager #aqAdminArticleReset{width:100%}
-#page-admin #adminArticleManager .aq-admin-article-count{font-size:12px;font-weight:700;color:#476071;margin:8px 0 10px}
+#page-admin #adminArticleManager .aq-admin-article-count{font-size:12px;font-weight:700;color:#476071;margin:8px 0 10px}
+#page-admin #adminArticleManager .field:disabled{color:#697782!important;background:#eee9e0!important;opacity:.85!important;cursor:not-allowed}
 #page-admin #adminArticleManager #adminArticles{margin-top:8px}
 @media(max-width:580px){#page-admin #adminArticleManager .aq-admin-article-filters{grid-template-columns:minmax(0,1fr);padding:13px}#page-admin #adminArticleManager .aq-admin-filter-reset label{display:none}}
 </style>
@@ -1736,7 +1737,7 @@ footer .aq-footer-privacy[href="privacy-policy.html"] .aq-footer-link-label,foot
             <h3 data-i18n="manageArticles">إدارة المقالات</h3>
             <div class="aq-admin-article-filters" id="aqAdminFilterGroup" role="group" aria-label="تصفية مقالات الإدارة">
               <div class="form-row"><label for="aqAdminArticleStatus">حالة المقال</label><select class="field" id="aqAdminArticleStatus"><option value="all">كل المقالات</option><option value="published">مقبولة ومنشورة</option><option value="rejected">مرفوضة</option><option value="pending_review">قيد المراجعة</option></select></div>
-              <div class="form-row"><label for="aqAdminLegalArea">القسم القانوني</label><select class="field" id="aqAdminLegalArea"><option value="all">كل الأقسام</option><option value="public-law">القانون العام</option><option value="private-law">القانون الخاص</option></select></div>
+              <div class="form-row"><label for="aqAdminLegalArea">القسم القانوني</label><select class="field" id="aqAdminLegalArea"><option value="all">كل الأقسام</option></select></div>
               <div class="form-row"><label for="aqAdminLegalBranch">الفرع القانوني</label><select class="field" id="aqAdminLegalBranch"><option value="all">كل الأفرع</option></select></div>
               <div class="form-row"><label for="aqAdminLegalSubject">الموضوع</label><select class="field" id="aqAdminLegalSubject"><option value="all">كل المواضيع</option></select></div>
               <div class="form-row"><label for="aqAdminArticleSearch">بحث في المقالات</label><input class="field" type="search" id="aqAdminArticleSearch" placeholder="ابحث في العنوان أو المحتوى أو الكاتب"></div>
@@ -2222,16 +2223,64 @@ footer .aq-footer-privacy[href="privacy-policy.html"] .aq-footer-link-label,foot
     subject.disabled = editing && branch.value === 'all';
   }
 
+  // Populate only values actually present in the admin-visible article records.
+  // Do not advertise branches or topics from the theoretical taxonomy until an article uses them.
   function syncAdminArticleFilters(){
-    syncLegalOptions(adminArticleFilters);
+    const {status,category,branch,subject,search,reset}=adminArticleFilters;
     const copy=adminFilterCopy[currentLang]||adminFilterCopy.ar;
+    const langIndex=['ar','nl','en','tr'].indexOf(currentLang);
+    const [,categoryLabel,allCategories,,,branchLabel,allBranches,subjectLabel,allSubjects]=filterLabels[currentLang];
+    const localizedUnclassified={
+      ar:['لا توجد أفرع مصنّفة بعد','لا توجد مواضيع مصنّفة بعد'],
+      nl:['Nog geen ingedeelde rechtstakken','Nog geen ingedeelde onderwerpen'],
+      en:['No classified legal branches yet','No classified subjects yet'],
+      tr:['Henüz sınıflandırılmış hukuk dalı yok','Henüz sınıflandırılmış konu yok']
+    }[currentLang]||['لا توجد أفرع مصنّفة بعد','لا توجد مواضيع مصنّفة بعد'];
+    const eligible=isAdmin?articles.filter(a=>status.value==='all'||a.status===status.value):[];
+    const unique=(values)=>[...new Set(values.filter(value=>typeof value==='string'&&value.trim()&&value!=='all'))];
+    const areaOf=(a)=>a.legalArea||a.category;
+    const areas=unique(eligible.map(areaOf));
+    const visibleByArea=eligible.filter(a=>category.value==='all'||areaOf(a)===category.value);
+    const branches=unique(visibleByArea.map(a=>a.legalBranch));
+    const visibleByBranch=visibleByArea.filter(a=>branch.value==='all'||a.legalBranch===branch.value);
+    const subjects=unique(visibleByBranch.map(a=>a.legalSubject));
+    function labelOfBranch(id){
+      const match=articleTaxonomy.find(([,branchId])=>branchId===id);
+      return match?.[2]?.[langIndex]||id;
+    }
+    function labelOfSubject(id){
+      for(const [,branchId,,topics] of articleTaxonomy){
+        if(branch.value!=='all'&&branchId!==branch.value)continue;
+        const match=topics.find(([topicId])=>topicId===id);
+        if(match)return match[langIndex+1]||id;
+      }
+      return id;
+    }
+    function fill(select,placeholder,values,labelOf,missing){
+      const previous=select.value;
+      select.replaceChildren(new Option(values.length?placeholder:missing,'all'),
+        ...values.map(value=>new Option(labelOf(value),value)));
+      select.value=values.includes(previous)?previous:'all';
+      select.disabled=values.length===0;
+    }
+    // Order matters: a former category/branch selection may no longer exist after status changes.
+    fill(category,allCategories,areas,id=>articleCategoryName(id),allCategories);
+    const selectedArea=category.value;
+    const scope=eligible.filter(a=>selectedArea==='all'||areaOf(a)===selectedArea);
+    const availableBranches=unique(scope.map(a=>a.legalBranch));
+    fill(branch,allBranches,availableBranches,labelOfBranch,localizedUnclassified[0]);
+    const availableSubjects=unique(scope.filter(a=>branch.value==='all'||a.legalBranch===branch.value).map(a=>a.legalSubject));
+    fill(subject,allSubjects,availableSubjects,labelOfSubject,localizedUnclassified[1]);
     document.getElementById('aqAdminFilterGroup').setAttribute('aria-label',copy.group);
-    adminArticleFilters.status.labels[0].textContent=copy.status;
-    for(const option of adminArticleFilters.status.options)option.textContent=copy[option.value]||option.textContent;
-    adminArticleFilters.search.labels[0].textContent=copy.search;
-    adminArticleFilters.search.placeholder=copy.hint;
-    adminArticleFilters.search.setAttribute('aria-label',copy.hint);
-    adminArticleFilters.reset.textContent=copy.reset;
+    status.labels[0].textContent=copy.status;
+    for(const option of status.options)option.textContent=copy[option.value]||option.textContent;
+    category.labels[0].textContent=categoryLabel;
+    branch.labels[0].textContent=branchLabel;
+    subject.labels[0].textContent=subjectLabel;
+    search.labels[0].textContent=copy.search;
+    search.placeholder=copy.hint;
+    search.setAttribute('aria-label',copy.hint);
+    reset.textContent=copy.reset;
   }
   function syncArticleFilters() {
     const [aria,,,,,,,,,resetLabel,searchLabel] = filterLabels[currentLang];
@@ -2300,6 +2349,7 @@ footer .aq-footer-privacy[href="privacy-policy.html"] .aq-footer-link-label,foot
     ['student','refugee','resident','general'].forEach(category=>renderArticleTarget(category+'Articles',published.filter(article=>article.category===category),false));
   }
   function renderAdminFilteredArticles(){
+    syncAdminArticleFilters();
     const copy=adminFilterCopy[currentLang]||adminFilterCopy.ar;
     const {status,category,branch,subject,search}=adminArticleFilters;
     const query=search.value.trim().toLocaleLowerCase(currentLang);
