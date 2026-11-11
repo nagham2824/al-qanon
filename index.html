@@ -1669,6 +1669,59 @@ html[dir="rtl"] #page-home .aq-home-cta {direction:rtl}
 .aq-storage-actions :focus-visible,#aqStorageOpen:focus-visible{outline:2px solid #f6d399;outline-offset:3px}
 #aqStorageOpen{justify-self:start}
 </style>
+<style id="aq-member-button-style">
+.aq-reference-header .navside .member.aq-member-trigger {
+  min-height:40px;
+  justify-content:center;
+  padding:7px 13px!important;
+  gap:9px;
+  border:1px solid #ba9256!important;
+  border-radius:18px!important;
+  background:linear-gradient(145deg,#183b57,#0b253a)!important;
+  color:#f5f0e7!important;
+  box-shadow:inset 0 1px 0 #fff4db18;
+  font-weight:800!important;
+}
+.aq-reference-header .navside .member.aq-member-trigger:is(:hover,[aria-expanded="true"]) {
+  background:#214563!important;
+  border-color:#edc37f!important;
+}
+.aq-reference-header .navside .member.aq-member-trigger:focus-visible {
+  outline:2px solid #edc37f!important;
+  outline-offset:2px!important;
+}
+.aq-member-trigger > [aria-hidden="true"] {
+  display:inline-grid;
+  place-items:center;
+  flex:0 0 11px;
+  font-size:0;
+  color:#edc37f;
+}
+.aq-member-trigger > [aria-hidden="true"]::before {
+  content:"";
+  width:6px;
+  height:6px;
+  border:solid currentColor;
+  border-width:0 1.5px 1.5px 0;
+  transform:translateY(-1px) rotate(45deg);
+}
+.aq-member-trigger[aria-expanded="true"] > [aria-hidden="true"]::before {
+  transform:translateY(2px) rotate(225deg);
+}
+@media(max-width:900px) {
+  .aq-reference-header .aq-mobile-member-panel {
+    background:linear-gradient(145deg,#183b57,#0b253a);
+    border-color:#ba9256;
+    box-shadow:inset 0 1px 0 #fff4db18;
+  }
+  .aq-reference-header .aq-mobile-member-panel > summary {color:#f5f0e7}
+  .aq-reference-header .aq-mobile-member-panel > summary:is(:hover,:focus-visible),
+  .aq-reference-header .aq-mobile-member-panel[open] > summary {background:#214563}
+  .aq-reference-header .aq-mobile-member-title svg,
+  .aq-reference-header .aq-mobile-member-chevron {color:#edc37f}
+  .aq-reference-header .aq-mobile-member-panel > summary:focus-visible {outline-offset:-4px}
+}
+</style>
 </head>
 <body>
   <a class="skip" href="#main" data-i18n="skip">تجاوز إلى المحتوى</a>
