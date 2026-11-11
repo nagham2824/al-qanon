@@ -1722,6 +1722,23 @@ html[dir="rtl"] #page-home .aq-home-cta {direction:rtl}
   .aq-reference-header .aq-mobile-member-panel > summary:focus-visible {outline-offset:-4px}
 }
 </style>
+<style id="aq-mobile-member-shortcut-style">
+.aq-reference-header .aq-mobile-member-shortcut {display:none}
+@media(max-width:900px) {
+  .aq-reference-header .aq-mobile-member-shortcut {
+    display:inline-flex;order:2;flex:none;align-items:center;justify-content:center;gap:5px;
+    min-height:44px;padding:0 8px;border:1px solid #ba9256;border-radius:13px;
+    color:#f5f0e7;background:linear-gradient(145deg,#183b57,#0b253a);
+    font:inherit;font-size:11px;font-weight:800;cursor:pointer;white-space:nowrap;
+  }
+  .aq-reference-header .aq-mobile-member-shortcut[aria-expanded="true"] {background:#214563}
+  .aq-reference-header .aq-mobile-member-shortcut:focus-visible {outline:2px solid #edc37f;outline-offset:2px}
+  .aq-mobile-member-shortcut svg {width:15px;height:15px;flex:none;color:#edc37f}
+}
+@media(max-width:380px) {
+  .aq-reference-header .wrap.nav > .brand img {max-width:104px!important}
+}
+</style>
 </head>
 <body>
   <a class="skip" href="#main" data-i18n="skip">تجاوز إلى المحتوى</a>
@@ -1741,6 +1758,10 @@ html[dir="rtl"] #page-home .aq-home-cta {direction:rtl}
           </div>
         </div>
       </div>
+      <button type="button" class="aq-mobile-member-shortcut" id="aqMobileMemberQuick" aria-label="دخول الأعضاء" aria-controls="aqMainNav" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 21v-2.3a6.7 6.7 0 0 1 13.4 0V21"/></svg>
+        <span id="aqMobileMemberQuickText">الأعضاء</span>
+      </button>
       <button type="button" class="aq-mobile-toggle" id="aqMobileToggle" aria-label="فتح قائمة التنقل" aria-controls="aqMainNav" aria-expanded="false"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></button>
       <nav class="navlinks" id="aqMainNav" aria-label="التنقل الرئيسي">
         <a href="#home" data-page="home" data-i18n="navHome">الرئيسية</a>
@@ -3170,6 +3191,7 @@ html[dir="rtl"] #page-home .aq-home-cta {direction:rtl}
 (() => {
   const toggle = document.getElementById('aqMobileToggle');
   const menu = document.getElementById('aqMainNav');
+  const memberQuick = document.getElementById('aqMobileMemberQuick');
   const language = document.getElementById('langSelect');
   const mobile = window.matchMedia('(max-width: 900px)');
   const labels = {
@@ -3184,6 +3206,7 @@ html[dir="rtl"] #page-home .aq-home-cta {direction:rtl}
     menu.classList.toggle('aq-mobile-open', open);
     menu.setAttribute('aria-label', navLabel);
     toggle.setAttribute('aria-expanded', String(open));
+    memberQuick.setAttribute('aria-expanded', String(open));
     toggle.setAttribute('aria-label', open ? closeLabel : openLabel);
   };
 
@@ -3201,7 +3224,7 @@ html[dir="rtl"] #page-home .aq-home-cta {direction:rtl}
     }
   });
   document.addEventListener('click', (event) => {
-    if (isOpen() && !menu.contains(event.target) && !toggle.contains(event.target)) {
+    if (isOpen() && !menu.contains(event.target) && !toggle.contains(event.target) && !memberQuick.contains(event.target)) {
       setOpen(false);
     }
   });
@@ -3231,6 +3254,9 @@ html[dir="rtl"] #page-home .aq-home-cta {direction:rtl}
  const panel=document.getElementById('aqMobileLanguages');
  const select=document.getElementById('langSelect');
  const member=document.getElementById('aqMobileMemberPanel');
+ const memberQuick=document.getElementById('aqMobileMemberQuick');
+ const memberQuickText=document.getElementById('aqMobileMemberQuickText');
+ const shortMemberLabel={ar:'الأعضاء',nl:'Inloggen',en:'Log in',tr:'Giriş'};
  if(!quick||!toggle||!panel||!select||!member)return;
  const localized={
   ar:['اختيار اللغة','لغة الموقع','دخول الأعضاء','دخول الإدارة','دخول المتطوعين'],
@@ -3241,6 +3267,8 @@ html[dir="rtl"] #page-home .aq-home-cta {direction:rtl}
  function sync(){
    const lang=select.value||'ar', a=localized[lang]||localized.ar;
    quick.setAttribute('aria-label',a[0]);quick.setAttribute('title',a[0]);
+   memberQuick.setAttribute('aria-label',a[2]);
+   memberQuickText.textContent=shortMemberLabel[lang]||shortMemberLabel.ar;
    ['aqMobileLanguageTitle','aqMobileMemberTitle','aqMobileAdminTitle','aqMobileVolunteerTitle'].forEach((id,i)=>{document.getElementById(id).textContent=a[i+1]});
    panel.querySelectorAll('[data-aq-mobile-language]').forEach(btn=>btn.setAttribute('aria-pressed',String(btn.dataset.aqMobileLanguage===lang)));
  }
@@ -3249,6 +3277,19 @@ html[dir="rtl"] #page-home .aq-home-cta {direction:rtl}
    quick.setAttribute('aria-expanded',String(open));
  }
  quick.addEventListener('click',()=>setLanguagePickerOpen(panel.hidden));
+ memberQuick.addEventListener('click',()=>{
+   const open=toggle.getAttribute('aria-expanded')==='true';
+   if(open && member.open){
+     toggle.click();
+     member.open=false;
+     return;
+   }
+   setLanguagePickerOpen(false);
+   if(!open)toggle.click();
+   member.open=true;
+   member.scrollIntoView({block:'nearest'});
+   member.querySelector('summary').focus({preventScroll:true});
+ });
  document.addEventListener('click',event=>{
    if(!panel.hidden && !quick.contains(event.target) && !panel.contains(event.target)){
      setLanguagePickerOpen(false);
