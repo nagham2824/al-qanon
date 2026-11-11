@@ -971,14 +971,53 @@ body:has(#page-admin.active){--paper:#f6f0e8}
 #page-admin .actions{gap:10px!important;align-items:center}
 #page-admin #adminWorkspace{display:grid;gap:20px}
 #page-admin #adminWorkspace.hidden{display:none!important}
-#page-admin #volunteerManagementPanel{margin:0!important;order:3}
-#page-admin #adminWorkspace>.actions{order:4;justify-content:flex-end;padding:0 5px}
+#page-admin #volunteerManagementPanel{margin:0!important;order:1}
+#page-admin #adminWorkspace>.actions{order:3;justify-content:flex-end;padding:0 5px}
 #page-admin #adminWorkspace>.two-col{order:2;display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:20px}
 #page-admin #adminArticles .article-item,#page-admin #volunteerAdminList .article-item{background:#f8f5ee!important;border:1px solid #e7dccb!important;border-radius:11px!important;padding:17px!important;color:#172e40!important}
 #page-admin #adminArticles .article-item h3,#page-admin #volunteerAdminList .article-item h3{border:0!important;padding:0!important;margin:0 0 8px!important;font-size:16px!important}
 #page-admin #adminLoginPanel{max-width:720px;margin:0 auto 20px}
 #page-admin #adminLoginPanel .text-link{color:#986c2f!important}
 #page-admin #newVolunteerCodeBox{background:#f7f0e2!important;color:#142d40!important;border:1px solid #c9923e!important;border-radius:10px!important}
+ /* Unified AQ button hierarchy only in approved admin membership and article editor panels. */
+ #page-admin #createVolunteerForm button[type="submit"],
+ #page-admin #articleForm button[type="submit"]{
+   background:linear-gradient(118deg,#d4a353 0%,#f2cd80 52%,#dcad58 100%)!important;
+   color:#102a43!important;
+   border:1px solid #b88637!important;
+   border-radius:9px!important;
+   box-shadow:0 3px 12px #82612620!important;
+   font-weight:850!important;
+ }
+ #page-admin #volunteerAdminList .aq-member-action--suspend{
+   background:#294a60!important;
+   color:#fffaf0!important;
+   border:1px solid #294a60!important;
+ }
+ #page-admin #volunteerAdminList .aq-member-action--reactivate{
+   background:#173d58!important;
+   color:#fffaf0!important;
+   border:1px solid #bb9451!important;
+ }
+ #page-admin #volunteerAdminList .aq-member-action--delete{
+   background:#893e50!important;
+   color:#fffaf5!important;
+   border:1px solid #893e50!important;
+ }
+ #page-admin #volunteerAdminList .btn.secondary{
+   background:#fffdf9!important;
+   border:1px solid #bca477!important;
+   color:#173d58!important;
+ }
+ #page-admin #createVolunteerForm button[type="submit"]:hover,
+ #page-admin #articleForm button[type="submit"]:hover,
+ #page-admin #volunteerAdminList .aq-member-action:hover{filter:brightness(1.06)!important;transform:translateY(-1px)}
+ #page-admin #createVolunteerForm button[type="submit"]:focus-visible,
+ #page-admin #articleForm button[type="submit"]:focus-visible,
+ #page-admin #volunteerAdminList .aq-member-action:focus-visible{outline:3px solid #d6a758!important;outline-offset:3px}
+ #page-admin #volunteerAdminList .aq-member-action:disabled{opacity:.58!important;cursor:wait}
+ #page-admin #volunteerAdminList>.article-item .actions{flex-wrap:wrap}
+ @media(prefers-reduced-motion:reduce){#page-admin #createVolunteerForm button[type="submit"]:hover,#page-admin #articleForm button[type="submit"]:hover,#page-admin #volunteerAdminList .aq-member-action:hover{transform:none}}
 #page-admin .status{overflow-wrap:anywhere}
 #page-admin textarea.field{min-height:190px!important}
 @media(max-width:800px){#page-admin #adminWorkspace>.two-col{grid-template-columns:1fr}#page-admin .aq-admin-heading > .section-title{padding:22px 20px 7px}#page-admin .aq-admin-heading > .notice{padding:0 20px 22px!important}#page-admin{width:calc(100% - 24px);margin:18px auto 48px}}
@@ -986,18 +1025,17 @@ body:has(#page-admin.active){--paper:#f6f0e8}
 </style>
 
 <style id="aq-admin-title-gold-white-only">
-/* Approved admin design retained; only the admin page heading receives the gold/white treatment. */
+/* Match the existing legal section title colors and animation, while keeping the smaller admin banner. */
 #page-admin .aq-admin-heading > h1.section-title > span {
   display: inline-block;
-  background-image: linear-gradient(110deg,#E7B85E 0%,#F2C66E 38%,#FFFFFF 55%,#F2C66E 72%,#E7B85E 100%) !important;
-  background-size: 220% 100% !important;
+  color: #e4bd62 !important;
+  background-image: linear-gradient(110deg,#d8aa45 0%,#f5e4ad 24%,#fffdf4 42%,#e4b94d 58%,#fffaf0 78%,#d8aa45 100%) !important;
+  background-size: 260% 100% !important;
   -webkit-background-clip: text !important;
   background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
-  color: #F2C66E !important;
-  animation: aq-admin-title-shine 9s ease-in-out infinite;
+  animation: aqInnerTitleWave 7s ease-in-out infinite;
 }
-@keyframes aq-admin-title-shine {0%,100% {background-position:100% 0} 50% {background-position:0 0}}
 @media (prefers-reduced-motion: reduce) {#page-admin .aq-admin-heading > h1.section-title > span {animation:none !important}}
 </style>
 <style>
@@ -1383,8 +1421,10 @@ footer .aq-footer-privacy[href="privacy-policy.html"] .aq-footer-link-label,foot
 .aq-heading-wave{position:absolute;inset-inline:0;inset-block-end:-1px;width:100%;height:var(--heading-wave-height);pointer-events:none;color:var(--paper);z-index:3}
 #page-home > .aq-hero{--heading-wave-height:clamp(44px,6vw,76px);padding-block-end:var(--heading-wave-height)!important}
 #page-home > .aq-hero::after{display:none!important}
-#page-admin .aq-admin-heading{--heading-wave-height:clamp(32px,5vw,52px);position:relative;overflow:hidden;margin-block-end:22px}
-#page-admin .aq-admin-heading > .notice{margin:0!important;padding-block-end:calc(var(--heading-wave-height) + 8px)!important;border-bottom:0!important;border-radius:0!important}
+#page-admin .aq-admin-heading{--heading-wave-height:clamp(32px,5vw,52px);position:relative;overflow:hidden;margin-block-end:22px;border-radius:18px 18px 0 0;background:linear-gradient(110deg,#071723 0%,#102b40 64%,#173b59 100%);box-shadow:inset 0 1px 0 #f5e4ad20;border:1px solid #d6a75844}
+#page-admin .aq-admin-heading > .section-title,
+#page-admin .aq-admin-heading > .notice{background:transparent!important}
+#page-admin .aq-admin-heading > .notice{margin:0!important;padding-block-end:calc(var(--heading-wave-height) + 8px)!important;border-bottom:0!important;border-radius:0!important;color:#f4f0e9!important}
 .aq-students-hero > .aq-volunteer-wave{pointer-events:none}
 </style>
 <style id="aq-admin-article-filters-css">
@@ -2656,10 +2696,10 @@ footer .aq-footer-privacy[href="privacy-policy.html"] .aq-footer-link-label,foot
         const actions=document.createElement('div');
         actions.className='actions';
         item.append(actions);
-        const button=document.createElement('button');button.type='button';button.className='btn small '+(v.status==='suspended'?'':'danger');button.textContent=v.status==='suspended'?t('reactivateMembership'):t('suspendMembership');
+        const button=document.createElement('button');button.type='button';button.className='btn small aq-member-action '+(v.status==='suspended'?'aq-member-action--reactivate':'aq-member-action--suspend');button.textContent=v.status==='suspended'?t('reactivateMembership'):t('suspendMembership');
         button.addEventListener('click',async()=>{button.disabled=true;try{await volunteerRequest('set_volunteer_status',{volunteerId:v.id,status:v.status==='suspended'?'active':'suspended'},session?.access_token||'');await refreshVolunteers();}catch(e){setStatus('createVolunteerStatus',volunteerErrorMessage(e),true);button.disabled=false;}});
         actions.append(button);
-        const deleteButton=document.createElement('button');deleteButton.type='button';deleteButton.className='btn small danger';deleteButton.textContent=t('deleteMembership');
+        const deleteButton=document.createElement('button');deleteButton.type='button';deleteButton.className='btn small aq-member-action aq-member-action--delete';deleteButton.textContent=t('deleteMembership');
         deleteButton.addEventListener('click',async()=>{
           if(!window.confirm(t('confirmDeleteMembership')))return;
           deleteButton.disabled=true;
