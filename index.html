@@ -1469,6 +1469,23 @@ footer .aq-footer-privacy[href="privacy-policy.html"] .aq-footer-link-label,foot
 #page-admin #adminArticleManager #adminArticles{margin-top:8px}
 @media(max-width:580px){#page-admin #adminArticleManager .aq-admin-article-filters{grid-template-columns:minmax(0,1fr);padding:13px}#page-admin #adminArticleManager .aq-admin-filter-reset label{display:none}}
 </style>
+<style id="aq-premium-hero-transition-20261111">
+/* Refine only the hero/wave boundary; leave latest-articles position and appearance unchanged. */
+#page-home > .aq-hero{
+  --heading-wave-height:clamp(32px,4vw,54px);
+  padding-block-end:0!important;
+  border-bottom:0!important;
+  overflow:hidden!important;
+}
+#page-home > .aq-hero .aq-heading-wave{
+  height:var(--heading-wave-height)!important;
+  inset-block-end:-1px!important;
+  z-index:5!important;
+}
+#page-home > .aq-hero .aq-heading-wave path:first-child{fill:#c59a58!important}
+#page-home > .aq-hero .aq-heading-wave path:last-child{fill:#f6f0e8!important}
+@media(max-width:700px){#page-home > .aq-hero{--heading-wave-height:clamp(28px,8vw,38px)}}
+</style>
 </head>
 <body>
   <a class="skip" href="#main" data-i18n="skip">تجاوز إلى المحتوى</a>
