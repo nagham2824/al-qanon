@@ -99,7 +99,12 @@ function render(lang){
    }
    root.appendChild(paragraph);
  });
- document.getElementById("language").value=lang;
+ const languageSelect=document.getElementById("language");
+ languageSelect.value=lang;
+ languageSelect.setAttribute("aria-label",d.language);
+ document.querySelectorAll('a[href^="https://aq-law.nl/"]').forEach(link=>{
+   link.href='https://aq-law.nl/?lang='+lang;
+ });
 }
 const params=new URLSearchParams(location.search);
 const requested=params.get("lang");
