@@ -1170,6 +1170,16 @@ body:has(#page-volunteer-login.active){--paper:#f6f0e8}
 .aq-member-page-heading span{display:inline-block;background:linear-gradient(105deg,#c9923e 5%,#f7d88c 38%,#fff 72%,#d6a44e 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
 .aq-member-page-heading{position:relative;overflow:hidden;margin:0;--member-wave-height:clamp(38px,6vw,62px);background:linear-gradient(145deg,#193a56,#0b2033 72%);color:var(--aq-gold);border-radius:19px 19px 0 0;padding:clamp(24px,5vw,47px);padding-block-end:calc(clamp(24px,5vw,47px) + var(--member-wave-height) - 12px);font-size:clamp(26px,4vw,39px);line-height:1.3}
 .aq-member-page-wave{position:absolute;inset-inline:0;inset-block-end:-1px;width:100%;height:var(--member-wave-height);pointer-events:none}
+.aq-member-page-wave g{
+  transform-box:view-box;
+  transform-origin:center bottom;
+  animation:aq-member-wave-motion 4s ease-in-out infinite alternate;
+}
+@keyframes aq-member-wave-motion{
+  from{transform:translateX(-2.5%) scale(1.08,.82)}
+  to{transform:translateX(2.5%) scale(1.08,1)}
+}
+@media(prefers-reduced-motion:reduce){.aq-member-page-wave g{animation:none}}
 #page-volunteer-login .panel{margin:0 auto;background:#fffdf9;color:#102a43;border:1px solid #e4d8c5;border-block-start:0;border-radius:0 0 19px 19px;padding:clamp(18px,4vw,36px);box-shadow:0 14px 36px #102a4312}
 #page-volunteer-login:not(:has(#volunteerWorkspace:not(.hidden))){max-width:570px}
 #page-volunteer-login .field{background:#fffdf8;color:#102a43;border:1px solid #9daab5;min-height:46px}
@@ -1586,7 +1596,7 @@ footer .aq-footer-privacy[href="privacy-policy.html"] .aq-footer-link-label,foot
     </div></section>
 
     <section class="page container" id="page-volunteer-login" aria-labelledby="volunteerMemberHeading">
-      <h1 id="volunteerMemberHeading" class="aq-member-page-heading"><span id="volunteerMemberHeadingText" data-i18n="volunteerLoginTitle">دخول المتطوعين</span><svg class="aq-member-page-wave" viewBox="0 0 1200 100" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path fill="#d6a758" d="M0 32C200 156 360 7 590 13S940 37 1200 17V100H0Z"/><path fill="#fffdf9" d="M0 38C200 162 360 13 590 19S940 43 1200 23V100H0Z"/></svg></h1>
+      <h1 id="volunteerMemberHeading" class="aq-member-page-heading"><span id="volunteerMemberHeadingText" data-i18n="volunteerLoginTitle">دخول المتطوعين</span><svg class="aq-member-page-wave" viewBox="0 0 1200 100" preserveAspectRatio="none" aria-hidden="true" focusable="false"><g><path fill="#d6a758" d="M0 32C200 156 360 7 590 13S940 37 1200 17V100H0Z"/><path fill="#fffdf9" d="M0 38C200 162 360 13 590 19S940 43 1200 23V100H0Z"/></g></svg></h1>
       <div class="panel" id="volunteerLoginPanel">
         <form id="volunteerLoginForm" class="form-grid">
           <div class="form-row full"><label for="volunteerCode" data-i18n="memberCode">رمز العضوية</label><input class="field" id="volunteerCode" required maxlength="13" autocomplete="username"></div>
