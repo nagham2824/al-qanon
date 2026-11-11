@@ -1167,7 +1167,7 @@ html[dir="rtl"] #page-volunteer .aq-volunteer-arrow {transform:scaleX(-1)}
 #page-volunteer #claimStatus.error {color:#a42227}
 #page-volunteer-login{width:min(1080px,calc(100% - 32px));margin:clamp(20px,4vw,52px) auto 64px;padding:0;color:#102a43}
 body:has(#page-volunteer-login.active){--paper:#f6f0e8}
-.aq-member-page-heading{margin:0;background:linear-gradient(145deg,#193a56,#0b2033 72%);color:#fff5e1;border-radius:19px 19px 0 0;border-block-end:3px solid #c9923e;padding:clamp(24px,5vw,47px);font-size:clamp(26px,4vw,39px);line-height:1.3}
+.aq-member-page-heading{margin:0;background:linear-gradient(145deg,#193a56,#0b2033 72%);color:#e6b66a;border-radius:19px 19px 0 0;border-block-end:3px solid #c9923e;padding:clamp(24px,5vw,47px);font-size:clamp(26px,4vw,39px);line-height:1.3}
 #page-volunteer-login .panel{margin:0 auto;background:#fffdf9;color:#102a43;border:1px solid #e4d8c5;border-block-start:0;border-radius:0 0 19px 19px;padding:clamp(18px,4vw,36px);box-shadow:0 14px 36px #102a4312}
 #page-volunteer-login:not(:has(#volunteerWorkspace:not(.hidden))){max-width:570px}
 #page-volunteer-login .field{background:#fffdf8;color:#102a43;border:1px solid #9daab5;min-height:46px}
@@ -1188,6 +1188,10 @@ body:has(#page-volunteer-login.active){--paper:#f6f0e8}
 #page-volunteer-login .btn:not(.secondary){
   background:var(--aq-gold) linear-gradient(135deg,#efd39c,var(--aq-gold));
   box-shadow:inset 0 1px 0 #fff5dc80,0 3px 8px #74480e20;
+}
+#page-volunteer-login #volunteerArticleForm .btn[type="submit"]{
+  background:var(--aq-gold);
+  min-height:46px;
 }
 #page-volunteer-login .btn.secondary{
   background:#fffdf9;
@@ -1630,7 +1634,7 @@ footer .aq-footer-privacy[href="privacy-policy.html"] .aq-footer-link-label,foot
         <form id="volunteerArticleForm" class="form-grid">
           <div class="form-row full"><label for="volunteerArticleTitle" data-i18n="articleTitle">عنوان المقال</label><input class="field" id="volunteerArticleTitle" maxlength="180" required></div>
           <div class="form-row"><label for="volunteerArticleCategory" data-i18n="articleSection">القسم</label><select class="field" id="volunteerArticleCategory"><option value="public-law" data-i18n="navPublic">القانون العام</option><option value="private-law" data-i18n="navPrivate">القانون الخاص</option><option value="student" data-i18n="studentsTitle">الطلاب والأكاديميون</option><option value="refugee" data-i18n="refugeeTitle">اللاجئون والحماية</option><option value="resident" data-i18n="residentTitle">المقيمون والعمل</option><option value="general" data-i18n="generalTitle">الشؤون العامة والمهنية</option></select></div>
-          <div class="form-row"><label for="volunteerArticleLang" data-i18n="articleLanguageLabel">لغة المقال</label><select class="field" id="volunteerArticleLang"><option value="ar">العربية</option><option value="nl">Nederlands</option><option value="tr">Türkçe</option><option value="en">English</option></select></div>
+          <div class="form-row"><label for="volunteerArticleLang" data-i18n="articleLanguageLabel">لغة المقال</label><select class="field" id="volunteerArticleLang"><option value="ar" data-i18n="articleLanguageAr">العربية</option><option value="nl" data-i18n="articleLanguageNl">الهولندية</option><option value="tr" data-i18n="articleLanguageTr">التركية</option><option value="en" data-i18n="articleLanguageEn">الإنجليزية</option></select></div>
           <div class="form-row full"><label for="volunteerArticleBody" data-i18n="articleTextLabel">نص المقال</label><textarea class="field" id="volunteerArticleBody" maxlength="30000" required></textarea></div>
           <div class="form-row full"><label for="volunteerArticleSource" data-i18n="articleSourceOptional">المصدر / الرابط (اختياري)</label><input class="field" id="volunteerArticleSource" type="url" maxlength="1000" placeholder="https://"></div>
           <div class="form-row full"><button class="btn" type="submit" data-i18n="submitReview">إرسال للمراجعة</button><p class="status" id="volunteerArticleStatus" role="status" aria-live="polite"></p></div>
@@ -1828,9 +1832,21 @@ footer .aq-footer-privacy[href="privacy-policy.html"] .aq-footer-link-label,foot
     "articleRejectionEdit": "Neden ekle veya düzenle"
   }
 };
-  for(const [lang, labels] of Object.entries(articleReviewTranslations)) Object.assign(translations[lang],labels);
+  const articleLanguageLabels={
+    ar:{articleLanguageAr:'العربية',articleLanguageNl:'الهولندية',articleLanguageTr:'التركية',articleLanguageEn:'الإنجليزية'},
+    nl:{articleLanguageAr:'Arabisch',articleLanguageNl:'Nederlands',articleLanguageTr:'Turks',articleLanguageEn:'Engels'},
+    en:{articleLanguageAr:'Arabic',articleLanguageNl:'Dutch',articleLanguageTr:'Turkish',articleLanguageEn:'English'},
+    tr:{articleLanguageAr:'Arapça',articleLanguageNl:'Felemenkçe',articleLanguageTr:'Türkçe',articleLanguageEn:'İngilizce'}
+  };
+  for(const [lang, labels] of Object.entries(articleReviewTranslations)) Object.assign(translations[lang],labels,articleLanguageLabels[lang]);
   function t(key){return translations[currentLang]?.[key] ?? translations.en[key] ?? key;}
-  function setStatus(id,message,error=false){const el=document.getElementById(id);if(!el)return;el.textContent=message;el.classList.toggle('error',error);}
+  function setStatus(id,message,error=false){const el=document.getElementById(id);if(!el)return;delete el.dataset.statusKey;delete el.dataset.statusSuffix;el.textContent=message;el.classList.toggle('error',error);}
+  function setLocalizedStatus(id,key,suffix='',error=false){
+    setStatus(id,t(key)+suffix,error);
+    const element=document.getElementById(id);
+    element.dataset.statusKey=key;
+    element.dataset.statusSuffix=suffix;
+  }
   function installPasswordToggles(){
     document.querySelectorAll('input[type="password"]').forEach(input=>{
       if(input.dataset.toggleReady)return;
@@ -2306,7 +2322,7 @@ footer .aq-footer-privacy[href="privacy-policy.html"] .aq-footer-link-label,foot
 
   document.querySelectorAll('[data-page]').forEach(element=>element.addEventListener('click',event=>{const page=element.dataset.page;if(!page)return;event.preventDefault();showPage(page);}));
   window.addEventListener('hashchange',()=>{const page=(location.hash||'#home').slice(1);showPage(page,false);});
-  function applyTranslations(){document.documentElement.lang=currentLang;document.documentElement.dir=currentLang==='ar'?'rtl':'ltr';document.body.dir=currentLang==='ar'?'rtl':'ltr';document.title=t('brand');document.getElementById('langSelect').setAttribute('aria-label',t('language'));document.querySelectorAll('[data-i18n]').forEach(element=>{const key=element.dataset.i18n;const value=translations[currentLang]?.[key];if(value!==undefined){if(element.tagName==='INPUT'||element.tagName==='TEXTAREA'){if(element.hasAttribute('placeholder'))element.placeholder=value;}else element.textContent=value;}});if(window.aqApplyExtraTranslations)window.aqApplyExtraTranslations(currentLang);updateLatestUi();renderArticles();renderVolunteerArticles();if(isAdmin)refreshVolunteers();}
+  function applyTranslations(){document.documentElement.lang=currentLang;document.documentElement.dir=currentLang==='ar'?'rtl':'ltr';document.body.dir=currentLang==='ar'?'rtl':'ltr';document.title=t('brand');document.getElementById('langSelect').setAttribute('aria-label',t('language'));document.querySelectorAll('[data-i18n]').forEach(element=>{const key=element.dataset.i18n;const value=translations[currentLang]?.[key];if(value!==undefined){if(element.tagName==='INPUT'||element.tagName==='TEXTAREA'){if(element.hasAttribute('placeholder'))element.placeholder=value;}else element.textContent=value;}});document.querySelectorAll('[data-status-key]').forEach(element=>{element.textContent=t(element.dataset.statusKey)+element.dataset.statusSuffix;});if(window.aqApplyExtraTranslations)window.aqApplyExtraTranslations(currentLang);updateLatestUi();renderArticles();renderVolunteerArticles();if(isAdmin)refreshVolunteers();}
   document.getElementById('langSelect').addEventListener('change',event=>{currentLang=translations[event.target.value]?event.target.value:'ar';syncArticleFilters();applyTranslations();});
 
   // Article submission is restricted to authenticated, active volunteers via volunteer-auth.
@@ -2535,12 +2551,12 @@ footer .aq-footer-privacy[href="privacy-policy.html"] .aq-footer-link-label,foot
     event.preventDefault();const code=document.getElementById('claimCode').value.trim().toUpperCase();const password=document.getElementById('claimPassword').value;const confirm=document.getElementById('claimPasswordConfirm').value;
     if(password!==confirm){setStatus('claimStatus',t('passwordMismatch'),true);return;}
     const button=event.currentTarget.querySelector('button');button.disabled=true;setStatus('claimStatus',t('activatingMembership'));
-    try{const result=await volunteerRequest('claim',{code,password});await acceptVolunteerSession(result);showPage('volunteer-login');setStatus('volunteerArticleStatus',t('membershipActivated'));}
+    try{const result=await volunteerRequest('claim',{code,password});await acceptVolunteerSession(result);showPage('volunteer-login');setLocalizedStatus('volunteerArticleStatus','membershipActivated');}
     catch(e){setStatus('claimStatus',volunteerErrorMessage(e),true);}finally{button.disabled=false;document.getElementById('claimPassword').value='';document.getElementById('claimPasswordConfirm').value='';}
   });
   document.getElementById('volunteerLoginForm').addEventListener('submit',async event=>{
     event.preventDefault();const code=document.getElementById('volunteerCode').value.trim().toUpperCase();const password=document.getElementById('volunteerPassword').value;const button=event.currentTarget.querySelector('button');button.disabled=true;setStatus('volunteerLoginStatus',t('loggingIn'));
-    try{const result=await volunteerRequest('login',{code,password});await acceptVolunteerSession(result);if(result.mustChangePassword)setStatus('volunteerPasswordChangeStatus',t('temporaryPasswordHelp'));else setStatus('volunteerArticleStatus',t('loginSuccess'));}
+    try{const result=await volunteerRequest('login',{code,password});await acceptVolunteerSession(result);if(result.mustChangePassword)setStatus('volunteerPasswordChangeStatus',t('temporaryPasswordHelp'));else setLocalizedStatus('volunteerArticleStatus','loginSuccess');}
     catch(e){setStatus('volunteerLoginStatus',volunteerErrorMessage(e),true);}finally{button.disabled=false;document.getElementById('volunteerPassword').value='';}
   });
   document.getElementById('volunteerPasswordChangeForm').addEventListener('submit',async event=>{
@@ -2563,10 +2579,10 @@ footer .aq-footer-privacy[href="privacy-policy.html"] .aq-footer-link-label,foot
   document.getElementById('volunteerLogout').addEventListener('click',()=>endVolunteerSession(t('logoutSuccess')));
   document.getElementById('volunteerArticleForm').addEventListener('submit',async event=>{
     event.preventDefault();const form=event.currentTarget;if(!volunteerExpiresAt||Date.now()>=volunteerExpiresAt){await endVolunteerSession(t('sessionExpired'));return;}
-    const {data:{session}}=await volunteerDb.auth.getSession();const source=safeHttpUrl(document.getElementById('volunteerArticleSource').value.trim());if(source===null){setStatus('volunteerArticleStatus',t('invalidArticleUrl'),true);return;}
+    const {data:{session}}=await volunteerDb.auth.getSession();const source=safeHttpUrl(document.getElementById('volunteerArticleSource').value.trim());if(source===null){setLocalizedStatus('volunteerArticleStatus','invalidArticleUrl','',true);return;}
     const payload={title:document.getElementById('volunteerArticleTitle').value.trim(),content:document.getElementById('volunteerArticleBody').value.trim(),category:document.getElementById('volunteerArticleCategory').value,language:document.getElementById('volunteerArticleLang').value,source_url:source||''};
-    const button=event.currentTarget.querySelector('button');button.disabled=true;setStatus('volunteerArticleStatus',t('sendingArticle'));
-    try{const result=await volunteerRequest('submit_article',payload,session?.access_token||'');form.reset();setStatus('volunteerArticleStatus',t('articleSubmitted')+(result.article?.id||'OK'));void loadVolunteerArticles();}
+    const button=event.currentTarget.querySelector('button');button.disabled=true;setLocalizedStatus('volunteerArticleStatus','sendingArticle');
+    try{const result=await volunteerRequest('submit_article',payload,session?.access_token||'');form.reset();setLocalizedStatus('volunteerArticleStatus','articleSubmitted',String(result.article?.id||'OK'));void loadVolunteerArticles();}
     catch(e){const message=volunteerErrorMessage(e);setStatus('volunteerArticleStatus',message,true);if(/انتهت جلسة|session expired|membership is inactive/i.test(String(e.message)))await endVolunteerSession(message);}finally{button.disabled=false;}
   });
   async function getVerifiedAdminToken(){
