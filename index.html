@@ -1175,6 +1175,29 @@ body:has(#page-volunteer-login.active){--paper:#f6f0e8}
 #page-volunteer-login .help{color:#43586c}
 #page-volunteer-login .text-link{color:#805317}
 #page-volunteer-login :is(.field,.btn,.password-toggle,.text-link):focus-visible{outline:2px solid #916323;outline-offset:2px}
+#page-volunteer-login .btn{
+  min-height:44px;
+  padding:10px 20px;
+  border:1px solid var(--aq-gold);
+  border-radius:12px;
+  color:var(--aq-navy-2);
+  font-weight:800;
+  cursor:pointer;
+  transition:background-color .16s,box-shadow .16s,transform .16s;
+}
+#page-volunteer-login .btn:not(.secondary){
+  background:var(--aq-gold) linear-gradient(135deg,#efd39c,var(--aq-gold));
+  box-shadow:inset 0 1px 0 #fff5dc80,0 3px 8px #74480e20;
+}
+#page-volunteer-login .btn.secondary{
+  background:#fffdf9;
+  border-color:#d5b47e;
+}
+#page-volunteer-login .btn:not(:disabled):hover{filter:none;box-shadow:0 4px 12px #74480e28}
+#page-volunteer-login .btn.secondary:not(:disabled):hover{background:#f8eedb}
+#page-volunteer-login .btn:not(:disabled):active{transform:translateY(1px);box-shadow:none}
+#page-volunteer-login .btn:disabled{cursor:not-allowed;filter:none}
+@media(prefers-reduced-motion:reduce){#page-volunteer-login .btn{transition:none;transform:none!important}}
 #page-volunteer-login :is(#volunteerLoginForm,#volunteerPasswordChangeForm) .btn{width:100%;min-height:46px}
 #volunteerWorkspace > .actions:first-child{justify-content:space-between;margin-block-start:0}
 #volunteerWelcome{color:#102a43;margin:0;overflow-wrap:anywhere}
