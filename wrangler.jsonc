@@ -6,8 +6,7 @@
     "command": "node scripts/build-vercel-seo-preview.mjs"
   },
   "assets": {
-    "directory": "./seo-deploy-preview",
-    "binding": "ASSETS"
+    "directory": "./seo-deploy-preview"
   },
   "previews": {}
 }
