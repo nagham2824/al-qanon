@@ -27,7 +27,7 @@ while (true) {
 }
 const urls = ['https://aq-law.nl/','https://aq-law.nl/privacy-policy.html','https://aq-law.nl/general-conditions.html','https://aq-law.nl/public-law.html'];
 for (const a of rows) {
-  if (!/^[0-9a-f-]{36}$/i.test(String(a.id))) continue;
+  if (!/^[1-9][0-9]*$/.test(String(a.id))) continue;
   const lang = langs.has(a.language) ? a.language : 'ar';
   const dir = lang === 'ar' ? 'rtl' : 'ltr';
   const title = plain(a.title) || 'مقال قانوني';
