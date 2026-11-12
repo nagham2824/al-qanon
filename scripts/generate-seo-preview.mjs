@@ -6,6 +6,8 @@ const key = process.env.SUPABASE_PUBLISHABLE_KEY;
 if (!base || !key || !/^https:\/\//.test(base)) throw Error('Set SUPABASE_URL and SUPABASE_PUBLISHABLE_KEY');
 const escape = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const plain = s => String(s ?? '').replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').trim();
+// Minimal safe inline Markdown: escape HTML first, then render **bold** and *emphasis*.
+const inline = s => escape(s).replace(/\*\*([^*\n]+)\*\*/g,'<strong>$1</strong>').replace(/(?<!\*)\*([^*\n]+)\*(?!\*)/g,'<em>$1</em>');
 
 // Render basic article Markdown safely, retaining headings and paragraphs.
 // Escape all source text before inserting HTML.
@@ -15,9 +17,9 @@ const renderArticle = source => String(source ?? '').replace(/\r\n?/g,'\n').spli
     const heading=line.match(/^\s*(#{1,6})\s+(.+)$/);
     if (heading) {
       const level=Math.min(heading[1].length+1,6);
-      return '<h'+level+'>'+escape(heading[2].trim())+'</h'+level+'>';
+      return '<h'+level+'>'+inline(heading[2].trim())+'</h'+level+'>';
     }
-    return line.trim() ? '<p>'+escape(line.trim())+'</p>' : '';
+    return line.trim() ? '<p>'+inline(line.trim())+'</p>' : '';
   }).join('\n');
 }).join('\n');
 const langs = new Set(['ar','nl','en','tr']);
