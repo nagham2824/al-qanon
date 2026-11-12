@@ -13,7 +13,7 @@ test('SEO generator emits only published articles and escaped crawlable HTML', a
     const u = new URL(url);
     if (u.searchParams.get('status') !== 'eq.published') throw Error('Missing published filter');
     return {ok:true,json:async()=>[{
-      id:'11111111-1111-4111-8111-111111111111',
+      id:'16',
       title:'اختبار <script>alert(1)</script>',content:'نص قانوني تجريبي',language:'ar',author_name:'مؤلف'
     }]};
   };`);
@@ -26,12 +26,12 @@ test('SEO generator emits only published articles and escaped crawlable HTML', a
     child.stderr.on('data', d => stderr+=d);
     const exit = await new Promise(resolve => child.on('close',resolve));
     assert.equal(exit,0,stderr);
-    const html = await readFile(join(dir,'seo-preview-output/articles/11111111-1111-4111-8111-111111111111.html'),'utf8');
+    const html = await readFile(join(dir,'seo-preview-output/articles/16.html'),'utf8');
     const sitemap = await readFile(join(dir,'seo-preview-output/sitemap.xml'),'utf8');
     assert.match(html,/نص قانوني تجريبي/);
     assert.ok(html.includes('اختبار alert(1)'));
     assert.doesNotMatch(html,/<script>alert/);
     assert.match(html,/<meta name="robots" content="index,follow">/);
-    assert.match(sitemap,/11111111-1111-4111-8111-111111111111.html/);
+    assert.match(sitemap,/16.html/);
   } finally { await rm(dir,{recursive:true,force:true}); }
 });
