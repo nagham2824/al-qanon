@@ -1,0 +1,4 @@
+{
+  "buildCommand": "node scripts/build-vercel-seo-preview.mjs",
+  "outputDirectory": "seo-deploy-preview"
+}

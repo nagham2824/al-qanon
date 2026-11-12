@@ -1,0 +1,54 @@
+name: SEO preview checks
+on:
+  pull_request:
+    paths:
+      - 'scripts/generate-seo-preview.mjs'
+      - 'scripts/apply-approved-article-logo.mjs'
+      - 'scripts/test-seo-preview.mjs'
+      - 'scripts/verify-seo-preview.mjs'
+      - 'scripts/assemble-seo-deploy-preview.mjs'
+      - 'scripts/smoke-test-seo-preview.mjs'
+      - '.github/workflows/seo-preview-check.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Test generator using mock published article
+        run: node --test scripts/test-seo-preview.mjs
+  article-preview:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Generate static pages from published Supabase articles
+        env:
+          SUPABASE_URL: https://vmrhohvvdapvebxxiilu.supabase.co
+          SUPABASE_PUBLISHABLE_KEY: sb_publishable_00z1UqTfpp_24yZf3-_KKA_l2sa41-3
+        run: node scripts/generate-seo-preview.mjs
+      - name: Apply exact approved homepage logo to article previews
+        run: node scripts/apply-approved-article-logo.mjs
+      - name: Validate generated article pages and sitemap
+        run: node scripts/verify-seo-preview.mjs
+      - name: Assemble static asset preview (no deployment)
+        run: node scripts/assemble-seo-deploy-preview.mjs
+      - name: Smoke test static preview over HTTP (no deployment)
+        run: node scripts/smoke-test-seo-preview.mjs
+      - name: Upload preview files (no deployment)
+        uses: actions/upload-artifact@v4
+        with:
+          name: aq-article-seo-preview
+          path: |
+            seo-preview-output/
+            seo-deploy-preview/
+          if-no-files-found: error
+          retention-days: 7

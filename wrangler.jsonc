@@ -1,0 +1,13 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "al-qanon",
+  "compatibility_date": "2026-11-01",
+  "build": {
+    "command": "node scripts/build-vercel-seo-preview.mjs"
+  },
+  "assets": {
+    "directory": "./seo-deploy-preview",
+    "binding": "ASSETS"
+  },
+  "previews": {}
+}
