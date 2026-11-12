@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,follow">
+<meta name="theme-color" content="#0b2033">
+<title>قراءة مقال قانوني | منصة القانون AQ</title>
+<style>
+:root{color-scheme:light}*{box-sizing:border-box}body{margin:0;background:#f6f4e9;color:#142e40;font:16px/2 system-ui,Tahoma,Arial,sans-serif}
+header{background:#0b2033;color:#f8edda;padding:18px max(5%,calc((100% - 940px)/2));border-bottom:2px solid #c9923e;display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap}
+header a{color:#f5d18b;text-decoration:none}header strong{font-size:22px;color:#d6aa5b}
+main{max-width:940px;margin:32px auto;padding:0 18px}article{background:#fffdf8;border:1px solid #e4d6b9;border-radius:16px;padding:clamp(22px,5vw,54px);box-shadow:0 15px 36px #0b20330d}
+.kicker{color:#93651c;font-size:13px;font-weight:700}h1{font-size:clamp(25px,4vw,42px);line-height:1.6;margin:8px 0 18px}
+#content{white-space:pre-wrap;overflow-wrap:anywhere;line-height:2.15}#status{color:#526274}footer{text-align:center;padding:25px;color:#526274;font-size:13px}
+</style></head>
+<body><header><strong>AQ | القانون</strong><a href="/">العودة إلى المنصة ←</a></header>
+<main><article><div class="kicker">AL-QANON AQ · LEGAL ARTICLE</div><h1 id="title">المقال القانوني</h1><p id="status" role="status">جارٍ تحميل المقال…</p><div id="content"></div></article></main>
+<footer>معلومات قانونية عامة للتوعية، وليست استشارة قانونية فردية.</footer>
+<script>
+(async()=>{
+const title=document.getElementById('title'),status=document.getElementById('status'),content=document.getElementById('content');
+const id=new URLSearchParams(location.search).get('id');
+if(!id||!/^[0-9a-f-]{1,80}$/i.test(id)){status.textContent='رابط المقال غير صالح.';return;}
+try{
+const endpoint='https://vmrhohvvdapvebxxiilu.supabase.co/rest/v1/articles';
+const key='sb_publishable_00z1UqTfpp_24yZf3-_KKA_l2sa41-3';
+const url=endpoint+'?select=id,title,content,language,author_name&status=eq.published&id=eq.'+encodeURIComponent(id)+'&limit=1';
+const response=await fetch(url,{headers:{apikey:key}});
+if(!response.ok)throw Error('Article request failed');
+const data=await response.json(),article=data[0];
+if(!article){status.textContent='هذا المقال غير متاح للنشر.';return;}
+title.textContent=article.title||'مقال قانوني';
+document.title=title.textContent+' | منصة القانون AQ';
+content.textContent=String(article.content||'').replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').trim();
+if(article.language&&['ar','nl','en','tr'].includes(article.language)){document.documentElement.lang=article.language;document.documentElement.dir=article.language==='ar'?'rtl':'ltr';}
+status.textContent=article.author_name?'بقلم: '+article.author_name:'';
+}catch(e){status.textContent='تعذّر تحميل المقال حالياً. يرجى المحاولة لاحقاً.';}
+})();
+</script></body></html>
