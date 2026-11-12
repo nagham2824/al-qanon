@@ -1,0 +1,4 @@
+{
+  "buildCommand": "SUPABASE_URL=https://vmrhohvvdapvebxxiilu.supabase.co SUPABASE_PUBLISHABLE_KEY=sb_publishable_00z1UqTfpp_24yZf3-_KKA_l2sa41-3 node scripts/generate-seo-preview.mjs && node scripts/verify-seo-preview.mjs && node scripts/assemble-seo-deploy-preview.mjs && node scripts/smoke-test-seo-preview.mjs",
+  "outputDirectory": "seo-deploy-preview"
+}
