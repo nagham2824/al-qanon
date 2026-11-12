@@ -3,6 +3,9 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,follow">
+<meta name="description" content="مقالات قانونية توعوية من منصة القانون AQ.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="منصة القانون AQ">
 <meta name="theme-color" content="#0b2033">
 <title>قراءة مقال قانوني | منصة القانون AQ</title>
 <style>
@@ -31,6 +34,9 @@ const data=await response.json(),article=data[0];
 if(!article){status.textContent='هذا المقال غير متاح للنشر.';return;}
 title.textContent=article.title||'مقال قانوني';
 document.title=title.textContent+' | منصة القانون AQ';
+const summary=String(article.content||'').replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').trim().slice(0,155);
+document.querySelector('meta[name="description"]').setAttribute('content',summary||'مقال قانوني من منصة القانون AQ');
+const canonical=document.createElement('link');canonical.rel='canonical';canonical.href=location.origin+'/article.html?id='+encodeURIComponent(article.id);document.head.appendChild(canonical);
 content.textContent=String(article.content||'').replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').trim();
 if(article.language&&['ar','nl','en','tr'].includes(article.language)){document.documentElement.lang=article.language;document.documentElement.dir=article.language==='ar'?'rtl':'ltr';}
 status.textContent=article.author_name?'بقلم: '+article.author_name:'';
