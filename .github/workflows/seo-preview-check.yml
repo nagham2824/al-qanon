@@ -3,6 +3,7 @@ on:
   pull_request:
     paths:
       - 'scripts/generate-seo-preview.mjs'
+      - 'scripts/apply-approved-article-logo.mjs'
       - 'scripts/test-seo-preview.mjs'
       - 'scripts/verify-seo-preview.mjs'
       - 'scripts/assemble-seo-deploy-preview.mjs'
@@ -34,6 +35,8 @@ jobs:
           SUPABASE_URL: https://vmrhohvvdapvebxxiilu.supabase.co
           SUPABASE_PUBLISHABLE_KEY: sb_publishable_00z1UqTfpp_24yZf3-_KKA_l2sa41-3
         run: node scripts/generate-seo-preview.mjs
+      - name: Apply exact approved homepage logo to article previews
+        run: node scripts/apply-approved-article-logo.mjs
       - name: Validate generated article pages and sitemap
         run: node scripts/verify-seo-preview.mjs
       - name: Assemble static asset preview (no deployment)
