@@ -1,0 +1,20 @@
+name: SEO preview checks
+on:
+  pull_request:
+    paths:
+      - 'scripts/generate-seo-preview.mjs'
+      - 'scripts/test-seo-preview.mjs'
+      - '.github/workflows/seo-preview-check.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Test generator using mock published article
+        run: node --test scripts/test-seo-preview.mjs
