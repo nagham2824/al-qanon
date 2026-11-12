@@ -6,6 +6,7 @@ on:
       - 'scripts/test-seo-preview.mjs'
       - 'scripts/verify-seo-preview.mjs'
       - 'scripts/assemble-seo-deploy-preview.mjs'
+      - 'scripts/smoke-test-seo-preview.mjs'
       - '.github/workflows/seo-preview-check.yml'
   workflow_dispatch:
 permissions:
@@ -37,6 +38,8 @@ jobs:
         run: node scripts/verify-seo-preview.mjs
       - name: Assemble static asset preview (no deployment)
         run: node scripts/assemble-seo-deploy-preview.mjs
+      - name: Smoke test static preview over HTTP (no deployment)
+        run: node scripts/smoke-test-seo-preview.mjs
       - name: Upload preview files (no deployment)
         uses: actions/upload-artifact@v4
         with:
