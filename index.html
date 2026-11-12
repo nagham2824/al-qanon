@@ -1751,7 +1751,24 @@ html[dir="rtl"] #page-home .aq-home-cta {direction:rtl}
 #aqStorageDismiss,#aqStorageDetails,.btn,.aq-btn-gold,.aq-btn-outline,.aq-btn-navy,.aq-footer-privacy,.aq-volunteer-action,.aq-member-trigger{background:#112d43!important;color:#f8dfab!important;border:1px solid #d9ab59!important;box-shadow:inset 0 1px 0 #ffffff0d,0 4px 12px #0002}
 .btn:hover,.aq-btn-gold:hover,.aq-btn-outline:hover,.aq-btn-navy:hover,.aq-footer-privacy:hover{background:#1c4058!important;color:#fff5e3!important}
 .aq-footer-privacy span,.aq-footer-privacy svg{color:inherit!important}
-</style></head>
+</style>
+<style id="aq-footer-consistent-colors-20261112">
+/* Keep footer controls consistent, including touch browsers' sticky hover. */
+.aq-site-footer .aq-footer-privacy,
+.aq-site-footer .aq-footer-privacy:is(:link,:visited,:hover,:focus,:focus-visible,:active){
+  background:#112d43!important;
+  color:#f8dfab!important;
+  border-color:#d9ab59!important;
+  box-shadow:inset 0 1px 0 #ffffff0d,0 4px 12px #0002;
+  -webkit-tap-highlight-color:transparent;
+}
+.aq-site-footer .aq-footer-privacy :is(span,svg){color:inherit!important}
+.aq-site-footer .aq-footer-privacy:focus-visible{
+  outline:2px solid #f8dfab;
+  outline-offset:3px;
+}
+</style>
+</head>
 <body>
   <a class="skip" href="#main" data-i18n="skip">تجاوز إلى المحتوى</a>
   <div class="top"><div class="wrap"><span data-i18n="topNote">مرجع مبسّط لشرح القوانين الهولندية</span><span>AR · NL · TR · EN</span></div></div>
