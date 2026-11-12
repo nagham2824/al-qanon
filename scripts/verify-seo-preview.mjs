@@ -15,7 +15,7 @@ for(const name of names){
   assert.ok(html.includes('<link rel="canonical" href="'+url+'">'),'Missing canonical');
   assert.ok(html.includes('<meta name="robots" content="index,follow">'),'Not indexable');
   assert.match(html,/<h1>[^<]+<\/h1>/,'Missing article heading');
-  assert.match(html,/<section>[^<]+<\/section>/,'Missing article content');
+  assert.match(html,/<section>[\s\S]*?<p>[^<]+<\/p>[\s\S]*?<\/section>/,'Missing article content');
 }
 const articleEntries=entries.filter(x=>x.startsWith('https://aq-law.nl/articles/'));
 assert.equal(articleEntries.length,names.length,'Sitemap contains article URLs without pages');
