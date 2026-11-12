@@ -29,7 +29,7 @@ test('SEO generator emits only published articles and escaped crawlable HTML', a
     const html = await readFile(join(dir,'seo-preview-output/articles/11111111-1111-4111-8111-111111111111.html'),'utf8');
     const sitemap = await readFile(join(dir,'seo-preview-output/sitemap.xml'),'utf8');
     assert.match(html,/نص قانوني تجريبي/);
-    assert.ok(html.includes('اختبار alert(1)'));\n    assert.doesNotMatch(html,/<script>alert/);
+    assert.ok(html.includes('اختبار alert(1)'));
     assert.doesNotMatch(html,/<script>alert/);
     assert.match(html,/<meta name="robots" content="index,follow">/);
     assert.match(sitemap,/11111111-1111-4111-8111-111111111111.html/);
