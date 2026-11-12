@@ -14,7 +14,7 @@ test('SEO generator emits only published articles and escaped crawlable HTML', a
     if (u.searchParams.get('status') !== 'eq.published') throw Error('Missing published filter');
     return {ok:true,json:async()=>[{
       id:'16',
-      title:'اختبار <script>alert(1)</script>',content:'نص قانوني تجريبي',language:'ar',author_name:'مؤلف'
+      title:'اختبار <script>alert(1)</script>',content:'نص **قانوني** تجريبي',language:'ar',author_name:'مؤلف'
     }]};
   };`);
   const script = new URL('./generate-seo-preview.mjs', import.meta.url).pathname;
@@ -28,7 +28,7 @@ test('SEO generator emits only published articles and escaped crawlable HTML', a
     assert.equal(exit,0,stderr);
     const html = await readFile(join(dir,'seo-preview-output/articles/16.html'),'utf8');
     const sitemap = await readFile(join(dir,'seo-preview-output/sitemap.xml'),'utf8');
-    assert.match(html,/نص قانوني تجريبي/);
+    assert.match(html,/نص <strong>قانوني<\/strong> تجريبي/);
     assert.ok(html.includes('اختبار alert(1)'));
     assert.doesNotMatch(html,/<script>alert/);
     assert.match(html,/<meta name="robots" content="index,follow">/);
