@@ -5,6 +5,7 @@ on:
       - 'scripts/generate-seo-preview.mjs'
       - 'scripts/test-seo-preview.mjs'
       - 'scripts/verify-seo-preview.mjs'
+      - 'scripts/assemble-seo-deploy-preview.mjs'
       - '.github/workflows/seo-preview-check.yml'
   workflow_dispatch:
 permissions:
@@ -34,10 +35,14 @@ jobs:
         run: node scripts/generate-seo-preview.mjs
       - name: Validate generated article pages and sitemap
         run: node scripts/verify-seo-preview.mjs
+      - name: Assemble static asset preview (no deployment)
+        run: node scripts/assemble-seo-deploy-preview.mjs
       - name: Upload preview files (no deployment)
         uses: actions/upload-artifact@v4
         with:
           name: aq-article-seo-preview
-          path: seo-preview-output/
+          path: |
+            seo-preview-output/
+            seo-deploy-preview/
           if-no-files-found: error
           retention-days: 7
