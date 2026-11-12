@@ -3,7 +3,8 @@
 import { readdir, cp, mkdir, copyFile, readFile, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 const output='seo-deploy-preview';
-const skip=new Set(['.git','.github','node_modules','scripts','seo-preview-output','seo-deploy-preview']);
+// Publish only browser-facing assets; never copy backend source, SQL, or build configs.
+const skip=new Set(['.git','.github','node_modules','scripts','seo-preview-output','seo-deploy-preview','supabase','wrangler.jsonc','vercel.json','README.md','CNAME']);
 await mkdir(output,{recursive:true});
 for(const entry of await readdir('.',{withFileTypes:true})){
   if(skip.has(entry.name)||entry.name.startsWith('.')) continue;
