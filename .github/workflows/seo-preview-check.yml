@@ -4,6 +4,7 @@ on:
     paths:
       - 'scripts/generate-seo-preview.mjs'
       - 'scripts/test-seo-preview.mjs'
+      - 'scripts/verify-seo-preview.mjs'
       - '.github/workflows/seo-preview-check.yml'
   workflow_dispatch:
 permissions:
@@ -31,6 +32,8 @@ jobs:
           SUPABASE_URL: https://vmrhohvvdapvebxxiilu.supabase.co
           SUPABASE_PUBLISHABLE_KEY: sb_publishable_00z1UqTfpp_24yZf3-_KKA_l2sa41-3
         run: node scripts/generate-seo-preview.mjs
+      - name: Validate generated article pages and sitemap
+        run: node scripts/verify-seo-preview.mjs
       - name: Upload preview files (no deployment)
         uses: actions/upload-artifact@v4
         with:
