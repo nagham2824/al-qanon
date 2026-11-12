@@ -11,7 +11,7 @@ for(const entry of await readdir('.',{withFileTypes:true})){
 }
 await mkdir(join(output,'articles'),{recursive:true});
 for(const entry of await readdir('seo-preview-output/articles',{withFileTypes:true})){
-  if(!entry.isFile()||!/^\\d+\\.html$/.test(entry.name)) throw Error('Unexpected generated article asset');
+  if(!entry.isFile()||!/^[0-9]+[.]html$/.test(entry.name)) throw Error('Unexpected generated article asset');
   await copyFile(join('seo-preview-output/articles',entry.name),join(output,'articles',entry.name));
 }
 await copyFile('seo-preview-output/sitemap.xml',join(output,'sitemap.xml'));
