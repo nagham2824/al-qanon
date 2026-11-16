@@ -3985,16 +3985,16 @@ function lang(){return copy[selector?.value]?selector.value:'ar'}
 function update(){const l=lang(),t=copy[l];button.classList.toggle('aq-left',l!=='ar');$('aqSearchTitle').textContent=t[0];input.placeholder=t[1];button.setAttribute('aria-label',t[0]);button.title=t[0];overlay.dir=l==='ar'?'rtl':'ltr';const params=new URLSearchParams((location.hash.split('?')[1]||''));
 const articleId=params.get('article');
 const viewing=!!(articleId&&location.hash.startsWith('#articles?'));
-button.hidden=viewing;
+button.hidden=false;
 if(viewing)close();}
-function render(){const t=copy[lang()],found=window.aqFloatingSearchPublished?.(input.value);results.replaceChildren();if(!found){const p=document.createElement('p');p.textContent=t[3];results.append(p);return;}if(!found.length){const p=document.createElement('p');p.textContent=t[2];results.append(p);return;}for(const article of found){const item=document.createElement('button');item.type='button';item.textContent=article.title;item.addEventListener('click',()=>{close();location.hash='#articles?article='+encodeURIComponent(article.id);update();});results.append(item);}}
+function render(){const t=copy[lang()];results.replaceChildren();if(!input.value.trim())return;const found=window.aqFloatingSearchPublished?.(input.value);if(!found){const p=document.createElement('p');p.textContent=t[3];results.append(p);return;}if(!found.length){const p=document.createElement('p');p.textContent=t[2];results.append(p);return;}for(const article of found){const item=document.createElement('button');item.type='button';item.textContent=article.title;item.addEventListener('click',()=>{close();location.hash='#articles?article='+encodeURIComponent(article.id);update();});results.append(item);}}
 function close(){overlay.hidden=true;}
 button.addEventListener('click',()=>{overlay.hidden=false;input.value='';render();input.focus();});
 $('aqSearchClose').addEventListener('click',()=>{close();button.focus();});
 overlay.addEventListener('click',e=>{if(e.target===overlay)close()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!overlay.hidden){close();button.focus()}});
 input.addEventListener('input',render);selector?.addEventListener('change',()=>{update();if(!overlay.hidden)render()});
-window.addEventListener('hashchange',()=>{update();requestAnimationFrame(update)});window.addEventListener('popstate',update);
+window.addEventListener('hashchange',()=>{update();button.classList.remove('aq-scroll-hidden');previousY=Math.max(0,window.scrollY);accumulated=0;requestAnimationFrame(update)});window.addEventListener('popstate',()=>{update();button.classList.remove('aq-scroll-hidden')});
 // Hide the floating button while scrolling down; restore on upward scroll or after returning near the top.
 let previousY=Math.max(0,window.scrollY), scrollQueued=false, accumulated=0;
 function syncFloatingVisibility(){
