@@ -3986,8 +3986,9 @@ function update(){const l=lang(),t=copy[l];button.classList.toggle('aq-left',l!=
 const articleId=params.get('article');
 const viewing=!!(articleId&&location.hash.startsWith('#articles?'));
 button.hidden=viewing;
+if(!viewing)button.classList.remove('aq-scroll-hidden');
 if(viewing)close();}
-function render(){const t=copy[lang()],found=window.aqFloatingSearchPublished?.(input.value);results.replaceChildren();if(!found){const p=document.createElement('p');p.textContent=t[3];results.append(p);return;}if(!found.length){const p=document.createElement('p');p.textContent=t[2];results.append(p);return;}for(const article of found){const item=document.createElement('button');item.type='button';item.textContent=article.title;item.addEventListener('click',()=>{close();location.hash='#articles?article='+encodeURIComponent(article.id);update();});results.append(item);}}
+function render(){results.replaceChildren();if(!input.value.trim())return;const t=copy[lang()],found=window.aqFloatingSearchPublished?.(input.value);if(!found){const p=document.createElement('p');p.textContent=t[3];results.append(p);return;}if(!found.length){const p=document.createElement('p');p.textContent=t[2];results.append(p);return;}for(const article of found){const item=document.createElement('button');item.type='button';item.textContent=article.title;item.addEventListener('click',()=>{close();location.hash='#articles?article='+encodeURIComponent(article.id);update();});results.append(item);}}
 function close(){overlay.hidden=true;}
 button.addEventListener('click',()=>{overlay.hidden=false;input.value='';render();input.focus();});
 $('aqSearchClose').addEventListener('click',()=>{close();button.focus();});
@@ -4009,7 +4010,7 @@ function syncFloatingVisibility(){
   previousY=y;scrollQueued=false;
 }
 window.addEventListener('scroll',()=>{if(!scrollQueued){scrollQueued=true;requestAnimationFrame(syncFloatingVisibility)}},{passive:true});
-window.addEventListener('pageshow',()=>{previousY=Math.max(0,window.scrollY);accumulated=0;button.classList.toggle('aq-scroll-hidden',previousY>90);});
+window.addEventListener('pageshow',()=>{previousY=Math.max(0,window.scrollY);accumulated=0;button.classList.remove('aq-scroll-hidden');update();});
 update();syncFloatingVisibility();
 })();
 </script>
