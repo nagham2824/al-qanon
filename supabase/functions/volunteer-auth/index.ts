@@ -1,5 +1,6 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "npm:@supabase/supabase-js@2";
+import { finalizeVolunteerClaim, isAuthCreationConflict, validNewPassword } from "./claim-helpers.js";
 
 const URL = Deno.env.get("SUPABASE_URL")!;
 const publishableKeys = JSON.parse(Deno.env.get("SUPABASE_PUBLISHABLE_KEYS") ?? "{}");
@@ -41,11 +42,6 @@ function randomTemporaryPassword() {
     [chars[i], chars[j]] = [chars[j], chars[i]];
   }
   return chars.join("");
-}
-function validNewPassword(password: string) {
-  return password.length >= 12 && password.length <= 128 &&
-    /[A-Z]/.test(password) && /[a-z]/.test(password) &&
-    /[0-9]/.test(password) && /[^A-Za-z0-9]/.test(password);
 }
 function internalEmail(id: string) {
   return "vol-" + id.replaceAll("-", "") + "@members.aq-law.invalid";
@@ -94,8 +90,14 @@ Deno.serve(async (req: Request) => {
     if (action === "claim" || action === "login") {
       const code = String(body.code ?? "").trim().toUpperCase();
       const password = String(body.password ?? "");
-      if (!/^AQ-[A-HJ-NP-Z2-9]{10}$/.test(code) || password.length < 12 || password.length > 128) {
-        return json({ error: "رمز العضوية أو كلمة السر غير صالح. يجب أن تكون كلمة السر 12 حرفاً على الأقل." }, 400, origin);
+      if (!/^AQ-[A-HJ-NP-Z2-9]{10}$/.test(code)) {
+        return json({ error: "رمز العضوية غير صالح." }, 400, origin);
+      }
+      if (password.length < 12 || password.length > 128) {
+        return json({ error: "يجب أن تكون كلمة السر بين 12 و128 حرفاً." }, 400, origin);
+      }
+      if (action === "claim" && !validNewPassword(password)) {
+        return json({ error: "عند تفعيل العضوية، يجب أن تتضمن كلمة السر حرفاً كبيراً وحرفاً صغيراً ورقماً ورمزاً." }, 400, origin);
       }
       const clientIp = req.headers.get("cf-connecting-ip") ?? "";
       if (!clientIp || clientIp.length > 64) {
@@ -123,14 +125,74 @@ Deno.serve(async (req: Request) => {
           email: internalEmail(volunteer.id), password, email_confirm: true,
           user_metadata: { account_type: "volunteer" },
         });
-        if (createError) return json({ error: "تعذر إنشاء الحساب. تحقق من كلمة السر وحاول مجدداً." }, 400, origin);
-        authUserId = created.user.id;
-        const { error: updateError } = await admin.from("volunteers").update({
-          auth_user_id: authUserId, status: "active", claimed_at: new Date().toISOString(), activated_at: new Date().toISOString(),
-        }).eq("id", volunteer.id).is("auth_user_id", null);
-        if (updateError) {
-          await admin.auth.admin.deleteUser(authUserId);
-          throw updateError;
+        if (createError) {
+          if (!isAuthCreationConflict(createError)) {
+            return json({ error: "تعذر إنشاء الحساب. تحقق من كلمة السر وحاول مجدداً." }, 400, origin);
+          }
+
+          // A previous claim may have created the Auth identity but failed before linking it.
+          // Recover only when the claimant proves ownership with that identity's password.
+          const { data: previousSession, error: previousSignInError } = await publicAuth().auth.signInWithPassword({
+            email: internalEmail(volunteer.id), password,
+          });
+          if (previousSignInError || !previousSession.session || !previousSession.user) {
+            return json({ error: "توجد محاولة تفعيل سابقة لهذا الرمز. استخدم كلمة السر التي اخترتها سابقاً أو تواصل مع الإدارة." }, 409, origin);
+          }
+
+          authUserId = previousSession.user.id;
+          const { data: recovered, error: recoveryError } = await admin.from("volunteers").update({
+            auth_user_id: authUserId, status: "active", claimed_at: new Date().toISOString(), activated_at: new Date().toISOString(),
+          }).eq("id", volunteer.id).is("auth_user_id", null).select("id").maybeSingle();
+          if (recoveryError) throw recoveryError;
+
+          if (!recovered) {
+            const { data: current, error: currentError } = await admin.from("volunteers")
+              .select("auth_user_id,status").eq("id", volunteer.id).maybeSingle();
+            if (currentError) throw currentError;
+            if (current?.status !== "active" || current.auth_user_id !== authUserId) {
+              return json({ error: "تمت معالجة تفعيل هذه العضوية من طلب آخر. حدّثي الصفحة وحاولي تسجيل الدخول." }, 409, origin);
+            }
+          }
+        } else {
+          authUserId = created.user.id;
+          const claimResult = await finalizeVolunteerClaim({
+            volunteerId: volunteer.id,
+            authUserId,
+            updateVolunteer: async (volunteerId, userId) => {
+              const { data, error } = await admin.from("volunteers").update({
+                auth_user_id: userId, status: "active", claimed_at: new Date().toISOString(), activated_at: new Date().toISOString(),
+              }).eq("id", volunteerId).is("auth_user_id", null).select("id").maybeSingle();
+              return { data, error };
+            },
+            deleteAuthUser: async (userId) => {
+              const { error } = await admin.auth.admin.deleteUser(userId);
+              return { error };
+            },
+          });
+          if (!claimResult.ok) {
+            if (claimResult.cleanupError) console.error("Could not clean up unclaimed volunteer auth user:", claimResult.cleanupError);
+            if (claimResult.updateError) throw claimResult.updateError;
+            return json({ error: "تم تفعيل هذه العضوية من طلب آخر. استخدم تسجيل الدخول، أو تواصل مع الإدارة إذا تعذر ذلك." }, 409, origin);
+          }
+        }
+        const claimResult = await finalizeVolunteerClaim({
+          volunteerId: volunteer.id,
+          authUserId,
+          updateVolunteer: async (volunteerId, userId) => {
+            const { data, error } = await admin.from("volunteers").update({
+              auth_user_id: userId, status: "active", claimed_at: new Date().toISOString(), activated_at: new Date().toISOString(),
+            }).eq("id", volunteerId).is("auth_user_id", null).select("id").maybeSingle();
+            return { data, error };
+          },
+          deleteAuthUser: async (userId) => {
+            const { error } = await admin.auth.admin.deleteUser(userId);
+            return { error };
+          },
+        });
+        if (!claimResult.ok) {
+          if (claimResult.cleanupError) console.error("Could not clean up unclaimed volunteer auth user:", claimResult.cleanupError);
+          if (claimResult.updateError) throw claimResult.updateError;
+          return json({ error: "تم تفعيل هذه العضوية من طلب آخر. استخدم تسجيل الدخول، أو تواصل مع الإدارة إذا تعذر ذلك." }, 409, origin);
         }
       }
 
