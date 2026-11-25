@@ -2,7 +2,7 @@
 'use strict';
 const content = {
 ar:{
-title:"سياسة الخصوصية",updated:"آخر تحديث: 11 نوفمبر 2026",language:"اللغة",back:"العودة إلى المنصة",logoAlt:"شعار منصة القانون AQ",
+title:"سياسة الخصوصية",updated:"آخر تحديث: 11 نوفمبر 2026",language:"اللغة",home:"الرئيسية",back:"العودة إلى المنصة",logoAlt:"شعار منصة القانون AQ",
 sections:[
 ["intro","توضح هذه السياسة كيفية تعامل منصة القانون AQ مع البيانات الشخصية عند زيارة الموقع أو استخدام خدماته. تقدم المنصة معلومات قانونية عامة، وليست مكتب محاماة ولا تقدم استشارات قانونية فردية."],
 ["controller","المسؤولة عن المنصة ومعالجة البيانات هي نور أدهم دليقان (Nour Adham Dlikan)، بصفتها فردًا. لطلبات الخصوصية أو الاستفسارات، يرجى التواصل عبر البريد الإلكتروني: info@aq-law.nl."],
@@ -19,7 +19,7 @@ sections:[
 ["changes","قد نحدّث هذه السياسة عند تغير وظائف المنصة أو المتطلبات القانونية. سننشر النسخة المحدّثة في هذه الصفحة مع تعديل تاريخ آخر تحديث."]
 ]},
 nl:{
-title:"Privacyverklaring",updated:"Laatst bijgewerkt: 11 november 2026",language:"Taal",back:"Terug naar het platform",logoAlt:"Logo van AQ Law",
+title:"Privacyverklaring",updated:"Laatst bijgewerkt: 11 november 2026",language:"Taal",home:"Home",back:"Terug naar het platform",logoAlt:"Logo van AQ Law",
 sections:[
 ["intro","Deze verklaring legt uit hoe AQ Law persoonsgegevens verwerkt wanneer u de website bezoekt of de diensten gebruikt. Het platform biedt algemene juridische informatie, is geen advocatenkantoor en geeft geen individueel juridisch advies."],
 ["controller","De verantwoordelijke voor het platform en de verwerking van persoonsgegevens is Nour Adham Dlikan, handelend als particulier. Voor privacyverzoeken of vragen kunt u contact opnemen via: info@aq-law.nl."],
@@ -36,7 +36,7 @@ sections:[
 ["changes","We kunnen deze verklaring aanpassen wanneer de functies van het platform of wettelijke vereisten veranderen. De bijgewerkte versie wordt met een nieuwe datum op deze pagina gepubliceerd."]
 ]},
 en:{
-title:"Privacy Policy",updated:"Last updated: 11 November 2026",language:"Language",back:"Back to the platform",logoAlt:"AQ Law platform logo",
+title:"Privacy Policy",updated:"Last updated: 11 November 2026",language:"Language",home:"Home",back:"Back to the platform",logoAlt:"AQ Law platform logo",
 sections:[
 ["intro","This policy explains how AQ Law processes personal data when you visit the website or use its services. The platform provides general legal information; it is not a law firm and does not provide individual legal advice."],
 ["controller","The person responsible for the platform and the processing of personal data is Nour Adham Dlikan, acting as an individual. For privacy requests or questions, contact: info@aq-law.nl."],
@@ -53,7 +53,7 @@ sections:[
 ["changes","We may update this policy when the platform’s features or legal requirements change. The updated version will be published on this page with a revised date."]
 ]},
 tr:{
-title:"Gizlilik Politikası",updated:"Son güncelleme: 11 Kasım 2026",language:"Dil",back:"Platforma dön",logoAlt:"AQ Law platform logosu",
+title:"Gizlilik Politikası",updated:"Son güncelleme: 11 Kasım 2026",language:"Dil",home:"Ana sayfa",back:"Platforma dön",logoAlt:"AQ Law platform logosu",
 sections:[
 ["intro","Bu politika, AQ Law web sitesini ziyaret ettiğinizde veya hizmetlerini kullandığınızda kişisel verilerin nasıl işlendiğini açıklar. Platform genel hukuki bilgi sunar; bir hukuk bürosu değildir ve kişiye özel hukuki danışmanlık vermez."],
 ["controller","Platformdan ve kişisel verilerin işlenmesinden sorumlu kişi, bireysel olarak hareket eden Nour Adham Dlikan'dır. Gizlilik talepleri veya sorular için: info@aq-law.nl."],
@@ -82,11 +82,13 @@ function render(lang){
  document.documentElement.dir=lang==="ar"?"rtl":"ltr";
  document.title=d.title+" | AQ Law";
  document.getElementById("languageLabel").textContent=d.language;
+ document.getElementById("homeTop").textContent=d.home;
+ document.getElementById("homeTop").href="/?lang="+lang;
  document.getElementById("back").textContent=d.back;
  document.getElementById("policyLogo").alt=d.logoAlt;
  const root=document.getElementById("policy");
  root.replaceChildren();
- const title=document.createElement("h1");title.textContent=d.title;root.appendChild(title);
+ const title=document.createElement("h1");const titleText=document.createElement("span");titleText.className="policy-title-gradient";titleText.textContent=d.title;title.appendChild(titleText);root.appendChild(title);
  const updated=document.createElement("p");updated.className="notice";updated.textContent=d.updated;root.appendChild(updated);
  d.sections.forEach((section,index)=>{
    const heading=document.createElement("h2");heading.textContent=headings[lang][index];root.appendChild(heading);
@@ -103,7 +105,7 @@ function render(lang){
  languageSelect.value=lang;
  languageSelect.setAttribute("aria-label",d.language);
  document.querySelectorAll('a[href^="https://aq-law.nl/"]').forEach(link=>{
-   link.href='https://aq-law.nl/?lang='+lang;
+   link.href='/?lang='+lang;
  });
 }
 const params=new URLSearchParams(location.search);
