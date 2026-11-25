@@ -85,7 +85,7 @@ function render(lang){
  document.getElementById("homeTop").textContent=d.home;
  document.getElementById("homeTop").href="/?lang="+lang;
  document.getElementById("back").textContent=d.back;
- document.getElementById("policyLogo").alt=d.logoAlt;
+ const logo=document.getElementById("policyLogo");if(logo)logo.alt=d.logoAlt;
  const root=document.getElementById("policy");
  root.replaceChildren();
  const title=document.createElement("h1");const titleText=document.createElement("span");titleText.className="policy-title-gradient";titleText.textContent=d.title;title.appendChild(titleText);root.appendChild(title);
