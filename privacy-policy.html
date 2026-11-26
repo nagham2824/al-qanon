@@ -165,14 +165,26 @@ main{width:100%!important;max-width:none!important;margin:0 auto 56px!important;
 }
 @media(max-width:365px){header{padding-inline:9px!important;gap:6px!important;}}
 </style>
-<style id="aq-legal-home-button-exact-match">
-.terms-home-button,.policy-home-button{font-family:Cairo,sans-serif!important;font-size:clamp(12px,1.03vw,17px)!important;line-height:1.5!important;font-weight:800!important;min-height:42px!important;padding:4px 3px!important;}
-@media(max-width:850px){.terms-home-button,.policy-home-button{font-size:14px!important;}}
-@media(max-width:600px){.terms-home-button,.policy-home-button{font-size:14px!important;line-height:1.5!important;min-height:38px!important;padding:6px 13px!important;}}
-@media(max-width:365px){.terms-home-button,.policy-home-button{font-size:14px!important;padding-inline:13px!important;}}
-</style>
-<style id="aq-legal-header-strip-compact">
-@media(min-width:601px){header{padding-block:4px!important;}}
+
+
+<style id="aq-legal-header-unified-measurements">
+/* Use the same compact logo, band and control dimensions as the main site header. */
+header{box-sizing:border-box!important;display:flex!important;align-items:center!important;flex-wrap:nowrap!important;height:66px!important;min-height:66px!important;padding:0 18px!important;background:#0b2033!important;border-bottom:2px solid #c9923e!important;}
+.brand-wrap,.terms-brand{display:block!important;flex:0 0 165px!important;width:165px!important;max-width:165px!important;line-height:0!important;}
+.brand-logo,.terms-brand img{display:block!important;width:auto!important;height:49px!important;max-width:165px!important;object-fit:contain!important;}
+.policy-header-actions,.terms-header-actions{display:flex!important;align-items:center!important;gap:9px!important;}
+.policy-home-button,.terms-home-button{display:inline-flex!important;align-items:center!important;justify-content:center!important;box-sizing:border-box!important;min-width:40px!important;min-height:40px!important;padding:6px 10px!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;color:#f5f0e7!important;font-family:Cairo,sans-serif!important;font-size:clamp(11px,1vw,14px)!important;line-height:1.5!important;font-weight:800!important;text-decoration:none!important;white-space:nowrap!important;}
+.aq-legal-language-trigger{box-sizing:border-box!important;width:40px!important;min-width:40px!important;max-width:40px!important;height:40px!important;min-height:40px!important;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;}
+.aq-legal-current-flag svg{width:36px!important;height:24px!important;}
+@media(max-width:850px){
+ header{height:52px!important;min-height:52px!important;padding:5px 10px!important;}
+ .brand-wrap,.terms-brand{flex-basis:130px!important;width:130px!important;max-width:130px!important;}
+ .brand-logo,.terms-brand img{height:40px!important;max-width:130px!important;}
+ .policy-home-button,.terms-home-button{font-size:12px!important;}
+ .aq-legal-language-trigger{width:40px!important;min-width:40px!important;max-width:40px!important;height:40px!important;min-height:40px!important;}
+}
+@media(max-width:600px){header{height:52px!important;min-height:52px!important;padding:5px 10px!important;}}
+@media(max-width:365px){.brand-wrap,.terms-brand{flex-basis:110px!important;width:110px!important;max-width:110px!important;}}
 </style>
 </head>
 <body>
