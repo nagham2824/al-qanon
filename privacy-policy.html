@@ -108,6 +108,11 @@ header{position:relative;z-index:30}
 <style id="aq-legal-desktop-home-button">@media(max-width:600px){.legal-desktop-home{display:none!important}}</style>
 <style id="aq-legal-controls-match-main-nav-v2">
 /* Legal page controls use the same quiet navigation treatment as the main site. */
+/* Keep the language control as a flag only, matching General Conditions and the home page. */
+.language-control>label,.terms-language-control>label,.terms-language-control>span{
+ position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;
+ overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important;
+}
 @media (min-width:851px){
  .terms-home-button,.policy-home-button{
   min-height:42px!important;padding:4px 3px!important;border:0!important;border-radius:0!important;
