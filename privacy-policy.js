@@ -84,6 +84,7 @@ function render(lang){
  document.getElementById("languageLabel").textContent=d.language;
  document.getElementById("homeTop").textContent=d.home;
  document.getElementById("homeTop").href="/?lang="+lang;
+ const desktopHomeButton=document.getElementById("desktopHomeButton");if(desktopHomeButton){desktopHomeButton.textContent=d.home;desktopHomeButton.href="/?lang="+lang+"#home";}
  document.getElementById("back").textContent=d.back;
  const logo=document.getElementById("policyLogo");if(logo)logo.alt=d.logoAlt;
  const root=document.getElementById("policy");
