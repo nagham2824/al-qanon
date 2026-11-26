@@ -89,7 +89,14 @@ function render(lang){
  const logo=document.getElementById("policyLogo");if(logo)logo.alt=d.logoAlt;
  const root=document.getElementById("policy");
  root.replaceChildren();
- const title=document.createElement("h1");const titleText=document.createElement("span");titleText.className="policy-title-gradient";titleText.textContent=d.title;title.appendChild(titleText);root.appendChild(title);
+ const hero=document.createElement("div");hero.className="aq-policy-hero";hero.setAttribute("aria-label",d.title);
+ const scene=document.createElementNS("http://www.w3.org/2000/svg","svg");scene.setAttribute("class","aq-policy-scene");scene.setAttribute("viewBox","0 0 390 230");scene.setAttribute("aria-hidden","true");scene.setAttribute("fill","none");scene.setAttribute("stroke","#e5bd73");scene.setAttribute("stroke-width","2.5");scene.setAttribute("stroke-linejoin","round");scene.innerHTML='<circle cx="119" cy="113" r="94" opacity=".18"/><path d="M0 204 Q95 176 187 204T390 203M0 218Q101 197 186 218T390 217" opacity=".38"/><path d="M45 193h99l-15-82H68z" fill="#173b59"/><path d="M65 111l33-35 34 35M91 192v-30h16v30"/><g transform="translate(97 97) rotate(-26)"><path d="M0-69v138M-69 0H69M0-69h16v51H0M69 0v16H18V0M0 69h-16V18H0M-69 0v-16h51V0"/><circle r="5" fill="#e5bd73"/></g><path d="M210 193h104m-86-9h69m-35 0V71m-59 28h118m-59-35v14m-48 21-22 54h44zm96 0-22 54h44z"/><path d="M191 153q22 26 45 0m51 0q22 26 45 0"/>';
+ const copy=document.createElement("div");copy.className="aq-policy-hero-copy";
+ const eyebrow=document.createElement("div");eyebrow.className="aq-policy-eyebrow";eyebrow.textContent="AL-QANON AQ · PRIVACY POLICY";
+ const title=document.createElement("h1");const titleText=document.createElement("span");titleText.className="policy-title-gradient";titleText.textContent=d.title;title.appendChild(titleText);
+ copy.append(eyebrow,title);hero.append(scene,copy);
+ const wave=document.createElementNS("http://www.w3.org/2000/svg","svg");wave.setAttribute("class","aq-policy-wave");wave.setAttribute("viewBox","0 0 1200 100");wave.setAttribute("preserveAspectRatio","none");wave.setAttribute("aria-hidden","true");wave.innerHTML='<path fill="#d6a758" d="M0 32C200 156 360 7 590 13S940 37 1200 17V100H0Z"/><path fill="#faf8f2" d="M0 38C200 162 360 13 590 19S940 43 1200 23V100H0Z"/>';
+ hero.appendChild(wave);root.appendChild(hero);
  const updated=document.createElement("p");updated.className="notice";updated.textContent=d.updated;root.appendChild(updated);
  d.sections.forEach((section,index)=>{
    const heading=document.createElement("h2");heading.textContent=headings[lang][index];root.appendChild(heading);
